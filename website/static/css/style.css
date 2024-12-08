@@ -1,0 +1,77 @@
+/* This File Contains Styles That Exist In Every Page */
+
+/* Main Colors */
+:root {
+    --dark-purple: #b391d6;
+    --light-purple: #dbcef6;
+    --dark-brown: #a1887f;
+    --white: 255,255,255; /* White */
+    --transition-seconds: 0.8s
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: "Rubik", sans-serif;
+    direction: rtl;
+}
+
+/* Navbar */
+nav {
+    background-color: var(--dark-purple);
+    color: rgb(var(--white));
+}
+nav .navbar-brand {
+    font-size: 25px;
+    font-weight: 500;
+    color: rgb(var(--white));
+}
+nav .navbar-nav li a {
+    color: rgba(var(--white), 0.65)
+}
+nav .navbar-nav li a:hover,
+nav .navbar-nav li a:focus,
+nav .navbar-nav li a:active  {
+    color: rgb(var(--white))
+}
+nav .sign-log button {
+    padding: 8px 13px;
+    border: none;
+    color: rgb(var(--white));
+    background-color: transparent;
+    border: none;
+    border-radius: 20px;
+    transition: var(--transition-seconds);
+}
+nav .sign-log button:hover,  
+nav .sign-log button:focus,  
+nav .sign-log button:active {
+    font-weight: 600;
+    color: var(--dark-brown);
+    background-color: rgb(var(--white));
+}
+
+
+/* Buttons */
+.button {
+    padding: 8px 13px;
+    font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    transition: var(--transition-seconds);
+}
+.purple-button {
+    color: rgb(var(--white));
+    color: var(--dark-brown);
+    background-color: var(--light-purple); 
+}
+.purple-button:hover {
+    color: rgb(var(--white));
+    background-color: var(--dark-purple); 
+    
+}
+.white-button {
+    color: var(--dark-brown);
+    background-color: rgb(var(--white));
+    
+}
