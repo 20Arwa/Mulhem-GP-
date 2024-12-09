@@ -2,10 +2,10 @@
 
 /* Main Colors */
 :root {
-    --dark-purple: #b391d6;
-    --light-purple: #dbcef6;
-    --dark-brown: #a1887f;
-    --white: 255,255,255; /* White */
+    --main-dark: #b391d6;
+    --main-light: #dbcef6;
+    --font-1: 255,255,255; 
+    --font-2: #a1887f;
     --transition-seconds: 0.8s
 }
 * {
@@ -18,37 +18,37 @@ body {
 
 /* Navbar */
 nav {
-    background-color: var(--dark-purple);
-    color: rgb(var(--white));
+    background-color: var(--main-dark);
+    color: rgb(var(--font-1));
 }
 nav .navbar-brand {
     font-size: 25px;
     font-weight: 500;
-    color: rgb(var(--white));
+    color: rgb(var(--font-1));
 }
 nav .navbar-nav li a {
-    color: rgba(var(--white), 0.65)
+    color: rgba(var(--font-1), 0.65)
 }
 nav .navbar-nav li a:hover,
 nav .navbar-nav li a:focus,
 nav .navbar-nav li a:active  {
-    color: rgb(var(--white))
+    color: rgb(var(--font-1))
 }
 nav .sign-log button {
     padding: 8px 13px;
     border: none;
-    color: rgb(var(--white));
+    color: rgb(var(--font-1));
     background-color: transparent;
     border: none;
-    border-radius: 20px;
+    border-radius: 0.375rem;;
     transition: var(--transition-seconds);
 }
 nav .sign-log button:hover,  
 nav .sign-log button:focus,  
 nav .sign-log button:active {
     font-weight: 600;
-    color: var(--dark-brown);
-    background-color: rgb(var(--white));
+    color: var(--font-2);
+    background-color: rgb(var(--font-1));
 }
 
 
@@ -61,17 +61,17 @@ nav .sign-log button:active {
     transition: var(--transition-seconds);
 }
 .purple-button {
-    color: rgb(var(--white));
-    color: var(--dark-brown);
-    background-color: var(--light-purple); 
+    color: rgb(var(--font-1));
+    color: var(--font-2);
+    background-color: var(--main-light); 
 }
 .purple-button:hover {
-    color: rgb(var(--white));
-    background-color: var(--dark-purple); 
+    color: rgb(var(--font-1));
+    background-color: var(--main-dark); 
     
 }
 .white-button {
-    color: var(--dark-brown);
-    background-color: rgb(var(--white));
+    color: var(--font-2);
+    background-color: rgb(var(--font-1));
     
 }
