@@ -4,7 +4,7 @@
 {% endblock %}
 {% block body %}
 <div class="sign-container w-50 d-flex justify-space-between my-5 mx-auto border rounded-2">
-    <div class="message w-50 rounded-end-2">
+    <div class="message d-flex justify-content-center align-items-center w-50 rounded-end-2">
         <h4>مرحبا بك</h4>
     </div>
     <form method="POST" id="sign-up" class="d-flex flex-column align-items-center mx-auto py-4 ">
@@ -18,7 +18,7 @@
         <input type="number" name="age" minlength="4" maxlength="20" placeholder="أدخل عمرك">
 
         <label for="gender">الجنس</label>
-        <select name="gender" form="sign-up" class="w-100" aria-placeholder="dkf">    
+        <select name="gender" form="sign-up" class="w-100" required>    
             <option value="" disabled selected hidden>اختر..</option>
             <option value="male">Male</option>
             <option value="female">Female</option>

@@ -1,25 +1,31 @@
 .sign-container  {
-    border-color: var(--main-light) !important;
+    border-color: var(--main-dark) !important;
     box-shadow: 10px;
 }
 .sign-container .message {
-    background-color: var(--main-light) !important;
-}
-.sign-container #sign-up {
-    width: fit-content;
+    color: var(--font-1);
+    background-color: var(--main-dark) !important;
 }
 .sign-container #sign-up label {
+    color: var(--font-2);
+    margin-bottom: 1.5px;
     align-self: start;
 }
 .sign-container #sign-up input:not(input:last-of-type), 
 .sign-container #sign-up input:focus-visible, 
 .sign-container #sign-up select {
-    margin-bottom: 15px;
-    padding: 5px 10px 5px 5px;
+    color: #424242;
+    margin-bottom: 10px;
+    padding: 4px 10px 4px 4px;
     border-radius: 0.375rem;
     border: 1.5px solid var(--main-dark);
     outline: none;
 }
-.sign-container #sign-up input::placeholder {
-    font-size: 12px;
+.sign-container #sign-up input::placeholder, 
+.sign-container #sign-up select:invalid {
+    font-size: 13px;
+    color: gray;
+}
+.sign-container #sign-up input[type='submit'] {
+    margin-top: 20px;
 }
