@@ -60,17 +60,17 @@ nav .sign-log button:active {
     border-radius: 10px;
     transition: var(--transition-seconds);
 }
-.purple-button {
+.main-button {
     color: rgb(var(--font-1));
     color: var(--font-2);
     background-color: var(--main-light); 
 }
-.purple-button:hover {
+.main-button:hover {
     color: rgb(var(--font-1));
     background-color: var(--main-dark); 
     
 }
-.white-button {
+.second-button {
     color: var(--font-2);
     background-color: rgb(var(--font-1));
     
