@@ -12,6 +12,7 @@
     box-sizing: border-box;
 }
 body {
+  height: 100%;
     font-family: "Rubik", sans-serif;
     direction: rtl;
 }
@@ -69,8 +70,107 @@ nav .sign-log button:active {
     background-color: var(--main-dark); 
     
 }
+
+
 .second-button {
     color: var(--font-2);
     background-color: var(--font-1);
     
+} 
+
+/* General styling for the section */
+.our-stories {
+    background-color: #f9f9f9; /* Background color for the section */
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .our-stories h2 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .stories-flex {
+    display: flex;
+    justify-content: space-between; /* توزيع العناصر بالتساوي */
+    gap: 20px;
+  }
+  
+  .story-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 30%; /* تحديد عرض العنصر ليظهر 3 عناصر بجانب بعضها */
+    text-align: center;
+    float: left; /* To display boxes side by side */
+
+  }
+ 
+  
+  .story-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .story-item h3 {
+    font-size: 20px;
+    color: #333;
+    margin: 15px 0;
+  }
+  
+  .story-item p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .read-more {
+    display: inline-block;
+    font-size: 14px;
+    color: #8e44ad;
+    text-decoration: none;
+    margin-top: 15px;
+  }
+  
+  .read-more:hover {
+    text-decoration: underline;
+  }
+  
+  
+
+
+
+
+
+/* footer style */
+
+footer {
+  background-color: #b391d6;
+  color: #ecf0f1;
+  font-family: Arial, sans-serif;
+  padding: 20px ;  /* Adjust padding as needed */
+  width: 100%;
+  bottom: 5px;
+  font-size: 25px;
+  height: 20%;
+  margin-bottom: 0;
+  
 }
+
+footer ul {
+  list-style-type: none;
+  padding: 25px;
+
+}
+footer p {
+  font-size: 18px; /* Increase font size to 18 pixels */
+}
+
+footer a {
+  font-size: 16px; /* Increase font size for links */
+}
+
+
+
