@@ -6,6 +6,8 @@
     --main-light: #dbcef6;
     --font-1: white; 
     --font-2: #9E887F;
+    --font-3: #8d69b1;
+    --font-4: #424242;
     --transition-seconds: 0.8s
 }
 * {
@@ -14,6 +16,9 @@
 body {
     font-family: "Rubik", sans-serif;
     direction: rtl;
+}
+a {
+    text-decoration: none;
 }
 
 /* Navbar */
@@ -62,15 +67,22 @@ nav .sign-log button:active {
 }
 .main-button {
     color: var(--font-1);
-    background-color: var(--main-light); 
+    background-color: var(--main-dark); 
 }
 .main-button:hover {
     color: var(--font-1);
     background-color: var(--main-dark); 
+    transform: scale(1.05);
+    /* box-shadow: 0 0 10px var(--main-dark); */
     
 }
 .second-button {
-    color: var(--font-2);
+    /* color: var(--font-2); */
+    border: .5px solid white;
     background-color: var(--font-1);
-    
+}
+.second-button:hover {
+
+    /* color: var(--font-2); */
+    /* background-color: var(--font-1); */
 }

@@ -1,5 +1,5 @@
 # This File Is For Routes In The Website
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, url_for
 from flask_login import login_required, current_user
 from website import db
 
@@ -8,10 +8,33 @@ views = Blueprint('views', __name__)
 # Home Page
 @views.route('/')
 def home():
-    return render_template("home.html", user=current_user) # Return User To Check If LoggedIn, To Change The Welcome Message
+    return render_template("home.html", user=current_user) 
 
 # Reading Page
 
-# Writing Page
+# Start Writing 
+# Types
+@views.route('/writing/writing-types')
+def writing_types():
+    return render_template("/writing/writing-types.html", url_for=url_for) 
 
+# Story Generator
+@views.route('/writing/story-generator')
+def story_generator():
+    return render_template("/writing/story-generator.html") 
+
+# End Writing 
+
+
+
+# Activities
+# All Activities
+@views.route('/activities/all_activities')
+def all_activities():
+    return render_template("/activities/all_activities.html") 
+
+# Activitiy 1
+@views.route('/activities/activity_1')
+def activity_1():
+    return render_template("/activities/activity_1.html") 
 # Lessons Page

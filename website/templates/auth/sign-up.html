@@ -1,39 +1,98 @@
 {% extends "base.html" %}
+{% block title %} إنشاء حساب{% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/sign-up.css') }}">
 {% endblock %}
 {% block body %}
-<div class="sign-container w-50 d-flex justify-space-between my-5 mx-auto border rounded-2">
-    <div class="message d-flex justify-content-center align-items-center w-50 rounded-end-2">
-        <h4>مرحبا بك</h4>
+<!-- Error Message -->
+<!-- <div class="alert alert-danger alert-dismissible fade" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true"></span></button>
+</div>
+<div class="alert alert-success alert-dismissible fade" role="alert">
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true"></span></button>
+</div> -->
+<div id="liveAlertPlaceholder"></div>
+
+<!-- Content -->
+<div class="sign-container d-flex justify-space-between my-5 mx-auto border rounded-2">
+    <div class="circle rounded-circle"></div>
+    <div class="hello-msg text-center d-flex align-items-center w-50 rounded-end-2 pe-4">
+        <div class="text w-75">
+            <h4 class="mb-4">مــرحــبــا بــك</h4>
+            <p>ابدأ رحلتك الإبداعية مع مُلهِم! انضم إلينا لتكتشف عالمًا مليئًا بالقصص والإبداع.</p>
+        </div>
     </div>
-    <form method="POST" id="sign-up" class="d-flex flex-column align-items-center mx-auto py-4 ">
-        <label for="name">الأسم الأول</label>
-        <input type="text" name="f_name" min="2" maxlength="30" placeholder="أدخل اسمك الأول">
+    <form method="POST" id="sign-up" class="d-flex flex-column align-items-center m-4 p-4 ps-5 w-50">
+        <div class="field row">
+            <div>
+                <label for="f_name">الأسم الأول</label>
+                <input type="text" name="f_name" placeholder="سارة">
+            </div>
+            <div>
+                <label for="l_name">الأسم الأخير</label>
+                <input type="text" name="l_name" placeholder="أحمد">
+            </div>
+            <div>
+                <label for="age">العمر</label>
+                <input type="number" name="age" min="1" placeholder="10" >
+            </div>
+            <div>
+                <label for="gender">الجنس</label>
+                <select name="gender" form="sign-up" class="w-100">    
+                    <option value="" disabled selected hidden></option>
+                    <option value="female">أنثى</option>
+                    <option value="male">ذكر</option>
+                </select>
+            </div>
+        </div>
 
-        <label for="name">الأسم الأخير</label>
-        <input type="text" name="l_name" min="2" maxlength="30" placeholder="أدخل اسمك الأخير">
-
-        <label for="name">العمر</label>
-        <input type="number" name="age" minlength="4" maxlength="20" placeholder="أدخل عمرك">
-
-        <label for="gender">الجنس</label>
-        <select name="gender" form="sign-up" class="w-100" required>    
-            <option value="" disabled selected hidden>اختر..</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-        </select>
-
-        <label for="name">البريد الإلكتروني</label>
-        <input type="email" name="email" placeholder="أدخل بريدك الإلكتروني">
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" name="email" placeholder="a12@gmail.com">
         
-        <label for="name">كلمة المرور</label>
-        <input type="password" name="password" placeholder="أدخل كلمة المرور">
+        <label for="password">كلمة المرور</label>
+        <input type="password" name="password">
 
-        <label for="name">تأكيد كلمة المرور</label>
-        <input type="password" name="password2" placeholder="تأكيد كلمة المرور">
+        <label for="password2">تأكيد كلمة المرور</label>
+        <input type="password" name="password2">
 
-        <input type="submit" value="إنشاء حساب" class="button main-button">
+        <input type="submit" class="button main-button" value="إنشاء حساب" onclick="checkInputs()" class="btn btn-primary" id="liveAlertBtn">
     </form>
 </div>
+{% endblock %}
+{% block script %}
+<script>
+    function checkInputs() {
+        // Get Form
+        form = document.getElementById("sign-up");
+        form.onsubmit = function (event) {event.preventDefault()} // Prevent Submit Form
+        // Get Inputs
+        f_name = form.elements["f_name"].value;
+        l_name = form.elements["l_name"].value;
+        age = form.elements["age"].value;
+        gender = form.elements["gender"].value;
+        email = form.elements["email"].value;
+        password = form.elements["password"].value;
+        password2 = form.elements["password2"].value;
+        
+        if (f_name.length < 2 || f_name.length > 30) {
+            appendAlert("الاسم الأول يجب أن يتكون من 3 إلى 30 حرفاً", 'danger');
+        }
+        else if (l_name.length < 2 || l_name.length > 30){  
+            appendAlert("الاسم الأخير يجب أن يتكون من 3 إلى 30 حرفاً", 'danger');
+        }
+        else if (/\d/.test(f_name)){  
+            appendAlert("الاسم الأول يجب أن يتكون من حروف فقط", 'danger');
+        }
+        else if (/\d/.test(l_name)){  
+            appendAlert("الاسم الأخير يجب أن يتكون من حروف فقط", 'danger');
+        }
+        else if (age == ""){  
+            appendAlert("يرجى ادخال عمرك", 'danger');
+        }
+        else {
+            // If All Input Are Fine > Can Send Form
+            form.onsubmit = function (event) { return true; }
+        }
+    }
+</script>
 {% endblock %}

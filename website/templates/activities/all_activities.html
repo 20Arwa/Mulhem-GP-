@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}الأنشطة التعليمية{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/activities.css') }}">
+{% endblock %}
+{% block body %}
+<div class="all-activities container row mx-auto my-4 g-5 text-center">
+    <!-- Object Contains Each Actitvites: title, description, path Of Html Page  -->
+    {% for avtivity in [
+        {'title': 'الفرق بين الكتابة القصصية والكتابة العادية', 'description': 'في هذا النشاط، سنقرأ معًا قصة ممتعة ونكتشف فكرتها، ثم نقارنها بكتاب يقدم معلومات حقيقية. سنتعلم الفرق بين الكتابة القصصية والكتابة العادية!', 'exercisesPath' : ['../activities/avtivity_1_exer1','../activities/avtivity_1_exer2']},
+        {'title': 'الفرق بين الكتابة القصصية والكتابة العادية', 'description': 'في هذا النشاط، سنقرأ معًا قصة ممتعة ونكتشف فكرتها، ثم نقارنها بكتاب يقدم معلومات حقيقية. سنلفان!', 'exercisesPath' : ['../activities/avtivity_1_exer1','../activities/avtivity_1_exer2']},
+        {'title': '', 'description': '', 'path': ''}
+    ]%}
+        <!-- For Each Activity In The Object, This Code Will Be Repeated -->
+        <div class="activity col-6">
+            <div class=" p-4 pt-5 pb-4 rounded-4 text-center h-100 d-flex flex-column justify-content-around">
+                <h4 class="my-0">{{avtivity.title}}</h4>
+                <p class="my-4">{{avtivity.description}}</p>
+                <div class="start-container flex mx-auto button main-button position-relative">
+                    <button class="border-0 bg-transparent">إبدأ</button>
+                    <i class="fa-solid fa-caret-up arrow"></i>
+                    <div class="exercises-container position-absolute">
+
+                        {% for exercise in avtivity.exercisesPath%}
+                        <a href="{{exercise}}">
+                            <p>تمرين {{loop.index}}</p>
+                        </a>
+                        {% endfor %}
+
+                    </div>
+                </div>
+                
+            </div>
+
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

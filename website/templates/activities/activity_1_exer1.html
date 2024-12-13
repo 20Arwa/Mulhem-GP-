@@ -1,0 +1,131 @@
+{% extends "base.html" %}
+{% block title %}الفرق بين الكتابة القصصية والإبداعية{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/activities.css') }}">
+{% endblock %}
+<!-- Questions & Answers -->
+{% set text1_questions = [
+    {'question': 'ما الفكرة الرئيسية من هذه القصة؟ وما غرضها ؟', 
+    'options' : [
+        {'answer': 'ليلى ترغب في السفر بعيدًا عن منزلها', 'class': 'active-wrong'},
+        {'answer': 'القصة عن كيفية إطعام الذئب', 'class': 'active-wrong'},
+        {'answer': 'القصة تعلمنا الحذر من الغرباء', 'class': 'active-right'}, 
+    ]
+    },
+    {'question': 'عن أي شيء تتحدث القصة؟', 
+    'options' : [
+        {'answer': 'عن ليلى والذئب في الغابة', 'class': 'active-right'}, 
+        {'answer': 'عن ليلى وصديقاتها في المدرسة', 'class': 'active-wrong'}, 
+        {'answer': 'عن ليلى عندما كانت في منزل جدتها', 'class': 'active-wrong'},
+        ]
+    },
+    {'question': 'هل هذه القصة حقيقية أو خيالية؟', 
+    'options' : [
+        {'answer': 'حقيقة', 'class': 'active-wrong'}, 
+        {'answer': 'خيالية', 'class': 'active-right'},
+        ]
+    },
+    {'question': 'كيف عرفت أنها خيالية، وليست واقعية؟', 
+    'options' : [
+        {'answer': 'لأن ليلى تمشي وتتكلم', 'class': 'active-wrong'}, 
+        {'answer': 'لأن الذب يتكلم ويلبس الثياب', 'class': 'active-right'}, 
+        {'answer': 'لأن الصياد هزم الذئب', 'class': 'active-wrong'},
+        ]
+    },
+]%}
+
+{% block body %}
+    <div class="activity activity_1_exer1 container my-4 p-5 rounded-4">
+        <div class="voice">
+            <!-- الصوت+ ايقونة صوت يتيغر لونه وممكن شكله لما يصغط عليه ويتشغل
+            يكون بوسيتشن ابسلوت، والأب ريلتف -->
+        </div>
+        <div class="text">
+            <h5>اقرأ أو استمع للقصة التالية وأجب عن الأسئلة:</h5>
+            <p class="my-5">في قديم الزمان، كانت هناك فتاة تُدعى "ذات الرداء الأحمر"، ترتدي دائمًا رداءً أحمر جميلًا أهَدته لها جدتها. طلبت منها والدتها إيصال سلة طعام لجدتها المريضة التي تعيش وحدها في الغابة، مع تحذيرها بعدم الابتعاد عن الطريق. أثناء رحلتها، ظهر لها ذئب مكر وسألها عن وجهتها، فأخبرته بمكان منزل جدتها. خطط الذئب بخبث لإيقاعها في الفخ، فأقنعها بجمع الأزهار كهدية لجدتها، مما تسبب في تأخيرها. استغل الذئب الوقت وذهب إلى منزل الجدة، خدعها بصوته الناعم وأكلها، ثم ارتدى ملابسها وانتظر ذات الرداء الأحمر. <br>عندما وصلت الفتاة، لاحظت أن هناك شيئًا غريبًا في "جدتها"، وسألتها عن أذنيها وعينيها وفمها الكبير. فجأة، قفز الذئب ليأكلها، لكن لحسن الحظ، كان هناك صياد قريب سمع الضجة. اقتحم المنزل، وقتل الذئب، وحرر الجدة والفتاة. شكرت ذات الرداء الأحمر وجدتُها الصياد.</p>
+        </div>
+        <div class="q-a carousel slide" id="questionsCarousel" data-bs-interval="false">
+            <div class="carousel-inner">
+                {% for ques in text1_questions %}
+                <div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+                    <div class="container">
+                        <h6>{{ ques.question }}</h6>
+                        <!-- For loop for answers -->
+                        {% for option in ques.options %}
+                        <button class=" m-1" onclick="optionClick(this, '{{ option.class }}')">
+                            {{ option.answer }}
+                        </button>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+  
+        </div>
+
+
+
+        <!-- هذا يطلع لما يخلص قصة ليلى -->
+  
+  <!-- Modal -->
+  <div class="modal fade modal-finishStory" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    const carouselElement = document.querySelector('#questionsCarousel');
+    const carousel = new bootstrap.Carousel(carouselElement, {
+        interval: false,
+        wrap: false // Prevent going back to the first question after finishing
+    });
+    
+    // Add event listener to the carousel DOM element, not the Carousel instance
+    carouselElement.addEventListener('slide.bs.carousel', (event) => {
+        const direction = event.direction === 'right' ? 'left' : 'right'; // Change direction
+        const inner = carouselElement.querySelector('.carousel-inner'); // Get the carousel-inner element
+        inner.style.direction = direction; // Apply the new direction
+    });
+    
+    let items = document.querySelectorAll('.q-a .carousel-inner .carousel-item');
+    
+    console.log(items)
+    function optionClick(button, optionClass) {
+        button.classList.toggle(optionClass); // Feedback (red, green) Colors For The Answers
+        // If User Choose Right Answer
+        if (optionClass === 'active-right') {
+            setTimeout(() => {
+                carousel.next(); // Go To Next Question
+            }, 250); 
+            
+            // if Question Is The Last One
+            if (button.parentElement.parentElement == items[items.length-1]) {
+                document.querySelector('.modal-finishStory').classList.add("show") // To Get Last Question
+                // Change The Content 
+                document.querySelector(".activity_1_exer1 > .text > p").innerHTML = "الذئب حيوان مفترس يعيش في الغابات والجبال.<br>يتميز بجسم قوي وفراء كثيف يحميه من البرد.<br>الذئب يحب العيش في مجموعات تُسمى 'قطعان'، حيث يتعاون أفراد القطيع للصيد وحماية بعضهم البعض.<br>على الرغم من أن الذئب قد يبدو مخيفًا، إلا أنه يلعب دورًا مهمًا في الطبيعة، حيث يساعد في الحفاظ على توازن البيئة من خلال صيده للحيوانات المريضة والضعيفة."
+                // Undisplay
+                items[items.length-1].style.display= 'show'
+            }
+        }
+    }
+</script>
+{% endblock %}

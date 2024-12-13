@@ -1,0 +1,60 @@
+/* Style all_activities Page */
+.all-activities {
+    
+}
+.all-activities .activity > div {
+    color: var(--font-4);
+    background-color: var(--main-light);
+}
+.all-activities .activity .start-container {
+    cursor: pointer;
+    color: var(--font-1);
+    background-color: var(--main-dark);
+    z-index: 0;
+}
+.all-activities .activity .start-container button {
+    font-weight: 600;
+    color: var(--font-1);
+}
+.all-activities .activity .start-container .exercises-container {
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: var(--transition-seconds);
+    z-index: -2;
+}
+.all-activities .activity .start-container .arrow {
+    transform: rotate(0deg);
+    transition: var(--transition-seconds);
+}
+.all-activities .activity .start-container:hover .arrow {
+    transform: rotate(180deg);
+}
+.all-activities .activity .start-container:hover .exercises-container {
+    opacity: 1;
+    transform: translateY(0px);
+    color: red
+}
+
+/* Style For Each Activity */
+.activity .active-wrong {
+    border: 2px solid red
+}
+.activity .active-right {
+    border: 2px solid green
+}
+
+/* Style activity_1 Page */
+.activity_1 {
+    color: var(--font-4);
+    background-color: var(--main-light);
+}
+.activity_1 {
+    color: var(--font-4);
+    background-color: var(--main-light);
+}
+
+
+/* Style activity_2 Page */
+.activity_2 {
+
+}
