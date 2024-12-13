@@ -85,22 +85,101 @@
 
     <!-- Bootstrap Link -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <script>
-        // Error Message Code
-        const alertPlaceholder = document.getElementById('liveAlertPlaceholder');
-        const appendAlert = (message, type) => {
-        const wrapper = document.createElement('div');
-        wrapper.innerHTML = [
-            `<div class="alert alert-${type} alert-dismissible" role="alert">`,
-            `   <div>${message}</div>`,
-            '   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>',
-            '</div>'
-        ].join('');
-        alertPlaceholder.append(wrapper);
-        }
-    </script>
-    <!-- JS Code -->
-    {% block script %}
-    {% endblock %}
+    <!-- JS Links -->
 </body>
+
+    <footer>
+    
+        <div class="row">
+          <div class="col-md-3">
+            <div class="footer-menu">
+              <img src="/static/images/logo.png" alt="logo" width="100" height="100">
+              <h5 > مُــلــهِــمْ - حيث تبدأ حكايات الأطفال، ونمنحهم الإلهام لخلق قصصهم الخاصة</h5>
+              <div class="social-links">
+                <ul class="d-flex list-unstyled gap-2">
+                  <li class="social">
+                    <a href="#"><img src="/static/images/Facebook icon.png" alt="Facebook" width="25" height="25">   
+                    </a>
+                  </li>
+                  <li class="social">
+                    <a href="#"><img src="/static/images/Twitter-icon.png" alt="Twitter" width="25" height="25"> 
+                  </li>
+                  <li class="social">
+                    <a href="#"><img src="/static/images/instagram-logo.png" alt="Instagram" width="25" height="25"> 
+                  </li>
+                  <li class="social">
+                    <a href="#"><img src="/static/images/whatsapp-icon.png" alt="whatsapp" width="25" height="25"> 
+                  </li>
+                  <li class="social">
+                    <a href="#">
+                    </a>
+                  </li>
+  
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="footer-menu">
+              
+              <ul class="menu-list list-unstyled">
+                <li class="menu-item">
+                  <a href="#" class="nav-link">الصفحة الرئيسية </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">انشئ قصة </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">قصصنا </a>
+                </li>
+                <li class="menu-item">
+                  <a href="#" class="nav-link">دروس الكتابة</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="footer-menu">
+            
+                <ul class="menu-list list-unstyled">
+                  <li class="menu-item">
+                    <a href="#" class="nav-link">الاسئلة الشائعة</a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#" class="nav-link">سياسة الخصوصية </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="#" class="nav-link"> معلومات عنا </a>
+                  </li>
+                  
+                  <li class="menu-item">
+                    <a href="#" class="nav-link">تواصل معنا </a>
+                  </li>
+                  
+                </ul>
+            </div>
+          </div>
+         
+  
+        </div>
+      </div>
+    </div>
+
+   
+  <div id="footer-bottom">
+    <div class="container">
+      <hr class="m-0">
+      <div class="row mt-3">
+        <div class="col-md-6 copyright">
+          <p class="secondary-font">© 2024 mulhem. All rights reserved.</p>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+
+    
+
+
+  </footer>
 </html>
