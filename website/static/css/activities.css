@@ -10,17 +10,16 @@
     cursor: pointer;
     color: var(--font-1);
     background-color: var(--main-dark);
-    z-index: 0;
+    transition: 0s;
+}
+.all-activities .activity .start-container:hover  {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    transform: none;
 }
 .all-activities .activity .start-container button {
     font-weight: 600;
     color: var(--font-1);
-}
-.all-activities .activity .start-container .exercises-container {
-    opacity: 0;
-    transform: translateY(-10px);
-    transition: var(--transition-seconds);
-    z-index: -2;
 }
 .all-activities .activity .start-container .arrow {
     transform: rotate(0deg);
@@ -29,19 +28,33 @@
 .all-activities .activity .start-container:hover .arrow {
     transform: rotate(180deg);
 }
-.all-activities .activity .start-container:hover .exercises-container {
+.all-activities .start-container .exercises-container {
+    opacity: 0;
+    bottom: -120px;
+    transform: translateY(-10px);
+    transition: var(--transition-seconds);
+    color: var(--main-dark);
+    background-color: white;
+}
+.all-activities .start-container:hover .exercises-container {
     opacity: 1;
     transform: translateY(0px);
-    color: red
+}
+.all-activities .start-container .exercises-container > a {
+    color: var(--font-3);
+    border-bottom: 1px solid var(--main-dark);
+    transition: var(--transition-seconds);
+}
+.all-activities .start-container .exercises-container > a:last-of-type {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    /* border-radius: ; */
+}
+.all-activities .start-container .exercises-container > a:hover {
+    border-color: var(--main-light);
+    color: var(--main-dark)
 }
 
-/* Style For Each Activity */
-.activity .active-wrong {
-    border: 2px solid red
-}
-.activity .active-right {
-    border: 2px solid green
-}
 
 /* Style activity_1 Page */
 .activity_1 {
@@ -51,6 +64,97 @@
 .activity_1 {
     color: var(--font-4);
     background-color: var(--main-light);
+}
+.activity_1 > .text2, .activity_1 > .text1 {
+    display: none;
+}
+.activity_1 .content .text {
+    color: var(--font-3);
+    font-weight: 500;
+}
+.activity_1 .content .text .right-side h5 {
+    font-size: 1.3rem;
+}
+.activity_1 .content .text img {
+    width: 210px;
+    height: fit-content;
+}
+.activity_1 .content .text audio {
+    height: 40px;
+    background-color: transparent;
+    border: 2px solid var(--font-3);
+}
+/* Carousel */
+.activity_1 .carousel {
+    text-align: center;
+}
+.activity_1 .carousel .carousel-item button {
+    padding: 6px 10px !important;
+    font-weight: 500 !important;
+}
+.activity .carousel .active-wrong {
+    border: 1.3px solid #e42723
+}
+.activity .carousel .active-right {
+    border: 1.3px solid #1eb333
+}
+.activity_1 .carousel-item button:hover {
+    transform: none !important;
+    color: var(--font-4);
+}
+.activity_1 .carousel-item button > .fa-lightbulb {
+    transition: var(--transition-seconds);
+}
+.activity_1 .carousel-item button:hover > .fa-lightbulb {
+    color: yellow;
+}
+.activity_1 .carousel-item button.active-right  > .fa-lightbulb {
+    color: yellow;
+}
+.activity_1 .carousel-item button.active-wrong {
+    color: var(--font-4);
+}
+/* Text 3 Table */
+.activity_1 .text3 table tr.head {
+    color: var(--font-1);
+    background-color: var(--main-dark);
+}
+.activity_1 .text3 table , .activity_1 .text3 tr , 
+.activity_1 .text3 th , .activity_1 .text3 td {
+    border: 1px solid;
+    padding: 5px
+}
+.activity_1 .text3 table tr td:first-of-type {
+    text-align: right !important;
+    color: var(--font-1);
+    background-color: var(--main-dark);
+}
+.activity_1 .text3 table tr td .fa-lightbulb.active {
+    color: yellow
+}
+
+.activity_1 .text3 table input,
+.activity_1 .text3 table textarea {
+    border: none;
+    outline: none;
+}
+.activity_1 .text3 table input:focus-visible,
+.activity_1 .text3 table textarea:focus-visible {
+    /* outline: none; */
+}
+/* Modal */
+.activity_1 .modal .modal-content {
+    margin-top: 5.75rem !important;
+    color: var(--font-3);
+    border: 3px solid var(--font-3);
+    background-color: white;
+}
+.activity_1 .modal .modal-content .modal-header {
+    width: 100%;
+    padding: 10px 0;
+    color: var(--font-1);
+    background-color: var(--main-dark);
+    justify-content: space-around;
 }
 
 
