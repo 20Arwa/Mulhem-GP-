@@ -177,22 +177,29 @@
 /* Start character_activity Page */
 .characters_activity {
     color: var(--font-4);
-   background-color: var(--main-light);
+    background-color: var(--main-light);
 }
-.characters_activity .carousel-inner {
+/* .characters_activity .carousel-inner {
    direction: rtl;
-}
-.characters_activity .carousel-item .explanation{
+} */
+.characters_activity .carousel-item .explanation {
     color: var(--font-3)
 }
 .characters_activity .carousel-item .explanation::after {
     content: "";
     width: 100%;
-    height: 2px;
-    color: var(--font-3);
+    height: 1.5px;
+    opacity: .75;
+    background-color: var(--font-3);
     position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: var(--transition-seconds);
 }
-.characters_activity .carousel-item .small-activity .content {
+.characters_activity .explanation::after {
+    bottom: -40px;
+}
+.characters_activity .carousel-item .small-activity {
     width: fit-content;
 }
 .characters_activity .carousel-item .small-activity .story {
@@ -200,14 +207,39 @@
     width: fit-content;
 }
 
+.characters_activity .section-4 .descriptions > div > div {
+    width: fit-content;
+    border: 1.5px solid var(--font-3);
+}
+.characters_activity .section-4 .descriptions > div > div h6 {
+    /* color: var(--font-4); */
+}
+.characters_activity .section-4 .descriptions ul {
+    padding: 0;
+    list-style: none;
+}
+.characters_activity .section-4 .descriptions ul li {
+    color: var(--font-4);
+    /* font-weight: 500; */
+}
+.characters_activity .section-4 .descriptions ul li span {
+    color: var(--font-3);
+    font-weight: 500;
+}
 
-
+/* Next & Prev Buttons */
 .characters_activity .carousel .carousel-control-prev {
-    right: 0 !important; /* عكس مكان الأزرار */
+    right: -50px !important;
     left: auto !important;
 }
 .characters_activity .carousel .carousel-control-next {
-    left: 0 !important;
+    left: -50px !important;
     right: auto !important;
 }
+.characters_activity .carousel .carousel-control-next i,
+.characters_activity .carousel .carousel-control-prev i {
+    font-size: 40px;
+    color: var(--font-3)
+}
+
 /* End character_activity Page */

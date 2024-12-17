@@ -7,16 +7,15 @@
 <div class="activity characters_activity container my-5 p-4 py-5 px-5 rounded-4 position-relative">
     <!-- Decore Images -->
     <!-- <img class="decore-imgs position-absolute" src="../../static/images/tree.png" alt="tree"> -->
-
     <div id="carouselCaracthers" class="carousel slide">
         <div class="carousel-inner">
             <!-- Section 1 -->
-            <div class="carousel-item section-1 active">
-                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto">
+            <div class="carousel-item section-1 ">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
                     <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>ماهي الشخصيات؟</h4>
                     <p>شخصيات القصة هم الأشخاص أو الحيوانات أو الكائنات التي تدور حولها أحداث القصة. مثلاً، في قصة السلحفاة والأرنب، السلحفاة والأرنب هما شخصيات القصة.</p>
                 </div>
-                <div class="small-activity text-center">
+                <div class="small-activity text-center pt-3  mx-auto">
                     <div class="content mx-auto">
                         <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج الشخصيات من القصة التالية:</h5>
                         <div class="story p-4 py-3 mx-auto my-3 rounded-4 border border-2 border-white">
@@ -31,13 +30,13 @@
                     <div class="question">
                         <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>شخصيات القصة هم:</h6>
                         <div class="options">
-                            <button class="wrong button main-button m-1">
+                            <button class="wrong button main-button m-1" onclick="optionClick(this)">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>السلحفاة لولو والنبتة جميلة
                             </button>
-                            <button class="right button main-button m-1">
+                            <button class="right button main-button m-1" onclick="optionClick(this)">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>السلحفاة لولو والشجرة ظليلة
                             </button>
-                            <button class="wrong button main-button m-1">
+                            <button class="wrong button main-button m-1" onclick="optionClick(this)">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>الشجرة ظليلة والنبتة جميلة
                             </button>
                         </div>
@@ -47,8 +46,8 @@
 
             <!-- Section 2 -->
             <div class="carousel-item section-2">
-                <div class="explanation">
-                    <h4><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصيات في القصة قد تكون أي شيء!</h4>
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative mx-auto">
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصيات في القصة قد تكون أي شيء!</h4>
                     <p>في القصص، الشخصيات ليست دائمًا أشخاصًا🧒. أحيانًا قد تكون:</p>
                     <ul class="d-flex">
                         <div>
@@ -66,28 +65,155 @@
                     </ul>
                     <p>في القصص، كل شيء ممكن! يمكنك أن تجعل أي شيء بطلًا لقصة رائعة.</p>
                 </div>
-                <div class="small-activity">
-                    <div class="content">
+                <div class="small-activity text-center pt-3">
+                    <div class="content  mx-auto">
                         <h5>
                             <i class="fa-regular fa-comment fs-4 ms-2"></i>
-                            إذا كان بإمكان أي شيء أن يتكلم، ماذا ستختار ليكون بطل قصتك؟ 
+                            فكر: إذا كان بإمكان أي شيء أن يتكلم، ماذا ستختار ليكون بطل قصتك؟ 
                         </h5>
                     </div>
                 </div>
             </div>
 
-
-
             <!-- Section 3 -->
-            <div class="carousel-item">
+            <div class="carousel-item section-3">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i> أنواع الشخصيات</h4>
+                    <p>هناك نوعان من الشخصيات في القصة:</p>
+                    <p><span>1.الشخصية الرئيسية: </span>الشخصية الرئيسية هي أهم شخصية في القصة، فهي البطل الذي يعيش المغامرات ويواجه التحديات، ونتابع أحداث القصة من خلاله.</p>
+                    <p><span>2.الشخصية الثانوية: </span>هي الشخصيات التي تساعد الشخصية الرئيسية أو تقف في طريقها، لكنها ليست الشخصية الأهم. بدونهم، ربما تكون القصة مملة لأنهم يضيفون تشويقًا وأحداثًا مختلفة.</p>
+                </div>
+                <div class="small-activity text-center pt-3 mx-auto">
+                    <div class="content">
+                        <div class="story p-4 py-3 mx-auto my-3 rounded-4 border border-2 border-white">
+                            <h5 class="mb-3">قصة الأرنب الذكي والثعلب الماكر</h5>
+                            <p class="text-end m-0">في أحد الأيام، كان هناك أرنب صغير اسمه "فرفور" يحب اللعب في الغابة.<br>  
+                                بينما كان يقفز بسعادة، ظهر ثعلب ماكر اسمه "مكرون" يريد أن يخدع فرفور ليأكله.<br>  
+                                قال مكرون: "هل تريد أن أريك مكانًا مليئًا بالجزر اللذيذ؟"<br>  
+                                لكن فرفور كان ذكيًا وقال: "شكرًا، لكني أحب البحث بنفسي!"<br>  
+                                ثم قفز بعيدًا بسرعة، ونجا من خدعة الثعلب الماكر.
+                                </p> 
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="question">
+                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصية الرئيسية هي:</h6>
+                            <div class="options">
+                                <button class="right button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>الأرنب فرفور
+                                </button>
+                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>الثعلب مكرون
+                                </button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصية الرئيسية هي:</h6>
+                            <div class="options">
+                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>الأرنب فرفور
+                                </button>
+                                <button class="right button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>الثعلب مكرون
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Section 4 -->
+            <div class="carousel-item section-4 active">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i> وصف الشخصيات</h4>
+                    <p>عندما نكتب قصة أو نقرأها، نحتاج إلى وصف الشخصيات لنعرف كيف تبدو وكيف تتصرف. هناك أشياء كثيرة يمكن أن نستخدمها لوصف الشخصيات، مثل:</p>
+                    <div class="descriptions row align-items-center gy-4">
+                        <div class="col-6 ">
+                            <div class="rounded-3 p-2 text-end">
+                                <h6 class="mb-4 text-center">وصف الشكل الخارجي</h6>
+                                <p>هذا يعني وصف ما نراه من مظهر الشخصية:</p>
+                                <ul>
+                                    <li><span>العيون: </span>بيرة، صغيرة، زرقاء، خضراء...</li>
+                                    <li><span>👩‍🦰 الشعر: </span>طويل، قصير، ناعم، مجعد، لونه أسود، بني...</li>
+                                    <li><span>الملابس: </span>ترتدي فستانًا، قميصًا، قبعة، حذاءً رياضيًا...</li>
+                                    <li><span>الطول أو الحجم: </span>طويل، قصير، ضخم، صغير...</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-6 ">
+                            <div class="rounded-3 p-2 text-end">
+                                <h6 class="mb-4 text-center">وصف الصفات الشخصية</h6>
+                                <p>هذا يعني وصف تصرفات أو أفكار أو مشاعر الشخصية:</p>
+                                <ul>
+                                    <li>سعيدة، حزينة، خائفة، غاضبة..</li>
+                                    <li>شجاعة، ذكية، كسولة، طيبة...</li>
+                                    <li> تحب مساعدة الآخرين، تحب اللعب، تحب المغامرات...</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="rounded-3 p-2 text-end">
+                                <h6 class="mb-4 text-center">وصف الصوت أو الحركة</h6>
+                                <p>هذا يساعد على جعل الشخصية أكثر حيوية:</p>
+                                <ul>
+                                    <li><span>الصوت: </span>اعم، عالٍ، مخيف، مرح...  </li>
+                                    <li><span>👩‍🦰 الحركة: </span>جري بسرعة، يمشي ببطء، يقفز عاليًا...</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="small-activity text-center pt-3 mx-auto">
+                    <div class="content">
+                        <div class="story p-4 py-3 mx-auto my-3 rounded-4 border border-2 border-white">
+                            <h5 class="mb-3">قصة الأرنب الذكي والثعلب الماكر</h5>
+                            <p class="text-end m-0">في أحد الأيام، كان هناك أرنب صغير اسمه "فرفور" يحب اللعب في الغابة.<br>  
+                                بينما كان يقفز بسعادة، ظهر ثعلب ماكر اسمه "مكرون" يريد أن يخدع فرفور ليأكله.<br>  
+                                قال مكرون: "هل تريد أن أريك مكانًا مليئًا بالجزر اللذيذ؟"<br>  
+                                لكن فرفور كان ذكيًا وقال: "شكرًا، لكني أحب البحث بنفسي!"<br>  
+                                ثم قفز بعيدًا بسرعة، ونجا من خدعة الثعلب الماكر.
+                                </p> 
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <div class="question">
+                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصية الرئيسية هي:</h6>
+                            <div class="options">
+                                <button class="right button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>الأرنب فرفور
+                                </button>
+                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>الثعلب مكرون
+                                </button>
+                            </div>
+                        </div>
+                        <div class="question">
+                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصية الرئيسية هي:</h6>
+                            <div class="options">
+                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>الأرنب فرفور
+                                </button>
+                                <button class="right button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>الثعلب مكرون
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 6 -->
+            <div class="carousel-item text-center">
+                اخر شريحة
+                <a href="../activities/all_activities"><button class="btn button main-button" >ارجع للأنشطة</button></a>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaracthers" data-bs-slide="prev">
-            السابق
+        <button class="carousel-control-prev" type="button" id="carouselPrev"  data-bs-target="#carouselCaracthers" data-bs-slide="prev">
+            <i class="fa-regular fa-circle-right"></i>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselCaracthers" data-bs-slide="next">
-            التالي
+        <button class="carousel-control-next" type="button" id="carouselNext" data-bs-target="#carouselCaracthers" data-bs-slide="next">
+            <i class="fa-regular fa-circle-left"></i>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
@@ -100,7 +226,34 @@
 <script>
     const myCarousel = document.querySelector('#carouselCaracthers');
     const carousel = new bootstrap.Carousel(myCarousel, {
-      wrap: false // Stops Looping, Going Back To First Section
+        wrap: false // Stops Going Back To First Section
     });
+    const nextButton = document.querySelector('#carouselNext');
+    const prevButton = document.querySelector('#carouselPrev');
+
+    myCarousel.addEventListener('slid.bs.carousel', (event) => {
+        const totalItems = document.querySelectorAll('#carouselCaracthers .carousel-item').length; // Number Of Items
+        const currentIndex = event.to; // Current Item
+        // Hide Prev Button If User In First Item
+        if (currentIndex === 0) {
+            prevButton.style.display = 'none';
+        } else {
+            prevButton.style.display = 'flex';
+        }
+        // Hide Next Button If User Reach Last Item
+        if (currentIndex === totalItems - 1) {
+            nextButton.style.display = 'none';
+        } else {
+            nextButton.style.display = 'flex';
+        }
+    });
+    function optionClick(button) {
+        if (button.classList.contains("wrong")) {
+            button.classList.add("active-wrong")
+        }
+        else {
+            button.classList.add("active-right")
+        }
+    }
 </script>
 {% endblock %}
