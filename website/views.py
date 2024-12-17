@@ -33,10 +33,14 @@ def story_generator():
 def all_activities():
     return render_template("/activities/all_activities.html") 
 
-# Activitiy 1 Exercise 1
+# Activitiy 1 
 @views.route('/activities/activity_1_exer1')
 def activity_1_exer1():
     return render_template("/activities/activity_1_exer1.html") 
 
+# Characters Activitiy  
+@views.route('/activities/characters_activity')
+def characters_activity():
+    return render_template("/activities/characters_activity.html") 
 
 # Lessons Page

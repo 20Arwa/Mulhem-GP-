@@ -62,7 +62,6 @@
         ]
     },
 ]%}
-
 {% block body %}
 <div class="activity activity_1 activity_1_exer1 container my-5 p-4 px-5 rounded-4">
 <!-- Text 1 -->
@@ -81,7 +80,6 @@
                 <p class="left-side me-2">في قديم الزمان، كانت هناك فتاة تُدعى "ذات الرداء الأحمر"، ترتدي دائمًا رداءً أحمر جميلًا أهَدته لها جدتها. طلبت منها والدتها إيصال سلة طعام لجدتها المريضة التي تعيش وحدها في الغابة، مع تحذيرها بعدم الابتعاد عن الطريق. أثناء رحلتها، ظهر لها ذئب مكر وسألها عن وجهتها، فأخبرته بمكان منزل جدتها. خطط الذئب بخبث لإيقاعها في الفخ، فأقنعها بجمع الأزهار كهدية لجدتها، مما تسبب في تأخيرها. استغل الذئب الوقت وذهب إلى منزل الجدة، خدعها بصوته الناعم وأكلها، ثم ارتدى ملابسها وانتظر ذات الرداء الأحمر. <br>عندما وصلت الفتاة، لاحظت أن هناك شيئًا غريبًا في "جدتها"، وسألتها عن أذنيها وعينيها وفمها الكبير. فجأة، قفز الذئب ليأكلها، لكن لحسن الحظ، كان هناك صياد قريب سمع الضجة. اقتحم المنزل، وقتل الذئب، وحرر الجدة والفتاة. شكرت ذات الرداء الأحمر وجدتُها الصياد.</p>
             </div>
         </div>
-    
         <!-- Carousel1 Text1 -->
         <div class="q-a carousel carousel1 slide" id="questionsCarousel" data-bs-interval="false">
             <div class="carousel-inner">
@@ -93,12 +91,14 @@
                             {{ ques.question }}
                         </h5>
                         <!-- For loop for answers -->
-                        {% for option in ques.options %}
-                        <button class="button main-button m-1" onclick="optionClick1(this, '{{ option.class }}')">
-                            <i class="fa-solid fa-lightbulb ms-1"></i>
-                            {{ option.answer }}
-                        </button>
-                        {% endfor %}
+                        <div class="options">
+                            {% for option in ques.options %}
+                            <button class="button main-button m-1" onclick="optionClick1(this, '{{ option.class }}')">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>
+                                {{ option.answer }}
+                            </button>
+                            {% endfor %}
+                        </div>
                     </div>
                 </div>
                 {% endfor %}
@@ -138,7 +138,6 @@
                     <p class="left-side mb-5">الذئب هو حيوان مفترس يعيش في الغابات والجبال، ويتميز بجسم قوي وفراء كثيف يحميه من البرد القارس. يحب الذئب العيش في مجموعات تُسمى "القطعان"، حيث يتعاون أفراد القطيع في الصيد وحماية بعضهم البعض. ورغم أن الذئب قد يبدو مخيفًا للبعض، إلا أنه يلعب دورًا أساسيًا في الحفاظ على توازن البيئة، من خلال صيده للحيوانات المريضة والضعيفة، مما يساعد على تحسين صحة النظام البيئي بشكل عام.</p>
                 </div>
             </div>
-        
             <!-- Carousel2 Text2 -->
             <div class="q-a carousel carousel2 slide" id="questionsCarousel2" data-bs-interval="false">
                 <div class="carousel-inner">
@@ -150,12 +149,14 @@
                                 {{ ques.question }}
                             </h5>
                             <!-- For loop for answers -->
+                            <div class="options">
                             {% for option in ques.options %}
-                            <button class="button main-button m-1" onclick="optionClick2(this, '{{ option.class }}')">
-                                <i class="fa-solid fa-lightbulb ms-1"></i>
-                                {{ option.answer }}
-                            </button>
-                            {% endfor %}
+                                <button class="button main-button m-1" onclick="optionClick2(this, '{{ option.class }}')">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>
+                                    {{ option.answer }}
+                                </button>
+                                {% endfor %}
+                            </div>
                         </div>
                     </div>
                     {% endfor %}
@@ -182,8 +183,6 @@
             </div>
         </div>
 
-
-    
 <!-- Text 3 -->
     <div class="text3 text-center">
         <h4 class="text-end">ملخص قصة ليلى والذئب ونص الذئب</h4>
@@ -194,57 +193,57 @@
                     <th>السؤال</th>
                     <th>ليلى والذئب</th>
                     <th>نص الذئب</th>
-                    
                 </tr>
                 <tr>
                     <td><i class="fa-regular fa-comment fs-5 ms-2"></i>نوع النص (خيالي أو حقيقي)</td>
-                    <td><i class="fa-solid fa-lightbulb active ms-1"></i><input type="text"  autofocus></td>
-                    <td><i class="fa-solid fa-lightbulb ms-1"></i><input type="text" ></td>
+                    <td><i class="fa-solid fa-lightbulb ms-1"></i><input class="fiction" type="text" autofocus></td>
+                    <td><i class="fa-solid fa-lightbulb ms-1"></i><input class="real" type="text" ></td>
                 </tr>
-                <tr>
+                <tr class="textarea_first">
                     <td><i class="fa-regular fa-comment fs-5 ms-2"></i>عن ماذا يتحدث النص؟</td>
                     <td>
                         <div class="d-flex">
-                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5"></textarea>
+                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5" placeholder="يجب أن يتكون الجواب من حوالي 15 كلمة كحد أدنى"></textarea>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex">
-                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5"></textarea>
+                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5" placeholder="يجب أن يتكون الجواب من حوالي 15 كلمة كحد أدنى"></textarea>
                         </div>
                     </td>
                 </tr>
-                <tr>
-                    <td><i class="fa-regular fa-comment fs-5 ms-2"></i>كيف تم حل المشكلة في النص</td>
+                <tr class="textarea_sec">
+                    <td><i class="fa-regular fa-comment fs-5 ms-2"></i>كيف تم حل المشكلة في النص؟</td>
                     <td>
                         <div class="d-flex">
-                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5"></textarea>
+                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5" placeholder="يجب أن يتكون الجواب من حوالي 5 كلمات كحد أدنى"></textarea>
                         </div>
                     </td>
                     <td>
                         <div class="d-flex">
-                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5"></textarea>
+                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5" placeholder="يجب أن يتكون الجواب من حوالي 5 كلمات كحد أدنى"></textarea>
                         </div>
                     </td>
                 </tr>
             </table>
         </div>
-
-        <table class="text2">
-
-        </table>
-
-        <button class="button main-button"  onclick="showModal3()">انتهيت</button>
+        <span class="d-block mb-3 error-msg text-danger">عذرًا، لم تتمكن من إضاءة جميع الأنوار. تأكد من إدخال الإجابات بالطول المطلوب وحاول مرة أخرى.</span>
+        <button class="button main-button done-button"  onclick="showModal3()">انتهيت</button>
     </div>
+
     <!-- Modal3 > Shows When Text3 Questions Are Done -->
     <div class="modal modal3 fade modal-finishStory" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content align-items-center text-center">
-            <div class="modal-header"><h1 class="modal-title fs-3" id="exampleModalLabel">عمل رائع!</h1></div>
-            <div class="modal-body">الآن أصبحت تعرف الفرق بين القصة الخيالية والنص الواقعي. تذكّر أن الكتابة القصصية تعتمد على الخيال، بينما الكتابة الواقعية تتحدث عن أشياء حقيقية. لا تنسَ أن تكتشف أنشطة أخرى لتتعلم أكثر!</div>
-            <div class="modal-footer">
-                <a href="../activities/all_activities"><button type="button" class="btn button main-button" data-bs-dismiss="modal">ارجع للأنشطة</button></a>
-            </div>
+                <div class="modal-header">
+                    <h2 class="modal-title fs-3 d-flex align-items-center" id="exampleModalLabel">
+                        <i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i>
+                        عمل رائع
+                        <i class="fa-solid fa-star fs-5 me-1" style="color: #FFD43B;"></i>
+                    </h2>
+                </div>
+                <div class="modal-body">الآن أصبحت تعرف الفرق بين القصة الخيالية والنص الواقعي. تذكّر أن الكتابة القصصية تعتمد على الخيال، بينما الكتابة الواقعية تتحدث عن أشياء حقيقية. لا تنسَ أن تكتشف أنشطة أخرى لتتعلم أكثر!</div>
+                <a href="../activities/all_activities" class="mb-4 mt-3"><button type="button" class="btn button main-button" data-bs-dismiss="modal">ارجع للأنشطة</button></a>
             </div>
         </div>
     </div>
@@ -259,17 +258,14 @@
         interval: false,
         wrap: false // Prevent going back to the first question after finishing
     });
-    
     // Add event listener to the carousel DOM element, not the Carousel instance
     carouselElement.addEventListener('slide.bs.carousel', (event) => {
         const direction = event.direction === 'right' ? 'left' : 'right'; // Change direction
         const inner = carouselElement.querySelector('.carousel-inner'); // Get the carousel-inner element
         inner.style.direction = direction; // Apply the new direction
     });
-    
     // Modal That Appears When Finish Text1 Questions
     var modal1 = new bootstrap.Modal(document.getElementById('modal1'));
-
     // Click On Options
     function optionClick1(button, optionClass) {
         button.classList.toggle(optionClass); // Feedback (red, green) Colors For The Answers
@@ -279,7 +275,7 @@
                 carousel.next(); // Go To Next Question
             }, 250);    
             // if Question Is The Last One
-            if (button.parentElement.parentElement.classList.contains("last-ques")) {
+            if (button.parentElement.parentElement.parentElement.classList.contains("last-ques")) {
                 modal1.show(); // Show Modal1                
                 document.querySelector(".activity_1_exer1 > .text1").style.display = 'none' // Undisplay Text1  
                 document.querySelector(".activity_1_exer1 > .text2").style.display = 'block' // Display Text2
@@ -288,24 +284,19 @@
     }
     // End Text 1
     
-    
-    
     // Start Text 2
     const carousel2Element = document.querySelector('#questionsCarousel2');
     const carousel2 = new bootstrap.Carousel(carousel2Element, {
         interval: false,
         wrap: false // Prevent going back to the first question after finishing
     });
-    
     // Add event listener to the carousel DOM element, not the Carousel instance
     carousel2Element.addEventListener('slide.bs.carousel', (event) => {
         const direction = event.direction === 'right' ? 'left' : 'right'; // Change direction
         const inner = carousel2Element.querySelector('.carousel-inner'); // Get the carousel-inner element
         inner.style.direction = direction; // Apply the new direction
     });
-    
     var modal2 = new bootstrap.Modal(document.getElementById('modal2'));
-    
     // Click On Options
     function optionClick2(button, optionClass) {
         button.classList.toggle(optionClass); // Feedback (red, green) Colors For The Answers
@@ -315,7 +306,7 @@
                 carousel2.next(); // Go To Next Question
             }, 250);    
             // if Question Is The Last One
-            if (button.parentElement.parentElement.classList.contains("last-ques")) {
+            if (button.parentElement.parentElement.parentElement.classList.contains("last-ques")) {
                 modal2.show(); // Show Modal1                
                 document.querySelector(".activity_1_exer1 > .text2").style.display = 'none' // Undisplay Text1  
                 document.querySelector(".activity_1_exer1 > .text3").style.display = 'block' // Display Text2
@@ -324,21 +315,48 @@
     }
     // End Text 2
     
-    
     // Start Text 3
-    var inputs = document.querySelectorAll("");
-    var textareas = document.querySelectorAll("");
+    var inputs = document.querySelectorAll(".activity_1 .text3 table input");
+    var input_first = document.querySelector(".activity_1 .text3 table td .fiction");
+    var input_sec = document.querySelector(".activity_1 .text3 table td .real");
+    var textareas = document.querySelectorAll(".activity_1 .text3 table textarea");
+    var textarea_first = document.querySelectorAll(".activity_1 .text3 table .textarea_first textarea");
+    var textarea_sec = document.querySelectorAll(".activity_1 .text3 table .textarea_sec textarea");
+    var error_msg = document.querySelector(".activity_1 .text3 .error-msg");
     var modal3 = new bootstrap.Modal(document.getElementById('modal3'));
     // If User Answers Right: Color Light
-    inputs.forEach((input) => {
-        
+    input_first.addEventListener("input", () => {
+        input_first.value.trim() == "خيالي" || input_first.value.trim() == "خيالية"? input_first.previousSibling.classList.add("active") : input_first.previousSibling.classList.remove("active")
     })
-    textareas.forEach((input) => {
-
+    input_sec.addEventListener("input", () => {
+        input_sec.value.trim() == "حقيقي" || input_sec.value.trim() == "حقيقية" ? input_sec.previousSibling.classList.add("active") : input_sec.previousSibling.classList.remove("active")
+    })
+    textarea_first.forEach((textarea) => {
+        textarea.addEventListener("input", () => {
+            textarea.value.length >= 60 ? textarea.previousSibling.classList.add("active") : textarea.previousSibling.classList.remove("active")
+        })
+    })
+    textarea_sec.forEach((textarea) => {
+        textarea.addEventListener("input", () => {
+            textarea.value.length >= 20 ? textarea.previousSibling.classList.add("active") : textarea.previousSibling.classList.remove("active")
+        })
     })
     function showModal3() {
-        // Show if all Light are active class
-        modal3.show();
+        // Check If All Light are On, If Yes Show Modal3
+        let input_active = false;
+        let textarea_active = false;
+        inputs.forEach((input) => {
+            if (input.previousSibling.classList.contains("active")) {input_active = true;} }) 
+        textareas.forEach((textarea) => {if (textarea.previousSibling.classList.contains("active") ) {textarea_active = true;} }) 
+        if (input_active) {
+            if (textarea_active) {
+                modal3.show();
+                error_msg.classList.remove("active")
+            }
+        }
+        else {
+            error_msg.classList.add("active")
+        }
     }
 </script>
 {% endblock %}

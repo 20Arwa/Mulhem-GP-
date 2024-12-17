@@ -1,0 +1,106 @@
+{% extends "base.html" %}
+{% block title %}الشخصيات{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/activities.css')}}">
+{% endblock %}
+{% block body %}
+<div class="activity characters_activity container my-5 p-4 py-5 px-5 rounded-4 position-relative">
+    <!-- Decore Images -->
+    <!-- <img class="decore-imgs position-absolute" src="../../static/images/tree.png" alt="tree"> -->
+
+    <div id="carouselCaracthers" class="carousel slide">
+        <div class="carousel-inner">
+            <!-- Section 1 -->
+            <div class="carousel-item section-1 active">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto">
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>ماهي الشخصيات؟</h4>
+                    <p>شخصيات القصة هم الأشخاص أو الحيوانات أو الكائنات التي تدور حولها أحداث القصة. مثلاً، في قصة السلحفاة والأرنب، السلحفاة والأرنب هما شخصيات القصة.</p>
+                </div>
+                <div class="small-activity text-center">
+                    <div class="content mx-auto">
+                        <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج الشخصيات من القصة التالية:</h5>
+                        <div class="story p-4 py-3 mx-auto my-3 rounded-4 border border-2 border-white">
+                            <h5 class="mb-3">قصة السلحفاة والمطر الغزير</h5>
+                            <p class="text-end m-0">في يوم من الأيام، كانت السلحفاة "لولو" تمشي ببطء في الحديقة،<br>  
+                                حتى بدأت قطرات المطر تتساقط بسرعة.<br>  
+                                خافت لولو وطلبت من الشجرة "ظليلة" أن تحتمي تحت أغصانها.<br>  
+                                أجابتها ظليلة: "بالطبع، تعالي حتى ينتهي المطر."<br>  
+                                بعد توقف المطر، شكرت لولو الشجرة فقالت ظليلة: "دائمًا سأكون هنا لأساعدك!"</p> 
+                        </div>
+                    </div>
+                    <div class="question">
+                        <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>شخصيات القصة هم:</h6>
+                        <div class="options">
+                            <button class="wrong button main-button m-1">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>السلحفاة لولو والنبتة جميلة
+                            </button>
+                            <button class="right button main-button m-1">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>السلحفاة لولو والشجرة ظليلة
+                            </button>
+                            <button class="wrong button main-button m-1">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>الشجرة ظليلة والنبتة جميلة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 2 -->
+            <div class="carousel-item section-2">
+                <div class="explanation">
+                    <h4><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصيات في القصة قد تكون أي شيء!</h4>
+                    <p>في القصص، الشخصيات ليست دائمًا أشخاصًا🧒. أحيانًا قد تكون:</p>
+                    <ul class="d-flex">
+                        <div>
+                            <li>🧒 حيوانات <p>مثل الأسد الذي يحكم الغابة</p></li>
+                            <li>🧒 نباتات <p>مثل شجرة تساعد الأطفال</p></li>
+                            <li>🧒 جمادات <p>مثل ساعة تهمس بأسرار الوقت</p></li>
+                            <li>🧒  عناصر من الطبيعية <p>مثل شعلة نار تساعد الناس في التدفئة</p></li>
+                        </div>
+                        <div>
+                            <li>🧒   ألعاب ودمى <p>مثل دمية دب تحكي عن مغامرتها مع مالكها</p></li>
+                            <li>🧒   مركبات <p>مثل سيارة تتحدث وتحب السباقات</p></li>
+                            <li>🧒   أماكن <p>مثل قلعة تتحدث وتحكي عن تاريخها</p></li>
+                            <li>🧒   كتب أو أدوات مدرسية <p>مثل قلم يحلم بأن يصبح رسامًا مشهورًا</p></li>
+                        </div>
+                    </ul>
+                    <p>في القصص، كل شيء ممكن! يمكنك أن تجعل أي شيء بطلًا لقصة رائعة.</p>
+                </div>
+                <div class="small-activity">
+                    <div class="content">
+                        <h5>
+                            <i class="fa-regular fa-comment fs-4 ms-2"></i>
+                            إذا كان بإمكان أي شيء أن يتكلم، ماذا ستختار ليكون بطل قصتك؟ 
+                        </h5>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!-- Section 3 -->
+            <div class="carousel-item">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselCaracthers" data-bs-slide="prev">
+            السابق
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselCaracthers" data-bs-slide="next">
+            التالي
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+
+
+
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    const myCarousel = document.querySelector('#carouselCaracthers');
+    const carousel = new bootstrap.Carousel(myCarousel, {
+      wrap: false // Stops Looping, Going Back To First Section
+    });
+</script>
+{% endblock %}

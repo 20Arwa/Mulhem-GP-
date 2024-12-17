@@ -1,7 +1,4 @@
 /* Style all_activities Page */
-.all-activities {
-    
-}
 .all-activities .activity > div {
     color: var(--font-4);
     background-color: var(--main-light);
@@ -48,7 +45,6 @@
 .all-activities .start-container .exercises-container > a:last-of-type {
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    /* border-radius: ; */
 }
 .all-activities .start-container .exercises-container > a:hover {
     border-color: var(--main-light);
@@ -56,7 +52,41 @@
 }
 
 
-/* Style activity_1 Page */
+
+/* Options Style */
+
+.options button {
+    font-size: 15px !important;
+    padding: 6px 10px !important;
+    font-weight: 500 !important;
+}
+.options .active-wrong {
+    border: 1.3px solid #e42723;
+    box-shadow: 0 0 5px rgba(228, 39, 35, 0.5);
+}
+.options .active-right {
+    border: 1.3px solid #1eb333;
+    box-shadow: 0 0 5px rgba(30, 179, 51, 0.5);
+}
+.options button:hover {
+    transform: none !important;
+    color: var(--font-4);
+}
+.options button > .fa-lightbulb {
+    transition: var(--transition-seconds);
+}
+.options button:hover > .fa-lightbulb {
+    color: yellow;
+}
+.options button.active-right  > .fa-lightbulb {
+    color: yellow;
+}
+.options button.active-wrong {
+    color: var(--font-4);
+}
+
+
+/* Start Style activity_1 Page */
 .activity_1 {
     color: var(--font-4);
     background-color: var(--main-light);
@@ -65,7 +95,7 @@
     color: var(--font-4);
     background-color: var(--main-light);
 }
-.activity_1 > .text2, .activity_1 > .text1 {
+.activity_1 > .text2, .activity_1 > .text3 {
     display: none;
 }
 .activity_1 .content .text {
@@ -84,35 +114,8 @@
     background-color: transparent;
     border: 2px solid var(--font-3);
 }
-/* Carousel */
 .activity_1 .carousel {
     text-align: center;
-}
-.activity_1 .carousel .carousel-item button {
-    padding: 6px 10px !important;
-    font-weight: 500 !important;
-}
-.activity .carousel .active-wrong {
-    border: 1.3px solid #e42723
-}
-.activity .carousel .active-right {
-    border: 1.3px solid #1eb333
-}
-.activity_1 .carousel-item button:hover {
-    transform: none !important;
-    color: var(--font-4);
-}
-.activity_1 .carousel-item button > .fa-lightbulb {
-    transition: var(--transition-seconds);
-}
-.activity_1 .carousel-item button:hover > .fa-lightbulb {
-    color: yellow;
-}
-.activity_1 .carousel-item button.active-right  > .fa-lightbulb {
-    color: yellow;
-}
-.activity_1 .carousel-item button.active-wrong {
-    color: var(--font-4);
 }
 /* Text 3 Table */
 .activity_1 .text3 table tr.head {
@@ -127,20 +130,32 @@
 .activity_1 .text3 table tr td:first-of-type {
     text-align: right !important;
     color: var(--font-1);
+    padding: 0 10px !important;
     background-color: var(--main-dark);
 }
 .activity_1 .text3 table tr td .fa-lightbulb.active {
     color: yellow
 }
-
 .activity_1 .text3 table input,
 .activity_1 .text3 table textarea {
+    color: var(--font-4);
     border: none;
     outline: none;
 }
-.activity_1 .text3 table input:focus-visible,
-.activity_1 .text3 table textarea:focus-visible {
-    /* outline: none; */
+.activity_1 .text3 table textarea::placeholder {
+    font-size: 14px;
+    transition: .2s;
+}
+.activity_1 .text3 table textarea:focus::placeholder {
+    opacity: 0;
+}
+.activity_1 .text3 .error-msg {
+    opacity: 0;
+    font-size: 15px;
+    transition: var(--transition-seconds);
+}
+.activity_1 .text3 .error-msg.active {
+    opacity: 1;
 }
 /* Modal */
 .activity_1 .modal .modal-content {
@@ -156,9 +171,43 @@
     background-color: var(--main-dark);
     justify-content: space-around;
 }
+/* End Style activity_1 Page */
 
 
-/* Style activity_2 Page */
-.activity_2 {
-
+/* Start character_activity Page */
+.characters_activity {
+    color: var(--font-4);
+   background-color: var(--main-light);
 }
+.characters_activity .carousel-inner {
+   direction: rtl;
+}
+.characters_activity .carousel-item .explanation{
+    color: var(--font-3)
+}
+.characters_activity .carousel-item .explanation::after {
+    content: "";
+    width: 100%;
+    height: 2px;
+    color: var(--font-3);
+    position: absolute;
+}
+.characters_activity .carousel-item .small-activity .content {
+    width: fit-content;
+}
+.characters_activity .carousel-item .small-activity .story {
+    color: var(--font-3);
+    width: fit-content;
+}
+
+
+
+.characters_activity .carousel .carousel-control-prev {
+    right: 0 !important; /* عكس مكان الأزرار */
+    left: auto !important;
+}
+.characters_activity .carousel .carousel-control-next {
+    left: 0 !important;
+    right: auto !important;
+}
+/* End character_activity Page */
