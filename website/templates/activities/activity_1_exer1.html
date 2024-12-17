@@ -343,11 +343,10 @@
     })
     function showModal3() {
         // Check If All Light are On, If Yes Show Modal3
-        let input_active = false;
-        let textarea_active = false;
-        inputs.forEach((input) => {
-            if (input.previousSibling.classList.contains("active")) {input_active = true;} }) 
-        textareas.forEach((textarea) => {if (textarea.previousSibling.classList.contains("active") ) {textarea_active = true;} }) 
+        let input_active = true;
+        let textarea_active = true;
+        inputs.forEach((input) => {if (input.previousSibling.classList.contains("active") == false) {input_active = false;} }) 
+        textareas.forEach((textarea) => {if (textarea.previousSibling.classList.contains("active") == false ) {textarea_active = false;} }) 
         if (input_active) {
             if (textarea_active) {
                 modal3.show();

@@ -7,12 +7,12 @@
     cursor: pointer;
     color: var(--font-1);
     background-color: var(--main-dark);
-    transition: 0s;
+    /* transition: 0s; */
 }
 .all-activities .activity .start-container:hover  {
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-    transform: none;
+    /* border-bottom-right-radius: 0; */
+    /* border-bottom-left-radius: 0; */
+    /* transform: none; */
 }
 .all-activities .activity .start-container button {
     font-weight: 600;
@@ -211,8 +211,8 @@
     width: fit-content;
     border: 1.5px solid var(--font-3);
 }
-.characters_activity .section-4 .descriptions > div > div h6 {
-    /* color: var(--font-4); */
+.characters_activity .section-4 .descriptions > div:last-of-type {
+    justify-items: center;
 }
 .characters_activity .section-4 .descriptions ul {
     padding: 0;

@@ -7,8 +7,8 @@
 <div class="all-activities container row mx-auto my-4 g-5 text-center">
     <!-- Object Contains Each Actitvites: title, description, path Of Html Page  -->
     {% for activity in [
-        {'title': 'الفرق بين الكتابة القصصية والكتابة العادية', 'description': 'في هذا النشاط، سنقرأ معًا قصة ممتعة ونكتشف فكرتها، ثم نقارنها بكتاب يقدم معلومات حقيقية. سنتعلم الفرق بين الكتابة القصصية والكتابة العادية!', 'exercisesPath' : ['../activities/activity_1_exer1','../activities/activity_1_exer1']},
-        {'title': 'شخصيات القصة', 'description': 'في هذا النشاط، سنتعرف على أحد عناصر القصة المهمة: الشخصيات! سنتعلم أنواعها وكيف نصفها، ثم نقرأ قصة قصيرة لنستخرج الشخصيات.', 'exercisesPath' : ['../activities/characters_activity','../activities/characters_activity']},
+        {'title': 'الفرق بين الكتابة القصصية والكتابة العادية', 'description': 'في هذا النشاط، سنقرأ معًا قصة ممتعة ونكتشف فكرتها، ثم نقارنها بكتاب يقدم معلومات حقيقية. سنتعلم الفرق بين الكتابة القصصية والكتابة العادية!', 'exercisesPath' : '../activities/activity_1_exer1'},
+        {'title': 'شخصيات القصة', 'description': 'في هذا النشاط، سنتعرف على أحد عناصر القصة المهمة: الشخصيات! سنتعلم أنواعها وكيف نصفها، ثم نقرأ قصة قصيرة لنستخرج الشخصيات.', 'exercisesPath' : '../activities/characters_activity'},
         {'title': '', 'description': '', 'path': ''}
     ]%}
         <!-- For Each Activity In The Object, This Code Will Be Repeated -->
@@ -16,20 +16,18 @@
             <div class=" p-4 pt-5 pb-4 rounded-4 text-center h-100 d-flex flex-column justify-content-around">
                 <h4 class="my-0">{{activity.title}}</h4>
                 <p class="my-4">{{activity.description}}</p>
-                <div class="start-container w-25 d-flex justify-content-around align-items-center mx-auto button main-button position-relative z-0">
-                    <button class="border-0 bg-transparent">إبدأ</button>
-                    <i class="fa-solid fa-caret-up arrow"></i>
-                    <div class="exercises-container position-absolute start-50 translate-middle w-100 z-n1">
-                        {% for exercise in activity.exercisesPath %}
-                        <a href="{{exercise}}" class="d-block">
-                            <p class="my-2">تمرين {{loop.index}}</p>
-                        </a>
-                        {% endfor %}
-                    </div>
-                </div>
-                
+                <!-- <div > -->
+                    <a href="{{activity.exercisesPath}}" class="start-container w-25 d-flex justify-content-around align-items-center mx-auto button main-button">
+                        <button class="border-0 bg-transparent">إبدأ</button>
+                    </a>
+                    <!-- <i class="fa-solid fa-caret-up arrow"></i> -->
+                    <!-- <div class="exercises-container position-absolute start-50 translate-middle w-100 z-n1"> -->
+                        <!-- {% for exercise in activity.exercisesPath %} -->
+                            <!-- <p class="my-2">تمرين {{loop.index}}</p> -->
+                        <!-- {% endfor %} -->
+                    <!-- </div> -->
+                <!-- </div> -->
             </div>
-
         </div>
     {% endfor %}
 </div>
