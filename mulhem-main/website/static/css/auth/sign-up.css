@@ -1,0 +1,25 @@
+.sign-container  {
+    border-color: var(--main-light) !important;
+    box-shadow: 10px;
+}
+.sign-container .message {
+    background-color: var(--main-light) !important;
+}
+.sign-container #sign-up {
+    width: fit-content;
+}
+.sign-container #sign-up label {
+    align-self: start;
+}
+.sign-container #sign-up input:not(input:last-of-type), 
+.sign-container #sign-up input:focus-visible, 
+.sign-container #sign-up select {
+    margin-bottom: 15px;
+    padding: 5px 10px 5px 5px;
+    border-radius: 0.375rem;
+    border: 1.5px solid var(--main-dark);
+    outline: none;
+}
+.sign-container #sign-up input::placeholder {
+    font-size: 12px;
+}
