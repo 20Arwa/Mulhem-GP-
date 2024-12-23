@@ -5,14 +5,13 @@
 {% endblock %}
 {% block body %}
 <!-- Error Message -->
-<!-- <div class="alert alert-danger alert-dismissible fade" role="alert">
+<div class="alert alert-danger alert-dismissible fade" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true"></span></button>
 </div>
 <div class="alert alert-success alert-dismissible fade" role="alert">
     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true"></span></button>
-</div> -->
+</div>
 <div id="liveAlertPlaceholder"></div>
-
 <!-- Content -->
 <div class="sign-container d-flex justify-space-between my-5 mx-auto border rounded-2">
     <div class="circle rounded-circle"></div>
@@ -45,16 +44,12 @@
                 </select>
             </div>
         </div>
-
         <label for="email">البريد الإلكتروني</label>
         <input type="email" name="email" placeholder="a12@gmail.com">
-        
         <label for="password">كلمة المرور</label>
         <input type="password" name="password">
-
         <label for="password2">تأكيد كلمة المرور</label>
         <input type="password" name="password2">
-
         <input type="submit" class="button main-button" value="إنشاء حساب" onclick="checkInputs()" class="btn btn-primary" id="liveAlertBtn">
     </form>
 </div>

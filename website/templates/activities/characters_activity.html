@@ -6,21 +6,34 @@
 {% block body %}
 <div class="activity characters_activity container my-5 p-4 py-5 px-5 rounded-4 position-relative">
     <!-- Decore Images -->
-    <!-- <img class="decore-imgs position-absolute" src="../../static/images/tree.png" alt="tree"> -->
+    <img class="decore-imgs boy position-absolute" src="../../static/images/boy.png" alt="boy">
+    <img class="decore-imgs tree position-absolute" src="../../static/images/tree.png" alt="tree">
+    <img class="decore-imgs racon position-absolute" src="../../static/images/racon.png" alt="racon">
+    <img class="decore-imgs flower position-absolute" src="../../static/images/flower.png" alt="flower">
+    <img class="decore-imgs apple position-absolute" src="../../static/images/apple.png" alt="apple">
+    <img class="decore-imgs door position-absolute" src="../../static/images/door.png" alt="door">
+    <img class="decore-imgs girl position-absolute" src="../../static/images/girl.png" alt="girl">
     <div id="carouselCaracthers" class="carousel slide">
         <div class="carousel-inner">
-            <!-- Section 1 -->
-            <div class="carousel-item section-1 ">
+            <!-- @@@@@@@@@@@@@ Section 1 @@@@@@@@@@@@@ -->
+            <div class="carousel-item section-1 active">
                 <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
-                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>ماهي الشخصيات؟</h4>
-                    <p>شخصيات القصة هم الأشخاص أو الحيوانات أو الكائنات التي تدور حولها أحداث القصة. مثلاً، في قصة السلحفاة والأرنب، السلحفاة والأرنب هما شخصيات القصة.</p>
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>ماهي الشخصيات؟<i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <p>شخصيات القصة هم الأشخاص أو الحيوانات أو الكائنات التي تدور حولها أحداث القصة.</p>
                 </div>
                 <div class="small-activity text-center pt-3  mx-auto">
                     <div class="content mx-auto">
                         <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج الشخصيات من القصة التالية:</h5>
-                        <div class="story p-4 py-3 mx-auto my-3 rounded-4 border border-2 border-white">
-                            <h5 class="mb-3">قصة السلحفاة والمطر الغزير</h5>
-                            <p class="text-end m-0">في يوم من الأيام، كانت السلحفاة "لولو" تمشي ببطء في الحديقة،<br>  
+                        <div class="story d-flex align-items-center gap-2 rounded-4 p-3 py-2 mx-auto my-3 border border-2 border-white">
+                            <div class="right-side text-center">  
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>السلحفاة والمطر الغزير</h5>
+                                <img class="my-3 rounded-4" src="../..//static/images/activity_turle_tree.webp" alt="سلحفاة ومطر">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side text-end mb-0">في يوم من الأيام، كانت السلحفاة "لولو" تمشي ببطء في الحديقة،<br>  
                                 حتى بدأت قطرات المطر تتساقط بسرعة.<br>  
                                 خافت لولو وطلبت من الشجرة "ظليلة" أن تحتمي تحت أغصانها.<br>  
                                 أجابتها ظليلة: "بالطبع، تعالي حتى ينتهي المطر."<br>  
@@ -28,44 +41,62 @@
                         </div>
                     </div>
                     <div class="question">
-                        <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>شخصيات القصة هم:</h6>
+                        <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>شخصيات القصة هم <span class="fw-bold">(يوجد خيارين)</span>:</h6>
                         <div class="options">
-                            <button class="wrong button main-button m-1" onclick="optionClick(this)">
-                                <i class="fa-solid fa-lightbulb ms-1"></i>السلحفاة لولو والنبتة جميلة
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>النبتة جميلة
                             </button>
-                            <button class="right button main-button m-1" onclick="optionClick(this)">
-                                <i class="fa-solid fa-lightbulb ms-1"></i>السلحفاة لولو والشجرة ظليلة
-                            </button>
-                            <button class="wrong button main-button m-1" onclick="optionClick(this)">
-                                <i class="fa-solid fa-lightbulb ms-1"></i>الشجرة ظليلة والنبتة جميلة
-                            </button>
+                            <div class="confetti-right confetti-click">
+                                <button class="right button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>الشجرة ظليلة
+                                </button>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
+                            </div>
+                            <div class="confetti-right confetti-click">
+                                <button class="right button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>السلحفاة لولو
+                                </button>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>       
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Section 2 -->
+            <!-- @@@@@@@@@@@@@ Section 2 @@@@@@@@@@@@@ -->
             <div class="carousel-item section-2">
                 <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative mx-auto">
-                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصيات في القصة قد تكون أي شيء!</h4>
-                    <p>في القصص، الشخصيات ليست دائمًا أشخاصًا🧒. أحيانًا قد تكون:</p>
-                    <ul class="d-flex">
-                        <div>
-                            <li>🧒 حيوانات <p>مثل الأسد الذي يحكم الغابة</p></li>
-                            <li>🧒 نباتات <p>مثل شجرة تساعد الأطفال</p></li>
-                            <li>🧒 جمادات <p>مثل ساعة تهمس بأسرار الوقت</p></li>
-                            <li>🧒  عناصر من الطبيعية <p>مثل شعلة نار تساعد الناس في التدفئة</p></li>
+                    <h4 class=" mb-4"><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصيات في القصة قد تكون أي شيء!<i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <h6 class="text-end">في القصص، الشخصيات ليست دائمًا أشخاصًا 🧒. أحيانًا قد تكون:</h6>
+                    <ul class="text-end d-flex justify-content-evenly p-0 mx-auto my-3 rounded-3 p-3">
+                        <div class="ms-5">
+                            <li>🦁 حيوانات <p>مثل الأسد الذي يحكم الغابة</p></li>
+                            <li>🌳 نباتات <p>مثل شجرة تساعد الأطفال</p></li>
+                            <li>⏰ جمادات <p>مثل ساعة تهمس بأسرار الوقت</p></li>
+                            <li>🔥  عناصر من الطبيعية <p class="mb-0">مثل شعلة نار تساعد الناس في التدفئة</p></li>
                         </div>
                         <div>
-                            <li>🧒   ألعاب ودمى <p>مثل دمية دب تحكي عن مغامرتها مع مالكها</p></li>
-                            <li>🧒   مركبات <p>مثل سيارة تتحدث وتحب السباقات</p></li>
-                            <li>🧒   أماكن <p>مثل قلعة تتحدث وتحكي عن تاريخها</p></li>
-                            <li>🧒   كتب أو أدوات مدرسية <p>مثل قلم يحلم بأن يصبح رسامًا مشهورًا</p></li>
+                            <li>🧸 ألعاب ودمى <p>مثل دمية دب تحكي عن مغامرتها مع مالكها</p></li>
+                            <li>🚘 مركبات <p>مثل سيارة تتحدث وتحب السباقات</p></li>
+                            <li>🏰 أماكن <p>مثل قلعة تتحدث وتحكي عن تاريخها</p></li>
+                            <li>🖊️ كتب أو أدوات مدرسية <p class="mb-0">مثل قلم يحلم بأن يصبح رسامًا مشهورًا</p></li>
                         </div>
                     </ul>
-                    <p>في القصص، كل شيء ممكن! يمكنك أن تجعل أي شيء بطلًا لقصة رائعة.</p>
+                    <h6 class="text-end mb-4">في القصص، كل شيء ممكن! يمكنك أن تجعل أي شيء بطلًا لقصة رائعة.</h6>
                 </div>
-                <div class="small-activity text-center pt-3">
+                <div class="small-activity text-center pt-3 mx-auto">
                     <div class="content  mx-auto">
                         <h5>
                             <i class="fa-regular fa-comment fs-4 ms-2"></i>
@@ -74,90 +105,105 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Section 3 -->
+            <!-- @@@@@@@@@@@@@ Section 3 @@@@@@@@@@@@@ -->
             <div class="carousel-item section-3">
                 <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
-                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i> أنواع الشخصيات</h4>
-                    <p>هناك نوعان من الشخصيات في القصة:</p>
-                    <p><span>1.الشخصية الرئيسية: </span>الشخصية الرئيسية هي أهم شخصية في القصة، فهي البطل الذي يعيش المغامرات ويواجه التحديات، ونتابع أحداث القصة من خلاله.</p>
-                    <p><span>2.الشخصية الثانوية: </span>هي الشخصيات التي تساعد الشخصية الرئيسية أو تقف في طريقها، لكنها ليست الشخصية الأهم. بدونهم، ربما تكون القصة مملة لأنهم يضيفون تشويقًا وأحداثًا مختلفة.</p>
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i> أنواع الشخصيات<i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <h5 class="text-end my-4">هناك نوعان من الشخصيات في القصة:</h5>
+                    <p><span>1.الشخصية الرئيسية: </span><br>الشخصية الرئيسية هي أهم شخصية في القصة، فهي البطل الذي يعيش المغامرات ويواجه التحديات، ونتابع أحداث القصة من خلاله.</p>
+                    <p><span>2.الشخصية الثانوية: </span><br>هي الشخصيات التي تساعد الشخصية الرئيسية أو تقف في طريقها، لكنها ليست الشخصية الأهم. بدونهم، ربما تكون القصة مملة لأنهم يضيفون تشويقًا وأحداثًا مختلفة.</p>
                 </div>
                 <div class="small-activity text-center pt-3 mx-auto">
                     <div class="content">
-                        <div class="story p-4 py-3 mx-auto my-3 rounded-4 border border-2 border-white">
-                            <h5 class="mb-3">قصة الأرنب الذكي والثعلب الماكر</h5>
-                            <p class="text-end m-0">في أحد الأيام، كان هناك أرنب صغير اسمه "فرفور" يحب اللعب في الغابة.<br>  
-                                بينما كان يقفز بسعادة، ظهر ثعلب ماكر اسمه "مكرون" يريد أن يخدع فرفور ليأكله.<br>  
-                                قال مكرون: "هل تريد أن أريك مكانًا مليئًا بالجزر اللذيذ؟"<br>  
-                                لكن فرفور كان ذكيًا وقال: "شكرًا، لكني أحب البحث بنفسي!"<br>  
-                                ثم قفز بعيدًا بسرعة، ونجا من خدعة الثعلب الماكر.
-                                </p> 
+                        <div class="story d-flex align-items-center gap-2 rounded-4 p-3 py-2 mx-auto my-3 border border-2 border-white">
+                            <div class="right-side text-center">  
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>الأرنب والثعلب الماكر</h5>
+                                <img class="my-3 rounded-4" src="../..//static/images/activity_rabbit_fox.jpg" alt="سلحفاة ومطر">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side text-end mb-0">في أحد الأيام، كان هناك <span>أرنب صغير اسمه "فرفور"</span> يحب اللعب في الغابة.<br>  
+                                بينما كان يقفز بسعادة، ظهر <span>ثعلب ماكر اسمه "مكرون"</span> يريد أن يخدع <span>فرفور</span> ليأكله.<br>  
+                                قال <span>مكرون</span>: "هل تريد أن أريك مكانًا مليئًا بالجزر اللذيذ؟"<br>  
+                                لكن <span>فرفور</span> كان ذكيًا وقال: "شكرًا، لكني أحب البحث بنفسي!"<br>  
+                                ثم قفز بعيدًا بسرعة، ونجا من خدعة <span>الثعلب الماكر</span>.
+                            </p> 
                         </div>
                     </div>
                     <div class="d-flex justify-content-between">
                         <div class="question">
-                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصية الرئيسية هي:</h6>
-                            <div class="options">
-                                <button class="right button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>الأرنب فرفور
-                                </button>
-                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>الثعلب مكرون
-                                </button>
+                            <h6><i class="fa-regular fa-comment fs-4 ms-2 mb-2"></i>انقر على الشخصية الرئيسية في الصورة:</h6>
+                            <div class="answer position-relative">
+                                <div class="confetti-right">
+                                    <img class="rounded-4" src="../../static/images/activity_rabbit_fox.jpg" alt="rabbit and fox">
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>       
+                                </div>
+                                <div class="square rabbit position-absolute"></div>
+                                <div class="square wrong-button fox position-absolute"></div>
                             </div>
+                            <div>
+                                <p>لقد اخترت: <button class="button bg-white mt-2 px-3" disabled>الأرنب</button></p>
+                            </div> 
                         </div>
                         <div class="question">
-                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>الشخصية الرئيسية هي:</h6>
-                            <div class="options">
-                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>الأرنب فرفور
-                                </button>
-                                <button class="right button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>الثعلب مكرون
-                                </button>
+                            <h6><i class="fa-regular fa-comment fs-4 ms-2 mb-2"></i>انقر على الشخصية الثانوية في الصورة:</h6>
+                            <div class="answer position-relative">
+                                <img class="rounded-4" src="../../static/images/activity_rabbit_fox.jpg" alt="rabbit and fox">
+                                <div class="square fox position-absolute"></div>
+                                <div class="square rabbit wrong-button position-absolute"></div>
+                            </div>
+                            <div>
+                                <p>لقد اخترت: <button class="button bg-white mt-2 px-3" disabled>الأرنب</button></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             
-            <!-- Section 4 -->
-            <div class="carousel-item section-4 active">
+            <!-- @@@@@@@@@@@@@ Section 4 @@@@@@@@@@@@@ -->
+            <div class="carousel-item section-4">
                 <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
-                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i> وصف الشخصيات</h4>
-                    <p>عندما نكتب قصة أو نقرأها، نحتاج إلى وصف الشخصيات لنعرف كيف تبدو وكيف تتصرف. هناك أشياء كثيرة يمكن أن نستخدمها لوصف الشخصيات، مثل:</p>
-                    <div class="descriptions row align-items-center gy-4">
-                        <div class="col-6 ">
-                            <div class="rounded-3 p-2 text-end">
-                                <h6 class="mb-4 text-center">وصف الشكل الخارجي</h6>
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i> وصف الشخصيات<i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <h6 class="text-end my-4">عندما نكتب قصة أو نقرأها، نحتاج إلى وصف الشخصيات لنعرف كيف تبدو وكيف تتصرف. هناك أشياء كثيرة يمكن أن نستخدمها لوصف الشخصيات، مثل:</h6>
+                    <div class="descriptions row align-items-center gy-3">
+                        <div class="col-6">
+                            <div class="rounded-3 p-2 text-end position-relative">
+                                <h6 class="mb-3 text-center">وصف الشكل الخارجي<i class="fa-solid text-sound fa-volume-high"></i></h6>
                                 <p>هذا يعني وصف ما نراه من مظهر الشخصية:</p>
-                                <ul>
-                                    <li><span>العيون: </span>بيرة، صغيرة، زرقاء، خضراء...</li>
-                                    <li><span>👩‍🦰 الشعر: </span>طويل، قصير، ناعم، مجعد، لونه أسود، بني...</li>
-                                    <li><span>الملابس: </span>ترتدي فستانًا، قميصًا، قبعة، حذاءً رياضيًا...</li>
-                                    <li><span>الطول أو الحجم: </span>طويل، قصير، ضخم، صغير...</li>
+                                <ul class="mb-0">
+                                    <li><span>👁️ العيون: </span>كبيرة، صغيرة، زرقاء، خضراء...</li>
+                                    <li><span>👩‍🦰 الشعر: </span>طويل، قصير، ناعم، مجعد، لونه أسود...</li>
+                                    <li><span>👚 الملابس: </span>ترتدي فستانًا، قميصًا، قبعة، حذاءً...</li>
+                                    <li><span>🧍‍♂️ الطول أو الحجم: </span>طويل، قصير، ضخم، صغير...</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-6 ">
-                            <div class="rounded-3 p-2 text-end">
-                                <h6 class="mb-4 text-center">وصف الصفات الشخصية</h6>
+                            <div class="rounded-3 p-2 text-end position-relative">
+                                <h6 class="mb-3 text-center">وصف الصفات الشخصية<i class="fa-solid text-sound fa-volume-high"></i></h6>
                                 <p>هذا يعني وصف تصرفات أو أفكار أو مشاعر الشخصية:</p>
-                                <ul>
-                                    <li>سعيدة، حزينة، خائفة، غاضبة..</li>
-                                    <li>شجاعة، ذكية، كسولة، طيبة...</li>
-                                    <li> تحب مساعدة الآخرين، تحب اللعب، تحب المغامرات...</li>
+                                <ul class="mb-0">
+                                    <li>😊سعيدة، حزينة، خائفة، غاضبة..</li>
+                                    <li>🤩 شجاعة، ذكية، كسولة، طيبة...</li>
+                                    <li>🥰 تحب مساعدة الآخرين، تحب اللعب، تحب المغامرات...</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-12">
-                            <div class="rounded-3 p-2 text-end">
-                                <h6 class="mb-4 text-center">وصف الصوت أو الحركة</h6>
+                            <div class="rounded-3 p-2 text-end position-relative">
+                                <h6 class="mb-3 text-center">وصف الصوت أو الحركة<i class="fa-solid text-sound fa-volume-high"></i></h6>
                                 <p>هذا يساعد على جعل الشخصية أكثر حيوية:</p>
-                                <ul>
-                                    <li><span>الصوت: </span>اعم، عالٍ، مخيف، مرح...  </li>
-                                    <li><span>👩‍🦰 الحركة: </span>جري بسرعة، يمشي ببطء، يقفز عاليًا...</li>
+                                <ul class="mb-0">
+                                    <li><span>🔊 الصوت: </span>اعم، عالٍ، مخيف، مرح...  </li>
+                                    <li><span>🏃 الحركة: </span>جري بسرعة، يمشي ببطء، يقفز عاليًا...</li>
                                 </ul>
                             </div>
                         </div>
@@ -165,91 +211,132 @@
                 </div>
                 <div class="small-activity text-center pt-3 mx-auto">
                     <div class="content">
-                        <div class="story p-4 py-3 mx-auto my-3 rounded-4 border border-2 border-white">
-                            <h5 class="mb-3">قصة الأرنب الذكي والثعلب الماكر</h5>
-                            <p class="text-end m-0">في الغابة، كان هناك قنفذ صغير اسمه "شوكي" له أشواك بنية قصيرة وعينان سوداوَان.<br>  
-                                جاء صديقه الأرنب "فرفور"، الذي كان سريعًا ومرحًا وله فراء أبيض ناعم وأذنان طويلتان.<br>  
+                        <div class="story d-flex align-items-center gap-2 rounded-4 p-3 py-2 mx-auto my-3 border border-2 border-white">
+                            <div class="right-side text-center">  
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i> شوكي و فرفور</h5>
+                                <img class="my-3 rounded-4" src="../..//static/images/activity_rabbit_hedoge.webp" alt="سلحفاة ومطر">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side text-end mb-0">في الغابة، كان هناك قنفذ صغير اسمه "شوكي" له <span>أشواك بنية وعينان سوداوَان</span>، وكان <span>هادئًا وشجاعًا</span>.<br>  
+                                جاء صديقه الأرنب "فرفور"، الذي كان <span>سريعًا ومرحًا</span> وله <span>فراء أبيض ناعم وأذنان طويلتان</span>.<br>  
                                 قال فرفور: "هيا نلعب يا شوكي!"<br>  
                                 ضحك شوكي وقال: "هيا بنا!"<br>  
                                 وبدآ يقفزان ويلعبان بسعادة بين الأشجار والزهور.
                             </p>
                         </div>
                     </div>
-                    <!-- Questions 1 -->
-                    <div class="d-flex justify-content-between column-gap-5">
-                        <div class="question">
-                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>كيف يبدو شكل القنفذ شوكي؟</h6>
-                            <div class="options">
-                                <button class="right button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>لديه أشواك بنية قصيرة وعينان سوداوان
-                                </button>
-                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>لديه جناحان وريش أزرق
-                                </button>
+                    <!-- Questions -->
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="question">
+                                <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>كيف يبدو شكل القنفذ شوكي؟</h6>
+                                <div class="options">
+                                    <div class="confetti-right confetti-click">
+                                        <button class="right button main-button m-1" onclick="optionClick(this)">
+                                            <i class="fa-solid fa-lightbulb ms-1"></i>لديه أشواك بنية وعينان سوداوان
+                                        </button>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>       
+                                    </div>
+                                    <button class="wrong wrong-button button main-button m-1 " onclick="optionClick(this)">
+                                        <i class="fa-solid fa-lightbulb ms-1"></i>لديه جناحان وريش أزرق
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                        <div class="question">
-                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>ما هي صفة القنفذ شوكي؟</h6>
-                            <div class="options">
-                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>يحب الطيران
-                                </button>
-                                <button class="right button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>هادئ وشجاع
-                                </button>
+                        <div class="col-6 align-content-center">
+                            <div class="question fill-in-blank hedgehog">
+                                <h6 class="mb-0 options"><i class="fa-regular fa-comment fs-4 ms-2"></i>
+                                    صفات القنفذ شوكي: هادئ و
+                                    <div class="confetti-right">
+                                        <input type="text" class="button">
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>       
+                                    </div>
+                                </h6>
+
                             </div>
                         </div>
-                    </div>
-                    <!-- Questions 2 -->
-                    <div class="d-flex justify-content-between mt-4">
-                        <div class="question">
-                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>كيف يبدو شكل الأرنب فرفور؟</h6>
-                            <div class="options">
-                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>لديه أجنحة ملونة
-                                </button>
-                                <button class="right button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>لديه فراء أبيض ناعم وأذنان طويلتان
-                                </button>
+                        <div class="col-6">
+                            <div class="question">
+                                <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>كيف يبدو شكل الأرنب فرفور؟</h6>
+                                <div class="options">
+                                    <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                        <i class="fa-solid fa-lightbulb ms-1"></i>لديه أجنحة ملونة
+                                    </button>
+                                    <div class="confetti-right confetti-click">
+                                        <button class="right button main-button m-1" onclick="optionClick(this)">
+                                            <i class="fa-solid fa-lightbulb ms-1"></i>لديه فراء أبيض ناعم وأذنان طويلتان
+                                        </button>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>       
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="question">
-                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>ما هي صفة الأرنب فرفور؟</h6>
-                            <div class="options">
-                                <button class="right button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>مرح وسريع
-                                </button>
-                                <button class="wrong button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>خائف وبطيء
-                                </button>
+                        <div class="col-6 align-content-center">
+                            <div class="question fill-in-blank rabbit">
+                                <h6 class="mb-0 options"><i class="fa-regular fa-comment fs-4 ms-2"></i>
+                                    صفات الأرنب فرفور: مرح و
+                                    <div class="confetti-right">
+                                        <input type="text" class="button">
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>       
+                                    </div>
+                                </h6>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Section 6 -->
-            <div class="carousel-item text-center">
-                <p>عمل جيد!</p>
-                <p>في ختام درسنا، تعلمنا أن الشخصيات هي أبطال القصص التي تجعلها ممتعة، ويمكن أن تكون بشرًا، حيوانات، جمادات، أو عناصر طبيعية، ولكل منها صفات مميزة</p>
-                <p>تذكر دائمًا:</p>
-                <p>الشخصية الجيدة تجعل القصة ممتعة ومفيدة.</p>
-                <p>استمتع بكتابة قصصك الخاصة، ودع شخصياتك تأخذك في مغامرات لا تُنسى!</p>
-                <a href="../activities/all_activities"><button class="btn button main-button" >ارجع للأنشطة</button></a>
+            <!-- @@@@@@@@@@@@@ Section 5 @@@@@@@@@@@@@ -->
+            <div class="carousel-item section-5 text-center ">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative mx-auto">
+                    <h4><i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i>عمل جيد! <i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i><i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <p class="my-4">في ختام درسنا، تعلمنا أن الشخصيات هي أبطال القصص التي تجعلها ممتعة، ويمكن أن تكون بشرًا، حيوانات، جمادات، أو عناصر طبيعية، ولكل منها صفات مميزة.</p>
+                    <div class="text-end mt-5">
+                        <h5><i class="fa-regular fa-comment fs-4 ms-2"></i>تذكر دائمًا:</h5>
+                        <p class="mb-1">الشخصية الجيدة تجعل القصة ممتعة ومفيدة.</p>
+                        <p>استمتع بكتابة قصصك الخاصة، ودع شخصياتك تأخذك في مغامرات لا تُنسى!</p>
+                    </div>
+                </div>
+                <a href="../activities/all_activities" class="go-back"><button class="btn button main-button">ارجع للأنشطة</button></a>
+                <div class="allQues-error-msg mt-3 text-danger">قم بالإجابة على جميع الأسئلة لإنهاء النشاط</div>
             </div>
         </div>
-        <button class="carousel-control-prev" type="button" id="carouselPrev"  data-bs-target="#carouselCaracthers" data-bs-slide="prev">
+        <button class="carousel-control-prev h-50 top-50 translate-middle-y" type="button" id="carouselPrev"  data-bs-target="#carouselCaracthers" data-bs-slide="prev">
             <i class="fa-regular fa-circle-right"></i>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next" type="button" id="carouselNext" data-bs-target="#carouselCaracthers" data-bs-slide="next">
+        <button class="carousel-control-next h-50 top-50 translate-middle-y" type="button" id="carouselNext" data-bs-target="#carouselCaracthers" data-bs-slide="next">
             <i class="fa-regular fa-circle-left"></i>
             <span class="visually-hidden">Next</span>
         </button>
     </div>
-
-
-
 </div>
 {% endblock %}
 {% block script %}
@@ -258,9 +345,10 @@
     const carousel = new bootstrap.Carousel(myCarousel, {
         wrap: false // Stops Going Back To First Section
     });
+    // Hide And Display Arrows
     const nextButton = document.querySelector('#carouselNext');
     const prevButton = document.querySelector('#carouselPrev');
-
+    prevButton.style.display = 'none';
     myCarousel.addEventListener('slid.bs.carousel', (event) => {
         const totalItems = document.querySelectorAll('#carouselCaracthers .carousel-item').length; // Number Of Items
         const currentIndex = event.to; // Current Item
@@ -273,10 +361,35 @@
         // Hide Next Button If User Reach Last Item
         if (currentIndex === totalItems - 1) {
             nextButton.style.display = 'none';
+            // Check If All Answerd
+            let allTrue = false; // Start as false
+            // Check if all Questions Are Answerd
+            if (
+                Array.from(document.querySelectorAll(".section-1 .small-activity .question button.right")).every(button => button.classList.contains("active-right")) &&
+                Array.from(document.querySelectorAll(".section-3 .small-activity .question .answer img")).every(img => img.classList.contains("active-right")) &&
+                Array.from(document.querySelectorAll(".section-4 .small-activity .question button.right")).every(button => button.classList.contains("active-right")) &&
+                Array.from(document.querySelectorAll(".section-4 .small-activity .question input[type='text']")).every(input => input.classList.contains("active-right"))
+                ) {
+                    allTrue = true;
+                    bigConfetti(); // Turn On Big Confitte
+                    document.querySelector(".section-5 .allQues-error-msg").style.opacity = 0;
+                    // Enable Go Back To Activiy Button 
+                    document.querySelector(".section-5 .go-back").style.opacity = '100%'; 
+                    document.querySelector(".section-5 .go-back").setAttribute("href", "../activities/all_activities");
+                }
+                else {
+                // Disable Go Back To Activiy Button 
+                document.querySelector(".section-5 .go-back").style.opacity = '50%';
+                document.querySelector(".section-5 .go-back").setAttribute("href", "#");
+                // Show Error Message In Last Item
+                document.querySelector(".section-5 .allQues-error-msg").style.opacity = 1;
+            }
         } else {
-            nextButton.style.display = 'flex';
+            nextButton.style.display = 'flex'; 
         }
     });
+
+    // @@@@@@@@@ Multiple Choise Questions @@@@@@@@@
     function optionClick(button) {
         if (button.classList.contains("wrong")) {
             button.classList.add("active-wrong")
@@ -285,5 +398,112 @@
             button.classList.add("active-right")
         }
     }
+    
+    // @@@@@@@@@ Select From Image Question @@@@@@@@@
+    // (((1))) Main Character Question
+    var mainCharcImage = document.querySelector("#carouselCaracthers .section-3 .question:first-of-type img");
+    var rabbit = document.querySelector("#carouselCaracthers .section-3 .question:first-of-type .rabbit");
+    var fox = document.querySelector("#carouselCaracthers .section-3 .question:first-of-type .fox");
+    rabbit.addEventListener("click", (rabbit) => {
+        mainCharcImage.classList.remove("active-wrong")
+        mainCharcImage.classList.add("active-right")
+        mainCharcImage.parentElement.classList.add("active") // Turn On Confitte
+        // Play Right Answer Sound
+        const audio = document.getElementById('confetti-sound-right');
+        audio.currentTime = 0; // Reset audio to the start
+        audio.play();
+        // Button Content Under The Image
+        document.querySelector("#carouselCaracthers .section-3 .question:first-of-type div p > button").innerHTML = "الأرنب";
+        document.querySelector("#carouselCaracthers .section-3 .question:first-of-type div p > button").style.color = "var(--font-4)";
+    })
+    fox.addEventListener("click", (fox) => {
+        mainCharcImage.classList.remove("active-right")
+        mainCharcImage.classList.add("active-wrong")
+        // Button Content Under The Image
+        document.querySelector("#carouselCaracthers .section-3 .question:first-of-type div p > button").innerHTML = "الثعلب";
+        document.querySelector("#carouselCaracthers .section-3 .question:first-of-type div p > button").style.color = "var(--font-4)";
+    })
+    // (((2))) Secondry Character Question
+    var secCharcImage = document.querySelector("#carouselCaracthers .section-3 .question:last-of-type img");
+    var rabbit = document.querySelector("#carouselCaracthers .section-3 .question:last-of-type .rabbit");
+    var fox = document.querySelector("#carouselCaracthers .section-3 .question:last-of-type .fox");
+    rabbit.addEventListener("click", (rabbit) => {
+        secCharcImage.classList.remove("active-right")
+        secCharcImage.classList.add("active-wrong")
+        // Button Content Under The Image
+        document.querySelector("#carouselCaracthers .section-3 .question:last-of-type div p > button").innerHTML = "الأرنب";
+        document.querySelector("#carouselCaracthers .section-3 .question:last-of-type div p > button").style.color = "var(--font-4)";
+    })
+    fox.addEventListener("click", (fox) => {
+        secCharcImage.classList.remove("active-wrong")
+        secCharcImage.classList.add("active-right")
+        secCharcImage.parentElement.classList.add("active") // Turn On Confitte
+        // Play Right Answer Sound
+        const audio = document.getElementById('confetti-sound-right');
+        audio.currentTime = 0; // Reset audio to the start
+        audio.play();
+        // Button Content Under The Image
+        document.querySelector("#carouselCaracthers .section-3 .question:last-of-type div p > button").innerHTML = "الثعلب";
+        document.querySelector("#carouselCaracthers .section-3 .question:last-of-type div p > button").style.color = "var(--font-4)";
+    })
+
+
+    // @@@@@@@@@ Fill In The Blank Question @@@@@@@@@
+    // (((1))) Hedgehog Question
+    var hedgehog_fill = document.querySelector("#carouselCaracthers .section-4 .fill-in-blank.hedgehog input[type='text']");
+    hedgehog_charac = ['شجاع', 'شجاعا', 'شجاعاً'];
+    
+    hedgehog_fill.addEventListener("input", () => {
+        if (hedgehog_charac.includes(hedgehog_fill.value)) {
+            // Play Right Answer Sound
+            const audio = document.getElementById('confetti-sound-right');
+            audio.currentTime = 0; // Return Voice To The Start
+            audio.play();
+            
+            hedgehog_fill.parentElement.classList.add("active") // Turn On Confitte
+            
+            hedgehog_fill.classList.add("active-wrong") // Remove Border Red
+            hedgehog_fill.classList.add("active-right"); // Border Green
+        }
+        else {
+            if (hedgehog_fill.value.length > 4) {
+                // Play Wrong Answer Sound
+                const audio = document.getElementById('sound-wrong');
+                audio.currentTime = 0; // Return Voice To The Start
+                audio.play();
+
+                hedgehog_fill.classList.remove("active-right"); // Remove Border Green
+                hedgehog_fill.classList.add("active-wrong") // Border Red
+            }
+        }
+    })
+    // (((2))) Rabbit Question
+    var rabbit_fill = document.querySelector("#carouselCaracthers .section-4 .fill-in-blank.rabbit input[type='text']");
+    rabbit_charac = ['سريع', 'سريعا', 'سريعاً'];
+    console.log(rabbit_fill)
+    rabbit_fill.addEventListener("input", () => {
+        if (rabbit_charac.includes(rabbit_fill.value)) {
+            // Play Right Answer Sound
+            const audio = document.getElementById('confetti-sound-right');
+            audio.currentTime = 0; // Return Voice To The Start
+            audio.play();
+            
+            rabbit_fill.parentElement.classList.add("active") // Turn On Confitte
+
+            rabbit_fill.classList.add("active-wrong") // Remove Border Red
+            rabbit_fill.classList.add("active-right"); // Border Green
+        }
+        else {
+            if (rabbit_fill.value.length > 4) {
+                // Play Wrong Answer Sound
+                const audio = document.getElementById('sound-wrong');
+                audio.currentTime = 0; // Return Voice To The Start
+                audio.play();
+
+                rabbit_fill.classList.remove("active-right"); // Remove Border Green
+                rabbit_fill.classList.add("active-wrong") // Border Red
+            }
+        }
+    })
 </script>
 {% endblock %}
