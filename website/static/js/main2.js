@@ -24,3 +24,22 @@ function bigConfetti() {
 
 // Make Function Global
 window.bigConfetti = bigConfetti;
+// Copyright (c) 2024 by Chris Coyier  (https://codepen.io/chriscoyier/pen/vYKvEQx)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
-
+// Copyright (c) 2024 by Coran Spicer (https://codepen.io/cgspicer/pen/AXjZxa)
 
 
 // Right Answer Effect 
@@ -95,6 +95,7 @@ document.querySelectorAll('.confetti-right.confetti-click').forEach(element => {
         }, 1000);
     });
 });
+// Copyright (c) 2024 by Michael Hobizal (https://codepen.io/mikehobizal/pen/gOdmmr)
 
 // Wrong Answer Effect 
 document.querySelectorAll('.wrong-button').forEach(element => {
@@ -104,6 +105,8 @@ document.querySelectorAll('.wrong-button').forEach(element => {
         audio.play();
     });
 });
+
+
 
 
 

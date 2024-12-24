@@ -23,6 +23,10 @@ def writing_types():
 def story_generator():
     return render_template("/writing/story-generator.html") 
 
+# Self Writing
+@views.route('/writing/self-writing')
+def self_writing():
+    return render_template("/writing/self-writing.html") 
 # End Writing 
 
 

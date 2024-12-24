@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block title %}الفرق بين الكتابة القصصية والإبداعية{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
+{% endblock %}
+{% block body %}
+<div class="container self-writing my-5">
+	<div class="rounded-4 p-4 position-relative">
+		<i class="fa-solid fa-square-plus add-page-icon position-absolute fs-4"></i>
+		<i class=""></i>
+		<div class="scene">
+			<article class="book">
+				<!-- form -->
+				<section class="page active">
+					<div class="front">
+						<h1>صفحة البداية</h1>
+					</div>
+					<div class="back">
+						<h1>صفحة 2</h1>
+					</div>
+				</section>
+				<section class="page">
+					<div class="front">
+						<h1>صفحة 3</h1>
+					</div>
+					<div class="back">
+						<h1>صفحة 4</h1>
+					</div>
+				</section>
+				<section class="page">
+					<div class="front">
+						<h1>صفحة 5</h1>
+					</div>
+					<div class="back">
+						<h1>صفحة 6</h1>
+					</div>
+				</section>
+			</article>
+			<div class="book-buttons">
+				<button id="prevButton" class="button main-button">السابق</button>
+				<button id="nextButton" class="button main-button">التالي</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+
+<script type="module">
+	document.addEventListener('DOMContentLoaded', function () {
+		const nextButton = document.getElementById('nextButton');
+		const prevButton = document.getElementById('prevButton');
+	
+		nextButton.addEventListener('click', nextPage);
+		prevButton.addEventListener('click', prevPage);
+	
+		function nextPage() {
+			const activePage = document.querySelector('.page.active');
+			if (activePage) {
+				const nextPage = activePage.nextElementSibling;
+		
+				// تحقق إذا لم تكن هناك صفحة تالية (أي الصفحة الأخيرة)
+				if (!nextPage || !nextPage.classList.contains('page')) {
+					console.log('وصلت إلى الصفحة الأخيرة');
+					// @@@@@@@@@@@@ هنا المفروض يطلع علامة الزائد حق الصفحة وينشأ صفحة جديدة (يعنيي يضيف سكشن جديد فيه فرونت وباك)
+					return; // إيقاف العملية
+				}
+		
+				// اجعل الصفحة النشطة مقلوبة
+				activePage.classList.remove('active');
+				activePage.classList.add('flipped');
+		
+				// اجعل الصفحة التالية نشطة
+				nextPage.classList.add('active');
+			}
+		}
+		function prevPage() {
+			const flippedPages = document.querySelectorAll('.page.flipped');
+			if (flippedPages.length > 0) {
+				// اجعل آخر صفحة مقلوبة نشطة مرة أخرى
+				const lastFlippedPage = flippedPages[flippedPages.length - 1];
+				lastFlippedPage.classList.remove('flipped');
+				lastFlippedPage.classList.add('active');
+	
+				// إزالة حالة النشط من جميع الصفحات الأخرى
+			const allPages = document.querySelectorAll('.page');
+			allPages.forEach((page) => {
+				if (page !== lastFlippedPage) {
+					page.classList.remove('active');
+				}
+			});
+			}
+		}
+	});
+</script>
+{% endblock %}
+
+<!-- Copyright (c) 2024 by Timo Hausmann (https://codepen.io/timohausmann/pen/AaJWvo) -->
