@@ -1,5 +1,5 @@
 # This File Is For Routes In The Website
-from flask import Blueprint, render_template, url_for
+from flask import Blueprint, render_template, url_for, request, jsonify
 from flask_login import login_required, current_user
 from website import db
 
@@ -47,4 +47,21 @@ def activity_1_exer1():
 def characters_activity():
     return render_template("/activities/characters_activity.html") 
 
-# Lessons Page
+
+
+# @@@@@@@@@@@ Recive And Send Data To JS @@@@@@@@@@@
+# Image
+@views.route('/generate-img', methods=['POST'])
+def generate_img():
+    data = request.json  # استلام البيانات من JavaScript
+    if not data or 'message' not in data:
+        return jsonify({"response": "Invalid request"}), 400  # تحقق من البيانات المستلمة
+    result = f"{data['message']} تم انشاء الصورة للنص: "  # معالجة البيانات
+    return jsonify({"response": result})  # إرسال الرد إلى JavaScript
+
+
+
+# Allam 
+
+
+# Audio

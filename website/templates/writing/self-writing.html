@@ -6,96 +6,185 @@
 {% block body %}
 <div class="container self-writing my-5">
 	<div class="rounded-4 p-4 position-relative">
-		<i class="fa-solid fa-square-plus add-page-icon position-absolute fs-4"></i>
-		<i class=""></i>
-		<div class="scene">
-			<article class="book">
-				<!-- form -->
-				<section class="page active">
-					<div class="front">
-						<h1>صفحة البداية</h1>
-					</div>
-					<div class="back">
-						<h1>صفحة 2</h1>
-					</div>
-				</section>
-				<section class="page">
-					<div class="front">
-						<h1>صفحة 3</h1>
-					</div>
-					<div class="back">
-						<h1>صفحة 4</h1>
-					</div>
-				</section>
-				<section class="page">
-					<div class="front">
-						<h1>صفحة 5</h1>
-					</div>
-					<div class="back">
-						<h1>صفحة 6</h1>
-					</div>
-				</section>
-			</article>
-			<div class="book-buttons">
-				<button id="prevButton" class="button main-button">السابق</button>
-				<button id="nextButton" class="button main-button">التالي</button>
+		<form method="POST" id="self-writing">
+			<div class="scene">
+				<article class="book">
+					<section class="page active">
+						<div class="front">
+							<h1>1</h1>
+							<input class="button" type="text" name="title" placeholder="عنوان القصة" class="">
+							<div class="cover-img-container img-container">
+								<div class="rounded-4">
+									<img class="img cover-img" src="" alt=""> 
+								</div>
+								<label for="cover-description">أدخل وصف الصورة</label>
+								<textarea class="w-100 h-75 rounded-3" type="text" id="cover-description" placeholder="مثال:ولد صغير مرح بشعر مجعد يرتدي سترة زرقاء، ويقف تحت شجرة بأوراق خضراء متوهجة. في الخلفية، سماء زرقاء مع سحب بيضاء وأرنب لطيف يقفز بالقرب." ></textarea>
+							</div>
+						</div>
+						<div class="back">
+							<textarea class="w-100 h-75 rounded-2" name="content"></textarea>
+							<i class="fa-solid fa-volume-high"></i>
+						</div>
+					</section>
+					<section class="page">
+						<div class="front">
+							<div class="cover-img-container img-container mt-5 mx-auto rounded-4">
+								<img class="img rounded-4 cover-img w-100" src=""> 
+							</div>
+							<button class="generate-btn button my-5">أنشئ صورة</button>
+						</div>
+						<div class="back">
+							<h1>صفحة 4</h1>
+							</div>
+					</section>
+				</article>
 			</div>
+		</form>
+		<div class="record-allam">
+			<div class="record">
+				<i class="fa-solid fa-microphone mic-icon"></i>
+				<p>سجل صوتك</p>
+			</div>
+			<div class="allam">
+				<button></button>
+			</div>
+		</div>
+		<div class="next-prev-buttons d-flex align-items-center justify-content-between position-absolute top-50 start-0 fs-1">
+			<!-- <button id="prevButton" class="button main-button">السابق</button> -->
+			<button id="nextButton" class="button main-button"><i class="fa-solid fa-circle-right"></i>
+			<!-- <button id="nextButton" class="button main-button">التالي</button> -->
+			<button id="nextButton" class="button main-button"><i class="fa-solid fa-circle-left"></i>
+			<i class="fa-solid fa-square-plus add-page-icon"></i>
+
+			</button>
 		</div>
 	</div>
 </div>
 {% endblock %}
-
 {% block script %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
 
 <script type="module">
-	document.addEventListener('DOMContentLoaded', function () {
-		const nextButton = document.getElementById('nextButton');
-		const prevButton = document.getElementById('prevButton');
-	
-		nextButton.addEventListener('click', nextPage);
-		prevButton.addEventListener('click', prevPage);
-	
-		function nextPage() {
-			const activePage = document.querySelector('.page.active');
-			if (activePage) {
-				const nextPage = activePage.nextElementSibling;
-		
-				// تحقق إذا لم تكن هناك صفحة تالية (أي الصفحة الأخيرة)
-				if (!nextPage || !nextPage.classList.contains('page')) {
-					console.log('وصلت إلى الصفحة الأخيرة');
-					// @@@@@@@@@@@@ هنا المفروض يطلع علامة الزائد حق الصفحة وينشأ صفحة جديدة (يعنيي يضيف سكشن جديد فيه فرونت وباك)
-					return; // إيقاف العملية
-				}
-		
-				// اجعل الصفحة النشطة مقلوبة
-				activePage.classList.remove('active');
-				activePage.classList.add('flipped');
-		
+document.addEventListener('DOMContentLoaded', function () {
+	const addPageBtn = document.querySelector(".add-page-icon"); // Add Page Button
+	const nextButton = document.getElementById('nextButton'); // Next Page Button
+	const prevButton = document.getElementById('prevButton'); // Prev Page Button
+
+	nextButton.addEventListener('click', nextPage);
+	prevButton.addEventListener('click', prevPage);
+
+	// @@@@@@@@@@@ Next Page Button @@@@@@@@@@@
+	function nextPage() {
+		const activePage = document.querySelector('.page.active');
+		if (activePage) {
+			const nextPage = activePage.nextElementSibling;
+			
+			// اجعل الصفحة النشطة مقلوبة
+			activePage.classList.remove('active');
+			activePage.classList.add('flipped');
+			
+			// تحقق إذا كانت الصفحة التالية موجودة
+			if (nextPage && nextPage.classList.contains('page')) {
 				// اجعل الصفحة التالية نشطة
 				nextPage.classList.add('active');
+				
+				// تحقق إذا كانت الصفحة الحالية هي الصفحة قبل الأخيرة
+				const afterNextPage = nextPage.nextElementSibling;
+				if (!afterNextPage || !afterNextPage.classList.contains('page')) {
+					addPageBtn.style.display = "block"; // Display Add Page Button ############## .replave("fa-square-plus","fa-square-plus")
+					console.log('أنت الآن على الصفحة قبل الأخيرة');
+					//nextButton.style.display = "none";
+				} else {
+					//nextButton.style.display = "inline-block";
+					document.querySelector(".add-page-icon").style.display = "none";
+				}
+			} else {
+				console.log('لا توجد صفحة تالية.');
 			}
 		}
-		function prevPage() {
-			const flippedPages = document.querySelectorAll('.page.flipped');
-			if (flippedPages.length > 0) {
-				// اجعل آخر صفحة مقلوبة نشطة مرة أخرى
-				const lastFlippedPage = flippedPages[flippedPages.length - 1];
-				lastFlippedPage.classList.remove('flipped');
-				lastFlippedPage.classList.add('active');
+	}
 	
-				// إزالة حالة النشط من جميع الصفحات الأخرى
+	// @@@@@@@@@@@ Prev Page Button @@@@@@@@@@@
+	function prevPage() {
+		document.querySelector(".add-page-icon").style.display = "none"; // Hide Add Page Button
+		//nextButton.style.display = "inline-block";
+		const flippedPages = document.querySelectorAll('.page.flipped');
+		if (flippedPages.length > 0) {
+			// اجعل آخر صفحة مقلوبة نشطة مرة أخرى
+			const lastFlippedPage = flippedPages[flippedPages.length - 1];
+			lastFlippedPage.classList.remove('flipped');
+			lastFlippedPage.classList.add('active');
+
+			// إزالة حالة النشط من جميع الصفحات الأخرى
 			const allPages = document.querySelectorAll('.page');
 			allPages.forEach((page) => {
 				if (page !== lastFlippedPage) {
 					page.classList.remove('active');
 				}
 			});
-			}
 		}
+	}
+
+	// @@@@@@@@@@@ Add Page Button @@@@@@@@@@@
+	addPageBtn.addEventListener("click", () => {
+		const book = document.querySelector(".book");
+		const newPage = document.createElement("section");
+		newPage.className = "page"; // أضف فئة "page"
+		newPage.innerHTML = `
+			<div class='front'></div>
+			<div class='back'></div>
+		`; 
+		book.appendChild(newPage); // أضف الصفحة الجديدة إلى الك
+		nextPage();
+	})
+
+
+
+	// @@@@@@@@@@@ Recive And Send Data To Python @@@@@@@@@@@
+	// Generate Image
+	async function sendTextGetImage() {
+		const text = document.querySelector(".page:nth-of-type(1) .back textarea");
+		const img = document.querySelector(".page:nth-of-type(2) .front img");
+
+		const data = { message: text.value }; // Corrected line
+	
+		const response = await fetch('http://127.0.0.1:5000/generate-img', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(data)
+		});
+	
+		if (response.ok) {
+			const result = await response.json();
+			console.log(result.response);
+		} else {
+			console.error(`Error: ${response.statusText}`);
+		}
+	}
+	
+	document.querySelector(".generate-btn").addEventListener("click", (e) => {
+		e.preventDefault(); // Prevent page reload
+		sendTextGetImage();
 	});
+	
+	
+	// Generate Audio
+	//async function sendTextGetAudio() {    }
+	// Contact With Allam
+	//async function contactAllam() {    }
+	
+});
+
 </script>
 {% endblock %}
 
 <!-- Copyright (c) 2024 by Timo Hausmann (https://codepen.io/timohausmann/pen/AaJWvo) -->
+
+<!-- //document.querySelector(".page:nth-of-type(2) .front button").addEventListener("click", ()=> {
+	//console.log("clickd")
+	//sendTextGetImage()
+//})
+//function generate_img_btn() {
+	//sendTextGetImage(); // هذا يتم استعدعاءه لما يضغط انشاء صورة
+//} -->

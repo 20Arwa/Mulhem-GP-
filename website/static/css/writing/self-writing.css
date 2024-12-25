@@ -8,20 +8,10 @@
   padding-right: 270px !important;
   background-color: var(--main-light);
 }
-.self-writing > div .add-page-icon {
-    color: var(--font-1);
-    cursor: pointer;
-    transition: var(--transtion-seconds);
-}
-.self-writing > div .add-page-icon:hover {
-    color: var(--font-3);
-    cursor: pointer;
-    transition: var(--transtion-seconds);
-}
 .book {
   position: relative;
-  width: 350px;
-  height: 400px !important;
+  width: 450px;
+  height: 500px !important;
   transform-style: preserve-3d;
   text-align: center;
   border-right: 10px solid var(--font-3);
@@ -55,9 +45,18 @@
   border-radius: 0px 10px 10px 0px;
   
 }
+.back textarea {
+  resize: none;
+}
 .front {
   border-width: 2px 1.5px 2px 2px;
   border-radius: 10px 0px 0px 10px;
+}
+
+.front .img-container {
+  width: 80%;
+  height: 60%;
+  border: 1px solid var(--main-dark);
 }
 .page.flipped {
   transform: translateZ(0) rotateY(180deg); /* غير الاتجاه */
@@ -70,16 +69,24 @@
 .page {
   transform-origin: right center; /* اجعل نقطة الدوران من اليمين */
 }
-
-
 .page.flipped:last-of-type {
   z-index: 1;
 }
 
-p {
-  margin: 0 0 0.1em;
-  text-indent: 1em;
+/* ##### buttons next prev */
+.self-writing > div .add-page-icon {
+  color: var(--font-1);
+  cursor: pointer;
+  transition: var(--transition-seconds);
+  display: none;
+  
 }
+.self-writing > div .add-page-icon:hover {
+    color: var(--font-3);
+    cursor: pointer;
+    transition: var(--transtion-seconds);
+}
+
 
 .qr {
   margin: 50px auto;
@@ -89,4 +96,6 @@ p {
   display: block;
 }
 
+
 /* Copyright (c) 2024 by Timo Hausmann (https://codepen.io/timohausmann/pen/AaJWvo) */
+
