@@ -12,7 +12,7 @@ def home():
 
 # profile Page
 def profile_view(request):
-    return render(request, 'auth/profile.html')
+    return render_template(request, 'auth/profile.html')
 
 # Reading Page
 
