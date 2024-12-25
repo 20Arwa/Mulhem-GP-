@@ -142,6 +142,10 @@ def preferences():
     return render_template('auth/preferences.html')
 
 
+# Profile Page
+@auth.route('/profile', methods=['GET', 'POST'])
+def profile():
+    return render_template('auth/profile.html')
 
 # Login Page
 
