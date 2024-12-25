@@ -1,19 +1,22 @@
 {% extends "base.html" %}
-{% block title %} إنشاء حساب{% endblock %}
+{% block title %}  profile {% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/profile.css') }}">
 {% endblock %}
 {% block body %}
 <div class="profile-container">
+    <h1>
+        <i class="fa-solid fa-user user-icon"></i>   ملفي الشخصي  </h1>
+    
     <!-- نموذج الإدخال -->
     <form class="profile-form">
         <label for="first-name">
             <i class="fa-solid fa-pen-to-square"></i> الاسم الأول :</label>
-        <input type="text" id="first-name" placeholder="">
+        <input type="text" id="first-name" placeholder="جولي ">
 
         <label for="last-name">
             <i class="fa-solid fa-pen-to-square"></i> الاسم الأخير : </label>
-        <input type="text" id="last-name" placeholder=" ">
+        <input type="text" id="last-name" placeholder=" الزهراني">
 
         <label for="age">
             <i class="fa-solid fa-calendar"></i> العمر : </label>
@@ -29,7 +32,7 @@
 
         <label for="password">
             <i class="fa-solid fa-lock"></i> كلمة المرور : </label>
-        <input type="password" id="password" placeholder="*********">
+        <input type="password" id="password" placeholder="***********">
 
         <label for="favorite-color">
             <i class="fa-solid fa-palette"></i> اللون المفضل : </label>
@@ -44,5 +47,11 @@
     </div>
 </form>
 </div>
+
 {% endblock %}
+{%block script%}
+<script>
+
+</script>
+{%endblock%}
 
