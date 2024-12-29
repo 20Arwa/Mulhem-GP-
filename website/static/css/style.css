@@ -17,6 +17,7 @@ body {
   height: 100%;
     font-family: "Rubik", sans-serif;
     direction: rtl;
+    scroll-behavior: smooth;
 }
 a {
   text-decoration: none;

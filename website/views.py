@@ -66,6 +66,19 @@ def generate_img():
 
 
 # Allam 
+# Corrcetion
+@views.route('/allam-correction', methods=['POST'])
+def allam_correction():
+    data = request.json  # استلام البيانات من JavaScript
+    if not data or 'message' not in data:
+        return jsonify({"response": "Invalid request"}), 400  # تحقق من البيانات المستلمة
+    
+    # هنا المفروض نرسل لعلام ونجيب منه json format : { "spelling": [صباح", "صباحن"]], "grammar": [[ "جميل", "حلو"]]}
+    # result = data['message']  # معالجة البيانات
+
+    result = result = {"spelling": [["صباحن","صباح"], ["فيا","في"]],"grammar": [["حلو", "جميل"], ["حلو", "جميل"]]} # معالجة البيانات
+    return jsonify({"response": result}), 200  # إرسال الرد إلى JavaScript
+
 
 
 # Audio

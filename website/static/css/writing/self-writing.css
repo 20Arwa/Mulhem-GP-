@@ -45,8 +45,54 @@
   border-radius: 0px 10px 10px 0px;
   
 }
-.back textarea {
+/* .back textarea {
   resize: none;
+} */
+.back .text {
+  padding: 19px 15px;
+  margin: 20px auto 0px;
+  height: 85%;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--font-3);
+  border-radius: 20px;
+  border: 1px solid black;
+  overflow: hidden;
+}
+.back .text:focus {
+  outline: none;
+}
+.back .text .spelling-error {
+  color: red;
+  text-decoration: underline;
+  text-decoration-style: wavy;
+  cursor: pointer;
+}
+.back .text .grammer-error {
+  color: blue
+}
+.back .text-counter {
+  text-align: right;
+  font-size: 13px;
+}
+.back .text-counter #error-msg {
+  display: block;
+  opacity: 0;
+  color: red
+}
+.back .correction-word {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 32%;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+  width: fit-content;
+  cursor: pointer;
 }
 .front {
   border-width: 2px 1.5px 2px 2px;
@@ -74,14 +120,15 @@
 }
 
 /* ##### buttons next prev */
-.self-writing > div .add-page-icon {
+.self-writing div .add-page-icon {
+  font-size: 40px;
   color: var(--font-1);
   cursor: pointer;
   transition: var(--transition-seconds);
   display: none;
   
 }
-.self-writing > div .add-page-icon:hover {
+.self-writing div .add-page-icon:hover {
     color: var(--font-3);
     cursor: pointer;
     transition: var(--transtion-seconds);
