@@ -23,7 +23,7 @@
 
 /* أيقونة المستخدم */
 .user-icon {
-    color: #7b5ba6;
+    color: #7b4e97;
     font-size: 20px;
     margin-left: 10px; /* المسافة بين الأيقونة والنص */
     cursor: pointer;
@@ -69,7 +69,7 @@
 
 /* تصميم زر الحفظ */
 .save-button {
-    background-color: #b391d6; /* لون بنفسجي */
+    background-color: #7b4e97; /* لون بنفسجي */
     color: #fff; /* لون النص أبيض */
     border: none; /* إزالة الحدود */
     border-radius: 25px; 
@@ -82,5 +82,5 @@
 
 /* التأثير عند تمرير الماوس على الزر */
 .save-button:hover {
-    background-color: #8160ab; /* تغيير لون الزر عند التمرير */
+    background-color: #b391d6; /* تغيير لون الزر عند التمرير */
 }
