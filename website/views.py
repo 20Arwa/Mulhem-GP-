@@ -33,6 +33,10 @@ def self_writing():
     return render_template("/writing/self-writing.html") 
 # End Writing 
 
+# create Writing
+@views.route('/writing/create')
+def create():
+    return render_template("/writing/create.html") 
 
 
 # Activities
