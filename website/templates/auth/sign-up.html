@@ -4,14 +4,6 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/sign-up.css') }}">
 {% endblock %}
 {% block body %}
-<!-- Error Message -->
-<div class="alert alert-danger alert-dismissible fade" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true"></span></button>
-</div>
-<div class="alert alert-success alert-dismissible fade" role="alert">
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="close"><span aria-hidden="true"></span></button>
-</div>
-<div id="liveAlertPlaceholder"></div>
 <!-- Content -->
 <div class="sign-container d-flex justify-space-between my-5 mx-auto border rounded-2">
     <div class="circle rounded-circle"></div>
@@ -21,7 +13,8 @@
             <p>ابدأ رحلتك الإبداعية مع مُلهِم! انضم إلينا لتكتشف عالمًا مليئًا بالقصص والإبداع.</p>
         </div>
     </div>
-    <form method="POST" id="sign-up" class="d-flex flex-column align-items-center m-4 p-4 ps-5 w-50">
+    <form method="POST" id="sign-up" class="d-flex flex-column align-items-center m-4 p-4 py-2 ps-5 w-50">
+        <h2 class="mb-5">إنشاء حساب</h2>
         <div class="field row">
             <div>
                 <label for="f_name">الأسم الأول</label>
@@ -33,30 +26,43 @@
             </div>
             <div>
                 <label for="age">العمر</label>
-                <input type="number" name="age" min="1" placeholder="10" >
+                <input type="number" name="age" min="6" max="13" placeholder="10" >
             </div>
             <div>
                 <label for="gender">الجنس</label>
                 <select name="gender" form="sign-up" class="w-100">    
                     <option value="" disabled selected hidden></option>
-                    <option value="female">أنثى</option>
-                    <option value="male">ذكر</option>
+                    <option value="أنثى">أنثى</option>
+                    <option value="ذكر">ذكر</option>
                 </select>
             </div>
         </div>
         <label for="email">البريد الإلكتروني</label>
-        <input type="email" name="email" placeholder="a12@gmail.com">
-        <label for="password">كلمة المرور</label>
-        <input type="password" name="password">
-        <label for="password2">تأكيد كلمة المرور</label>
-        <input type="password" name="password2">
+        <input type="text" name="email" placeholder="a12@gmail.com">
+
+        <div class="password-container w-100 position-relative">
+            <label for="password">كلمة المرور</label>
+            <input id="password-input" type="password" name="password" maxlength="128">
+            <i id="toggle-password" class="fas fa-eye-slash toggle-password"></i>
+        </div>
+        <div class="password-container w-100 position-relative">
+            <label for="password2">تأكيد كلمة المرور</label>
+            <input id="password-input" type="password" name="password2" maxlength="128">
+            <i id="toggle-password" class="fas fa-eye-slash toggle-password"></i>
+        </div>
+        
+        <div class="error-msg">رسالة خطأ</div>
         <input type="submit" class="button main-button" value="إنشاء حساب" onclick="checkInputs()" class="btn btn-primary" id="liveAlertBtn">
+        <div class="have-account mt-2">
+            <p>هل لديك حساب بالفعل؟ <a href="../auth/login.html">تسجيل الدخول</a></p>
+        </div>
     </form>
 </div>
 {% endblock %}
 {% block script %}
 <script>
     function checkInputs() {
+        var errorMsg = document.querySelector(".error-msg")
         // Get Form
         form = document.getElementById("sign-up");
         form.onsubmit = function (event) {event.preventDefault()} // Prevent Submit Form
@@ -70,24 +76,93 @@
         password2 = form.elements["password2"].value;
         
         if (f_name.length < 2 || f_name.length > 30) {
-            appendAlert("الاسم الأول يجب أن يتكون من 3 إلى 30 حرفاً", 'danger');
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الاسم الأول يجب أن يتكون من 3 إلى 30 حرفاً";
         }
         else if (l_name.length < 2 || l_name.length > 30){  
-            appendAlert("الاسم الأخير يجب أن يتكون من 3 إلى 30 حرفاً", 'danger');
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الاسم الأخير يجب أن يتكون من 3 إلى 30 حرفاً";
         }
         else if (/\d/.test(f_name)){  
-            appendAlert("الاسم الأول يجب أن يتكون من حروف فقط", 'danger');
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الاسم الأول يجب أن يتكون من حروف فقط";
         }
         else if (/\d/.test(l_name)){  
-            appendAlert("الاسم الأخير يجب أن يتكون من حروف فقط", 'danger');
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الاسم الأخير يجب أن يتكون من حروف فقط";
         }
         else if (age == ""){  
-            appendAlert("يرجى ادخال عمرك", 'danger');
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى ادخال عمرك";
+        }
+        else if (gender == ""){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى اختيار الجنس";
+        }
+        // Email
+        else if (email == ""){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى إدخال البريد الإلكتروني";
+        }
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى إدخال بريد إلكتروني صالح";
+        }
+        // Password
+        else if (password.length == 0){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى إدخال كلمة المرور";
+        } else if (password.length < 8){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "كلمة المرور لا يجب أن تقل عن 8 أحرف";
+        } else if (!/[A-Z]/.test(password)) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل";
+        } else if (!/[a-z]/.test(password)) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل";
+        } else if (!/\d/.test(password)) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل";
+        } else if (/\s/.test(password)) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يجب أن لا تحتوي كلمة المرور على مسافات";
+        }
+        else if (password2.length == 0){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى إدخال تأكيد كلمة المرور";
+        }
+        else if (password != password2){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "كلمة المرور غير متطابقة، حاول مجددا";
+            form.elements["password"].value = "";
+            form.elements["password2"].value = "";
         }
         else {
-            // If All Input Are Fine > Can Send Form
+            errorMsg.style.opacity = 0;
+            // If All Input Are Valid > Send Form
             form.onsubmit = function (event) { return true; }
         }
     }
+    // Password Eye
+    const passwordInputs = document.querySelectorAll('#password-input');
+    const togglePasswords = document.querySelectorAll('#toggle-password');
+
+    // Loop through each toggle button
+    togglePasswords.forEach((toggle, index) => {
+        toggle.addEventListener('click', () => {
+            // Get the corresponding password input
+            const passwordInput = passwordInputs[index];
+
+            // Toggle the input type
+            const isPassword = passwordInput.type === 'password';
+            passwordInput.type = isPassword ? 'text' : 'password';
+
+            // Toggle the icon classes
+            toggle.classList.toggle('fa-eye');
+            toggle.classList.toggle('fa-eye-slash');
+        });
+    });
+
 </script>
 {% endblock %}

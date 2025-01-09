@@ -1,7 +1,78 @@
 {% extends "base.html" %}
-
+{% block title %}تسجيل دخول{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/sign-up.css') }}">
+{% endblock %}
 {% block body %}
-<form method="POST">
+<!-- Content -->
+<div class="sign-container d-flex justify-space-between my-5 mx-auto border rounded-2">
+    <div class="circle rounded-circle"></div>
+    <div class="hello-msg text-center d-flex align-items-center w-50 rounded-end-2 pe-4">
+        <div class="text w-75">
+            <h4 class="mb-4">مرحبا بعودتك إلى مُلهِم!</h4>
+            <p>استمر في رحلتك الإبداعية واكتشف المزيد من القصص والإلهام.</p>
+        </div>
+    </div>
+    <form method="POST" id="sign-up" class="d-flex flex-column align-items-center m-4 p-4 py-2 ps-5 w-50">
+        <h2 class="mb-5">تسجيل دخول</h2>
+       
+        <label for="email">البريد الإلكتروني</label>
+        <input type="text" name="email" placeholder="a12@gmail.com">
 
-</form>
+        <div class="password-container w-100 position-relative">
+            <label for="password">كلمة المرور</label>
+            <input id="password-input" type="password" name="password" maxlength="128">
+            <i id="toggle-password" class="fas fa-eye-slash toggle-password"></i>
+        </div>
+
+        <div class="error-msg">رسالة خطأ</div>
+        <input type="submit" class="button main-button" value="تسجيل دخول" onclick="checkInputs()" class="btn btn-primary" id="liveAlertBtn">
+        <div class="have-account mt-2">
+            <p>ليس لديك حساب؟ <a href="../auth/sign-up.html">قم بإنشاء حساب</a></p>
+        </div>
+    </form>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    function checkInputs() {
+        var errorMsg = document.querySelector(".error-msg")
+        // Get Form
+        form = document.getElementById("sign-up");
+        form.onsubmit = function (event) {event.preventDefault()} // Prevent Submit Form
+        // Get Inputs
+
+        email = form.elements["email"].value;
+        password = form.elements["password"].value;
+        
+        // Email
+        if (email == ""){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى إدخال البريد الإلكتروني";
+        }
+        else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى إدخال بريد إلكتروني صالح";
+        }
+        else {
+            errorMsg.style.opacity = 0;
+            // If All Input Are Valid > Send Form
+            form.onsubmit = function (event) { return true;}
+        }
+    }
+     // Password Eye
+    const passwordInput = document.querySelector('#password-input');
+    const togglePassword = document.querySelector('#toggle-password');
+
+    togglePassword.addEventListener('click', () => {
+        // Toggle the input type
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+
+        // Toggle the icon classes
+        togglePassword.classList.toggle('fa-eye');
+        togglePassword.classList.toggle('fa-eye-slash');
+    });
+
+</script>
 {% endblock %}

@@ -4,16 +4,15 @@ from website import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required,logout_user, current_user
 from flask_mail import Mail, Message
+from .models import User
 from random import *
 from datetime import datetime, timedelta
 
 auth = Blueprint('auth', __name__)
 
-# Sign Up Page
+# @@@@@@@@@@@@@@ Sign Up Page @@@@@@@@@@@@@@
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def signUp():
-    email = None
-
     if request.method == 'POST':
         # Get Inputs
         f_name = request.form.get('f_name')
@@ -24,27 +23,36 @@ def signUp():
         password = request.form.get('password')
         password2 = request.form.get('password2')
 
-        # Check If Already Exist #############
-        
-        if checkSignUp(f_name, l_name, age, gender, email, password, password2) == False: # checkSignUp To Varify Inputs
-            flash("أكمل البيانات بالطريقة الصحيحة", category="error") # If Inputs Not Right
+        # Check If Already Exist 
+        user = User.query.filter_by(email=email).first()
+        if user: 
+            flash("لديك حساب بالفعل! قم بتسجيل الدخول!", category='error')
+        elif not checkSignUp(f_name, l_name, age, gender, email, password, password2):
+            flash("أكمل البيانات بالطريقة الصحيحة", category="error")
         else:
             # Start Email Verification
-            # انشاء رمز تحقق والاحتفاظ به في السيشن
             otp_num = randint(1000, 9999)
             session['otp_num'] = otp_num
-            session['otp_time'] = datetime.now()  # عشان رمز التحقق يصير غير صالح بعد فترة
-            session['email'] = email
-            
-            # Flask-email Sitting
-            current_app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # مزود البريد
-            current_app.config['MAIL_PORT'] = 587  # منفذ SMTP (عادةً 587 مع TLS)
-            current_app.config['MAIL_USE_TLS'] = True  # تمكين تشفير TLS
-            current_app.config['MAIL_USE_SSL'] = False  # عدم استخدام SSL
-            current_app.config['MAIL_USERNAME'] = 'mulhem2025gp@gmail.com'  # بريدك الإلكتروني
-            current_app.config['MAIL_PASSWORD'] = 'suiu wzif bqbq meff'  # كلمة مرور البريد (استخدم كلمة مرور خاصة بالتطبيق إذا كنت تستخدم Gmail)
+            session['otp_time'] = datetime.now()
+            session['temp_user'] = {
+                'f_name': f_name,
+                'l_name': l_name,
+                'age': age,
+                'gender': gender,
+                'email': email,
+                'password': generate_password_hash(password)
+            }
+
+            # Flask-email Configuration
+            current_app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+            current_app.config['MAIL_PORT'] = 587
+            current_app.config['MAIL_USE_TLS'] = True
+            current_app.config['MAIL_USE_SSL'] = False
+            current_app.config['MAIL_USERNAME'] = 'mulhem2025gp@gmail.com'
+            current_app.config['MAIL_PASSWORD'] = 'suiu wzif bqbq meff'
 
             mail = Mail(current_app)
+
             # Send OTP Message To User
             msg = Message(subject='تطبيق ملهم', sender='mulhem2025gp@gmail.com', recipients=[email])
             msg.html = f'''
@@ -54,27 +62,21 @@ def signUp():
                         <p>رمز التحقق الخاص بك هو: <strong>{otp_num}</strong></p>
                     </body>
                 </html>
-            ''' 
+            '''
             mail.send(msg)
+
+            flash("تم إرسال رمز التحقق إلى بريدك الإلكتروني. يرجى إدخال الرمز.", category='info')
             return redirect(url_for('auth.verify'))
         
-            # After veri add user to database
-            # Then Go to prefences page
-
-        # End Email Verification
-    return render_template('/auth/sign-up.html')
+    return render_template('/auth/sign-up.html', user=current_user)
 
 # Varify Sign Up Inputs
 def checkSignUp(f_name, l_name, age, gender, email, password, password2):
     # Name
     if len(f_name) < 2 or len(f_name) > 30 :
         flash("الاسم الأول يجب أن يتكون من 3 إلى 30 حرفاً", category='error')
-    elif not f_name.isalpha():
-        flash("الاسم الأول يجب أن يتكون من حروف فقط", category='error')
     elif len(l_name) < 2 or len(l_name) > 30:
         flash("الاسم الأخير يجب أن يتكون من 3 إلى 30'حرفاً'", category='error')
-    elif not l_name.isalpha():
-        flash("الاسم الأول يجب أن يتكون من حروف فقط", category='error')
     # Age
     elif not age:
         flash("يرجى ادخال عمرك", category='error')
@@ -111,42 +113,89 @@ def checkSignUp(f_name, l_name, age, gender, email, password, password2):
 def verify():
     if request.method == 'POST':
         entered_otp = request.form.get('otp')
-        otp_num = session.get('otp_num')  # الحصول على رمز التحقق من السيشن
-        otp_time = session.get('otp_time')
+        otp_num = session.get('otp_num')  # الحصول على رمز التحقق من الجلسة
+        otp_time = session.get('otp_time')  # الحصول على وقت التحقق من الجلسة
+        temp_user = session.get('temp_user')  # الحصول على بيانات المستخدم المؤقتة
 
-         # التحقق من انتهاء صلاحية رمز التحقق
-        otp_time = datetime.strptime(otp_time, '%Y-%m-%d %H:%M:%S.%f')  # تحويل النص إلى كائن datetime
+        # التحقق من وجود otp_num و otp_time و temp_user
+        if not otp_num or not otp_time or not temp_user:
+            flash("لم يتم العثور على رمز التحقق أو بيانات المستخدم. يرجى إعادة المحاولة.", category='error')
+            return redirect(url_for('auth.signUp'))
+
+        # التأكد من أن كلاً من datetime.now() و otp_time هما نفس النوع
+        if isinstance(otp_time, datetime):
+            # إذا كانت otp_time تحتوي على معلومات المنطقة الزمنية (aware), نقوم بإزالة المنطقة الزمنية منها
+            otp_time = otp_time.replace(tzinfo=None)
+
+        # الآن قارن بين datetime.now() و otp_time
         if datetime.now() > otp_time + timedelta(hours=1):  # انتهاء صلاحية بعد ساعة
             flash("رمز التحقق منتهي الصلاحية. يرجى إعادة المحاولة.", category='error')
             session.pop('otp_num', None)
             session.pop('otp_time', None)
+            session.pop('temp_user', None)
             return redirect(url_for('auth.signUp'))
-        
-        if not otp_num or not otp_time:
-            flash("لم يتم العثور على رمز التحقق. يرجى إعادة المحاولة.", category='error')
-            return redirect(url_for('auth.signUp'))
-        
-        if str(entered_otp) == str(otp_num):  # مقارنة الرمز المدخل بالرمز المرسل
-            flash("تم التحقق بنجاح!", category='success')
+
+        # التحقق من صحة رمز التحقق
+        if str(entered_otp) == str(otp_num):  # مقارنة الرمز المدخل مع الرمز المرسل
+            # حفظ المستخدم في قاعدة البيانات بعد التحقق
+            new_user = User(
+                first_name=temp_user['f_name'],
+                last_name=temp_user['l_name'],
+                age=temp_user['age'],
+                gender=temp_user['gender'],
+                email=temp_user['email'],
+                password=temp_user['password']
+            )
+            db.session.add(new_user)
+            db.session.commit()
+
+            # إزالة البيانات المؤقتة من الجلسة
             session.pop('otp_num', None)
-            session.pop('email', None)
-            return redirect(url_for('auth.preferences'))  # توجيه المستخدم إلى الصفحة الرئيسية
+            session.pop('otp_time', None)
+            session.pop('temp_user', None)
+
+            flash("تم التحقق بنجاح وتم إنشاء الحساب!", category='success')
+            login_user(new_user, remember=True)
+            return redirect(url_for('views.home'))  # توجيه المستخدم إلى الصفحة الرئيسية
         else:
             flash("رمز التحقق غير صحيح. حاول مرة أخرى.", category='error')
-        
-    return render_template('auth/verify.html') 
+
+    return render_template('auth/verify.html')
+
     
-# Preferences Page
-@auth.route('/preferences', methods=['GET', 'POST'])
-def preferences():
-    return render_template('auth/preferences.html')
+# @@@@@@@@@@@@@@ Login Page @@@@@@@@@@@@@@
+@auth.route('/login', methods=['GET', 'POST'])
+def login():
+    email = None
 
+    if request.method == 'POST':
+        # Get Inputs
+        email = request.form.get('email')
+        password = request.form.get('password')
 
-# Profile Page
+        user = User.query.filter_by(email=email).first() 
+        if user: #If User Exist
+            if check_password_hash(user.password, password):
+                flash("تم تسجيل دخولك بنجاح", category='success')
+                login_user(user, remember=True)
+                return redirect(url_for('views.home'))
+            else:
+                flash("كلمة المرور خاطئة!", category='error')
+        else: # If User Not Exist
+            flash("البريد الإلكتروني الذي أدخلته غير موجود!", category='error')
+
+    return render_template('/auth/login.html', user=current_user)
+
+# @@@@@@@@@@@@@@ Logout Page @@@@@@@@@@@@@@
+@auth.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    flash("تم تسجيل خروجك", category='success')
+    return redirect(url_for('views.home'))
+
+# @@@@@@@@@@@@@@ Profile Page @@@@@@@@@@@@@@
 @auth.route('/profile', methods=['GET', 'POST'])
 def profile():
     return render_template('auth/profile.html')
 
-# Login Page
-
-# Logout Page

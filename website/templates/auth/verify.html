@@ -1,12 +1,33 @@
 {% extends "base.html" %}
-
+{% block styles %}
+    <style>
+        .verify-sign-up .form-control:focus {
+            border-color: var(--main-dark);
+            box-shadow: 0 0 0 .25rem rgba(179, 145, 214, .25);
+        }
+    </style>
+{% endblock %}
 {% block body %}
-<div class="">
-    <form method="POST" class="">
-        <h3>أدخل رمز التحقق</h3>
-        <p>{{user_email}}</p>
-        <label for="otp">العمر</label>
-        <input type="text" name="otp" minlength="4" maxlength="4" placeholder="أدخل ">
-    </form>
+<div class="verify-sign-up container d-flex justify-content-center align-items-center my-5 py-5">
+    <div class="card p-4 shadow-sm" style="max-width: 400px; width: 100%;">
+        <div class="card-body text-center">
+            <h2 class="card-title fs-4 mb-4">أدخل رمز التحقق</h2>
+            <p class="text-muted">تم إرسال رمز التحقق إلى بريدك الإلكتروني:</p>
+            <p><strong>{{ user_email }}</strong></p>
+            <form method="POST" action="{{ url_for('auth.verify') }}">
+                <div class="mb-3">
+                    <label for="otp" class="form-label"></label>
+                    <input type="text" name="otp" id="otp" minlength="4" maxlength="4" placeholder="أدخل الرمز" required class="form-control text-center">
+                </div>
+                <button type="submit" class="button main-button form-control text-center w-50 mx-auto">تحقق</button>
+            </form>
+        </div>
+    </div>
 </div>
+{% endblock %}
+{% block script %}
+    <script>
+
+
+    </script>
 {% endblock %}

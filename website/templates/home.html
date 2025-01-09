@@ -79,7 +79,18 @@
 </style>
 
 <div class="home container">
-    <h1>مرحبا بك في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h1>
+    <!-- Diffrent Welcom If User Logged In Or Not -->
+    {% if user.is_authenticated %}
+
+        {% if user.gender == "أنثى"%}
+        <h2>مرحبا بكِ يا {{user.first_name}} في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h2>
+        {% else %}
+        <h2>مرحبا بكَ يا {{user.first_name}} في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h2>
+        {% endif %}
+
+    {% else %}
+        <h2>مرحبا بك في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h2>
+    {% endif %}
 
 </div>
 <div class="section-1">

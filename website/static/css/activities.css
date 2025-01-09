@@ -156,11 +156,6 @@ i.text-sound:hover {
     width: 210px;
     height: fit-content;
 }
-.activity_1 .content .text audio {
-    height: 40px;
-    background-color: transparent;
-    border: 2px solid var(--font-3);
-}
 .activity_1 .carousel {
     text-align: center;
 }
@@ -304,11 +299,6 @@ i.text-sound:hover {
 .characters_activity .carousel-item .small-activity .story {
     color: var(--font-3);
     width: fit-content;
-}
-.characters_activity .carousel-item .story audio {
-    height: 40px;
-    background-color: transparent;
-    border: 2px solid var(--font-3);
 }
 .characters_activity .small-activity .story > p span {
     font-weight: 700;
