@@ -1,0 +1,551 @@
+/* This File Contains Styles That Exist In Every Page */
+
+/* Main Colors */
+:root {
+    --main-dark: #b391d6;
+    --main-light: #dbcef6;
+    --font-1: white; 
+    --font-2: #9E887F;
+    --font-3: #7b5ba6;
+    --font-4: #424242;
+    --transition-seconds: 0.8s
+}
+* {
+    box-sizing: border-box;
+}
+body {
+  height: 100%;
+    font-family: "Rubik", sans-serif;
+    direction: rtl;
+    scroll-behavior: smooth;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+}
+p {
+  font-size: 17px;
+  font-weight: 500;
+}
+/* Navbar */
+nav {
+    background-color: var(--main-dark);
+    color: var(--font-1);
+}
+nav .navbar-brand {
+    font-size: 25px;
+    font-weight: 500;
+    color: var(--font-1);
+}
+nav .navbar-nav li a {
+    color: rgba(255,255,255, 0.65)
+}
+nav .navbar-nav li a:hover,
+nav .navbar-nav li a:focus,
+nav .navbar-nav li a:active  {
+    color: var(--font-1)
+}
+nav .sign-log button {
+    padding: 8px 13px;
+    border: none;
+    color: var(--font-1);
+    background-color: transparent;
+    border: none;
+    border-radius: 0.375rem;;
+    transition: var(--transition-seconds);
+}
+nav .sign-log button:hover,  
+nav .sign-log button:focus,  
+nav .sign-log button:active {
+    font-weight: 600;
+    color: var(--font-2);
+    background-color: var(--font-1);
+}
+
+
+/* Buttons */
+.button {
+    padding: 8px 13px;
+    font-weight: 600;
+    border: none;
+    border-radius: 10px;
+    transition: var(--transition-seconds);
+}
+.main-button {
+    color: var(--font-1);
+    background-color: var(--main-dark); 
+}
+.main-button:hover {
+    color: var(--font-1);
+    background-color: var(--main-dark); 
+    transform: scale(1.05);
+    /* box-shadow: 0 0 10px var(--main-dark); */
+    
+}
+
+
+.second-button {
+    /* color: var(--font-2); */
+    border: .5px solid white;
+    background-color: var(--font-1);
+    
+} 
+
+/* General styling for the section */
+.our-stories {
+    background-color: #f9f9f9; /* Background color for the section */
+    padding: 40px 20px;
+    text-align: center;
+  }
+  
+  .our-stories h2 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 30px;
+  }
+  
+  .stories-flex {
+    display: flex;
+    justify-content: space-between; /* توزيع العناصر بالتساوي */
+    gap: 20px;
+  }
+  
+  .story-item {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 30%; /* تحديد عرض العنصر ليظهر 3 عناصر بجانب بعضها */
+    text-align: center;
+    float: left; /* To display boxes side by side */
+
+  }
+ 
+  
+  .story-item img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .story-item h3 {
+    font-size: 20px;
+    color: #333;
+    margin: 15px 0;
+  }
+  
+  .story-item p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .read-more {
+    display: inline-block;
+    font-size: 14px;
+    color: #8e44ad;
+    text-decoration: none;
+    margin-top: 15px;
+  }
+  
+  .read-more:hover {
+    text-decoration: underline;
+  }
+  
+  
+
+
+
+
+
+/* footer style */
+
+footer {
+  background-color: #b391d6;
+  color: #ecf0f1;
+  font-family: Arial, sans-serif;
+  padding: 20px ;  /* Adjust padding as needed */
+  width: 100%;
+  bottom: 5px;
+  font-size: 25px;
+  height: 20%;
+  margin-bottom: 0;
+  
+}
+
+footer ul {
+  list-style-type: none;
+  padding: 25px;
+
+}
+footer p {
+  font-size: 18px; /* Increase font size to 18 pixels */
+}
+
+footer a {
+  font-size: 16px; /* Increase font size for links */
+}
+
+
+/* Drag And Drop Question */
+.quiz-wrapper .answers {
+  font-size: 13px;
+  .target {
+    height: 40px;
+    display: inline-block;
+    width: 110px;
+    border: 2px solid transparent;
+    background: #efefef;
+    margin: 0 3px;
+    text-align:center;
+  }
+}
+/* Copyright (c) 2024 by Coran Spicer (https://codepen.io/cgspicer/pen/AXjZxa) */
+
+
+/* Right Answer Effect */
+@keyframes bang {
+  from {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.confetti-right {
+  display: inline-block;
+  position: relative; 
+}
+.confetti-right .fa-lightbulb {
+  display: contents;
+}
+.confetti-right .conf-i {
+  position: absolute;
+  display: block;
+  left: 50%;
+  top: 0;
+  width: 3px;
+  height: 5px;
+  background: red;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(1) {
+  transform: translate3d(5px, -51px, 0) rotate(340deg);
+  background: hsl(260, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(2) {
+  transform: translate3d(35px, -11px, 0) rotate(307deg);
+  background: hsl(226, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(3) {
+  transform: translate3d(-82px, -60px, 0) rotate(9deg);
+  background: hsl(84, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(4) {
+  transform: translate3d(-94px, -66px, 0) rotate(124deg);
+  background: hsl(159, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(5) {
+  transform: translate3d(-51px, -56px, 0) rotate(219deg);
+  background: hsl(200, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(6) {
+  transform: translate3d(37px, -85px, 0) rotate(36deg);
+  background: hsl(64, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(7) {
+  transform: translate3d(-17px, 7px, 0) rotate(255deg);
+  background: hsl(320, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(8) {
+  transform: translate3d(28px, -11px, 0) rotate(69deg);
+  background: hsl(113, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(9) {
+  transform: translate3d(-43px, -66px, 0) rotate(242deg);
+  background: hsl(350, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(10) {
+  transform: translate3d(-74px, -84px, 0) rotate(68deg);
+  background: hsl(112, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(11) {
+  transform: translate3d(5px, -43px, 0) rotate(359deg);
+  background: hsl(125, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(12) {
+  transform: translate3d(19px, -20px, 0) rotate(144deg);
+  background: hsl(7, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(13) {
+  transform: translate3d(-9px, -34px, 0) rotate(84deg);
+  background: hsl(65, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(14) {
+  transform: translate3d(44px, -19px, 0) rotate(289deg);
+  background: hsl(16, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(15) {
+  transform: translate3d(-67px, -80px, 0) rotate(1deg);
+  background: hsl(21, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(16) {
+  transform: translate3d(6px, 5px, 0) rotate(71deg);
+  background: hsl(220, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(17) {
+  transform: translate3d(43px, -24px, 0) rotate(318deg);
+  background: hsl(17, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(18) {
+  transform: translate3d(-66px, -95px, 0) rotate(314deg);
+  background: hsl(135, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(19) {
+  transform: translate3d(19px, -14px, 0) rotate(204deg);
+  background: hsl(99, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(20) {
+  transform: translate3d(-88px, -43px, 0) rotate(213deg);
+  background: hsl(121, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(21) {
+  transform: translate3d(76px, 6px, 0) rotate(210deg);
+  background: hsl(19, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(22) {
+  transform: translate3d(28px, -9px, 0) rotate(232deg);
+  background: hsl(104, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(23) {
+  transform: translate3d(74px, -90px, 0) rotate(267deg);
+  background: hsl(258, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(24) {
+  transform: translate3d(78px, -65px, 0) rotate(58deg);
+  background: hsl(84, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(25) {
+  transform: translate3d(-21px, -32px, 0) rotate(119deg);
+  background: hsl(81, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(26) {
+  transform: translate3d(44px, -95px, 0) rotate(348deg);
+  background: hsl(12, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(27) {
+  transform: translate3d(83px, -70px, 0) rotate(332deg);
+  background: hsl(287, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(28) {
+  transform: translate3d(72px, -11px, 0) rotate(240deg);
+  background: hsl(268, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(29) {
+  transform: translate3d(-36px, -89px, 0) rotate(296deg);
+  background: hsl(30, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(30) {
+  transform: translate3d(-11px, -14px, 0) rotate(253deg);
+  background: hsl(212, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(31) {
+  transform: translate3d(64px, -97px, 0) rotate(113deg);
+  background: hsl(257, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(32) {
+  transform: translate3d(22px, -20px, 0) rotate(297deg);
+  background: hsl(177, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(33) {
+  transform: translate3d(50px, -29px, 0) rotate(64deg);
+  background: hsl(248, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(34) {
+  transform: translate3d(84px, -69px, 0) rotate(56deg);
+  background: hsl(130, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(35) {
+  transform: translate3d(-40px, 3px, 0) rotate(236deg);
+  background: hsl(29, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(36) {
+  transform: translate3d(54px, -14px, 0) rotate(210deg);
+  background: hsl(55, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(37) {
+  transform: translate3d(-63px, -31px, 0) rotate(71deg);
+  background: hsl(334, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(38) {
+  transform: translate3d(-7px, -60px, 0) rotate(194deg);
+  background: hsl(320, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(39) {
+  transform: translate3d(68px, -14px, 0) rotate(124deg);
+  background: hsl(156, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(40) {
+  transform: translate3d(-50px, -68px, 0) rotate(63deg);
+  background: hsl(280, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(41) {
+  transform: translate3d(-10px, -56px, 0) rotate(242deg);
+  background: hsl(161, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(42) {
+  transform: translate3d(-97px, 0px, 0) rotate(263deg);
+  background: hsl(94, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(43) {
+  transform: translate3d(-10px, -3px, 0) rotate(174deg);
+  background: hsl(87, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(44) {
+  transform: translate3d(-93px, -16px, 0) rotate(245deg);
+  background: hsl(279, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(45) {
+  transform: translate3d(4px, -14px, 0) rotate(206deg);
+  background: hsl(181, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(46) {
+  transform: translate3d(-89px, -21px, 0) rotate(15deg);
+  background: hsl(16, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(47) {
+  transform: translate3d(-77px, -41px, 0) rotate(273deg);
+  background: hsl(161, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(48) {
+  transform: translate3d(89px, 6px, 0) rotate(6deg);
+  background: hsl(314, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(49) {
+  transform: translate3d(65px, -24px, 0) rotate(72deg);
+  background: hsl(158, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+.confetti-right.active .conf-i:nth-of-type(50) {
+  transform: translate3d(-25px, 7px, 0) rotate(60deg);
+  background: hsl(81, 100%, 50%);
+  animation: bang 1300ms ease-out forwards 0.3s;
+  opacity: 0;
+}
+/* Copyright (c) 2024 by Michael Hobizal (https://codepen.io/mikehobizal/pen/gOdmmr) */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

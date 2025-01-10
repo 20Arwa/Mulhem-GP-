@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %} أنواع الكتابة {% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/writing-types.css') }}">
+{% endblock %}
+{% block body %}
+<div class="writing-types container mx-auto my-5 row g-5">
+    {% for type in [
+        {'name': 'مولد القصة', 'description': 'كل ما عليك فعله هو إدخال عناصر القصة التي ترغب بها، وسيقوم ملهم بكتابة قصة رائعة لك!', 'path': '../writing/story-generator'},
+        {'name': 'كتابة مشتركة', 'description': 'ستقوم أنت وملهم بالمشاركة معا لكتابة قصة رائعة', 'path': '../writing/story-generator'},
+        {'name': 'كتابة ذاتية', 'description': 'ستكتب القصة بنفسك وسيقوم ملهم بمساعدتك إذا احتجته', 'path': '../writing/self-writing'}
+    ]%}
+        <a class="type col-4" href="{{type.path}}">
+            <div class=" p-3 py-4 rounded-4 text-center h-100 d-flex flex-column justify-content-around">
+                <h3>{{type.name}}</h3>
+                <p>{{type.description}}</p>
+            </div>
+            <p></p>
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}

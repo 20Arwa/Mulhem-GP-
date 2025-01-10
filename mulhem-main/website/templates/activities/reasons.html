@@ -1,0 +1,277 @@
+{% extends "base.html" %}
+{% block title %} الاسباب {% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/activities.css')}}">
+{% endblock %}
+{% block body %}
+<div class="activity characters_activity container my-5 p-4 py-5 px-5 rounded-4 position-relative">
+    <!-- Decore Images -->
+    <img class="decore-imgs boy position-absolute" src="../../static/images/boy.png" alt="boy">
+    <img class="decore-imgs tree position-absolute" src="../../static/images/tree.png" alt="tree">
+    <img class="decore-imgs racon position-absolute" src="../../static/images/racon.png" alt="racon">
+    <img class="decore-imgs flower position-absolute" src="../../static/images/flower.png" alt="flower">
+    <img class="decore-imgs apple position-absolute" src="../../static/images/apple.png" alt="apple">
+    <img class="decore-imgs door position-absolute" src="../../static/images/door.png" alt="door">
+    <img class="decore-imgs girl position-absolute" src="../../static/images/girl.png" alt="girl">
+    <div id="carouselCaracthers" class="carousel slide">
+        <div class="carousel-inner">
+            <!-- @@@@@@@@@@@@@ Section 1 @@@@@@@@@@@@@ -->
+            <div class="carousel-item section-1 active">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>ماهي الاسباب ؟<i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <p> الأسباب هي الأشياء التي نفعلها، أو تحدث، وتؤدي إلى نتيجة.
+
+                        مثال:
+                        
+                        إذا وضعت الماء على الزهرة، ستنمو 🌸.
+                        إذا لم تسقها، ستذبل 🥀.
+                           </p>
+                </div>
+                <div class="small-activity text-center pt-3  mx-auto">
+                    <div class="content mx-auto">
+                        <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج الاسباب التي أدت الى تغير الاحداث من القصة التالية:</h5>
+                        <div class="story d-flex align-items-center gap-2 rounded-4 p-3 py-2 mx-auto my-3 border border-2 border-white">
+                            <div class="right-side text-center">  
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>قصة رحلة الحديقة</h5>
+                                <img class="my-3 rounded-4" src="../..//static/images/reason1.webp" alt="سامي في الحديقة">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side text-end mb-0">في يوم جميل، قرر سامي الذهاب مع أصدقائه إلى الحديقة<br>  
+                                جهز حقيبته ووضع فيها بعض الطعام والعصير، ثم انطلقوا.<br>  
+                                عندما وصلوا، اكتشف سامي أنه نسي زجاجة الماء.<br>  
+                                شعر بالعطش ولم يستطع اللعب كثيرًا مع أصدقائه.<br>  
+                                قالت صديقته سارة: "كان يجب أن تتأكد من حقيبتك جيدًا قبل الخروج."</p> 
+                        </div>
+                    </div>
+                    <div class="question">
+                        <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>لماذا لم يستطع سامي اللعب كثيرًا مع أصدقائه في الحديقة؟</h6>
+                        <div class="options">
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>لأنه شعر بالتعب من حمل حقيبته.
+                            </button>
+                            <div class="confetti-right confetti-click">
+                                <button class="right button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i> أنه نسي زجاجة الماء في المنزل. 
+                                </button>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
+                            </div>
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>لأنه لم يحب الحديقة
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- @@@@@@@@@@@@@ Section 2 @@@@@@@@@@@@@ -->
+           
+
+            <!-- @@@@@@@@@@@@@ Section 3 @@@@@@@@@@@@@ -->
+            <div class="carousel-item section-3">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i> ماهي اهمية الاسباب ؟<i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <p> الاسباب تجعل القصة ممتعة ومفهومة. عندما نعرف السبب، نفهم لماذا تصرف الشخصيات كما تصرفت، ولماذا حدثت الأشياء كما حدثت. 
+                    </p>
+                </div>
+                <div class="small-activity text-center pt-3 mx-auto">
+                    <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج الاسباب التي أدت الى تغير الاحداث من القصة التالية:</h5>
+                    <div class="content">
+                        <div class="story d-flex align-items-center gap-2 rounded-4 p-3 py-2 mx-auto my-3 border border-2 border-white">
+                            <div class="right-side text-center">  
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>قصةالكتاب المفقود</h5>
+                                <img class="my-3 rounded-4" src="../..//static/images/reason2.webp" alt=" حسن والكتاب ">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side text-end mb-0">في يوم دراسي عادي، كان حسن في المدرسة يستعد للمشاركة في نشاط قراءة<br>  
+                                مع زملائه عندما فتح حقيبته اكتشف أنه نسي كتابه المفضل في المنزل.   <br>  
+                                 شعر بالحزن أنه كان متحمسًا جدًا لقراءة الفصل الجديد أمام أصدقائه   <br>  
+                                 قرر حسن أن يسأل معلمته إذا كان بإمكانه العودة إلى المنزل لإحضار الكتاب <br>  
+                                لكن المعلمة أخبرته أن الوقت لا يسمح..  فقال لها: "كنت سأكون أول من ينهي الفصل اليوم!<br>  
+                                قال له صديقه يوسف: "المرة القادمة، تأكد من حقيبتك قبل مغادرة البيت. <br>  
+                            </p> 
+                        </div>
+                    </div>
+                   
+                        <div class="question">
+                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>لماذا لم يتمكن حسن من قراءة الكتاب في النشاط؟</h6>
+                            <div class="options">
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>لأنه كان يشعر بالخوف من القراءة أمام أصدقائه. 
+                                </button>
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>لأنه لم يجد مكانًا للجلوس في الفصل.
+                                </button>
+                                <div class="confetti-right confetti-click">
+                                    <button class="right button main-button m-1" onclick="optionClick(this)">
+                                        <i class="fa-solid fa-lightbulb ms-1"></i>أنه نسى الكتاب في المنزل. 
+                                    </button>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            
+            <!-- @@@@@@@@@@@@@ Section 4 @@@@@@@@@@@@@ -->
+            
+            <div class="carousel-item section-4">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>  كيف تعمل الأسباب في القصة؟ <i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <p> عندما تواجه الشخصية مشكلة أو تتخذ قرارًا، هناك دائمًا سبب وراء ذلك. هذا يجعل القصة ممتعة ومثيره لمعرفة ما الذي سيحدث بعد ذلك.
+                        <p><span> 🔹 مثال بسيط: </span><br>إذا تأخر سالم عن المدرسة، قد يكون السبب أنه نسي ضبط المنبه. هذا السبب يؤدي إلى نتيجة مثل مواجهة سالم لعقوبة أو تعلمه أهمية تنظيم الوقت. </p>
+                    </p>
+                </div>
+                <div class="small-activity text-center pt-3 mx-auto">
+                    <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج الاسباب التي أدت الى تغير الاحداث من القصة التالية:</h5>
+                    <div class="content">
+                        <div class="story d-flex align-items-center gap-2 rounded-4 p-3 py-2 mx-auto my-3 border border-2 border-white">
+                            <div class="right-side text-center">  
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>قصة القلم السحري</h5>
+                                <img class="my-3 rounded-4" src="../..//static/images/reason3.webp" alt=" أحمد والقلم ">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side text-end mb-0">  ذات يوم، كان أحمد يلعب في حديقة المنزل حين وجد قلمًا قديمًا بين الأعشاب<br> 
+                                لما كتب بالقلم، حدث شيء غريب في الواقع عندما نظر إليه، لاحظ شيئًا غريبًا<br>  
+                                إذا كتب "الغيم في السماء" تتلبد السماء بالغيوم ,وإذا كتب "سقوط المطر"، <br>  
+                                     ، بدأ المطر يتساقط. فوجئ أحمد بهذه القدرة السحرية للقلم<br>                        
+                                  قرر أحمد أن يستخدم القلم بحكمة لجعل العالم من حوله مكانًا أجمل وأسعد. <br>
+                            </p> 
+                        </div>
+                    </div>
+                   
+                        <div class="question">
+                            <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>ما السبب الذي جعل أحمد يستغرب قوة القلم السحرية؟</h6>
+                            <div class="options">
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>لأنه لم يعجبته الكتابة بالقلم.
+                                </button>
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>لأنه فقد القلم في الحديقة.
+                                </button>
+                                <div class="confetti-right confetti-click">
+                                    <button class="right button main-button m-1" onclick="optionClick(this)">
+                                        <i class="fa-solid fa-lightbulb ms-1"></i>لأنه كان يكتب أشياء تتغير في الواقع.
+                                    </button>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <!-- @@@@@@@@@@@@@ Section 5 @@@@@@@@@@@@@ -->
+            <div class="carousel-item section-5 text-center ">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative mx-auto">
+                    <h4><i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i>عمل جيد! <i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i><i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <p class="my-4"> ختام درسنا تعلمنا أن الأسباب هي المحرك الأساسي للأحداث في القصص، فهي ما يجعل الشخصيات تتصرف بطريقة معينة وتواجه مواقف جديدة. وكل سبب يؤدي إلى نتيجة تشكل جزءًا مهمًا من القصة.  </p>
+                    <div class="text-end mt-5">
+                        <h5><i class="fa-regular fa-comment fs-4 ms-2"></i>تذكر دائمًا:</h5>
+                        <p class="mb-1">عندما تكتب قصة، فكر في "لماذا" حدث الشيء و"ماذا" سيحدث بعد ذلك.</p>
+                        <p>✨ كلما كانت الأسباب واضحة ومنطقية، أصبحت قصتك أكثر تشويقًا وإثارة.  </p>
+                    </div>
+                </div>
+                <a href="../activities/all_activities" class="go-back"><button class="btn button main-button">ارجع للأنشطة</button></a>
+                <div class="allQues-error-msg mt-3 text-danger">قم بالإجابة على جميع الأسئلة لإنهاء النشاط</div>
+            </div>
+        </div>
+        <button class="carousel-control-prev h-50 top-50 translate-middle-y" type="button" id="carouselPrev"  data-bs-target="#carouselCaracthers" data-bs-slide="prev">
+            <i class="fa-regular fa-circle-right"></i>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next h-50 top-50 translate-middle-y" type="button" id="carouselNext" data-bs-target="#carouselCaracthers" data-bs-slide="next">
+            <i class="fa-regular fa-circle-left"></i>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    const myCarousel = document.querySelector('#carouselCaracthers');
+    const carousel = new bootstrap.Carousel(myCarousel, {
+        wrap: false // Stops Going Back To First Section
+    });
+    // Hide And Display Arrows
+    const nextButton = document.querySelector('#carouselNext');
+    const prevButton = document.querySelector('#carouselPrev');
+    prevButton.style.display = 'none';
+    myCarousel.addEventListener('slid.bs.carousel', (event) => {
+        const totalItems = document.querySelectorAll('#carouselCaracthers .carousel-item').length; // Number Of Items
+        const currentIndex = event.to; // Current Item
+        // Hide Prev Button If User In First Item
+        if (currentIndex === 0) {
+            prevButton.style.display = 'none';
+        } else {
+            prevButton.style.display = 'flex';
+        }
+        // Hide Next Button If User Reach Last Item
+        if (currentIndex === totalItems - 1) {
+            nextButton.style.display = 'none';
+            // Check If All Answerd
+            let allTrue = false; // Start as false
+            // Check if all Questions Are Answerd
+            if (
+                Array.from(document.querySelectorAll(".section-1 .small-activity .question button.right")).every(button => button.classList.contains("active-right")) &&
+                Array.from(document.querySelectorAll(".section-3 .small-activity .question .answer img")).every(img => img.classList.contains("active-right")) &&
+                Array.from(document.querySelectorAll(".section-4 .small-activity .question button.right")).every(button => button.classList.contains("active-right")) &&
+                Array.from(document.querySelectorAll(".section-4 .small-activity .question input[type='text']")).every(input => input.classList.contains("active-right"))
+                ) {
+                    allTrue = true;
+                    bigConfetti(); // Turn On Big Confitte
+                    document.querySelector(".section-5 .allQues-error-msg").style.opacity = 0;
+                    // Enable Go Back To Activiy Button 
+                    document.querySelector(".section-5 .go-back").style.opacity = '100%'; 
+                    document.querySelector(".section-5 .go-back").setAttribute("href", "../activities/all_activities");
+                }
+                else {
+                // Disable Go Back To Activiy Button 
+                document.querySelector(".section-5 .go-back").style.opacity = '50%';
+                document.querySelector(".section-5 .go-back").setAttribute("href", "#");
+                // Show Error Message In Last Item
+                document.querySelector(".section-5 .allQues-error-msg").style.opacity = 1;
+            }
+        } else {
+            nextButton.style.display = 'flex'; 
+        }
+    });
+
+    // @@@@@@@@@ Multiple Choise Questions @@@@@@@@@
+    function optionClick(button) {
+        if (button.classList.contains("wrong")) {
+            button.classList.add("active-wrong")
+        }
+        else {
+            button.classList.add("active-right")
+        }
+    }
+    
+   
+</script>
+{% endblock %}

@@ -1,0 +1,18 @@
+.writing-types .type > div {
+    color: var(--font-4);
+    cursor: pointer;
+    transition: var(--transition-seconds);
+    background-color: var(--main-light);
+}
+.writing-types .type > div:hover {
+    color: var(--font-1);
+    box-shadow: 2px 5px 10px var(--main-dark);
+    background-color: var(--main-dark);
+    /* transform: scale(1.05); */
+}
+/* .writing-types .type > div button {
+    cursor: pointer;
+}
+.writing-types .type > div:has(button:hover) {
+
+} */

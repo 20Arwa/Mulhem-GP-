@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+
+{% block title %}الصفحة الرئيسية{% endblock %}
+
+{% block body %}
+
+
+<style>
+ 
+  a {
+      text-decoration: none; 
+      color:black; 
+      display: inline-block; 
+      align-items: center; 
+      transition: color 0.3s;
+  }
+
+  a:hover {
+      color: rgb(0, 76, 185); 
+  }
+  .img-e {
+      max-width: 100%; 
+      height: 250px;
+      width: 350px;
+      margin-right: 10px; 
+      border-radius: 5px; 
+  }
+
+  .story-box {
+      background-color: white;
+      padding: 15px;
+      display: inline-block;
+      margin: 10px;
+      border-radius: 5px; 
+      transition: transform 0.3s;
+      width:280px;
+      height: 320px;;
+  }
+
+  .menu-item p{
+      margin: 10px 0;
+      font-size: 20px;
+      color:black;
+  }
+
+  .story-box:hover {
+      transform: scale(1.05); 
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+  }
+
+  .line-container {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            margin: 20px 0; /* Space above and below the line */
+        }
+
+        .line {
+            flex-grow: 1; /* Allow the line to grow */
+            height: 2px; /* Height of the line */
+            background-color: #b391d6; /* Color of the line */
+        }
+
+        .line-text {
+            padding: 0 10px; /* Space around the text */
+            background: white; /* Background color to cover the line */
+            color: #b391d6;
+            position: relative; /* Position relative for better control */
+            z-index: 1; /* Ensure text is above the line */
+        }
+        .section-container{
+          Display: flex;
+          justify-content: center;
+          align-items:center
+        }
+       
+
+</style>
+
+<div class="home container">
+    <h1>مرحبا بك في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h1>
+
+</div>
+<div class="section-1">
+<div class="line-container">
+  <div class="line"></div>
+  <span class="line-text"> اقرأ القصص وعدّلها</span>
+  <div class="line"></div>
+</div>
+
+<div class ="section-container">
+<div class="story-box">
+  <div calss=" img-e">
+  <a href="try.html" target="_blank">
+    
+      <img src="/static/images/علاء الدين.jpeg" alt="علاء الدين"  height="270px"  width="250px"  >
+      <p>علاء الدين و المصباح السحري</p>
+  </a>
+</div> 
+
+</div>
+
+<div class="story-box">
+  <a href="tstory-boxry.html" target="_blank">
+      <img src="/static/images/جاك وحبة الفاصولياء.png" alt="جاك و حبة الفاصولياء"  height="270px"  width="250px"   max-width="100%" >
+      <p>جاك وحبة الفاصولياء</p>
+  </a>
+</div>
+
+
+    
+<div class="story-box">
+  <a href="try.html" target="_blank">
+      <img src="/static/images/open-book.png" alt=" اقرأ المزيد "  height="270px"  width="250px"   max-width="100%" >
+      <p>اقرأ المزيد </p>
+  </a>
+</div>
+</div>
+</div>
+  </section>
+  
+  
+<div class="line-container">
+  <div class="line"></div>
+  <span class="line-text"> <img src="/static/images/pencil1.png"></span>
+  <div class="line"></div>
+</div>
+  
+<section>
+  <div class="section-2">
+  <div class="section-container">
+<div class="story-box">
+  <div calss=" img-e">
+  <a href="try.html" target="_blank">
+    
+      <img src="/static/images/teacher1.png" alt=" دروس الكتابة"  height="270px"  width="250px"  >
+      <p>دروس الكتابة </p>
+  </a>
+</div> 
+
+</div>
+
+<div class="story-box">
+  <a href="tstory-boxry.html" target="_blank">
+      <img src="/static/images/writing.png" alt="أبدع واكتب قصة "  height="270px"  width="250px"   max-width="100%" >
+      <p>أبدع واكتب قصة </p>
+  </a>
+</div>
+
+<div class="story-box">
+  <a href="try.html" target="_blank">
+      <img src="/static/images/publishing.png" alt=" منصة النشر "    height="270px"  width="250px"   max-width="100%" >
+      <p> منصة النشر </p>
+  </a>
+</div>
+
+ 
+</div>
+  </div>
+  </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+<body>
+
+
+
+
+
