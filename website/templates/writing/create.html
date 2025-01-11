@@ -5,7 +5,7 @@
 {% endblock %}
 {% block body %}
 
-  <div class="story-container">
+  <div class="create-story-container my-5">
     <h1 class="story-title">إنشاء قصة</h1>
     <form id="storyForm">
       <label class="story-label">الشخصيات:</label>
@@ -15,7 +15,7 @@
           <input type="text" class="story-input-text story-character-description" placeholder="وصف الشخصية..." />
         </div>
       </div>
-      <button type="button" class="story-btn-small" onclick="addCharacter()"> إضافة شخصيه جديدة ! </button>
+      <button type="button" class="story-btn-small" onclick="addCharacter()"> إضافة شخصية جديدة ! </button>
 
       <div class="story-spacing"></div>
 
@@ -46,6 +46,7 @@
       <label class="story-label">الحل أو النهاية:</label>
       <textarea id="solution" class="story-input-text" placeholder="كيف ستنتهي القصة..."></textarea>
 
+      <div class="error-msg text-center">يجب إدخال النصوص باللغة العربية فقط</div>
       <!-- زر "أنشئ القصة" -->
       <button type="button" class="story-btn-main" onclick="submitStory()">أنشئ القصة</button>
     </form>
@@ -58,6 +59,7 @@
 function addCharacter() {
   const charactersDiv = document.getElementById("characters");
   const characterInputs = charactersDiv.querySelectorAll(".story-character-row");
+
   if (characterInputs.length < 5) {
     const newRow = document.createElement("div");
     newRow.className = "story-character-row";
@@ -82,6 +84,8 @@ function addCharacter() {
 
 function submitStory() {
   const arabicRegex = /^[\u0600-\u06FF\s]+$/;
+  const errorMsg = document.querySelector(".create-story-container .error-msg");
+
 
   const characters = [...document.querySelectorAll(".story-character-row")].map(row => ({
     name: row.querySelector(".story-character-name").value.trim(),
@@ -93,16 +97,18 @@ function submitStory() {
   const solution = document.getElementById("solution").value.trim();
 
   if (!place || !time || !problem || !solution) {
-    alert("يجب ملء جميع الحقول.");
-    return;
+    errorMsg.style.opacity = 1;
+    errorMsg.innerHTML = "يجب ملء جميع الحقول";
+  }
+  else if (![place, time, problem, solution].concat(characters.map(c => c.name)).every(text => arabicRegex.test(text))) {
+    errorMsg.style.opacity = 1;
+    errorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
+  }
+  else {
+    errorMsg.style.opacity = 0;
+    alert("تم إنشاء القصة بنجاح!");
   }
 
-  if (![place, time, problem, solution].concat(characters.map(c => c.name)).every(text => arabicRegex.test(text))) {
-    alert("يجب إدخال النصوص باللغة العربية فقط.");
-    return;
-  }
-
-  alert("تم إنشاء القصة بنجاح!");
 }
 </script>
 {%endblock%}

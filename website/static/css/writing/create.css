@@ -1,4 +1,4 @@
-.story-container {
+.create-story-container {
   max-width: 600px;
   margin: auto;
   background-color: #dbcef6;
@@ -7,14 +7,14 @@
   box-shadow: 0 0 10px rgba(197, 154, 190, 0.1);
 }
 
-.story-title {
+.create-story-container .story-title {
   font-size: 24px;
   margin-bottom: 20px;
   text-align: center;
   color: #fff;
 }
 
-.story-label {
+.create-story-container .story-label {
  font-size: medium;
   color: #7b5ba6;
   font-weight: bold;
@@ -22,7 +22,7 @@
   margin-top: 20px;
 }
 
-.story-input-text, .story-input-select {
+.create-story-container .story-input-text, .story-input-select {
   width: 100%;
   margin: 10px 0;
   padding: 10px;
@@ -31,21 +31,21 @@
   font-size: 16px;
 }
 
-.story-characters-group {
+.create-story-container .story-characters-group {
   margin-top: 10px;
 }
 
-.story-character-row {
+.create-story-container .story-character-row {
   display: flex;
   gap: 10px;
   margin-bottom: 9px;
 }
 
-.story-character-name, .story-character-description {
+.create-story-container .story-character-name, .story-character-description {
   flex: 1;
 }
 
-.story-btn-small, .story-btn-main {
+.create-story-container .story-btn-small, .story-btn-main {
   margin: 10px 0;
   padding: 8px 20px;
   border: none;
@@ -54,16 +54,21 @@
   font-size: 16px;
 }
 
-.story-btn-small {
+.create-story-container .story-btn-small {
   background-color: #7b4e97;
   color: #fff;
 }
 
-.story-btn-small:hover {
+.create-story-container .story-btn-small:hover {
   background-color: #7b4e97;
 }
+.create-story-container .error-msg {
+  color: red;
+  opacity: 0;
+  transition: var(--transition-seconds);
+}
 
-.story-btn-main {
+.create-story-container .story-btn-main {
   display: block;
   margin: 20px auto; /* التمركز في المنتصف */
   padding: 10px 25px; /* حجم مناسب */
@@ -72,14 +77,14 @@
   font-size: 16px;
 }
 
-.story-btn-main:hover {
+.create-story-container .story-btn-main:hover {
   background-color: #7b4e97;
 }
 
-.story-btn-main:active {
+.create-story-container .story-btn-main:active {
   transform: scale(0.98);
 }
 
-.story-spacing {
+.create-story-container .story-spacing {
   margin-top: 20px;
 }

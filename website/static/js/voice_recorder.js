@@ -8,8 +8,6 @@ let mediaRecorder, chunks = [], audioURL = ''
 
 // mediaRecorder setup for audio
 if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
-    console.log('mediaDevices supported..')
-
     navigator.mediaDevices.getUserMedia({
         audio: true
     }).then(stream => {
@@ -43,6 +41,7 @@ const clearControls = () => {
 }
 const record = () => {
     if (stateIndex === 2) { // Check if we're in the "Download" state
+        // Sweet Alert
         Swal.fire({
             title: 'إعادة تسجيل الصوت',
             text: 'هل أنت متأكد أنك تريد إعادة تسجيل الصوت؟ سيؤدي هذا إلى استبدال التسجيل الحالي.',

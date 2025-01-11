@@ -97,7 +97,7 @@
   height: 80%;
   width: 100%;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 18px;
   color: var(--font-3);
   border-radius: 20px;
   border: 1px solid black;
@@ -152,10 +152,9 @@
   height: 20px;
   width: 150px;
   text-align: right;
-  font-size: 14px;
+  font-size: 16px;
   color: var(--font-4);
 }
-
 
 /* @@@@@@ Front @@@@@@ */
 .front {
@@ -195,6 +194,7 @@
 
 /* @@@@@@ Sitting Buttons @@@@@@ */
 .self-writing button {
+  font-size: 18px;
   display: flex;
   align-items: center;
   padding: 5px 8px;
@@ -226,6 +226,7 @@
   padding: 4px 8px;
   cursor: pointer;
   transition: var(--transition-seconds);
+  border-bottom: 1px solid var(--font-3);
 }
 .dropdown.allam-help .dropdown-item:hover {
   color: var(--font-3);
@@ -237,18 +238,15 @@
 .dropdown.allam-help .dropdown-toggle::after {
   margin-right: 5px;
 }
-/* @@@@@@ Starting Ideas @@@@@@ */
-.self-writing .allam-response-starting {
-  height: 290px;
-}
-.self-writing .allam-response-starting h3 {
+/* @@@@@@ Response Square White @@@@@@ */
+.self-writing .response h3 {
   color: var(--font-4);
 }
-.self-writing .allam-response-starting {
+.self-writing .response {
   width: 90%;
   display: none;
 }
-.self-writing .allam-response-starting .close-icon {
+.self-writing .response .close-icon {
   font-size: 30px;
   color: var(--font-4);
   cursor: pointer;
@@ -256,71 +254,67 @@
   top: -12px;
   left: -18px;
 }
-.self-writing .allam-response-starting .close-icon:hover {
+.self-writing .response .close-icon:hover {
   color: var(--main-dark);
 }
-/* .self-writing .allam-response-starting ul {
-  list-style: outside;
+/* @@@@@@ Starting Ideas @@@@@@ */
+.self-writing .response-starting {
+  height: 290px;
 }
-.self-writing .allam-response-starting ul > div {
- width: 47%;
-} */
-/* .allam-response-starting ul > div:first-of-type::after {
-  content: "";
-  width: 2px;
-  height: 100%;
-  background-color: var(--main-dark);
-  position: absolute;
-  top: 0;
-  left: -15px;
-
-} */
-.allam-response-starting .carousel {
+.response-starting .carousel {
   background-color: #dbcef645
 }
-.allam-response-starting .carousel .carousel-indicators {
+.response-starting .carousel .carousel-indicators {
   top: 150px
 }
-.allam-response-starting .carousel .carousel-indicators button {
+.response-starting .carousel .carousel-indicators button {
   pointer-events: none;
 }
-.allam-response-starting .carousel-item {
+.response-starting .carousel-item {
   color: var(--font-3)
 }
-.allam-response-starting .carousel-item p {
+.response-starting .carousel-item p {
   margin-top: 15px;
   font-size: 20px;
   color: var(--font-4);
   font-weight: 400;
 }
-.allam-response-starting .carousel .carousel-control-prev,
-.allam-response-starting .carousel .carousel-control-next {
+.response-starting .carousel .carousel-control-prev,
+.response-starting .carousel .carousel-control-next {
   font-size: 40px;
   color: var(--font-3);
   background-color: transparent;
   border: none;
 }
-.allam-response-starting .carousel .carousel-control-prev i,
-.allam-response-starting .carousel .carousel-control-next i {
+.response-starting .carousel .carousel-control-prev i,
+.response-starting .carousel .carousel-control-next i {
   font-size: 40px;
   
 }
-.allam-response-starting .carousel .carousel-control-prev:hover,
-.allam-response-starting .carousel .carousel-control-next:hover {
+.response-starting .carousel .carousel-control-prev:hover,
+.response-starting .carousel .carousel-control-next:hover {
   color: var(--font-3) !important;
     border: none !important;
     background-color: transparent !important;
 }
-.allam-response-starting .carousel .carousel-control-next {
+.response-starting .carousel .carousel-control-next {
   left: -30px !important;
   right: auto !important;
 }
-.allam-response-starting .carousel .carousel-control-prev {
+.response-starting .carousel .carousel-control-prev {
   right: -30px !important;
   left: auto !important;
 }
-.allam-response-starting .carousel .carousel-indicators button {
+.response-starting .carousel .carousel-indicators button {
   background-color: var(--font-3);
+}
+/* @@@@@@ Story Elemetns @@@@@@ */
+.self-writing .response-elements .elements > div {
+  color: var(--font-4);
+  display: flex;
+}
+.self-writing .response-elements .elements > div h5{
+  color: var(--font-3);
 }
 /* @@@@@@ Record @@@@@@ */
 .record {
@@ -328,12 +322,21 @@
 }
 
 /* @@@@@@ Sweet Alert @@@@@@ */
+.swal2-popup  {
+  border-radius: 15px;
+  border: 5px solid var(--main-dark);
+}
 .swal2-popup .swal2-warning {
   font-size: 10px;
     color: #ff6363;
     border-color: #ff6363;
 }
+.swal2-popup .swal2-info {
+    color: #3F51B5;
+    border-color: #3F51B5;
+}
 .swal2-popup .swal2-title {
+  color: var(--font-3);
   padding-top: 10px;
 }
 .swal2-popup .swal2-confirm, 
