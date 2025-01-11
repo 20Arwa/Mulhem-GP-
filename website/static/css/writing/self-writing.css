@@ -107,7 +107,7 @@
   outline: none;
 }
 /* Correcting Words */
-.back .text .spelling-error {
+.back .text .error-word {
   color: red;
   text-decoration: underline;
   text-decoration-style: wavy;
@@ -315,6 +315,15 @@
 }
 .self-writing .response-elements .elements > div h5{
   color: var(--font-3);
+}
+.self-writing .response-elements .elements span.red {
+  color: #ff8080
+}
+/* @@@@@@ Story Completion @@@@@@ */
+.self-writing .response-completion .text {
+  color: var(--font-3);
+  font-size: 20px;
+  font-weight: 500;
 }
 /* @@@@@@ Record @@@@@@ */
 .record {

@@ -22,14 +22,14 @@ def generate_AllamResponse(prompt, max_tokens):
             "repetition_penalty": 1
         },
         "model_id": "sdaia/allam-1-13b-instruct",
-        "project_id": "1bc67ee2-295c-4c59-ab4c-92777b72de95"
+         "project_id": "586e581d-f01e-4912-b519-81bf9ca06349"
     }
 
     # إعداد headers الخاص بالطلب
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-    "Authorization": "Bearer  eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTUwMDBPSEg4IiwiaWQiOiJJQk1pZC02OTUwMDBPSEg4IiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMGNkYmQwN2YtZDViMi00NzRkLTgyZTMtYWJiNTFlYWY0OTVhIiwiaWRlbnRpZmllciI6IjY5NTAwME9ISDgiLCJnaXZlbl9uYW1lIjoiQXJ3YSIsImZhbWlseV9uYW1lIjoiTW9oYW1tYWQiLCJuYW1lIjoiQXJ3YSBNb2hhbW1hZCIsImVtYWlsIjoiMTVzdWpvMTVzdXBlckBnbWFpbC5jb20iLCJzdWIiOiIxNXN1am8xNXN1cGVyQGdtYWlsLmNvbSIsImF1dGhuIjp7InN1YiI6IjE1c3VqbzE1c3VwZXJAZ21haWwuY29tIiwiaWFtX2lkIjoiSUJNaWQtNjk1MDAwT0hIOCIsIm5hbWUiOiJBcndhIE1vaGFtbWFkIiwiZ2l2ZW5fbmFtZSI6IkFyd2EiLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWFkIiwiZW1haWwiOiIxNXN1am8xNXN1cGVyQGdtYWlsLmNvbSJ9LCJhY2NvdW50Ijp7InZhbGlkIjp0cnVlLCJic3MiOiI1NTlhYzU2ZTkyZjI0N2FlOTliNDhmOTVmYjNlM2MwZSIsImZyb3plbiI6dHJ1ZX0sImlhdCI6MTczNjQ4Mzg4MSwiZXhwIjoxNzM2NDg3NDgxLCJpc3MiOiJodHRwczovL2lhbS5jbG91ZC5pYm0uY29tL2lkZW50aXR5IiwiZ3JhbnRfdHlwZSI6InVybjppYm06cGFyYW1zOm9hdXRoOmdyYW50LXR5cGU6YXBpa2V5Iiwic2NvcGUiOiJpYm0gb3BlbmlkIiwiY2xpZW50X2lkIjoiZGVmYXVsdCIsImFjciI6MSwiYW1yIjpbInB3ZCJdfQ.jgJhH5PNwgk5CmhDxU7yjXtc5OVFHV1peHYxuOKt9OR5fEN6qu4ib4vtU4NCHMj3_zjkxBwjxeNPjaL4Ecs_voA3fhX4ia_VBz01W3gKQ8FbrTWxQz-S6J1CQy7NYAGE-yo_Yi8e8YVLbp_lRPSlkRDNv7fe0lUmCv7efADLw_3PrsFwwtNAVWzIuu0FefZJuDSZbNYIvG-QircP0UJN7itza3fDByCv1km0bAK_83_GHeVFk3ACYHdB9tqzKpUQJZHDpwKnvp8T3vwdNWUx6-F8FLXH42ApDQ_Tp_qi4xnKHxWc3wMRMkcRdRc_1PoowxjB6GdCQQk3UPaI3mD7Vg",
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTEwMDBPU1dVIiwiaWQiOiJJQk1pZC02OTEwMDBPU1dVIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiOTZjYjgwOWQtZTFjMi00YmJlLTljNGEtMmJjZDAxNGE0MjU4IiwiaWRlbnRpZmllciI6IjY5MTAwME9TV1UiLCJnaXZlbl9uYW1lIjoiSHVzc2FpbiIsImZhbWlseV9uYW1lIjoiTW9oYW1tZWQiLCJuYW1lIjoiSHVzc2FpbiBNb2hhbW1lZCIsImVtYWlsIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwic3ViIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwiaWFtX2lkIjoiSUJNaWQtNjkxMDAwT1NXVSIsIm5hbWUiOiJIdXNzYWluIE1vaGFtbWVkIiwiZ2l2ZW5fbmFtZSI6Ikh1c3NhaW4iLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJodXNzYWluNTU1NTk4NUBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiZmZiODI1NGFmYmJlNGVhNmFlNDQwMjUxYzM3NWY0OGUiLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzY1OTY1MTAsImV4cCI6MTczNjYwMDExMCwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.bmjR3JV5SAlCSx4QXqSmMyY8zt2RNlnkJfPNP8LTUUBNztf7FmwhDqL52zGLrWOyV9u_P26xIoPR9T2-I60PFS5dxt7wREjYNu6ZxPJJTurCIY7WOH3t9odUolsfLWv-HsExgy3Bo678ercisWNQFQObLYoXAuOWNLDBdZ0PgOT74wf1zbuhfM3XoZZN1bFggVZQjeilP9J8CLEjztTqH4hPKhKazR-lNP_3-vYuz-OlA43BRbJFwhkLK4zpAWPFceuq1ReMaKv5-n4-dfFNOc-f66qN-azihKCux1TLo21t_fy-wmljIqOXsxUhRi0lx2yKfo83cE5Dqg7m8OTLVA",
     }
 
     # إرسال الطلب إلى النموذج
@@ -41,7 +41,10 @@ def generate_AllamResponse(prompt, max_tokens):
         return None
 
     # إعادة الإخراج كـ JSON
-    return response.json()
+    print(response.json())
+    result = response.json()
+    return result['results'][0]['generated_text']
+
 
 
 
@@ -64,9 +67,9 @@ def writing_types():
     return render_template("/writing/writing-types.html", url_for=url_for) 
 
 # Story Generator
-@views.route('/writing/create')
-def create():
-    return render_template("/writing/create.html") 
+@views.route('/writing/story-generator')
+def storyGenerator():
+    return render_template("/writing/story-generator.html") 
 
 # Self Writing
 @views.route('/writing/self-writing')
@@ -106,48 +109,53 @@ def generate_img():
 
 
 # Allam 
+# Completion
+@views.route('/allam-completion', methods=['POST'])
+def allam_completion():
+    data = request.json  # استلام البيانات من JavaScript
+    if not data or 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
+
+    prompt = f"""Input: ساعد الطفل في إكمال قصته عن طريق تشجيعه ثم طرح سؤالين أو ثلاثة أسئلة قصيرة ملهمة ومساعدة.
+    قصة الطفل: في الحديقة ولد يدعى عمر.
+    Output: بداية رائعة! هل يحب عمر استكشاف الطبيعة؟ هل يلتقي بحيوانات مثيرة في الحديقة؟ هل يتعلم درسًا عن البيئة؟
+
+    Input: ساعد الطفل في إكمال قصته عن طريق تشجيعه ثم طرح سؤالين أو ثلاثة أسئلة قصيرة ملهمة ومساعدة.
+    قصة الطفل: {data['message']}.
+    Output:"""
+
+    result = generate_AllamResponse(prompt, 100)
+    # result = "أحسنت! قصتك جميلة جدًا. أين يمكن أن يكون أحمد؟ هل يساعد أصدقائه في المدرسة أم في الحي؟"
+    
+    # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
+    if result is None:
+        return jsonify({"response": "Error processing request."}), 500
+    return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
+
+
+
 # Corrcetion
-# @views.route('/allam-correction', methods=['POST'])
-# def allam_correction():
-#     data = request.json  # استلام البيانات من JavaScript
-#     if not data or 'message' not in data:
-#         return jsonify({"response": "Invalid request"}), 400  # تحقق من البيانات المستلمة
-#     create
-
-#     prompt = f"""Input: صحح الأخطاء: في صباحن حلو هناك ولد يدعى احمدون كان كيوت.
-#     Output: {{
-#         "spelling": [["صباح", "صباحن"], ["أحمد", "أحمدون"]],
-#         "grammar": [["جميل", "حلو"], ["لطيف", "كيوت"]]
-#     }}
-#     Input: صحح الأخطاء: {data['message']}
-#     Output:"""
-
-#     result = generate_AllamResponse(prompt,3500)
-#     return jsonify({"response": result}), 200  # إرسال الرد إلى JavaScript
 @views.route('/allam-correction', methods=['POST'])
 def allam_correction():
     data = request.json  # استلام البيانات من JavaScript
     if not data or 'message' not in data or not data['message']:
         return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
 
-    # بناء الـ prompt بناءً على المدخلات
-    # prompt = f"""Input: صحح الأخطاء: في صباحن حلو هناك ولد يدعى احمدون كان كيوت.
-    # Output: {{
-    #     "spelling": [["صباح", "صباحن"], ["أحمد", "أحمدون"]], 
-    #     "grammar": [["جميل", "حلو"], ["لطيف", "كيوت"]]
-    # }}
-    # Input: صحح الأخطاء: {data['message']}
-    # Output:"""
+    prompt = f"""Input: صحح الكلمات الخاطئة: كان هناك ولد يدعى أحمدون كيوت وطيب، لكنه يقابل شخصا ذو وجه معفن يؤذيه.
+        Output: {{"spelling": [["أحمدون", "أحمد"]],"language_errors": [["كيوت", "لطيف"]], "inappropriate_words": [["معفن", "غير لطيف"]]}}
+        Input: صحح الأخطاء: كان هناك ولد يدعى أحمد.
+        Output: {{}}
+        Input: صحح الأخطاء: {data['message']}
+        Output:"""
 
-    # استدعاء الدالة التي تتواصل مع النموذج
-    # result = generate_AllamResponse(prompt, 3500)
-    result = {"spelling": [["أحمد", "أحمدون"]],"grammar": [],"inappropriate_words": []}
+    result = generate_AllamResponse(prompt, 3500)
+    # result = {"spelling": [],"grammar": [["أحمد", "أحمدون"]],"inappropriate_words": [["كيوت", "كيوت"]]}
     
     # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
     if result is None:
         return jsonify({"response": "Error processing request."}), 500
-
     return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
+
 
 # Story Elements
 @views.route('/allam-elements', methods=['POST'])
@@ -156,13 +164,24 @@ def allam_elements():
     if not data or 'message' not in data or not data['message']:
         return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
 
-    result = {
-    "العناصر مكتملة": "True",
-    "الشخصيات": "أحمد",
-    "المكان": "غير مذكور. أين يمكن أن يكون أحمد؟ في المنزل، المدرسة، أم مكان آخر؟",
-    "الزمان": "صباح جميل",
-    "الأسباب": "غير مذكورة. لماذا أحمد في هذا المكان؟ هل هو ذاهب لإنجاز شيء مهم أم لمجرد التسلية؟",
-    "المعضلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"}
+
+    prompt = f"""Input: استخرج عناصر القصة الأساسية (الشخصيات، المكان، الزمان، الأسباب، المعضلة) من النص التالي: في الحديقة، كان هناك ولد يدعى أحمد، وهو هنا ليتعلم عن الطبيعة.
+    Output: {{"الشخصيات": "أحمد", "المكان": "الحديقة", "الزمان": "غير مذكور. متى حدثت القصة؟ في الصباح أم في المساء؟", "الأسباب": "أحمد هنا ليتعلم عن الطبيعة.", "المعضلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"}}
+
+    Input: استخرج عناصر القصة الأساسية (الشخصيات، المكان، الزمان، الأسباب، المعضلة) من النص التالي: {data['message']}
+    Output:"""
+
+    result = """
+    {
+        "الشخصيات": "أحمد",
+        "المكان": "غير مذكور. أين يمكن أن يكون أحمد؟ في المنزل، المدرسة، أم مكان آخر؟",
+        "الزمان": "صباح جميل",
+        "الأسباب": "غير مذكورة. لماذا أحمد في هذا المكان؟ هل هو ذاهب لإنجاز شيء مهم أم لمجرد التسلية؟",
+        "المعضلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"
+    }
+"""
+
+    # result = generate_AllamResponse(prompt, 170)
     
     # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
     if result is None:
@@ -170,5 +189,55 @@ def allam_elements():
 
     return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
 
+
+
+# Activity 1 Laiala
+@views.route('/allam_activity1_1', methods=['POST'])
+def allam_activity1_1():
+    data = request.json  # استلام البيانات من JavaScript
+    if not data or 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
+
+    prompt = f"""Input: النص: يتحدث عن قصة ليلى والذئب المعروفة.السؤال: عن ماذا يتحدث النص؟
+    الجواب: عن ليلى والذئب في الغابة.
+    Output: True
+
+    Input: النص: يتحدث عن قصة ليلى والذئب المعروفة.
+    السؤال: عن ماذا يتحدث النص؟
+    الجواب: {data['message']}
+    Output:"""
+
+    result = generate_AllamResponse(prompt, 10)
+    
+    # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
+    if result is None:
+        return jsonify({"response": "Error processing request."}), 500
+
+    return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
+
+# Activity 1 Wolf
+@views.route('/allam_activity1_2', methods=['POST'])
+def allam_activity1_2():
+    data = request.json  # استلام البيانات من JavaScript
+    if not data or 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
+
+    prompt = f"""Input: النص: يتحدث عن معلومات وحقائق عن الذئب.
+    السؤال: عن ماذا يتحدث النص؟
+    الجواب: عن الذئب وليلى.
+    Output: False
+
+    Input: النص: يتحدث عن معلومات وحقائق عن الذئب.
+    السؤال: عن ماذا يتحدث النص؟
+    الجواب: {data['message']}
+    Output:"""
+
+    result = generate_AllamResponse(prompt, 10)
+    
+    # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
+    if result is None:
+        return jsonify({"response": "Error processing request."}), 500
+
+    return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
 
 # Audio

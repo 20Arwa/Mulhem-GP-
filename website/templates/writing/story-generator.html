@@ -1,10 +1,114 @@
 {% extends "base.html" %}
-{% block title %} أنواع الكتابة {% endblock %}
+{% block title %}  create {% endblock %}
 {% block styles %}
-    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/writing-types.css') }}"> -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/writing/story-generator.css')  }}">
 {% endblock %}
 {% block body %}
-<div class="writing-types container mx-auto my-5 row g-5">
-    ldfkjlajflja;
-</div>
+
+  <div class="create-story-container my-5">
+    <h1 class="story-title">إنشاء قصة</h1>
+    <form id="storyForm">
+      <label class="story-label">الشخصيات:</label>
+      <div id="characters" class="story-characters-group">
+        <div class="story-character-row">
+          <input type="text" class="story-input-text story-character-name" maxlength="9" placeholder="اسم الشخصية..." />
+          <input type="text" class="story-input-text story-character-description" placeholder="وصف الشخصية..." />
+        </div>
+      </div>
+      <button type="button" class="story-btn-small" onclick="addCharacter()"> إضافة شخصية جديدة ! </button>
+
+      <div class="story-spacing"></div>
+
+      <label class="story-label">المكان:</label>
+      <select id="place" class="story-input-select">
+        <option value="">اختر المكان...</option>
+        <option value="البيت">البيت</option>
+        <option value="الحديقة">الحديقة</option>
+        <option value="المدرسة">المدرسة</option>
+        <option value="قرية">قرية</option>
+        <option value="غابة">غابة</option>
+        <option value="بلدة">بلدة</option>
+      </select>
+
+      <label class="story-label">الزمان:</label>
+      <select id="time" class="story-input-select">
+        <option value="">اختر الزمان...</option>
+        <option value="الصباح">الصباح</option>
+        <option value="المساء">المساء</option>
+        <option value="الظهر">الظهر</option>
+      </select>
+
+      <div class="story-spacing"></div>
+
+      <label class="story-label">المشكلة أو التحدي:</label>
+      <textarea id="problem" class="story-input-text" placeholder="ما الذي ستواجهه الشخصيات..."></textarea>
+
+      <label class="story-label">الحل أو النهاية:</label>
+      <textarea id="solution" class="story-input-text" placeholder="كيف ستنتهي القصة..."></textarea>
+
+      <div class="error-msg text-center">يجب إدخال النصوص باللغة العربية فقط</div>
+      <!-- زر "أنشئ القصة" -->
+      <button type="button" class="story-btn-main" onclick="submitStory()">أنشئ القصة</button>
+    </form>
+  </div>
+
 {% endblock %}
+{%block script%}
+
+<script>
+function addCharacter() {
+  const charactersDiv = document.getElementById("characters");
+  const characterInputs = charactersDiv.querySelectorAll(".story-character-row");
+
+  if (characterInputs.length < 5) {
+    const newRow = document.createElement("div");
+    newRow.className = "story-character-row";
+
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.className = "story-input-text story-character-name";
+    nameInput.placeholder =` اسم الشخصية ${characterInputs.length + 1}...`;
+
+    const descInput = document.createElement("input");
+    descInput.type = "text";
+    descInput.className = "story-input-text story-character-description";
+    descInput.placeholder =` وصف الشخصية ${characterInputs.length + 1}...`;
+
+    newRow.appendChild(nameInput);
+    newRow.appendChild(descInput);
+    charactersDiv.appendChild(newRow);
+  } else {
+    alert("يمكنك إضافة 5 شخصيات كحد أقصى!");
+  }
+}
+
+function submitStory() {
+  const arabicRegex = /^[\u0600-\u06FF\s]+$/;
+  const errorMsg = document.querySelector(".create-story-container .error-msg");
+
+
+  const characters = [...document.querySelectorAll(".story-character-row")].map(row => ({
+    name: row.querySelector(".story-character-name").value.trim(),
+    description: row.querySelector(".story-character-description").value.trim(),
+  }));
+  const place = document.getElementById("place").value.trim();
+  const time = document.getElementById("time").value.trim();
+  const problem = document.getElementById("problem").value.trim();
+  const solution = document.getElementById("solution").value.trim();
+
+  if (!place || !time || !problem || !solution) {
+    errorMsg.style.opacity = 1;
+    errorMsg.innerHTML = "يجب ملء جميع الحقول";
+  }
+  else if (![place, time, problem, solution].concat(characters.map(c => c.name)).every(text => arabicRegex.test(text))) {
+    errorMsg.style.opacity = 1;
+    errorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
+  }
+  else {
+    errorMsg.style.opacity = 0;
+    alert("تم إنشاء القصة بنجاح!");
+  }
+
+}
+</script>
+{%endblock%}

@@ -53,7 +53,7 @@
 			</div>
 		</div>
 		
-		
+		<!-- @@@@@@@@@@@@@ Buttons @@@@@@@@@@@@ -->
 		<div class="sitting-buttons mt-4">
 			<div class="sitting-error-msg error-msg mb-2">رسالة الخطأ</div>
 			<div class="d-flex align-items-center justify-content-center column-gap-2">
@@ -65,8 +65,7 @@
 					<i class="fa-solid fa-circle-minus"></i>
 					حذف صفحة
 				</button>
-	
-				
+
 				<div class="dropdown allam-help">
 					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						<i class="fa-solid fa-circle-question"></i>
@@ -91,9 +90,6 @@
 				<button class="out-btn"><i class="fa-solid fa-right-from-bracket"></i>خروج</button>
 			</div>
 		</div>
-
-
-	
 
 
 		<!-- @@@@@@@@@@@@@ Starting Ideas @@@@@@@@@@@@ -->
@@ -169,13 +165,24 @@
 			</div>
 		</div>
 
-		<!--  -->
+		<!-- Story Completion -->
+		<div class="response response-completion p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="completion">
+			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
+			<div class="d-flex justify-content-between mb-5">
+				<h3>✍️📖المساعدة في الإكمال:</h3>
+			</div>
+			<div class="text">
+			</div>
+		</div>
+
+
+		<!-- Story Elements -->
 		<div class="response response-elements p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="elements">
 			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
 			<div class="d-flex justify-content-between mb-5">
-				<h3>التحقق من عناصر القصة📚✨:</h3>
+				<h3>📚✨التحقق من عناصر القصة:</h3>
 			</div>
-			<div class="elements">
+			<div class="elements mb-3">
 			</div>
 		</div>
 
@@ -435,91 +442,116 @@ document.addEventListener('DOMContentLoaded', function () {
 		else {
 			sittingErrMsg.style.opacity = 0; // Remove Error Message
 		}
-
+		
 		// Send To Allam
 		const data = { message: textElement.textContent }; 
-		var result = "";
-	
-		const response = await fetch('http://127.0.0.1:5000/allam-correction', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(data)
-		});
-	
-		if (response.ok) {
-			result = await response.json();
 
-			// $$$$$$ If No Errors $$$$$$ 
-			if (Object.keys(result.response).length === 0) {
-				Swal.fire({
-					title: 'رائع جدا!',
-					text: 'نصك خالٍ من الأخطاء، عملك ممتاز! 🌟',
-					icon: 'success',
-					confirmButtonText: 'عودة للكتابة',
-					reverseButtons: true, 
-				})
-				return;
-			}
-			else {
-				Swal.fire({
-					title: 'أحسنت!',
-					text: 'لكن هناك بعض الأخطاء الصغيرة. اضغط على الأجزاء الملوّنة لتصحيحها وتحسين قصتك',
-					icon: 'info',
-					confirmButtonText: 'العودة لتصحيح الأخطاء',
-					reverseButtons: true,
-				})
-			}
+		 // إظهار رسالة التحميل
+		 Swal.fire({
+            title: 'جاري التحقق من الأخطاء...',
+            text: 'الرجاء الانتظار قليلاً',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading(); // عرض المؤشر الدائري
+            }
+        });
 
-			// $$$$$$ Spelling $$$$$$
-			var spellings = result.response.spelling;
-			let text = textElement.innerHTML;
-			function highlightSpellingErrors(textElement, spellings) {
+		var result = "";		
+		try {
+            const response = await fetch('http://127.0.0.1:5000/allam-correction', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			});
+
+            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+
+            if (!response.ok) {
+                throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+            }
+
+            result = await response.json();
+			const jsonObject = JSON.parse(result.response); // Convert String To JSONS
+
+				function highlightErrors(textElement, errorTypes) {
 				const textContent = textElement.textContent; // النص الكامل
 				const words = textContent.split(/(\s+|[,.!?؛؟])/); // تقسيم النص إلى كلمات وعلامات الترقيم
-			
+				let hasErrors = false; // متغير لتتبع وجود الأخطاء
+
 				// إنشاء محتوى جديد مع الأخطاء المحددة
 				const newContent = words.map(word => {
-					const spelling = spellings.find(sp => sp[0] === word); // البحث عن الكلمة في قائمة الأخطاء
-					if (spelling) {
-						// إذا كانت الكلمة خاطئة، إنشاء <span>
-						const span = document.createElement("span");
-						span.className = "spelling-error position-relative";
-						span.dataset.suggestion = spelling[1];
-						span.textContent = spelling[0];
-						return span.outerHTML; // تحويل العنصر إلى نص HTML
+					// البحث في كل نوع من الأخطاء
+					for (const [errorType, errors] of Object.entries(errorTypes)) {
+						const error = errors.find(err => err[0] === word && err[0] !== err[1]); // البحث عن الكلمة في قائمة الأخطاء
+						if (error) {
+							hasErrors = true; // تحديد وجود الأخطاء
+							// إذا وُجد خطأ، إنشاء <span>
+							const span = document.createElement("span");
+							span.className = `${errorType}-error position-relative error-word`; // إضافة نوع الخطأ كـ class
+							span.dataset.suggestion = error[1]; // الاقتراح
+							span.textContent = error[0]; // النص الخاطئ
+							span.dataset.errorType = errorType; // نوع الخطأ
+							return span.outerHTML; // تحويل العنصر إلى نص HTML
+						}
 					}
 					return word; // الكلمة صحيحة تُترك كما هي
 				}).join(''); // إعادة تجميع النصوص
 			
 				// استبدال النص في العنصر
 				textElement.innerHTML = newContent;
+
+				// $$$$$$ If No Errors $$$$$$ 
+				if (!hasErrors) {
+					Swal.fire({
+						title: 'رائع جدا!',
+						text: 'نصك خالٍ من الأخطاء، عملك ممتاز! 🌟',
+						icon: 'success',
+						confirmButtonText: 'عودة للكتابة',
+						reverseButtons: true, 
+					})
+					return;
+				}
+				else {
+					Swal.fire({
+						title: 'أحسنت!',
+						text: 'لكن هناك بعض الأخطاء الصغيرة. اضغط على الأجزاء الملوّنة لتصحيحها وتحسين قصتك',
+						icon: 'info',
+						confirmButtonText: 'العودة لتصحيح الأخطاء',
+						reverseButtons: true,
+					})
+				}
 			}
-			// تطبيق الدالة
-			highlightSpellingErrors(textElement, spellings);
-
-			var correctionWord = document.querySelector(".back .correction-word")
-
+			
+			highlightErrors(textElement, jsonObject); // تطبيق الدالة
+			
+		
+			// Show Correction On Mouse Over
+			var correctionWord = document.querySelector(".back .correction-word");	
 			textElement.addEventListener('mouseover', (e) => {
-				if (e.target.classList.contains('spelling-error')) {
+				if (e.target.classList.contains('spelling-error') || e.target.classList.contains('grammar-error') || e.target.classList.contains('inappropriate_words-error')) {
 					correctionWord.style.display = 'block';
 					correctionWord.textContent = `الكلمة الصحيحة: ${e.target.dataset.suggestion}`;
 			
 					// إضافة حدث النقر لتعديل الكلمة المحددة فقط
 					correctionWord.onclick = () => {
 						e.target.textContent = e.target.dataset.suggestion;
-						e.target.classList.remove('spelling-error');
+						e.target.className = ""; // إزالة كل الأخطاء
 						correctionWord.style.display = 'none';
 					};
 				}
 			});
-
-			// $$$$$$ Grammer $$$$$$ نفس اللي فوق بس اغير اسم السبلنق، والايرور الازرق حقه
-
-			// $$$$$$ Inappropriate Words $$$$$$
-
-		} else {
-			console.error(`Error: ${response.statusText}`);
-		}
+		} catch (error) {
+            Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+            // عرض رسالة خطأ
+            Swal.fire({
+                title: 'خطأ!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'موافق',
+                reverseButtons: true,
+            });
+        }
 	}
 	// Click Correction Button
 	document.querySelector(".dropdown.allam-help .correction").addEventListener("click", (e) => {
@@ -544,7 +576,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 		// If Text Is Short
-		else if (fullStory.length < 200) {
+		else if (fullStory.length < 20) {
 			sittingErrMsg.innerHTML = "القصة قصيرة! حاول كتابة المزيد لتمكين التحقق"
 			sittingErrMsg.style.opacity = 1;
 			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
@@ -556,19 +588,40 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Send To Allam
 		const data = { message: fullStory }; 
-		var result = "";
-	
-		const response = await fetch('http://127.0.0.1:5000/allam-elements', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(data)
-		});
-	
-		if (response.ok) {
-			result = await response.json();
+
+		// إظهار رسالة التحميل
+		Swal.fire({
+			title: 'جاري التحقق من عناصر القصة...',
+            text: 'الرجاء الانتظار قليلاً',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading(); // عرض المؤشر الدائري
+            }
+        });
+		
+		var result = "";		
+		try {
+			const response = await fetch('http://127.0.0.1:5000/allam-elements', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			});
+
+            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+			
+            if (!response.ok) {
+				throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+            }
+			
+            result = await response.json();
+			console.log(result)
+			//const resultObjenc = result.response.split("Input:")[0].trim();
+			//const jsonObject =  JSON.parse(resultObjenc);  // Convert 
+			const jsonObject =  JSON.parse(result.response);  // Convert 
 
 			// $$$$$$ If All Elements Exist $$$$$$ 
-			if (result.response["العناصر مكتملة"] == "True") {
+			if (!result.response.includes("غير مذكور")) {
 				Swal.fire({
 					title: 'رائع جدا!',
 					text: 'قصتك تحتوي على جميع عناصر القصة. أحسنت! 🌟',
@@ -587,37 +640,45 @@ document.addEventListener('DOMContentLoaded', function () {
 				})
 			}
 
-			// Show Response To User
-			var responseElemsContainer = document.querySelector(".response-elements");
-			responseElemsContainer.style.display = "block"; // Display Response
-			// Go Down To Elements
+			 // Show Response To User
+			const responseElemsContainer = document.querySelector(".response-elements");
+			responseElemsContainer.style.display = "block"; // عرض الحاوية
+		
+			// تنظيف الحاوية قبل الإضافة
+			const responseElems = document.querySelector(".response-elements .elements");
+			responseElems.innerHTML = ""; // إزالة المحتوى السابق
+		
+			// ترتيب العناصر وعرضها
+			const elementOrder = ["الشخصيات", "المكان", "الزمان", "الأسباب", "المعضلة"];
+			elementOrder.forEach(key => {
+				if (key in jsonObject) {
+					const elementDiv = document.createElement("div"); // إنشاء div لكل عنصر
+					const title = document.createElement("h5");
+					title.innerHTML = key;
+					const paragraph = document.createElement("p");
+					paragraph.innerHTML = `:&nbsp;${jsonObject[key]}`; // عرض النص
+					elementDiv.appendChild(title);
+					elementDiv.appendChild(paragraph);
+					responseElems.appendChild(elementDiv); // إضافة العنصر إلى الحاوية
+				}
+			});
+		
+			// الانتقال إلى الأسفل لرؤية النتائج
 			const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
 			window.scrollTo({ 
 				top: responseElemsContainer.getBoundingClientRect().top + window.pageYOffset - offset, 
-				behavior: 'smooth' 
+				behavior: 'smooth', 
 			});
-
-			const elementOrder = ["الشخصيات", "المكان", "الزمان", "الأسباب", "المعضلة"]; // قائمة ترتيب العناصر
-			const responseElems = document.querySelector(".response-elements .elements");
-			
-			// أضف العناصر بالترتيب
-			elementOrder.forEach(key => {
-				if (key in result.response) {
-					const elementDiv = document.createElement("div"); // إنشاء div لكل عنصر
-					// إنشاء عنوان h5
-					const title = document.createElement("h5");
-					title.innerHTML = key;
-					// إنشاء فقرة p
-					const paragraph = document.createElement("p");
-					paragraph.innerHTML = `: &nbsp${result.response[key]}`;
-					// ربط العناصر
-					elementDiv.appendChild(title);
-					elementDiv.appendChild(paragraph);
-					responseElems.appendChild(elementDiv); // إضافة div إلى الـ container
-				}
+		
+		} catch (error) {
+			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+			Swal.fire({
+				title: 'خطأ!',
+				text: error.message,
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
 			});
-		} else {
-			console.error(`Error: ${response.statusText}`);
 		}
 	}
 	// Click Elements Button
@@ -632,6 +693,100 @@ document.addEventListener('DOMContentLoaded', function () {
 	});
 
 
+	// @@@@@@@@@@@ Allam Completion @@@@@@@@@@@
+	async function allamCompletion() {
+		var sittingErrMsg = document.querySelector(".sitting-error-msg");
+	
+		// Get All Text
+		var AllStory = document.querySelectorAll(".back .text");
+		var fullStory = "";
+		AllStory.forEach(text => {fullStory += text.textContent.trim() + " "})
+		
+		// If Text Is Empty
+		if (fullStory.trim().length == 0) {
+			sittingErrMsg.innerHTML = "لا يوجد نص للتحقق منه، أضف نصاً أولاً"
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// If Text Is Short
+		else if (fullStory.length < 10) {
+			sittingErrMsg.innerHTML = "النص قصير جدا! حاول كتابة المزيد لأتمكن من مساعدتك"
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		else {
+			sittingErrMsg.style.opacity = 0; // Remove Error Message
+		}
+
+		// Send To Allam
+		const data = { message: fullStory }; 
+
+		 // إظهار رسالة التحميل
+		Swal.fire({
+            title: 'جاري التحقق من الإجابة...',
+            text: 'الرجاء الانتظار قليلاً',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading(); // عرض المؤشر الدائري
+            }
+        });
+
+		console.log(fullStory)
+		var result = "";		
+		try {
+            const response = await fetch('http://127.0.0.1:5000/allam-completion', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			});
+
+            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+			
+            if (!response.ok) {
+                throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+            }
+			
+            result = await response.json();
+			const resultQues = result.split("Input:")[0].trim();
+			
+			// Show Response To User
+			var completionContain  = document.querySelector(".response-completion");
+
+			// Go Down To completion
+			const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
+			window.scrollTo({ 
+				top: completionContain.getBoundingClientRect().top + window.pageYOffset - offset, 
+				behavior: 'smooth' 
+			});
+
+
+			completionContain.style.display = "block";
+			completionContain.querySelector(".text").innerHTML = resultQues;
+		
+		} catch (error) {
+			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+			Swal.fire({
+				title: 'خطأ!',
+				text: error.message,
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
+		}
+	}
+	// Click Completion Button
+	document.querySelector(".dropdown.allam-help .completion").addEventListener("click", (e) => {
+		e.preventDefault(); // Prevent page reload
+		allamCompletion(); 
+	});
+	// Click On Close Completion
+	document.querySelector(".response-completion .close-icon").addEventListener("click", () => {
+		document.querySelector(".response-completion").style.display = "none";
+		window.scrollBy({top: -420});	
+	});
 
 	// @@@@@@@@@@@ Starting Ideas @@@@@@@@@@@
 	var startingIdeas = document.querySelector(".response-starting");

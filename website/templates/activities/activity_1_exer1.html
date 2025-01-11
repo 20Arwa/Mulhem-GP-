@@ -408,13 +408,15 @@
                     <td><i class="fa-regular fa-comment fs-5 ms-2"></i>عن ماذا يتحدث النص؟</td>
                     <td>
                         <div class="d-flex">
-                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5" placeholder="يجب أن يتكون الجواب من حوالي 15 كلمة كحد أدنى"></textarea>
+                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea class="textarea_laila" rows="5" placeholder="اكتب إجابتك"></textarea>
                         </div>
+                        <button class="check button mb-1" onclick="allamCheck_1()">تحقق من الإجابة</button>
                     </td>
                     <td>
                         <div class="d-flex">
-                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5" placeholder="يجب أن يتكون الجواب من حوالي 15 كلمة كحد أدنى"></textarea>
+                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea class="textarea_wolf" rows="5" placeholder="اكتب إجابتك"></textarea>
                         </div>
+                        <button class="check button mb-1" onclick="allamCheck_2()">تحقق من الإجابة</button>
                     </td>
                 </tr>
                 <!-- <tr class="textarea_sec">
@@ -614,16 +616,14 @@ function CheckCar2Ques() {
 }
 
 
-
-
 // @@@@@@@@@@@@@@@@@@@@@@@@ Start Text 3 @@@@@@@@@@@@@@@@@@@@@@@@
     var selects = document.querySelectorAll(".activity_1 .text3 table tr:nth-of-type(2) select");
     var select_first = document.querySelector(".activity_1 .text3 table tr:nth-of-type(2) .fiction");
     var select_sec = document.querySelector(".activity_1 .text3 table tr:nth-of-type(2) .real");
     
     var textareas = document.querySelectorAll(".activity_1 .text3 table textarea");
-    var textarea_first = document.querySelectorAll(".activity_1 .text3 table .textarea_first textarea");
-    var textarea_sec = document.querySelectorAll(".activity_1 .text3 table .textarea_sec textarea");
+    var textarea_laila = document.querySelector(".activity_1 .text3 table .textarea_laila");
+    var textarea_wolf = document.querySelector(".activity_1 .text3 table .textarea_wolf");
     var error_msg = document.querySelector(".activity_1 .text3 .error-msg");
     var modal3 = new bootstrap.Modal(document.getElementById('modal3'));
     
@@ -634,16 +634,143 @@ function CheckCar2Ques() {
     select_sec.addEventListener("input", () => {
         select_sec.value == "real" ? select_sec.previousElementSibling.classList.add("active") : select_sec.previousElementSibling.classList.remove("active")
     })
-    textarea_first.forEach((textarea) => {
-        textarea.addEventListener("input", () => {
-            textarea.value.length >= 60 ? textarea.previousSibling.classList.add("active") : textarea.previousSibling.classList.remove("active")
-        })
-    })
-    textarea_sec.forEach((textarea) => {
-        textarea.addEventListener("input", () => {
-            textarea.value.length >= 20 ? textarea.previousSibling.classList.add("active") : textarea.previousSibling.classList.remove("active")
-        })
-    })
+
+    // Allam Check Laila
+    async function allamCheck_1() {  
+        // Check If Answer No Answer  
+        if (textarea_laila.value.length == 0) {  
+            error_msg.innerHTML = "لا يوجد نص للتحقق منه";  
+            error_msg.classList.add("active");  
+            return;  
+        }  
+    
+        // Check If Answer Is Short  
+        if (textarea_laila.value.length < 5) {  
+            error_msg.innerHTML = "النص قصير جدًا. حاول إضافة المزيد ليتم التحقق";  
+            error_msg.classList.add("active");  
+            return;  
+        }  
+
+         // Send To Allam  
+        const data = { message: textarea_laila.value };  
+
+        // إظهار رسالة التحميل
+        Swal.fire({
+            title: 'جاري التحقق من الإجابة...',
+            text: 'الرجاء الانتظار قليلاً',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading(); // عرض المؤشر الدائري
+            }
+        });
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/allam_activity1_1', {  
+                method: 'POST',  
+                headers: { 'Content-Type': 'application/json' },  
+                body: JSON.stringify(data),  
+            });
+
+            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+
+            if (!response.ok) {
+                throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+            }
+            const result = await response.json();
+            var resultTrim = result.response.trim();
+
+            // عرض النتيجة بناءً على الرد
+            Swal.fire({
+                title:  resultTrim === "True" ? 'إجابة صحيحة!' : 'إجابة خاطئة!',
+                icon:  resultTrim === "True" ? 'success' : 'error',
+                confirmButtonText:  resultTrim === "True" ? 'عودة للنشاط' : 'إعادة المحاولة',
+                reverseButtons: true,
+            });
+
+            // Light On Based on Response
+            resultTrim === "True" ? textarea_wolf.previousSibling.classList.add("active") : textarea_wolf.previousSibling.classList.remove("active");
+        } catch (error) {
+            Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+
+            // عرض رسالة خطأ
+            Swal.fire({
+                title: 'خطأ!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'موافق',
+                reverseButtons: true,
+            });
+        }
+    }
+    
+    // Allam Check Laila
+    async function allamCheck_2() {  
+        // Check If Answer No Answer  
+        if (textarea_wolf.value.length == 0) {  
+            error_msg.innerHTML = "لا يوجد نص للتحقق منه";  
+            error_msg.classList.add("active");  
+            return;  
+        }  
+    
+        // Check If Answer Is Short  
+        if (textarea_wolf.value.length < 5) {  
+            error_msg.innerHTML = "النص قصير جدًا. حاول إضافة المزيد ليتم التحقق";  
+            error_msg.classList.add("active");  
+            return;  
+        }  
+
+         // Send To Allam  
+        const data = { message: textarea_wolf.value };  
+
+        // إظهار رسالة التحميل
+        Swal.fire({
+            title: 'جاري التحقق من الإجابة...',
+            text: 'الرجاء الانتظار قليلاً',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading(); // عرض المؤشر الدائري
+            }
+        });
+
+        try {
+            const response = await fetch('http://127.0.0.1:5000/allam_activity1_2', {  
+                method: 'POST',  
+                headers: { 'Content-Type': 'application/json' },  
+                body: JSON.stringify(data),  
+            });
+
+            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+
+            if (!response.ok) {
+                throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+            }
+            const result = await response.json();
+            var resultTrim = result.response.trim();
+
+            // عرض النتيجة بناءً على الرد
+            Swal.fire({
+                title:  resultTrim === "True" ? 'إجابة صحيحة!' : 'إجابة خاطئة!',
+                icon:  resultTrim === "True" ? 'success' : 'error',
+                confirmButtonText:  resultTrim === "True" ? 'عودة للنشاط' : 'إعادة المحاولة',
+                reverseButtons: true,
+            });   
+            resultTrim === "True" ? textarea_wolf.previousSibling.classList.add("active") : textarea_wolf.previousSibling.classList.remove("active");
+        } catch (error) {
+            Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+
+            // عرض رسالة خطأ
+            Swal.fire({
+                title: 'خطأ!',
+                text: error.message,
+                icon: 'error',
+                confirmButtonText: 'موافق',
+                reverseButtons: true,
+            });
+        }
+    }
+
     function showModal3() {
         // Check If All Light are On, If Yes Show Modal3
         let select_active = true;
@@ -659,10 +786,12 @@ function CheckCar2Ques() {
                 error_msg.classList.remove("active")
             }
             else {
+                error_msg.innerHTML = "عذرًا، لم تتمكن من إضاءة جميع الأنوار. تأكد من إدخال الإجابات بالطول المطلوب وحاول مرة أخرى";
                 error_msg.classList.add("active")
             }
         }
         else {
+            error_msg.innerHTML = "عذرًا، لم تتمكن من إضاءة جميع الأنوار. تأكد من إدخال الإجابات بالطول المطلوب وحاول مرة أخرى";
             error_msg.classList.add("active")
         }
     }

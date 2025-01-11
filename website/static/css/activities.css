@@ -142,7 +142,7 @@ i.text-sound:hover {
     color: var(--font-4);
     background-color: var(--main-light);
 }
-.activity_1 > .text2, .activity_1 > .text3 {
+.activity_1 > .text2, .activity_1 > .text1 {
     display: none;
 }
 .activity_1 .content .text {
@@ -180,6 +180,15 @@ i.text-sound:hover {
     color: var(--font-1);
     padding: 0 10px !important;
     background-color: var(--main-dark);
+}
+.activity_1 .text3 table .textarea_first .check {
+    background-color: var(--main-light);
+    color: var(--font-4);
+    padding: 6px 8px;
+    font-size: 14px;
+}
+.activity_1 .text3 table .textarea_first .check:hover {
+    color: var(--font-3);
 }
 .activity_1 .text3 table tr td .fa-lightbulb.active {
     color: yellow

@@ -50,16 +50,19 @@ user_input = "عن ليلى اللتي لم ذهبت إلى المدرسة."
 activity1_1_ptompt = f"""Input: النص: يتحدث عن قصة ليلى والذئب المعروفة.
 السؤال: عن ماذا يتحدث النص؟
 الجواب: عن ليلى اللتي لم تستمع إلى امها.
-Output: true
+Output: "True"
 Input: الجواب:{user_input}
 Output:"""
 
 user_input = "عن الذئب وحياته"
-activity1_2_ptompt = f"""Input: النص: يتحدث عم معلومات وحقائق عن الذئب.
+activity1_2_ptompt = f"""Input: النص: يتحدث عن معلومات وحقائق عن الذئب.
 السؤال: عن ماذا يتحدث النص؟
 الجواب: عن الذئب وليلى.
-Output: false
-Input: الجواب:{user_input}
+Output: False
+
+Input: النص: يتحدث عن معلومات وحقائق عن الذئب.
+السؤال: عن ماذا يتحدث النص؟
+الجواب: {user_input}
 Output:"""
 max_tokens = 10
 
