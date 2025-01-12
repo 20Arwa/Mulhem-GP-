@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}  edit story  {% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reading/edit_story.css') }}">
+{% endblock %}
+{% block body %}
+
+
+
+
+<div class="form-container">
+    <h1>
+        <i class="fa-solid fa-pen user-icon"></i>   اضف لمستك الى القصة    </h1>
+    
+    <!-- نموذج الإدخال -->
+    <form class="edit-form">
+
+        <label for="delet-charcter">
+            <i class="fa-solid fa-user-minus"></i>  احذف شخصية من شخصيات القصة:
+        </label>
+        <input type="text" id="delet-charcter" placeholder="   من هي الشخصية ؟  ">
+
+        <label for="add-charcter">
+            <i class="fa-solid fa-user-plus"></i>  اضافة شخصية للقصة:
+        </label>
+        <input type="text" id="add-charcter" placeholder="  اوصف الشخصية ؟ ">
+
+        <label for="story-events">
+            <i class="fa-solid fa-exchange-alt"></i>  تغير حدث في القصة:
+        </label>
+        <input type="text" id="story-events" placeholder=" ما الحدث الذي تود تغيره ؟ ">
+
+        <label for="beginning">
+            <i class="fa-solid fa-pen-to-square"></i>   تغير بداية القصة:
+        </label>
+        <input type="text" id="beginning" placeholder="  كيف ستبدأ القصة ؟">
+
+        <label for="End">
+            <i class="fa-solid fa-pen-to-square"></i> تغير نهاية القصة:
+        </label>
+        <input type="text" id="End" placeholder="  كيف ستنتهي القصة .. ">
+
+    <div class="create-container">
+    <button class="create-button"> انشئ القصة  </button>
+    </div>
+</form>
+</div>
+
+{% endblock %}
+{%block script%}
+<script>
+
+</script>
+{%endblock%}
+

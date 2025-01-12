@@ -1,8 +1,10 @@
 # This File Is For Routes In The Website
-from flask import Blueprint, render_template, url_for, request, jsonify
+from flask import Blueprint, render_template, url_for, request, jsonify, redirect
 from flask_login import login_required, current_user
 from website import db
 import requests
+import json
+
 
 views = Blueprint('views', __name__)
 
@@ -29,7 +31,7 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTEwMDBPU1dVIiwiaWQiOiJJQk1pZC02OTEwMDBPU1dVIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiOTZjYjgwOWQtZTFjMi00YmJlLTljNGEtMmJjZDAxNGE0MjU4IiwiaWRlbnRpZmllciI6IjY5MTAwME9TV1UiLCJnaXZlbl9uYW1lIjoiSHVzc2FpbiIsImZhbWlseV9uYW1lIjoiTW9oYW1tZWQiLCJuYW1lIjoiSHVzc2FpbiBNb2hhbW1lZCIsImVtYWlsIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwic3ViIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwiaWFtX2lkIjoiSUJNaWQtNjkxMDAwT1NXVSIsIm5hbWUiOiJIdXNzYWluIE1vaGFtbWVkIiwiZ2l2ZW5fbmFtZSI6Ikh1c3NhaW4iLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJodXNzYWluNTU1NTk4NUBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiZmZiODI1NGFmYmJlNGVhNmFlNDQwMjUxYzM3NWY0OGUiLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzY1OTY1MTAsImV4cCI6MTczNjYwMDExMCwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.bmjR3JV5SAlCSx4QXqSmMyY8zt2RNlnkJfPNP8LTUUBNztf7FmwhDqL52zGLrWOyV9u_P26xIoPR9T2-I60PFS5dxt7wREjYNu6ZxPJJTurCIY7WOH3t9odUolsfLWv-HsExgy3Bo678ercisWNQFQObLYoXAuOWNLDBdZ0PgOT74wf1zbuhfM3XoZZN1bFggVZQjeilP9J8CLEjztTqH4hPKhKazR-lNP_3-vYuz-OlA43BRbJFwhkLK4zpAWPFceuq1ReMaKv5-n4-dfFNOc-f66qN-azihKCux1TLo21t_fy-wmljIqOXsxUhRi0lx2yKfo83cE5Dqg7m8OTLVA",
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTEwMDBPU1dVIiwiaWQiOiJJQk1pZC02OTEwMDBPU1dVIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMjBiZjYzNWItNjdmNy00NzJjLWI3MzItMDYzYTgyNTYxZjVkIiwiaWRlbnRpZmllciI6IjY5MTAwME9TV1UiLCJnaXZlbl9uYW1lIjoiSHVzc2FpbiIsImZhbWlseV9uYW1lIjoiTW9oYW1tZWQiLCJuYW1lIjoiSHVzc2FpbiBNb2hhbW1lZCIsImVtYWlsIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwic3ViIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwiaWFtX2lkIjoiSUJNaWQtNjkxMDAwT1NXVSIsIm5hbWUiOiJIdXNzYWluIE1vaGFtbWVkIiwiZ2l2ZW5fbmFtZSI6Ikh1c3NhaW4iLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJodXNzYWluNTU1NTk4NUBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiZmZiODI1NGFmYmJlNGVhNmFlNDQwMjUxYzM3NWY0OGUiLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzY2Njg0ODAsImV4cCI6MTczNjY3MjA4MCwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.HLvh5QQbYnGYCLVVuYCzbT045CDNy4SAmFP47DlBNgzxoAgoA2hR3MbLFB4cIMQDosMMTbtfikmf_rwacX_wXL5dE11BVlTxliZ3-IrDw-19fnGx3nmMcMZjz_IROQDh2MOT555lquLNy_S-RUsM6S9x8Rt8Wx12ua28yDZyC8FyZ9qSj8sW5AkmYuAVSdAZKc-V4MRS5NtLtYXvMpo4I6JoMcXqN3HzPcLjs4nAV5M-6-g2ztqaHdB2uKz9LMaL9Cf6Ui2po0pqMAfuV7zzgbEEJDeXE6XKZS8XJqzx784_6dmqCqdvK8UFUnE4kzuOM85t-1E4BpBoIVm7on4RoA",
     }
 
     # إرسال الطلب إلى النموذج
@@ -59,25 +61,11 @@ def profile_view(request):
     return render_template(request, 'auth/profile.html')
 
 # Reading Page
+#edit story
+@views.route('/reading/edit_story')
+def edit_story():
+    return render_template("/reading/edit_story.html") 
 
-# Start Writing 
-# Types
-@views.route('/writing/writing-types')
-def writing_types():
-    return render_template("/writing/writing-types.html", url_for=url_for) 
-
-# Story Generator
-@views.route('/writing/story-generator')
-def storyGenerator():
-    return render_template("/writing/story-generator.html") 
-
-# Self Writing
-@views.route('/writing/self-writing')
-def self_writing():
-    return render_template("/writing/self-writing.html") 
-
-
-# End Writing 
 
 # Activities
 # All Activities
@@ -96,6 +84,35 @@ def characters_activity():
     return render_template("/activities/characters_activity.html") 
 
 
+# Activitiy 2
+@views.route('/activities/activity_2_exer')
+def activity_2_exer():
+    return render_template("/activities/activity_2_exer.html") 
+
+
+#Resson Activitiy 
+@views.route('/activities/reasons')
+def reasons():
+    return render_template("/activities/reasons.html") 
+
+
+
+# Start Writing 
+# Types
+@views.route('/writing/writing-types')
+def writing_types():
+    return render_template("/writing/writing-types.html", url_for=url_for) 
+
+# Story Generator
+@views.route('/writing/story-generator')
+def storyGenerator():
+    return render_template("/writing/story-generator.html") 
+
+# Self Writing
+@views.route('/writing/self-writing')
+def self_writing():
+    return render_template("/writing/self-writing.html") 
+# End Writing 
 
 # @@@@@@@@@@@ Recive And Send Data To JS  @@@@@@@@@@@
 # Image
@@ -109,29 +126,42 @@ def generate_img():
 
 
 # Allam 
-# Completion
-@views.route('/allam-completion', methods=['POST'])
-def allam_completion():
-    data = request.json  # استلام البيانات من JavaScript
-    if not data or 'message' not in data or not data['message']:
-        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
+# Story Generator
+@views.route('/allam-story-generator', methods=['POST'])
+def allam_story_generator():
+    data = request.json
+    if not isinstance(data, dict) or 'message' not in data or not data.get('message'):
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400
 
-    prompt = f"""Input: ساعد الطفل في إكمال قصته عن طريق تشجيعه ثم طرح سؤالين أو ثلاثة أسئلة قصيرة ملهمة ومساعدة.
-    قصة الطفل: في الحديقة ولد يدعى عمر.
-    Output: بداية رائعة! هل يحب عمر استكشاف الطبيعة؟ هل يلتقي بحيوانات مثيرة في الحديقة؟ هل يتعلم درسًا عن البيئة؟
+    prompt = f""" اكتب قصة قصيرة للأطفال بحيث تكون القصة مقسمة إلى أجزاء داخل مصفوفة، وكل جزء لا يتعدى 100 حرف 
+تفاصيل القصة: {data.get('message')} .
+يجب أن تحتوي القصة فقط على النصوص المخصصة للأطفال بدون إضافة أي تعليقات أو عناوين.
+إذا وجدت تفاصيل غير منطقية أو غير لائقة، قم بتجاهلها واستبدالها بما تراه مناسبًا، مع الحفاظ على جودة القصة وسلامتها للأطفال.
+"""
 
-    Input: ساعد الطفل في إكمال قصته عن طريق تشجيعه ثم طرح سؤالين أو ثلاثة أسئلة قصيرة ملهمة ومساعدة.
-    قصة الطفل: {data['message']}.
-    Output:"""
-
+    # نص القصة
     result = generate_AllamResponse(prompt, 100)
-    # result = "أحسنت! قصتك جميلة جدًا. أين يمكن أن يكون أحمد؟ هل يساعد أصدقائه في المدرسة أم في الحي؟"
-    
-    # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
-    if result is None:
-        return jsonify({"response": "Error processing request."}), 500
-    return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
+    # result = '\nفي مساء جميل، ذهب محمد إلى نادي الحي للعب مع أصحابه. كان محمد يحب اللعب مع أصحابه كثيرًا، لكن في هذا اليوم تشاجر مع صاحبه بسبب لعبة.\n\nمحمد كان غاضبًا جدًا من صاحبه، ولم يكن يعرف كيف يتصالح معه. لكن بعد تفكير قليل، قرر محمد أن يذهب إلى صاحبه ويعتذر له عن ما حدث.\n\nعندما وصل محمد إلى صاحبه، وجده جالسًا وحيدًا ويبكي. اقترب محمد منه وقال له: "أنا آسف على ما حدث بيننا".'
 
+    if result.startswith('\n'):
+        result = result[1:]
+    # تقسيم النص إلى أسطر
+    lines = result.split('\n')
+    lines = [line.strip() for line in lines if line.strip()]
+
+    # تحويل القائمة إلى JSON
+    story_json = json.dumps(lines)
+    redirect_url = url_for('views.show_generated_story', story=story_json)
+    return jsonify({"redirect": redirect_url})
+
+
+# Show Generated Story Page
+@views.route('/show-generated-story', methods=['GET'])
+def show_generated_story():
+    # استلام القصة وتحويلها إلى قائمة
+    story_json = request.args.get('story', '[]')
+    story = json.loads(story_json)
+    return render_template('/writing/show-generated-story.html', story=story)
 
 
 # Corrcetion

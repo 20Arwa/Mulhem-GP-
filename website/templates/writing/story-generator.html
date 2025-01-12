@@ -20,7 +20,8 @@
       <div class="story-spacing"></div>
 
       <label class="story-label">المكان:</label>
-      <select id="place" class="story-input-select">
+      <input type="text" name="place" id="place" class="story-input-select">
+      <!-- <select id="place" class="story-input-select">
         <option value="">اختر المكان...</option>
         <option value="البيت">البيت</option>
         <option value="الحديقة">الحديقة</option>
@@ -28,15 +29,16 @@
         <option value="قرية">قرية</option>
         <option value="غابة">غابة</option>
         <option value="بلدة">بلدة</option>
-      </select>
-
+      </select> -->
+      
       <label class="story-label">الزمان:</label>
-      <select id="time" class="story-input-select">
+      <input type="text" name="time" id="time" class="story-input-select">
+      <!-- <select id="time" class="story-input-select">
         <option value="">اختر الزمان...</option>
         <option value="الصباح">الصباح</option>
         <option value="المساء">المساء</option>
         <option value="الظهر">الظهر</option>
-      </select>
+      </select> -->
 
       <div class="story-spacing"></div>
 
@@ -82,7 +84,7 @@ function addCharacter() {
   }
 }
 
-function submitStory() {
+async function submitStory() {
   const arabicRegex = /^[\u0600-\u06FF\s]+$/;
   const errorMsg = document.querySelector(".create-story-container .error-msg");
 
@@ -96,6 +98,9 @@ function submitStory() {
   const problem = document.getElementById("problem").value.trim();
   const solution = document.getElementById("solution").value.trim();
 
+  //console.log(place,time,problem,solution, characters[0].name)
+  var storyElements = {characters,place,time,problem,solution};
+
   if (!place || !time || !problem || !solution) {
     errorMsg.style.opacity = 1;
     errorMsg.innerHTML = "يجب ملء جميع الحقول";
@@ -105,10 +110,65 @@ function submitStory() {
     errorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
   }
   else {
-    errorMsg.style.opacity = 0;
-    alert("تم إنشاء القصة بنجاح!");
-  }
 
+    const data = { message: storyElements };
+
+  // إظهار رسالة التحميل
+  Swal.fire({
+    title: 'جاري إنشاء القصة...',
+    text: 'الرجاء الانتظار قليلاً',
+    allowOutsideClick: false,
+    showConfirmButton: false,
+    didOpen: () => {
+      Swal.showLoading(); // عرض المؤشر الدائري
+    }
+  });
+  try {
+    const response = await fetch('http://127.0.0.1:5000/allam-story-generator', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+  
+    Swal.close(); // إغلاق رسالة التحميل
+  
+    if (!response.ok) {
+      throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+    }
+  
+    // محاولة تحليل الرد كـ JSON
+    let responseData;
+    try {
+      responseData = await response.json();
+    } catch (jsonError) {
+      throw new Error('رد غير صالح من الخادم. تأكد أن الخادم يعيد JSON.');
+    }
+  
+    // التحقق من وجود رابط إعادة توجيه في الرد
+    if (responseData.redirect) {
+      window.location.href = responseData.redirect;
+    } else {
+      // عرض القصة إذا لم يتم إرسال رابط إعادة توجيه
+      Swal.fire({
+        title: 'تم!',
+        html: `<div style="text-align: right; white-space: pre-line;">${responseData.response}</div>`,
+        icon: 'success',
+        confirmButtonText: 'موافق',
+        reverseButtons: true,
+      });
+    }
+  } catch (error) {
+    Swal.close();
+    Swal.fire({
+      title: 'خطأ!',
+      text: error.message,
+      icon: 'error',
+      confirmButtonText: 'موافق',
+      reverseButtons: true,
+    });
+  }
+  
+}
 }
 </script>
 {%endblock%}

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}  create {% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/writing/story-generator.css')  }}">
+{% endblock %}
+{% block body %}
+<!-- For Loop Story -->
+{% for section in story %}
+<div style="white-space: pre-line;">
+    {{ section }}
+</div>
+{% endfor %}
+
+
+<div>{{story}}</div>
+{% endblock %}
+{%block script%}
+{% endblock %}
