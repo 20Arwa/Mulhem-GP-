@@ -1,8 +1,10 @@
 # This File Is For Routes In The Website
-from flask import Blueprint, render_template, url_for, request, jsonify, redirect
+from flask import Blueprint, render_template, url_for, request, jsonify, redirect,current_app
 from flask_login import login_required, current_user
 from website import db
+from .models import User_stories
 import requests
+import os
 import json
 
 
@@ -110,19 +112,180 @@ def storyGenerator():
 
 # Self Writing
 @views.route('/writing/self-writing')
+@login_required
 def self_writing():
-    return render_template("/writing/self-writing.html") 
+    return render_template("/writing/self-writing.html", user=current_user) 
+
+
+# Save Story
+@views.route('/save-user-story', methods=['POST'])
+@login_required
+def save_user_story():
+    data = request.json
+    if not data:
+        return jsonify({"response": "Invalid request, no data provided."}), 400
+    if 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400
+
+    title = data.get('title', '')
+    content = data.get('message', '')
+    imageSrc = data.get('imageSrc', '')  # اسم الصورة المرسل
+    story_type = data.get('type', '')
+    user_id = current_user.id
+    print( title,content,imageSrc,story_type,user_id)
+
+    # تحقق إذا كان العنوان موجودًا بالفعل
+    existing_story = User_stories.query.filter_by(title=title).first()
+    if existing_story:
+        return jsonify({"response": "A story with this title already exists.", "status": "duplicate"}), 400
+
+    try:
+        # إنشاء القصة الجديدة
+        new_Story = User_stories(
+            title=title,
+            content=content,
+            type=story_type,
+            imgSrc=imageSrc,
+            user_id=user_id
+        )
+        db.session.add(new_Story)
+        db.session.commit()
+
+        print(new_Story)
+        # الحصول على ID القصة
+        storyID = new_Story.id
+        old_ext = None
+
+
+        print("Before")
+        # تغيير اسم الملف إذا كانت الصورة موجودة
+        if imageSrc:
+            # استخراج امتداد الملف
+            ext = os.path.splitext(imageSrc)[1]  # مثال: .png أو .jpg
+
+            # إنشاء المسار الكامل للملف القديم والجديد
+            old_name = os.path.join(current_app.root_path, 'static/images/users', str(user_id), imageSrc)
+            new_name = os.path.join(current_app.root_path, 'static/images/users', str(user_id), f"{user_id}_{storyID}{ext}")
+
+            # استخراج امتداد الصورة القديمة
+            old_ext = os.path.splitext(imageSrc)[1]  # هذا سيعيد الامتداد مع النقطة مثل ".png" أو ".jpg"
+            print("IMage IS There")
+
+            # تحقق إذا كان الملف القديم موجودًا
+            if os.path.exists(old_name):
+                os.rename(old_name, new_name)  # تغيير اسم الملف
+                # تحديث المسار في قاعدة البيانات
+                new_Story.imgSrc = f"images/users/{user_id}/{user_id}_{storyID}{ext}"
+                db.session.commit()
+            else:
+                print("After")
+                return jsonify({"response": "Image file not found.", "file": old_name}), 404
+        return jsonify({"response": "Story saved successfully!", "storyID": storyID, "userID": user_id,"imageUpdated": bool(imageSrc) ,"imageFormat": old_ext}), 200
+    except Exception as e:
+        db.session.rollback()
+        print(f"Error: {e}")
+        return jsonify({"response": "Failed to save story", "error": str(e)}), 500
+
+   
+
 # End Writing 
 
 # @@@@@@@@@@@ Recive And Send Data To JS  @@@@@@@@@@@
 # Image
-@views.route('/generate-img', methods=['POST'])
+@views.route('/generate-cover-img', methods=['POST'])
 def generate_img():
+    # Recive Story From JS
     data = request.json  # استلام البيانات من JavaScript
-    if not data or 'message' not in data:
-        return jsonify({"response": "Invalid request"}), 400  # تحقق من البيانات المستلمة
-    result = f"{data['message']} تم انشاء الصورة للنص: "  # معالجة البيانات
-    return jsonify({"response": result})  # إرسال الرد إلى JavaScript
+    if not data or 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
+    
+    # Send To Allam
+    prompt = f"""Input: استخرج من القصة التفاصيل رئيسية تساعد في إنشاء صورة، مثل وصف الشخصيات (نوعها، ملامحها، ملابسها)، المكان (طبيعته وأي تفاصيل هامة)، وأي عناصر مميزة أو أحداث هامة.
+القصة:  في يوم من الأيام، كانت أرنبة تحذر أبناءها الأربعة من دخول حديقة المزارع محمود بعد أن فقد والدهم هناك. رغم تحذيراتها، دخل باسل الحديقة بحثًا عن الخضروات الطازجة، لكنه وقع في مأزق حين طارده المزارع. تمكن من الهروب لكنه فقد معطفه الجديد. عاد إلى المنزل منهكًا، تعلم درسًا عن أهمية الاستماع للنصائح، وعاهد أمه على الطاعة.
+Output: Brown rabbit with new coat, garden full of vegetables, farmer chasing the rabbit, coat stuck in net, forest around the garden.
+
+Input: استخرج من القصة التفاصيل رئيسية تساعد في إنشاء صورة، مثل وصف الشخصيات (نوعها، ملامحها، ملابسها)، المكان (طبيعته وأي تفاصيل هامة)، وأي عناصر مميزة أو أحداث هامة  .
+القصة: {data['message']}
+Output:"""
+
+# المحدث من تشات:
+# Input: استخرج من القصة التفاصيل رئيسية تساعد في إنشاء صورة، مثل وصف الشخصيات (نوعها، ملامحها، ملابسها)، المكان (طبيعته وأي تفاصيل هامة)، وأي عناصر مميزة أو أحداث هامة.
+# القصة: في يوم من الأيام، كانت أرنبة تحذر أبناءها الأربعة من دخول حديقة المزارع محمود بعد أن فقد والدهم هناك. رغم تحذيراتها، دخل باسل الحديقة بحثًا عن الخضروات الطازجة، لكنه وقع في مأزق حين طارده المزارع. تمكن من الهروب لكنه فقد معطفه الجديد. عاد إلى المنزل منهكًا، تعلم درسًا عن أهمية الاستماع للنصائح، وعاهد أمه على الطاعة.
+# Output: solo rabbit, brown fur, wearing a red coat, running in a vibrant garden full of fresh vegetables (carrots, cabbages), being chased by an angry farmer in a straw hat and overalls, coat stuck in a wooden net, surrounded by a dense forest with tall trees and sunlight, playful and adventurous atmosphere.
+
+# Input: استخرج من القصة التفاصيل رئيسية تساعد في إنشاء صورة، مثل وصف الشخصيات (نوعها، ملامحها، ملابسها), المكان (طبيعته وأي تفاصيل هامة)، وأي عناصر مميزة أو أحداث هامة.
+# القصة: {data['message']}
+# Output: ...
+
+
+    result = generate_AllamResponse(prompt, 10) # Get Prompt For Image 
+
+    print(result)
+    # Send To Colab And Recive Image
+    colab_url = "https://1d56-34-169-81-36.ngrok-free.app/colab-message"  # رابط ngrok من Colab
+    # prompt = {"message": f"{data['message']}"}
+    prompt = {"message": f"{result}"} # Send Prompt From Allam
+    # إرسال الطلب إلى Colab
+    response = requests.post(colab_url, json=prompt)
+
+    print("Response Status Code:", response.status_code)
+    print("Response Content:", response.text)
+
+    if response.status_code == 200:
+        # إذا كانت الاستجابة تحتوي على صورة
+        content_type = response.headers.get('Content-Type', '')
+
+        if 'image/' in content_type:
+            # تحديد المسار الكامل لحفظ الصورة
+            base_dir = os.path.dirname(os.path.abspath(__file__))  # مسار views.py
+            image_path = os.path.join(base_dir, 'static', 'images', 'users', f'{current_user.id}',f'{current_user.id}.png')
+            # التأكد من وجود المجلد
+            os.makedirs(os.path.dirname(image_path), exist_ok=True)
+            # حفظ الصورة
+            with open(image_path, 'wb') as img_file:
+                img_file.write(response.content)
+             # إنشاء المسار النسبي لإرساله للمتصفح
+            relative_image_path = f'/static/images/users/{current_user.id}/{current_user.id}.png'
+            print("Generated relative image path:", relative_image_path)
+
+            # إرسال الاستجابة مع المسار النسبي
+            return jsonify({"message": "Image saved successfully", "image_path": relative_image_path})
+        else:
+            try:
+                response_data = response.json()  # محاولة قراءة الرد كـ JSON
+            except ValueError:  # إذا لم يكن JSON
+                response_data = {"message": response.text}  # التعامل معه كنص
+            return jsonify({"response_from_colab": response_data})
+    else:
+        return jsonify({"error": f"Failed to send message to Colab, Status Code: {response.status_code}, Content: {response.text}"}), 500
+
+
+@views.route('/save-uploaded-img', methods=['POST'])
+def saveUploadedImg():
+    if 'image' not in request.files:
+        return jsonify({'success': False, 'message': 'No image file part'}), 400
+
+    file = request.files['image']
+
+    if file.filename == '':
+        return jsonify({'success': False, 'message': 'No selected file'}), 400
+
+    if file:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        image_path = os.path.join(base_dir, 'static', 'images', 'users', f'{current_user.id}', f'{current_user.id}.png')
+
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(image_path), exist_ok=True)
+
+        file.save(image_path)
+
+        # Return relative path for client
+        relative_path = f'/static/images/users/{current_user.id}/{current_user.id}.png'
+        return jsonify({'success': True, 'file_path': relative_path})
+
+    return jsonify({'success': False, 'message': 'File not saved'}), 500
+
+
 
 
 # Allam 

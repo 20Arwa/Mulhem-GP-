@@ -11,8 +11,8 @@
       <label class="story-label">الشخصيات:</label>
       <div id="characters" class="story-characters-group">
         <div class="story-character-row">
-          <input type="text" class="story-input-text story-character-name" maxlength="9" placeholder="اسم الشخصية..." />
-          <input type="text" class="story-input-text story-character-description" placeholder="وصف الشخصية..." />
+          <input type="text" class="story-input-text story-character-name" maxlength="15" placeholder="اسم الشخصية..."/>
+          <input type="text" class="story-input-text story-character-description" maxlength="200" placeholder="وصف الشخصية..." />
         </div>
       </div>
       <button type="button" class="story-btn-small" onclick="addCharacter()"> إضافة شخصية جديدة ! </button>
@@ -20,7 +20,7 @@
       <div class="story-spacing"></div>
 
       <label class="story-label">المكان:</label>
-      <input type="text" name="place" id="place" class="story-input-select">
+      <input type="text" name="place" id="place" class="story-input-select" maxlength="200">
       <!-- <select id="place" class="story-input-select">
         <option value="">اختر المكان...</option>
         <option value="البيت">البيت</option>
@@ -32,7 +32,7 @@
       </select> -->
       
       <label class="story-label">الزمان:</label>
-      <input type="text" name="time" id="time" class="story-input-select">
+      <input type="text" name="time" id="time" class="story-input-select" maxlength="200">
       <!-- <select id="time" class="story-input-select">
         <option value="">اختر الزمان...</option>
         <option value="الصباح">الصباح</option>
@@ -43,10 +43,10 @@
       <div class="story-spacing"></div>
 
       <label class="story-label">المشكلة أو التحدي:</label>
-      <textarea id="problem" class="story-input-text" placeholder="ما الذي ستواجهه الشخصيات..."></textarea>
+      <textarea id="problem" class="story-input-text" maxlength="800" placeholder="ما الذي ستواجهه الشخصيات..."></textarea>
 
       <label class="story-label">الحل أو النهاية:</label>
-      <textarea id="solution" class="story-input-text" placeholder="كيف ستنتهي القصة..."></textarea>
+      <textarea id="solution" class="story-input-text" maxlength="800" placeholder="كيف ستنتهي القصة..."></textarea>
 
       <div class="error-msg text-center">يجب إدخال النصوص باللغة العربية فقط</div>
       <!-- زر "أنشئ القصة" -->
@@ -110,6 +110,7 @@ async function submitStory() {
     errorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
   }
   else {
+    errorMsg.style.opacity = 0;
 
     const data = { message: storyElements };
 

@@ -237,6 +237,9 @@ footer a {
   background-color: var(--font-3); 
   background-color: var(--main-dark); 
 }
+.swal2-loading {
+  padding: 30px;
+}
 
 /* Drag And Drop Question */
 .quiz-wrapper .answers {

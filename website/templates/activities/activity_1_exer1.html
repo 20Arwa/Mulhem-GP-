@@ -637,19 +637,25 @@ function CheckCar2Ques() {
 
     // Allam Check Laila
     async function allamCheck_1() {  
+        const arabicRegex = /^[\u0600-\u06FF\s]+$/;
         // Check If Answer No Answer  
         if (textarea_laila.value.length == 0) {  
             error_msg.innerHTML = "لا يوجد نص للتحقق منه";  
             error_msg.classList.add("active");  
             return;  
         }  
-    
         // Check If Answer Is Short  
-        if (textarea_laila.value.length < 5) {  
+        else if (textarea_laila.value.length < 5) {  
             error_msg.innerHTML = "النص قصير جدًا. حاول إضافة المزيد ليتم التحقق";  
             error_msg.classList.add("active");  
             return;  
         }  
+        // If Text Is Not Arabic
+		else if (!arabicRegex.test(textarea_laila.value) ) {
+            error_msg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط"; 
+            error_msg.classList.add("active");  
+			return;
+		}
 
          // Send To Allam  
         const data = { message: textarea_laila.value };  
@@ -706,19 +712,26 @@ function CheckCar2Ques() {
     
     // Allam Check Laila
     async function allamCheck_2() {  
-        // Check If Answer No Answer  
+        const arabicRegex = /^[\u0600-\u06FF\s]+$/;
+
+        // Check If No Answer  
         if (textarea_wolf.value.length == 0) {  
             error_msg.innerHTML = "لا يوجد نص للتحقق منه";  
             error_msg.classList.add("active");  
             return;  
         }  
-    
         // Check If Answer Is Short  
-        if (textarea_wolf.value.length < 5) {  
+        else if (textarea_wolf.value.length < 5) {  
             error_msg.innerHTML = "النص قصير جدًا. حاول إضافة المزيد ليتم التحقق";  
             error_msg.classList.add("active");  
             return;  
         }  
+         // If Text Is Not Arabic
+		else if (!arabicRegex.test(textarea_wolf.value) ) {
+            error_msg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط"; 
+            error_msg.classList.add("active");  
+			return;
+		}
 
          // Send To Allam  
         const data = { message: textarea_wolf.value };  

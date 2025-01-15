@@ -12,4 +12,13 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(120), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     # Relationship With Other Tables: 
+    user_stories = db.relationship('User_stories')
     
+class User_stories(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    title = db.Column(db.String(255), nullable=True, unique=True)
+    content = db.Column(db.Text, nullable=True)
+    type = db.Column(Enum('generated', 'self-writing', 'edited_ourStory', name='story_types'), nullable=False)
+    # aval_edited_id = db.Column(db.Integer, db.ForeignKey('avaulble_story.id'), nullable=True) # Foreignkey
+    imgSrc = db.Column(db.String(255), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=True) # Foreignkey

@@ -40,7 +40,7 @@
 .book {
   position: relative;
   width: 450px;
-  height: 470px !important;
+  height: 500px !important;
   transform-style: preserve-3d;
   text-align: center;
   border-right: 10px solid var(--font-3);
@@ -89,13 +89,13 @@
   border-radius: 0px 10px 10px 0px;
   
 }
-.back .text {
+.page .text {
   text-align: right;
   padding: 10px;
   padding-left: 5px;
   margin: 20px auto 0px;
-  height: 80%;
-  width: 100%;
+  height: 70%;
+  width: 98%;
   font-weight: 400;
   font-size: 18px;
   color: var(--font-3);
@@ -103,25 +103,23 @@
   border: 1px solid black;
   overflow: hidden;
 }
-.back .text:focus {
+.page .text:focus {
   outline: none;
 }
+.page .correction-btn {
+  margin: 10px auto 0;
+}
 /* Correcting Words */
-.back .text .error-word {
+.page .text .error-word {
   color: red;
   text-decoration: underline;
   text-decoration-style: wavy;
   cursor: pointer;
 }
-.back .text .grammer-error {
+.page .text .grammer-error {
   color: blue
 }
-.back #error-msg {
-  display: block;
-  opacity: 0;
-  color: red
-}
-.back .correction-word {
+.page .correction-word {
     display: none;
     font-size: 15px;
     padding: 2px;
@@ -142,15 +140,15 @@
 }
 
 /* Counter & Audio */
-.back .counter-sound {
+.page .counter-sound {
   display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 10px 0;
+    margin: 10px 0 2px;
 }
-.back .text-counter {
+.page .text-counter {
   height: 20px;
-  width: 150px;
+  width: 160px;
   text-align: right;
   font-size: 16px;
   color: var(--font-4);
@@ -161,13 +159,30 @@
   border-width: 2px 1.5px 2px 2px;
   border-radius: 10px 0px 0px 10px;
 }
+.front .title {
+  width: 90%;
+  background-color: transparent;
+  border: 2px solid var(--font-3);
+  text-align: center;
+  color: var(--font-3);
+  transition: var(--transition-seconds);
+}
+.front .title::placeholder {
+  color: var(--font-3);
+  opacity: 80%;
+}
+.front .title:focus-visible {
+  outline: none;
+  box-shadow: rgb(227 204 232) 0px 3px 8px
+}
+
 .front .img-container {
-  width: 80%;
-  height: 60%;
-  margin: 3rem auto 2rem;
+  width: 90%;
+  height: 70%;
+  margin: 1rem auto 8px;
   border-radius: 1rem;
   border: 1px solid rgb(179 145 217 / 60%);
-  box-shadow: 0px 0px 20px 10px rgb(144 144 145 / 20%);
+  box-shadow:rgb(227 204 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset
   /* background-color: rgb(144 144 145 / 20%); */
 }
 .front .img-container img {
@@ -177,24 +192,43 @@
 .front .error-msg {
   opacity: 0;
   color: red;
+  transition: var(--transition-seconds);
 }
-.front .generate-btn {
+.cover-page .buttons {
+  margin-top: 8px;
+}
+.cover-page .buttons button {
   border: 2px solid white;
   color: var(--font-1);
   background-color: var(--main-dark);
-  margin: .5rem auto;
+  margin: 0 8px;  
+  display: none;
+  font-size: 16px;
+  font-weight: 500;
 }
-.front .generate-btn:hover {
+.page .buttons button.active {
+  display: block;
+}
+.cover-page .buttons button:hover {
   color: var(--font-4);
 }
-
+.cover-page .buttons  input[type="file"] {
+  appearance: none; /* لإخفاء الشكل الافتراضي */
+  display: none;
+  -webkit-appearance: none; /* لدعم المتصفحات القديمة */
+  color: transparent; /* إخفاء النص */
+}
+.cover-page .buttons  input[type="file"]::file-selector-button {
+  appearance: none; 
+}
 
 
 
 
 /* @@@@@@ Sitting Buttons @@@@@@ */
 .self-writing button {
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 500;
   display: flex;
   align-items: center;
   padding: 5px 8px;
@@ -361,6 +395,7 @@
   background-color: var(--font-3); 
   background-color: var(--main-dark); 
 }
+
 
 
 .qr {
