@@ -23,7 +23,7 @@ def create_app():
     app.register_blueprint(auth, url_prefix='/')
 
     # Import Tables
-    from .models import User, User_stories
+    from .models import User, User_stories, Available_Stories
 
     create_database(app)
 
