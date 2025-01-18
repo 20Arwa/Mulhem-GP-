@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/reading/our_library.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/user-stories.css') }}">
+{% endblock %}
+
+{% block body %}
+<h2>قصصي</h2>
+<div class="container user-stories our-library-container">
+{% for story in stories %}
+    <div class="story-box">
+        <!-- <a href="" target=""> -->
+            
+                <!-- Cover Image -->
+                {% if story['imgSrc'] is none or story['imgSrc'] | trim == "" %}
+                <div class="no-cover cover">
+                    لا يوجد غلاف
+                </div>
+                <div>{{ story['imgSrc'] }}</div>
+                {% else %}
+                <img class="cover" src="/static/{{ story['imgSrc'] }}" alt="صورة الغلاف">
+                {% endif %}
+
+                <p>{{story['title']}}</p>
+                <p class="story-type {{story['type']}}">نوع القصة: <span>{{story['type']}}</span></p>
+
+                <!-- <div class="buttons">
+                    <button class="button main-button">
+                        حذف القصة
+                    </button>
+                    <button class="button main-button">
+                        تعديل القصة
+                    </button>
+                </div> -->
+            <!-- </a> -->
+        </div>
+        
+        {% endfor %}
+    </div>
+{% endblock %}
+{% block script %}
+<script>
+    // Send Reding Type (user_stories) To Server
+    document.querySelectorAll(".user-stories .story-box").forEach(story => {
+        story.addEventListener("click", async () => {
+            try {
+                const data = { message: "user_stories" }; 
+                const response = await fetch('http://127.0.0.1:5000/reading/get-reading-type', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });            
+                if (!response.ok) {
+                    throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+                }
+                const result = await response.json();
+                if (result.redirect) {
+                    // إعادة التوجيه إلى الرابط المولد
+                    window.open(result.redirect, '_blank');
+                }
+            } catch (error) {
+                console.error('حدث خطأ:', error);
+            }
+        })
+    })
+</script>
+{% endblock %}

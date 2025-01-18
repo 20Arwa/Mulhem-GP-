@@ -1,0 +1,7 @@
+.user-stories {
+    color: var(--font-4)
+}
+.user-stories .story-box .cover {
+    width: 250px;
+    height: 250px;
+}

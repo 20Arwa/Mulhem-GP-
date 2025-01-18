@@ -14,11 +14,20 @@ class User(db.Model, UserMixin):
     # Relationship With Other Tables: 
     user_stories = db.relationship('User_stories')
     
+class Available_stories(db.Model):
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    title = db.Column(db.String(255), nullable=True, unique=True)
+    content = db.Column(db.JSON, nullable=True)
+    imgSrc = db.Column(db.String(255), nullable=True)
+    audioSrc = db.Column(db.String(255), nullable=True)
+
+
 class User_stories(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     title = db.Column(db.String(255), nullable=True, unique=True)
-    content = db.Column(db.Text, nullable=True)
-    type = db.Column(Enum('generated', 'self-writing', 'edited_ourStory', name='story_types'), nullable=False)
-    # aval_edited_id = db.Column(db.Integer, db.ForeignKey('avaulble_story.id'), nullable=True) # Foreignkey
+    content = db.Column(db.JSON, nullable=True)
+    type = db.Column(Enum('قصة مُلهِم', 'كتابة مستقلة', 'قصة معدلة', name='story_types'), nullable=False)
     imgSrc = db.Column(db.String(255), nullable=True)
+    audioSrc = db.Column(db.String(255), nullable=True)
+    aval_edited_id = db.Column(db.Integer, db.ForeignKey('available_stories.id'), nullable=True) # Foreignkey
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=True) # Foreignkey

@@ -7,7 +7,7 @@ headers = {
 }
 data = {
     "grant_type": "urn:ibm:params:oauth:grant-type:apikey",
-    "apikey": "YxictQ_ngjhf6I5mgnsG5F645nI_LCBw11l3kZduhfhM"
+    "apikey": "b9LFjxX_n2TixGhh57U7M3zz69WMen5nJFwwhhJ4hMsM"
 }
 
 response = requests.post(url, headers=headers, data=data)

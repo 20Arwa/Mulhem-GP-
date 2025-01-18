@@ -7,12 +7,12 @@
 {% block body %}
     <header>
     </header>
-    <div class="container">
+    <div class="container our-library-container">
         <div class="story-box">
-            <a href="newpage.html" target="_blank">
+            <!-- <a href="" target=""> -->
                 <img src="/static/images/علاء الدين.jpeg" alt="علاء الدين">
                 <p>علاء الدين و المصباح السحري</p>
-            </a>
+            <!-- </a> -->
         </div>
 
         <div class="story-box">
@@ -64,4 +64,33 @@
             </a>
         </div>
     </div>
+{% endblock %}
+{% block script %}
+<script>
+    // Send Reding Type (our_library) To Server
+    document.querySelectorAll(".our-library-container .story-box").forEach(story => {
+        story.addEventListener("click", async () => {
+            try {
+                const data = { message: "our_library" }; 
+                const response = await fetch('http://127.0.0.1:5000/reading/get-reading-type', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });            
+                if (!response.ok) {
+                    throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+                }
+                const result = await response.json();
+                if (result.redirect) {
+                    // إعادة التوجيه إلى الرابط المولد
+                    window.open(result.redirect, '_blank');
+                }
+            } catch (error) {
+                console.error('حدث خطأ:', error);
+            }
+        })
+    })
+</script>
 {% endblock %}

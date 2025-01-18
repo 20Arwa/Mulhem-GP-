@@ -142,7 +142,7 @@ i.text-sound:hover {
     color: var(--font-4);
     background-color: var(--main-light);
 }
-.activity_1.activity_1_exer1 > .text2, .activity_1.activity_1_exer1 > .text3 {
+.activity_1.activity_1_exer1 > .text2, .activity_1.activity_1_exer1 > .text1 {
     display: none;
 }
 .activity_1 .content .text {

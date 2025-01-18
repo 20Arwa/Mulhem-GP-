@@ -16,14 +16,39 @@ if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia){
         mediaRecorder.ondataavailable = (e) => {
             chunks.push(e.data)
         }
+       
 
-        mediaRecorder.onstop = () => {
-            const blob = new Blob(chunks, {'type': 'audio/ogg; codecs=opus'})
-            chunks = []
-            audioURL = window.URL.createObjectURL(blob)
-            document.querySelector('audio').src = audioURL
-
-        }
+        mediaRecorder.onstop = async () => {
+            const blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' });
+            chunks = []; // إعادة تعيين chunks بعد إنشاء blob
+            audioURL = window.URL.createObjectURL(blob);
+        
+            try {
+                const formData = new FormData();
+                formData.append('audio', blob, 'recorded_audio.ogg'); // رفع الصوت
+        
+                const response = await fetch('http://127.0.0.1:5000/save-recorded-audio', {
+                    method: 'POST',
+                    body: formData
+                });
+        
+                if (!response.ok) {
+                    throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+                }
+        
+                const result = await response.json();
+                if (result.success) {
+                    console.log('تم رفع الصوت بنجاح:', result.file_path);
+                    document.querySelector('audio').setAttribute("src", `${result.file_path}?t=${new Date().getTime()}`); // تحديث المسار
+                } else {
+                    console.error('فشل رفع الصوت:', result.message);
+                }
+            } catch (error) {
+                console.error('حدث خطأ أثناء رفع الصوت:', error);
+            }
+        };
+        
+        
     }).catch(error => {
         console.log('Following error has occured : ',error)
     })
@@ -112,6 +137,7 @@ const addAudio = () => {
     audio.controls = true
     audio.src = audioURL
     display.append(audio)
+    
 }
 
 const application = (index) => {
@@ -138,17 +164,22 @@ const application = (index) => {
             addAudio()
             addButton('record', 'record()', 'سجل مرة أخرى')
             break
-
-        default:
-            clearControls()
-            clearDisplay()
-
-            addMessage('المتصفح الخاص بك لا يدعم هذه الخاصية')
-            break;
-    }
-
-}
-
+            
+            default:
+                clearControls()
+                clearDisplay()
+                
+                addMessage('المتصفح الخاص بك لا يدعم هذه الخاصية')
+                break;
+            }
+            
+        }
+        
+        console.log('Current State Index:', stateIndex);
 application(stateIndex)
+
+
+
+
 
 // Copyright https://github.com/davidsproject/VRecorder

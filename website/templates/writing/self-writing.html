@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
 {% endblock %}
 {% block body %}
-<div class="container self-writing my-5 rounded-4 p-4 position-relative">
+<div class="container self-writing my-5 rounded-4 p-4 py-5 position-relative">
 	<div class="book-container position-relative">
 		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
 		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3"></i>
@@ -16,36 +16,21 @@
 							<div class="cover-img-container img-container">
 								<img class="img cover-img" src=""> 
 							</div>
-							<div class="error-msg cover-error">اكتب المزيد لتحصل على الصورة</div>
 							<div class="buttons d-flex align-items-center justify-content-center">
 								<button class="generate-coverImage-btn button active"><i class="fa-solid fa-folder-plus"></i> توليد صورة</button>
 								<button class="upload-coverImage-btn button active">
 									<i class="fa-solid fa-upload"></i>
-									<input type="file" id="imageUpload" accept="image/*"> 
-									رفع صورة </button>
-								<!-- <button class="regenerate-coverImage-btn button"><i class="fa-solid fa-rotate-right"></i> إعادة إنشاء الصورة</button> -->
+									<input type="file" id="imageUpload" accept="image/*" placeholder="غلاف القصة"> 
+									رفع صورة 
+								</button>
 								<button class="delete-coverImage-btn button"><i class="fa-solid fa-circle-minus"></i> حذف الصورة</button>
 							</div>
-
-
-							<!-- 
-							<div class="cover-img-container img-container">
-								<label for="cover-description">أدخل وصف الصورة</label>
-								<div class="rounded-4">
-									<img class="img cover-img" src="" alt=""> 
-								</div>
-								<textarea class="w-100 h-75 rounded-3" type="text" id="cover-description" placeholder="مثال:ولد صغير مرح بشعر مجعد يرتدي سترة زرقاء، ويقف تحت شجرة بأوراق خضراء متوهجة. في الخلفية، سماء زرقاء مع سحب بيضاء وأرنب لطيف يقفز بالقرب." ></textarea>
-							</div> -->
 						</div>
 						<div class="back">
 							<div class="text" contenteditable="true"></div>
 							<div class="correction-word" title="انقر للتصحيح"></div>
 							<div class="counter-sound">
 								<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
-								<audio class="text-audio" controls controlslist="nodownload noplaybackrate">
-									<source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
-									المتصفح الخاص بك لا يدعم عنصر الصوت
-								</audio>
 							</div>
 							<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
 							<button class="correction-btn">صحح أخطائي</button>
@@ -57,10 +42,6 @@
 							<div class="correction-word" title="انقر للتصحيح"></div>
 							<div class="counter-sound">
 								<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
-								<audio class="text-audio" controls controlslist="nodownload noplaybackrate">
-									<source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
-									المتصفح الخاص بك لا يدعم عنصر الصوت
-								</audio>
 							</div>
 							<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
 							<button class="correction-btn">صحح أخطائي</button>
@@ -70,13 +51,9 @@
 							<div class="correction-word" title="انقر للتصحيح"></div>
 							<div class="counter-sound">
 								<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
-								<audio class="text-audio" controls controlslist="nodownload noplaybackrate">
-									<source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
-									المتصفح الخاص بك لا يدعم عنصر الصوت
-								</audio>
 							</div>
 							<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-							
+							<button class="correction-btn">صحح أخطائي</button>
 						</div>
 					</section>
 				</article>
@@ -84,7 +61,7 @@
 		</div>
 		
 		<!-- @@@@@@@@@@@@@ Buttons @@@@@@@@@@@@ -->
-		<div class="sitting-buttons mt-4">
+		<div class="sitting-buttons">
 			<div class="sitting-error-msg error-msg mb-2">رسالة الخطأ</div>
 			<div class="d-flex align-items-center justify-content-center column-gap-2">
 				<button class="add-page-icon">
@@ -331,19 +308,38 @@ document.addEventListener('DOMContentLoaded', function () {
 		newPage.className = "page"; // أضف فئة "page"
 		newPage.innerHTML = `
 			<div class="front">
-				
-			</div>  
+				<div class="text" contenteditable="true"></div>
+				<div class="correction-word" title="انقر للتصحيح"></div>
+				<div class="counter-sound">
+					<div class="text-counter">
+						عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span>
+					</div>
+				</div>
+				<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
+				<button class="correction-btn">صحح أخطائي</button>
+			</div>
 			<div class="back">
 				<div class="text" contenteditable="true"></div>
-				<div class="text-counter">
-					عدد الأحرف: <span id="charCount">0</span>/<span id="maxLength">500</span>
-					<span id="error-msg">لقد وصلت إلى الحد الأقصى من الحروف. يمكنك إضافة صفحة جديدة للمتابعة.</span>
-				</div>
 				<div class="correction-word" title="انقر للتصحيح"></div>
-				<i class="fa-solid fa-volume-high"></i>
+				<div class="counter-sound">
+					<div class="text-counter">
+						عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span>
+					</div>
+				</div>
+				<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
+				<button class="correction-btn">صحح أخطائي</button>
 			</div>
-		`; 
+		`;
+
+		
 		book.appendChild(newPage); // أضف الصفحة الجديدة إلى الكتاب
+		// Correction Button
+		document.querySelectorAll(".page .correction-btn").forEach(btn => {
+			btn.addEventListener("click", (e) => {
+				e.preventDefault(); // منع إعادة تحميل الصفحة
+				allamCorrection(btn); // استدعاء الدالة الخاصة
+			});
+		});
 		nextPage(); // الانتقال إلى الصفحة التالية
 	});
 	
@@ -458,9 +454,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	// @@@@@@@@@@@ Generate Image @@@@@@@@@@@
 	async function generateCoverImg() {
 		const img = document.querySelector(".page.cover-page img");
-		const coverErrMsg = document.querySelector(".error-msg.cover-error");
-		const arabicRegex = /^[\u0600-\u06FF\s]+$/;
-	
 		// تحقق إذا كانت هناك صورة موجودة بالفعل
 		if (img.getAttribute("src")) {
 			const result = await Swal.fire({
@@ -478,8 +471,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}
 		}
 	
-		// Display Delete Button
-		deleteCoverBtn.style.display = "block";
+	
 
 		// Get All Text
 		const AllStory = document.querySelectorAll(".page .text");
@@ -490,16 +482,57 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 		// Check Text Length
 		if (fullStory.trim().length == 0) {
-			showError("لا يوجد نص للتحقق منه، أضف نصاً أولاً", coverErrMsg);
+			Swal.fire({
+				title: 'خطأ!',
+				text: "لا يوجد نص للتحقق منه، أضف نصاً أولاً",
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
 			return;
 		} else if (fullStory.length < 20) {
-			showError("القصة قصيرة! حاول كتابة المزيد لتمكين التحقق", coverErrMsg);
+			Swal.fire({
+				title: 'خطأ!',
+				text: "القصة قصيرة! حاول كتابة المزيد لتمكين التحقق",
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
 			return;
+		// Check Arabic 
 		} else if (!arabicRegex.test(fullStory)) {
-			showError("يجب إدخال النصوص باللغة العربية فقط", coverErrMsg);
+			Swal.fire({
+				title: 'خطأ!',
+				text: "يجب إدخال النصوص باللغة العربية فقط",
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
 			return;
-		} else {
-			coverErrMsg.style.opacity = 0; // Remove Error Message
+		}
+		else if (!repeatedPattern.test(fullStory)) {
+			Swal.fire({
+				title: 'خطأ!',
+				text: "النص يحتوي على كلمات عشوائية وغير مفهومة!",
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
+			return;
+		} 
+		else if (gibberishPattern.test(fullStory)) {
+			Swal.fire({
+                title: 'خطأ!',
+                text: 'النص يبدو غير مفهوم!',
+                icon: 'error',
+                confirmButtonText: 'موافق',
+                reverseButtons: true,
+            });
+			return;
+		} 
+		// الكلمات المحظورة
+		if (checkForbiddenWords(fullStory)) {
+			return;
 		}
 	
 		// Send To Flask
@@ -515,27 +548,39 @@ document.addEventListener('DOMContentLoaded', function () {
 				Swal.showLoading(); // عرض المؤشر الدائري
 			}
 		});
-	
 		try {
 			const response = await fetch('http://127.0.0.1:5000/generate-cover-img', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(data)
 			});
-	
+			
 			Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
-	
+			
 			if (!response.ok) {
 				throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
 			}
-	
+			
 			const result = await response.json();
-	
+			
+			// From Allam If Text Unclear
+			if (result.response === "False") {
+				Swal.fire({
+					title: 'خطأ!',
+					text: "النص غير مفهوم، يرجى كتابة قصة واضحة",
+					icon: 'error',
+					confirmButtonText: 'موافق',
+					reverseButtons: true,
+				});
+				return;
+			}
 			// وضع الصورة في صفحة الغلاف
 			const coverImage = document.querySelector(".cover-img-container .cover-img");
 			coverImage.setAttribute("src", `${result.image_path}?t=${new Date().getTime()}`);
 
-	
+			// Display Delete Button
+			deleteCoverBtn.style.display = "block";
+
 		} catch (error) {
 			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
 			Swal.fire({
@@ -590,7 +635,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	// @@@@@@@@@@@ Allam Correction @@@@@@@@@@@
 	async function allamCorrection(button) {  
-		const arabicRegex = /^[\u0600-\u06FF\s]+$/;
+
 		// Check If Cover Page
 		if (document.querySelector(".page.active") == document.querySelector(".page:first-of-type")) {
 			sittingErrMsg.innerHTML = "لا يمكن المراجعة والتصحيح في صفحة الغلاف";
@@ -598,10 +643,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
 			return ;
 		}
-		// If Text Is Empty
 		var textElement = button.parentElement.querySelector(".text");
 		var corrcErrorMsg = button.previousElementSibling;
-
+		
+		// If Text Is Empty
 		if (textElement.textContent.length == 0) {
 			corrcErrorMsg.innerHTML = "لا يوجد نص لمراجعته، أضف نصاً أولاً"
 			corrcErrorMsg.style.opacity = 1;
@@ -622,8 +667,25 @@ document.addEventListener('DOMContentLoaded', function () {
 			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
 			return;
 		}
+		else if (!repeatedPattern.test(fullStory)) {
+			corrcErrorMsg.innerHTML = "النص يحتوي على كلمات عشوائية وغير مفهومة!";
+			corrcErrorMsg.style.opacity = 1;
+			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
+			return;
+		} 
+		// التحقق من أن النص يحتوي على أحرف مفهومة وليس رموزًا فقط
+		else if (!symbolsRegex.test(textElement.textContent)) {
+			corrcErrorMsg.innerHTML = "النص يحتوي على رموز عشوائية فقط";
+			corrcErrorMsg.style.opacity = 1;
+			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
 		else {
 			corrcErrorMsg.style.opacity = 0; // Remove Error Message
+		}
+		// الكلمات المحظورة
+	 	if (checkForbiddenWords(textElement.textContent)) {
+			return;
 		}
 		
 		// Send To Allam
@@ -747,7 +809,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	// @@@@@@@@@@@ Allam Elements @@@@@@@@@@@
 	async function allamElements() {  
 		var sittingErrMsg = document.querySelector(".sitting-error-msg");
-		const arabicRegex = /^[\u0600-\u06FF\s]+$/;
 
 		// Get All Text
 		var AllStory = document.querySelectorAll(".page .text");
@@ -773,6 +834,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			sittingErrMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
 			sittingErrMsg.style.opacity = 1;
 			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// الكلمات المحظورة
+		if (checkForbiddenWords(fullStory)) {
 			return;
 		}
 		else {
@@ -889,7 +954,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	// @@@@@@@@@@@ Allam Completion @@@@@@@@@@@
 	async function allamCompletion() {
 		var sittingErrMsg = document.querySelector(".sitting-error-msg");
-		const arabicRegex = /^[\u0600-\u06FF\s]+$/;
 
 		// Get All Text
 		var AllStory = document.querySelectorAll(".page .text");
@@ -915,6 +979,10 @@ document.addEventListener('DOMContentLoaded', function () {
 			sittingErrMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
 			sittingErrMsg.style.opacity = 1;
 			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// الكلمات المحظورة
+		if (checkForbiddenWords(fullStory)) {
 			return;
 		}
 		else {
@@ -1081,24 +1149,90 @@ document.addEventListener('DOMContentLoaded', function () {
 		handleUserExit()
 	})
 	// مستمع لحدث beforeunload
-	window.addEventListener('beforeunload', handleUserExit);
+	window.addEventListener('beforeunload',(event) => {
+		//event.preventDefault(); 
+		//event.returnValue = 'إذا خرجت الآن دون حفظ القصة، قد تضيع قصتك الجميلة! هل تريد حفظها قبل المغادرة؟';
+		//handleUserExit()
+	});
 
 	// مستمع لحدث unload
-	window.addEventListener('unload', handleUserExit);
+	window.addEventListener('unload',(event) => {
+		//	event.preventDefault(); 
+	//	handleUserExit()
+	});
+	
+	// Click On Save Button
+	var saveBtn = document.querySelector(".save-btn");
+	saveBtn.addEventListener("click",async () => {
+		// Get Elements
+		var title = document.querySelector(".page.cover-page .front .title");
+		var titleText = document.querySelector(".page.cover-page .front .title").value;
+		var image = document.querySelector(".page.cover-page .front .cover-img");
+		var imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
+		var type = "كتابة مستقلة";
+		var audio = document.querySelector(".record audio");
+		var audioSrc = "";
+		if (audio) {
+			audioSrc = audio.getAttribute("src").split('?')[0].split('/').pop()
+		}
+		
+		// Get All Text As One String
+		var AllStory = document.querySelectorAll(".page .text");
+		var fullStory = "";
+		AllStory.forEach(text => { fullStory += text.textContent.trim() + " " ;console.log(text)});
+		// Stor Story In Array
+		var fullStoryArray = []; // تعريف مصفوفة لتخزين النصوص
+		AllStory.forEach(text => {
+		fullStoryArray.push(text.textContent.trim())}); // إضافة النصوص إلى المصفوفة
 
+		// If Title Is Not Arabic
+		if (!titleText.trim()) { 
+			console.log("العنوان فارغ، لا حاجة للتحقق.");
+			// يمكن ترك الحقل فارغًا والاستمرار في تنفيذ الأكواد التالية
+		} else if (!arabicRegex.test(titleText)) {
+			Swal.fire({
+				title: 'خطأ!',
+				text: "يجب إدخال عنوان القصة باللغة العربية فقط",
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
+			return; // الخروج فقط في حالة النص غير العربي
+		}
+		const data = {
+			title: title.value || null, // إذا كان الحقل فارغًا، يتم إرساله كقيمة فارغة
+			imageSrc: imageSrc || "", 
+			audioSrc: audioSrc || "", 
+			type: type || "",
+			message: fullStoryArray || ""
+		};
+		
+		// Call function to send the story
+		await SendStory(data);
+	})
+	
 	//Save Story Function
 	async function handleUserExit(event) {
 		// Get Elements
 		var title = document.querySelector(".page.cover-page .front .title");
 		var image = document.querySelector(".page.cover-page .front .cover-img");
 		var imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
-		var type = "self-writing";
+		var type = "كتابة مستقلة";
+		var audio = document.querySelector(".record audio");
+		var audioSrc = "";
+		if (audio) {
+			audioSrc = audio.getAttribute("src").split('?')[0].split('/').pop()
+		}
 		
 		// Get All Text
 		var AllStory = document.querySelectorAll(".page .text");
 		var fullStory = "";
 		AllStory.forEach(text => { fullStory += text.textContent.trim() + " " });
-	
+		// Stor Story In Array
+		var fullStoryArray = []; // تعريف مصفوفة لتخزين النصوص
+		AllStory.forEach(text => {
+		fullStoryArray.push(text.textContent.trim())}); // إضافة النصوص إلى المصفوفة
+
 		// Check If At Least One Exists
 		if (!title.value && !imageSrc && !fullStory.trim()) {
 			window.location.href = '/writing/writing-types'; // Go To Writing Types Page
@@ -1113,35 +1247,36 @@ document.addEventListener('DOMContentLoaded', function () {
 				cancelButtonText: 'لا أريد حفظها',
 				reverseButtons: true // Swaps the position of confirm and cancel buttons
 			}).then(async (result) => { // تأكد من جعل الدالة داخل then متزامنة
-				var titleText = document.querySelector(".page.cover-page .front .title").value;
-				const arabicRegex = /^[\u0600-\u06FF\s]+$/;
-
-				// If Title Is Not Arabic
-				if (!titleText.trim()) { 
-					console.log("العنوان فارغ، لا حاجة للتحقق.");
-					// يمكن ترك الحقل فارغًا والاستمرار في تنفيذ الأكواد التالية
-				} else if (!arabicRegex.test(titleText)) {
-					Swal.fire({
-						title: 'خطأ!',
-						text: "يجب إدخال عنوان القصة باللغة العربية فقط",
-						icon: 'error',
-						confirmButtonText: 'موافق',
-						reverseButtons: true,
-					});
-					return; // الخروج فقط في حالة النص غير العربي
-				}
-				
-
 				if (result.isConfirmed) {
+					var titleText = document.querySelector(".page.cover-page .front .title").value;
+	
+					// If Title Is Not Arabic
+					if (!titleText.trim()) { 
+						console.log("العنوان فارغ، لا حاجة للتحقق.");
+						// يمكن ترك الحقل فارغًا والاستمرار في تنفيذ الأكواد التالية
+					} else if (!arabicRegex.test(titleText)) {
+						Swal.fire({
+							title: 'خطأ!',
+							text: "يجب إدخال عنوان القصة باللغة العربية فقط",
+							icon: 'error',
+							confirmButtonText: 'موافق',
+							reverseButtons: true,
+						});
+						return; // الخروج فقط في حالة النص غير العربي
+					}
+
 					const data = {
 						title: title.value || null, // إذا كان الحقل فارغًا، يتم إرساله كقيمة فارغة
 						imageSrc: imageSrc || "", // نفس الشيء هنا
+						audioSrc: audioSrc || "", 
 						type: type || "",
-						message: fullStory || ""
+						message: fullStoryArray || ""
 					};
 					
 					// Call function to send the story
-					await SendStory(data);
+					if (await SendStory(data))
+						setTimeout(() => {window.location.href = '/writing/writing-types'},800)
+
 				}
 				else if (result.isDismissed) {
 					window.location.href = '/writing/writing-types'; // Go To Writing Types Page
@@ -1178,8 +1313,6 @@ document.addEventListener('DOMContentLoaded', function () {
 					let storyID = result.storyID; // جلب ID القصة من الخادم
 					var userID = result.userID;  // جلب ID المستخدم من الخادم
 					var imageFormat = result.imageFormat; 
-					
-
 					// تحديث صورة القصة في الواجهة
 					const newImageName = `/static/images/users/${userID}/${userID}_${storyID}${imageFormat}`;
 					document.querySelector(".page.cover-page .front .cover-img").setAttribute("src", newImageName);
@@ -1188,9 +1321,11 @@ document.addEventListener('DOMContentLoaded', function () {
 					console.log("لا توجد صورة جديدة لتحديثها.");
 			}		
 			Swal.fire('تم حفظ القصة!', '', 'success');
+			return true;
 			} else {
 				const result = await response.json();
 				if (result.status === "duplicate") {
+					console.log(result)
 					Swal.fire({
 						title: 'العنوان موجود!',
 						text: 'هناك قصة أخرى بنفس العنوان. يرجى اختيار عنوان جديد.',

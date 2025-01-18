@@ -17,17 +17,9 @@
             <div class=" p-4 pt-5 pb-4 rounded-4 text-center h-100 d-flex flex-column justify-content-around">
                 <h4 class="my-0">{{activity.title}}</h4>
                 <p class="my-4">{{activity.description}}</p>
-                <!-- <div > -->
-                    <a href="{{activity.exercisesPath}}" class="start-container w-25 d-flex justify-content-around align-items-center mx-auto button main-button">
-                        <button class="border-0 bg-transparent">إبدأ</button>
-                    </a>
-                    <!-- <i class="fa-solid fa-caret-up arrow"></i> -->
-                    <!-- <div class="exercises-container position-absolute start-50 translate-middle w-100 z-n1"> -->
-                        <!-- {% for exercise in activity.exercisesPath %} -->
-                            <!-- <p class="my-2">تمرين {{loop.index}}</p> -->
-                        <!-- {% endfor %} -->
-                    <!-- </div> -->
-                <!-- </div> -->
+                <a href="{{activity.exercisesPath}}" class="start-container w-25 d-flex justify-content-around align-items-center mx-auto button main-button">
+                    <button class="border-0 bg-transparent">إبدأ</button>
+                </a>
             </div>
         </div>
     {% endfor %}

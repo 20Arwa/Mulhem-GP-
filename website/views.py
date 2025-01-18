@@ -6,6 +6,7 @@ from .models import User_stories
 import requests
 import os
 import json
+import ast
 
 
 views = Blueprint('views', __name__)
@@ -26,14 +27,15 @@ def generate_AllamResponse(prompt, max_tokens):
             "repetition_penalty": 1
         },
         "model_id": "sdaia/allam-1-13b-instruct",
-         "project_id": "586e581d-f01e-4912-b519-81bf9ca06349"
+        "project_id": "3431790e-e856-4155-9294-c15efc460c95"
+
     }
 
     # إعداد headers الخاص بالطلب
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTEwMDBPU1dVIiwiaWQiOiJJQk1pZC02OTEwMDBPU1dVIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMjBiZjYzNWItNjdmNy00NzJjLWI3MzItMDYzYTgyNTYxZjVkIiwiaWRlbnRpZmllciI6IjY5MTAwME9TV1UiLCJnaXZlbl9uYW1lIjoiSHVzc2FpbiIsImZhbWlseV9uYW1lIjoiTW9oYW1tZWQiLCJuYW1lIjoiSHVzc2FpbiBNb2hhbW1lZCIsImVtYWlsIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwic3ViIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiaHVzc2FpbjU1NTU5ODVAZ21haWwuY29tIiwiaWFtX2lkIjoiSUJNaWQtNjkxMDAwT1NXVSIsIm5hbWUiOiJIdXNzYWluIE1vaGFtbWVkIiwiZ2l2ZW5fbmFtZSI6Ikh1c3NhaW4iLCJmYW1pbHlfbmFtZSI6Ik1vaGFtbWVkIiwiZW1haWwiOiJodXNzYWluNTU1NTk4NUBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiZmZiODI1NGFmYmJlNGVhNmFlNDQwMjUxYzM3NWY0OGUiLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzY2Njg0ODAsImV4cCI6MTczNjY3MjA4MCwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.HLvh5QQbYnGYCLVVuYCzbT045CDNy4SAmFP47DlBNgzxoAgoA2hR3MbLFB4cIMQDosMMTbtfikmf_rwacX_wXL5dE11BVlTxliZ3-IrDw-19fnGx3nmMcMZjz_IROQDh2MOT555lquLNy_S-RUsM6S9x8Rt8Wx12ua28yDZyC8FyZ9qSj8sW5AkmYuAVSdAZKc-V4MRS5NtLtYXvMpo4I6JoMcXqN3HzPcLjs4nAV5M-6-g2ztqaHdB2uKz9LMaL9Cf6Ui2po0pqMAfuV7zzgbEEJDeXE6XKZS8XJqzx784_6dmqCqdvK8UFUnE4kzuOM85t-1E4BpBoIVm7on4RoA",
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTUwMDBPV1lLIiwiaWQiOiJJQk1pZC02OTUwMDBPV1lLIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiZmYwZDk0YjctNGE1Yy00NDhhLTg4OTUtZWRjYzk5NjI1YTA4IiwiaWRlbnRpZmllciI6IjY5NTAwME9XWUsiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiSHVzc2FpIiwibmFtZSI6IkFyd2UgSHVzc2FpIiwiZW1haWwiOiIxNXN1cGVyMTVzdWpvQGdtYWlsLmNvbSIsInN1YiI6IjE1c3VwZXIxNXN1am9AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiMTVzdXBlcjE1c3Vqb0BnbWFpbC5jb20iLCJpYW1faWQiOiJJQk1pZC02OTUwMDBPV1lLIiwibmFtZSI6IkFyd2UgSHVzc2FpIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6Ikh1c3NhaSIsImVtYWlsIjoiMTVzdXBlcjE1c3Vqb0BnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiM2Y4ZWQwZGJhNjI1NDhhZjk3ODdkM2M4YmMwMGU1MmUiLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzcwMzY0MTQsImV4cCI6MTczNzA0MDAxNCwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.FIa3UGkAXzUfJzPP55dqZg7TvBjNrwjXbVks9BknHeoJ36ojObEbBPjihkEnqCJk6Q1zLkXg9pSvXOQG5SGQRSeOO9fWjii6pD_X6oM2b8H3k6WM3hzRk2ZCpdMqk__vYaAW4jL1J20FWFUVvO1QI0j27eYAHvEO3Uwm1mdFx2I1lwxm72E-yHk7Ha2cCFpkMpSpNrz9f_IWYrLqpPmQY5MQAOCsNR2q9m9w4a_1lvdcDrF0J_k1u66Uq7V1MWC3qBo7vZq5Tuuj8EwyEZ76p8KG0PMt1TuZCaughOpjzqzc-G6UF3rhA7WijrmGkr85GWsvtV7EvRG_DqPhpxzRQw",
     }
 
     # إرسال الطلب إلى النموذج
@@ -63,11 +65,37 @@ def profile_view(request):
     return render_template(request, 'auth/profile.html')
 
 # Reading Page
+# Our Library
+@views.route('/reading/our_library')
+def our_library():
+    return render_template("/reading/our_library.html") 
+
 #edit story
 @views.route('/reading/edit_story')
 def edit_story():
     return render_template("/reading/edit_story.html") 
 
+# Get Reading Type
+@views.route('/reading/get-reading-type', methods=['POST'])
+def reading_type():
+    data = request.json
+    if not isinstance(data, dict) or 'message' not in data or not data.get('message'):
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400
+    
+    reading_type = data['message']
+    print(reading_type)  # طباعة النوع للتأكد من وصوله
+    
+    # إنشاء رابط مع النوع
+    redirect_url = url_for('views.reading_page', type=reading_type)
+    return jsonify({"redirect": redirect_url})
+
+# Reading Page
+@views.route('/reading/reading_page')
+def reading_page():
+    reading_type = request.args.get('type', 'default')
+    print(f"نوع القراءة: {reading_type}")  # للتأكد من وصول النوع
+
+    return render_template("reading/reading_page.html", reading_type=reading_type)
 
 # Activities
 # All Activities
@@ -127,37 +155,41 @@ def save_user_story():
     if 'message' not in data or not data['message']:
         return jsonify({"response": "Invalid request, 'message' is required."}), 400
 
+    # Get Story Data
     title = data.get('title', '')
-    content = data.get('message', '')
+    content = data.get('message', None)  # استلام المصفوفة
     imageSrc = data.get('imageSrc', '')  # اسم الصورة المرسل
+    audioSrc = data.get('audioSrc', '')  # اسم الصورة المرسل
     story_type = data.get('type', '')
     user_id = current_user.id
-    print( title,content,imageSrc,story_type,user_id)
+
+    print("Data received on the server:", data)
+    print("Type of message:", type(data.get('message', None)))
+    print(f"Received data type: {type(content)} - Content: {content}")
 
     # تحقق إذا كان العنوان موجودًا بالفعل
     existing_story = User_stories.query.filter_by(title=title).first()
     if existing_story:
-        return jsonify({"response": "A story with this title already exists.", "status": "duplicate"}), 400
+        if existing_story.title is not None:
+            return jsonify({"response": "A story with this title already exists.", "status": "duplicate"}), 400
 
     try:
         # إنشاء القصة الجديدة
         new_Story = User_stories(
             title=title,
-            content=content,
+            content=json.dumps(content),
             type=story_type,
             imgSrc=imageSrc,
+            audioSrc=audioSrc,
             user_id=user_id
         )
         db.session.add(new_Story)
         db.session.commit()
 
-        print(new_Story)
         # الحصول على ID القصة
         storyID = new_Story.id
         old_ext = None
 
-
-        print("Before")
         # تغيير اسم الملف إذا كانت الصورة موجودة
         if imageSrc:
             # استخراج امتداد الملف
@@ -180,13 +212,53 @@ def save_user_story():
             else:
                 print("After")
                 return jsonify({"response": "Image file not found.", "file": old_name}), 404
+    
+        # تغيير اسم الملف إذا كان الصوت موجود
+        if audioSrc:
+            # استخراج امتداد الملف
+            ext = os.path.splitext(audioSrc)[1]  # مثال: .png أو .jpg
+
+            # إنشاء المسار الكامل للملف القديم والجديد
+            old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), audioSrc)
+            new_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), f"{user_id}_{storyID}{ext}")
+
+            # تحقق إذا كان الملف القديم موجودًا
+            if os.path.exists(old_name):
+                os.rename(old_name, new_name)  # تغيير اسم الملف
+                # تحديث المسار في قاعدة البيانات
+                new_Story.audioSrc = f"audio/users/{user_id}/{user_id}_{storyID}{ext}"
+                db.session.commit()
+            else:
+                return jsonify({"response": "Audio file not found.", "file": old_name}), 404
+            
         return jsonify({"response": "Story saved successfully!", "storyID": storyID, "userID": user_id,"imageUpdated": bool(imageSrc) ,"imageFormat": old_ext}), 200
     except Exception as e:
         db.session.rollback()
         print(f"Error: {e}")
         return jsonify({"response": "Failed to save story", "error": str(e)}), 500
 
-   
+# User Stories Page
+@views.route('/writing/user-stories')
+@login_required
+def user_stories():
+    all_stories = User_stories.query.all()
+
+    # تحويل الكائنات إلى JSON
+    stories_data = [
+        {
+            "id": story.id,
+            "title": story.title,
+            "content": story.content,
+            "type": story.type,
+            "imgSrc": story.imgSrc,
+            "user_id": story.user_id,
+        }
+        for story in all_stories
+    ]
+
+    for story in stories_data:
+        print(story['imgSrc'])
+    return render_template("/writing/user-stories.html", stories=stories_data) 
 
 # End Writing 
 
@@ -197,34 +269,42 @@ def generate_img():
     # Recive Story From JS
     data = request.json  # استلام البيانات من JavaScript
     if not data or 'message' not in data or not data['message']:
-        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
-    
-    # Send To Allam
-    prompt = f"""Input: استخرج من القصة التفاصيل رئيسية تساعد في إنشاء صورة، مثل وصف الشخصيات (نوعها، ملامحها، ملابسها)، المكان (طبيعته وأي تفاصيل هامة)، وأي عناصر مميزة أو أحداث هامة.
-القصة:  في يوم من الأيام، كانت أرنبة تحذر أبناءها الأربعة من دخول حديقة المزارع محمود بعد أن فقد والدهم هناك. رغم تحذيراتها، دخل باسل الحديقة بحثًا عن الخضروات الطازجة، لكنه وقع في مأزق حين طارده المزارع. تمكن من الهروب لكنه فقد معطفه الجديد. عاد إلى المنزل منهكًا، تعلم درسًا عن أهمية الاستماع للنصائح، وعاهد أمه على الطاعة.
-Output: Brown rabbit with new coat, garden full of vegetables, farmer chasing the rabbit, coat stuck in net, forest around the garden.
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # توصف تفصيليTrue", "A white duck sleeping peacefully under a tall hazelnut tree in the heart of the forest. The tree is laden with ripe hazelnuts, and one falls gently onto the duck's head. The startled duck wakes up, its feathers fluffed with panic, mistakenly believing a hunter has fired at it. The forest around is serene, with sunlight streaming through the branches, casting soft shadows on the ground."]
 
-Input: استخرج من القصة التفاصيل رئيسية تساعد في إنشاء صورة، مثل وصف الشخصيات (نوعها، ملامحها، ملابسها)، المكان (طبيعته وأي تفاصيل هامة)، وأي عناصر مميزة أو أحداث هامة  .
-القصة: {data['message']}
+    promptAllam = f"""Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
+القصة: في غابة جميلة غنّاء سمعت الحيوانات صوت شجار غرابين واقفين على غصن شجرة عالِ، فقَدِم الثعلب المكّار وحاول أن يفهم سبب شجارهما، وما إن اقترب أكثر حتى سأل الغرابين: ما بالكما أيها الغرابان؟ فقال أحدهما: اتفقنا على أن نتشارك قطعة الجبن هذه بعد قسمتها بالتساوي، لكنّ هذا الغراب الأحمق يحاول أخذ مقدار يزيد عن نصيبه، فابتسم الثعلب، وقال: إذن ما رأيكما في أن أساعدكما في حل هذه المشكلة، وأقسم قطعة الجبن بينكما بالتساوي؟.
+Output: ["True", "Two black crows perched on a high tree branch, arguing over a piece of cheese. The crows have glossy black feathers, The surrounding forest is lush with green trees, and soft sunlight filters through the branches, creating a lively and peaceful atmosphere in the background."]
+
+
+Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
+القصة: كان يا مكان في قديم الزمان خهثتبخ ةبن
+Output: ["False"]
+
+Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
+القصة: {data['message']}.
 Output:"""
+    
+    
+    result = generate_AllamResponse(promptAllam, 150) # Get Prompt For Image 
+    result = ast.literal_eval(result)  # تحويل النص إلى مصفوفة
+    global result_cleaned 
+    # result =""
 
-# المحدث من تشات:
-# Input: استخرج من القصة التفاصيل رئيسية تساعد في إنشاء صورة، مثل وصف الشخصيات (نوعها، ملامحها، ملابسها)، المكان (طبيعته وأي تفاصيل هامة)، وأي عناصر مميزة أو أحداث هامة.
-# القصة: في يوم من الأيام، كانت أرنبة تحذر أبناءها الأربعة من دخول حديقة المزارع محمود بعد أن فقد والدهم هناك. رغم تحذيراتها، دخل باسل الحديقة بحثًا عن الخضروات الطازجة، لكنه وقع في مأزق حين طارده المزارع. تمكن من الهروب لكنه فقد معطفه الجديد. عاد إلى المنزل منهكًا، تعلم درسًا عن أهمية الاستماع للنصائح، وعاهد أمه على الطاعة.
-# Output: solo rabbit, brown fur, wearing a red coat, running in a vibrant garden full of fresh vegetables (carrots, cabbages), being chased by an angry farmer in a straw hat and overalls, coat stuck in a wooden net, surrounded by a dense forest with tall trees and sunlight, playful and adventurous atmosphere.
+    if result[0] == "False":
+        print(result[0], result)
+        return jsonify({"response": result[0]})
+    
+    elif "Input:" in result[1]:
+        # استخراج النص من البداية حتى كلمة "Input"
+        input_index = result[1].find("Input")  # إيجاد موقع الكلمة
+        result_cleaned = result[1][:input_index].strip()  # قص النص من البداية حتى الكلمة
+    else:
+        result_cleaned = result[1]  # Or handle the error as needed
 
-# Input: استخرج من القصة التفاصيل رئيسية تساعد في إنشاء صورة، مثل وصف الشخصيات (نوعها، ملامحها، ملابسها), المكان (طبيعته وأي تفاصيل هامة)، وأي عناصر مميزة أو أحداث هامة.
-# القصة: {data['message']}
-# Output: ...
-
-
-    result = generate_AllamResponse(prompt, 10) # Get Prompt For Image 
-
-    print(result)
     # Send To Colab And Recive Image
-    colab_url = "https://1d56-34-169-81-36.ngrok-free.app/colab-message"  # رابط ngrok من Colab
-    # prompt = {"message": f"{data['message']}"}
-    prompt = {"message": f"{result}"} # Send Prompt From Allam
+    colab_url = "https://d881-34-125-154-110.ngrok-free.app/colab-message"  # رابط ngrok من Colab
+    prompt = {"message": f"{result_cleaned}"} # Send Prompt From Allam
+    # prompt = {"message": " A white duck is sleeping under a fruitful beech tree in a forest. The tree is filled with beech nuts, and the sunlight filters through the leaves, creating a peaceful and serene atmosphere. Suddenly, a beech nut falls from the tree and lands on the duck's head, waking it up with a start. The duck, initially frightened, realizes that it was just a falling nut and not a hunter's shot."} # Send Prompt From Allam
     # إرسال الطلب إلى Colab
     response = requests.post(colab_url, json=prompt)
 
@@ -244,7 +324,7 @@ Output:"""
             # حفظ الصورة
             with open(image_path, 'wb') as img_file:
                 img_file.write(response.content)
-             # إنشاء المسار النسبي لإرساله للمتصفح
+            # إنشاء المسار النسبي لإرساله للمتصفح
             relative_image_path = f'/static/images/users/{current_user.id}/{current_user.id}.png'
             print("Generated relative image path:", relative_image_path)
 
@@ -259,7 +339,7 @@ Output:"""
     else:
         return jsonify({"error": f"Failed to send message to Colab, Status Code: {response.status_code}, Content: {response.text}"}), 500
 
-
+# Upoaded Image
 @views.route('/save-uploaded-img', methods=['POST'])
 def saveUploadedImg():
     if 'image' not in request.files:
@@ -286,6 +366,36 @@ def saveUploadedImg():
     return jsonify({'success': False, 'message': 'File not saved'}), 500
 
 
+# Recorded Audio
+@views.route('/save-recorded-audio', methods=['POST'])
+def saveRecordedAudio():
+    if 'audio' not in request.files:
+        return jsonify({'success': False, 'message': 'No audio file part'}), 400
+
+    file = request.files['audio']
+
+    if file.filename == '':
+        return jsonify({'success': False, 'message': 'No selected file'}), 400
+
+    if file:
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        user_id = str(current_user.id)  # الحصول على user id
+        audio_filename = f'{user_id}.ogg'  # حفظ الملف باسم المستخدم
+        audio_path = os.path.join(base_dir, 'static', 'audio', 'users', user_id, audio_filename)
+
+        # Ensure the directory exists
+        os.makedirs(os.path.dirname(audio_path), exist_ok=True)
+
+        file.save(audio_path)
+
+        # Return relative path for client
+        relative_path = f'/static/audio/users/{user_id}/{audio_filename}'
+        return jsonify({'success': True, 'file_path': relative_path})
+
+    return jsonify({'success': False, 'message': 'File not saved'}), 500
+
+
+
 
 
 # Allam 
@@ -296,7 +406,7 @@ def allam_story_generator():
     if not isinstance(data, dict) or 'message' not in data or not data.get('message'):
         return jsonify({"response": "Invalid request, 'message' is required."}), 400
 
-    prompt = f""" اكتب قصة قصيرة للأطفال بحيث تكون القصة مقسمة إلى أجزاء داخل مصفوفة، وكل جزء لا يتعدى 100 حرف 
+    prompt = f""" اكتب قصة قصيرة للأطفال بحيث تكون القصة مقسمة إلى أجزاء داخل مصفوفة، وكل جزء لا يتعدى 500 حرف 
 تفاصيل القصة: {data.get('message')} .
 يجب أن تحتوي القصة فقط على النصوص المخصصة للأطفال بدون إضافة أي تعليقات أو عناوين.
 إذا وجدت تفاصيل غير منطقية أو غير لائقة، قم بتجاهلها واستبدالها بما تراه مناسبًا، مع الحفاظ على جودة القصة وسلامتها للأطفال.
@@ -433,4 +543,33 @@ def allam_activity1_2():
 
     return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
 
+# Activity 2 وجدان
+@views.route('/allam_activity2', methods=['POST'])
+def allam_activity2():
+    data = request.json  # استلام البيانات من JavaScript
+    if not data or 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
+
+    prompt = f"""Input:السؤال: اكتب جملة عن شيء مميز لاحظته اليوم وتخيّل أنه بداية لقصة خيالية.  إجابة الطفل: رأيت قطة صغيرة تحاول القفز على سور الحديقة.  
+Output: [True, رائع جدًا! هذا بداية ممتازة لقصة مليئة بالمغامرات. يمكنك تخيّل ما حدث للقطة بعد ذلك!] 
+
+Input:اكتب جملة عن شيء مميز لاحظته اليوم وتخيّل أنه بداية لقصة خيالية.  
+   إجابة الطفل: أنا أحب البيتزا. 
+Output: [False, البيتزا لذيذة، لكن حاول أن تكتب عن شيء لاحظته اليوم وكان مميزًا، مثل موقف ممتع أو شيء مثير للاهتمام حدث حولك!]
+
+Input:اكتب جملة عن شيء مميز لاحظته اليوم وتخيّل أنه بداية لقصة خيالية.  
+   إجابة الطفل: {data['message']}. 
+Output:
+"""
+
+    result = generate_AllamResponse(prompt, 500)
+
+    # رد افتراضي لعلام:
+    # result = "[True, هذه بداية رائعة لقصة مليئة بالمرح والمغامرات! يمكنك تخيل المزيد من المواقف الممتعة التي حدثت لك ولصديقتك في المول.] "
+    
+    # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
+    if result is None:
+        return jsonify({"response": "Error processing request."}), 500
+
+    return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
 # Audio

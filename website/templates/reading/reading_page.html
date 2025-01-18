@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block styles %}
+{% endblock %}
+
+{% block body %}
+<div>{{reading_type}}</div>
+<!-- Check Type Of Reading (our_library/user_stories) -->
+    {% if reading_type == "our_library" %}
+    <div>our library</div>
+    {% else  %}
+    <div>user stories</div>
+    {% endif %}
+<!-- If  our_library -->
+<!-- Show Diffrent database content, it will recive stories anyway with type -->
+
+{% endblock %}

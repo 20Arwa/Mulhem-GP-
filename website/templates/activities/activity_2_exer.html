@@ -79,7 +79,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-    document.getElementById('myForm').addEventListener('submit', function(event) {
+    document.getElementById('myForm').addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent the default form submission
 
         const textarea = document.getElementById('floatingTextarea');
@@ -91,6 +91,54 @@
 
             
         } else {
+
+            //@@@@@@@@@@@@@@@@ Send To Flask
+            const data = { message: textarea.value };
+        
+            // إظهار رسالة التحميل
+            Swal.fire({
+                title: 'جاري التحقق من الإجابة...',
+                text: 'الرجاء الانتظار قليلاً',
+                allowOutsideClick: false,
+                showConfirmButton: false,
+                didOpen: () => {
+                    Swal.showLoading(); // عرض المؤشر الدائري
+                }
+            });
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/allam_activity2', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+
+                if (!response.ok) {
+                    throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+                }
+
+                const result = await response.json();
+
+                console.log(result)
+                // Check Answers
+                // Right Answer
+                // Wrong Answer
+            } catch (error) {
+                Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+                Swal.fire({
+                    title: 'خطأ!',
+                    text: error.message,
+                    icon: 'error',
+                    confirmButtonText: 'موافق',
+                    reverseButtons: true,
+                });
+            }
+            //@@@@@@@@@@@@@@@@ Send To Flask
+
+
+
             // Show the modal if the input is valid
             var modal = new bootstrap.Modal(document.getElementById('modal3'));
             modal.show();
@@ -99,6 +147,9 @@
             bigConfetti();
         }
     });
+
+   
+
 </script>
 
 
