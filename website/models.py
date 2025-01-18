@@ -2,6 +2,8 @@
 from website import db
 from flask_login import UserMixin
 from sqlalchemy import Enum
+from datetime import datetime
+
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
@@ -19,8 +21,7 @@ class Available_stories(db.Model):
     title = db.Column(db.String(255), nullable=True, unique=True)
     content = db.Column(db.JSON, nullable=True)
     imgSrc = db.Column(db.String(255), nullable=True)
-    audioSrc = db.Column(db.String(255), nullable=True)
-
+    audioSrc = db.Column(db.JSON, nullable=True)
 
 class User_stories(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)

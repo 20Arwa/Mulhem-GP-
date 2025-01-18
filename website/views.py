@@ -65,10 +65,20 @@ def profile_view(request):
     return render_template(request, 'auth/profile.html')
 
 # Reading Page
-# Our Library
+
 @views.route('/reading/our_library')
 def our_library():
-    return render_template("/reading/our_library.html") 
+    stories = [
+        {"url": "/mulhem-main/reading.html", "image": "images/علاء الدين.jpeg", "alt": "علاء الدين", "title": "علاء الدين و المصباح السحري"},
+        {"url": "/mulhem-main/reading.html", "image": "images/جاك وحبة الفاصولياء.png", "alt": "جاك و حبة الفاصولياء", "title": "جاك وحبة الفاصولياء"},
+        {"url": "/mulhem-main/reading.html", "image": "images/نور و الالوان المفقودة.jpeg", "alt": "نور و الألوان المفقودة", "title": "نور والألوان المفقودة"},
+        {"url": "tryme.html", "image": "images/الفتى المخادع.jpeg", "alt": "الفتى المخادع", "title": "الفتى المخادع"},
+        {"url": "tryme.html", "image": "images/ذات الرداء الأحمر.jpg", "alt": "ذات الرداء الأحمر", "title": "ذات الرداء الأحمر (ليلى والذئب)"},
+        {"url": "tryme.html", "image": "images/الأرنب المشاغب.png", "alt": "الأرنب المشاغب", "title": "الأرنب المشاغب باسل"},
+        {"url": "tryme.html", "image": "images/راكان وكنز الجد.jpeg", "alt": "راكان وكنز الجد", "title": "راكان وكنز الجد"},
+        {"url": "tryme.html", "image": "images/التمرة الضائعة.jpeg", "alt": "التمرة الضائعة", "title": "التمرة الضائعة"}
+    ]
+    return render_template("/reading/our_library.html", stories=stories)
 
 #edit story
 @views.route('/reading/edit_story')

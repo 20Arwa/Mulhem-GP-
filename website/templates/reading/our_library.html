@@ -5,64 +5,15 @@
 {% endblock %}
 
 {% block body %}
-    <header>
-    </header>
-    <div class="container our-library-container">
+    <div class="container">
+        {% for story in stories %}
         <div class="story-box">
-            <!-- <a href="" target=""> -->
-                <img src="/static/images/علاء الدين.jpeg" alt="علاء الدين">
-                <p>علاء الدين و المصباح السحري</p>
-            <!-- </a> -->
-        </div>
-
-        <div class="story-box">
-            <a href="newpage.html" target="_blank">
-                <img src="/static/images/جاك وحبة الفاصولياء.png" alt="جاك و حبة الفاصولياء">
-                <p>جاك وحبة الفاصولياء</p>
+            <a href="{{ story.url }}" target="_blank">
+                <img src="{{ url_for('static', filename=story.image) }}" alt="{{ story.alt }}">
+                <p>{{ story.title }}</p>
             </a>
         </div>
-
-        <div class="story-box">
-            <a href="newpage.html" target="_blank">
-                <img src="/static/images/نور و الالوان المفقودة.jpeg" alt="نور و الألوان المفقودة">
-                <p>نور والألوان المفقودة</p>
-            </a>
-        </div>
-
-        <div class="story-box">
-            <a href="newpage.html" target="_blank">
-                <img src="/static/images/الفتى المخادع.jpeg" alt="الفتى المخادع">
-                <p>الفتى المخادع</p>
-            </a>
-        </div>
-
-        <div class="story-box">
-            <a href="newpage.html" target="_blank">
-                <img src="/static/images/ذات الرداء الأحمر.jpg" alt="ذات الرداء الأحمر">
-                <p>ذات الرداء الأحمر (ليلى والذئب)</p>
-            </a>
-        </div>
-        
-        <div class="story-box">
-            <a href="newpage.html" target="_blank">
-                <img src="/static/images/الأرنب المشاغب.png" alt="الأرنب المشاغب">
-                <p>الأرنب المشاغب باسل</p>
-            </a>
-        </div>
-
-        <div class="story-box">
-            <a href="newpage.html" target="_blank">
-                <img src="/static/images/راكان وكنز الجد.jpeg" alt="راكان وكنز الجد">
-                <p>راكان وكنز الجد</p>
-            </a>
-        </div>
-
-        <div class="story-box">
-            <a href="newpage.html" target="_blank">
-                <img src="/static/images/التمرة الضائعة.jpeg" alt="التمرة الضائعة">
-                <p>التمرة الضائعة</p>
-            </a>
-        </div>
+        {% endfor %}
     </div>
 {% endblock %}
 {% block script %}
