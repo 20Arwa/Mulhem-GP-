@@ -11,7 +11,7 @@
 
 .our-library-container a {
     text-decoration: none; 
-    color: black; 
+    color: var(--font-4); 
     display: inline-block; 
     align-items: center; 
     transition: color 0.3s;
@@ -32,7 +32,7 @@
 .our-library-container .story-box p {
     margin: 10px 0;
     font-size: 20px;
-    color: black;
+    color: var(--font-4);
     text-align: center;
 }
 

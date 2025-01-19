@@ -8,9 +8,7 @@
 <h2>قصصي</h2>
 <div class="container user-stories our-library-container">
 {% for story in stories %}
-    <div class="story-box">
-        <!-- <a href="" target=""> -->
-            
+    <div class="story-box" id="{{story['id']}}">
                 <!-- Cover Image -->
                 {% if story['imgSrc'] is none or story['imgSrc'] | trim == "" %}
                 <div class="no-cover cover">
@@ -21,18 +19,15 @@
                 <img class="cover" src="/static/{{ story['imgSrc'] }}" alt="صورة الغلاف">
                 {% endif %}
 
+                <!-- Title -->
+                {% if story['title'] == None %}
+                <p>بدون عنوان</p>
+                {% else  %}
                 <p>{{story['title']}}</p>
-                <p class="story-type {{story['type']}}">نوع القصة: <span>{{story['type']}}</span></p>
+                {% endif %}
 
-                <!-- <div class="buttons">
-                    <button class="button main-button">
-                        حذف القصة
-                    </button>
-                    <button class="button main-button">
-                        تعديل القصة
-                    </button>
-                </div> -->
-            <!-- </a> -->
+                <!-- Story Type -->
+                <p class="story-type" story-type="{{story['type']}}">نوع القصة: <span>{{story['type']}}</span></p>
         </div>
         
         {% endfor %}
@@ -44,7 +39,7 @@
     document.querySelectorAll(".user-stories .story-box").forEach(story => {
         story.addEventListener("click", async () => {
             try {
-                const data = { message: "user_stories" }; 
+                const data = { message: ["user_stories",story.getAttribute("id")] }; 
                 const response = await fetch('http://127.0.0.1:5000/reading/get-reading-type', {
                     method: 'POST',
                     headers: {

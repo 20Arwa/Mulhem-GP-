@@ -5,13 +5,13 @@
 {% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container our-library-container">
         {% for story in stories %}
-        <div class="story-box">
-            <a href="{{ story.url }}" target="_blank">
+        <div class="story-box " id="{{story.id}}">
+            <!-- <a href="{{ story.url }}" target="_blank"> -->
                 <img src="{{ url_for('static', filename=story.image) }}" alt="{{ story.alt }}">
                 <p>{{ story.title }}</p>
-            </a>
+            <!-- </a> -->
         </div>
         {% endfor %}
     </div>
@@ -22,7 +22,7 @@
     document.querySelectorAll(".our-library-container .story-box").forEach(story => {
         story.addEventListener("click", async () => {
             try {
-                const data = { message: "our_library" }; 
+                const data = { message: ["our_library",story.getAttribute("id")] }; 
                 const response = await fetch('http://127.0.0.1:5000/reading/get-reading-type', {
                     method: 'POST',
                     headers: {

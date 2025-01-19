@@ -1,7 +1,31 @@
 .user-stories {
-    color: var(--font-4)
+}
+.user-stories .story-box {
+    color: var(--font-4);
+    border: 2px solid;
 }
 .user-stories .story-box .cover {
     width: 250px;
     height: 250px;
+}
+.user-stories .story-box:has(.story-type[story-type="كتابة مستقلة"]) {
+    border-color: #6BA659;
+    box-shadow:  rgba(107, 166, 89, 0.2) 0px 8px 15px
+}
+.user-stories .story-box .story-type[story-type="كتابة مستقلة"] span {
+    color: #6BA659;
+}
+.user-stories .story-box:has(.story-type[story-type="قصة مُلهِم"]) {
+    border-color: var(--font-3);
+    box-shadow:  rgba(123, 91, 166, 0.2) 0px 8px 15px
+}
+.user-stories .story-box .story-type[story-type="قصة مُلهِم"] span {
+    color: var(--font-3);
+}
+.user-stories .story-box:has(.story-type[story-type="قصة معدلة"]) {
+    border-color: #596BA6;
+    box-shadow:  rgba(89, 107, 166, 0.2) 0px 8px 15px
+}
+.user-stories .story-box .story-type[story-type="قصة معدلة"] span {
+    color: #596BA6;
 }

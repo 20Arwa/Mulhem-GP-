@@ -2,7 +2,7 @@
 from flask import Blueprint, render_template, url_for, request, jsonify, redirect,current_app
 from flask_login import login_required, current_user
 from website import db
-from .models import User_stories
+from .models import User_stories,Available_stories
 import requests
 import os
 import json
@@ -64,8 +64,14 @@ def home():
 def profile_view(request):
     return render_template(request, 'auth/profile.html')
 
-# Reading Page
 
+# Reading
+#edit story
+@views.route('/reading/edit_story')
+def edit_story():
+    return render_template("/reading/edit_story.html") 
+
+# our_library Page
 @views.route('/reading/our_library')
 def our_library():
     stories = [
@@ -80,11 +86,6 @@ def our_library():
     ]
     return render_template("/reading/our_library.html", stories=stories)
 
-#edit story
-@views.route('/reading/edit_story')
-def edit_story():
-    return render_template("/reading/edit_story.html") 
-
 # Get Reading Type
 @views.route('/reading/get-reading-type', methods=['POST'])
 def reading_type():
@@ -92,20 +93,48 @@ def reading_type():
     if not isinstance(data, dict) or 'message' not in data or not data.get('message'):
         return jsonify({"response": "Invalid request, 'message' is required."}), 400
     
-    reading_type = data['message']
-    print(reading_type)  # طباعة النوع للتأكد من وصوله
+    reading_type = data['message'][0]
+    story_id = data['message'][1]
+    print(reading_type,story_id )  # طباعة النوع للتأكد من وصوله
     
     # إنشاء رابط مع النوع
-    redirect_url = url_for('views.reading_page', type=reading_type)
+    redirect_url = url_for('views.reading_page', type=reading_type, id=story_id)
     return jsonify({"redirect": redirect_url})
 
 # Reading Page
 @views.route('/reading/reading_page')
 def reading_page():
     reading_type = request.args.get('type', 'default')
-    print(f"نوع القراءة: {reading_type}")  # للتأكد من وصول النوع
+    story_id = request.args.get('id', 'default')
+    # تحويل story_id إلى عدد صحيح
+    story_id = int(story_id) if story_id.isdigit() else None
+    if story_id is None:
+        print("Invalid story_id")
+        return "Invalid story ID", 400
 
-    return render_template("reading/reading_page.html", reading_type=reading_type)
+    # الاستعلام عن القصة
+    story = None
+    if reading_type == "our_library":
+        story = Available_stories.query.filter_by(id=story_id).first()
+        print(f"Querying User_stories with id={story_id}: {story}")
+    else:
+        story = User_stories.query.filter_by(id=story_id).first()
+        print(f"Querying Available_stories with id={story_id}: {story}")
+
+    # معالجة السجل المفقود
+    if not story:
+        print(f"No story found for id={story_id} in {reading_type}")
+        return "Story not found", 404
+
+    print(f"Story found: {story}")
+    print(story.content)
+    story.content = json.loads(story.content)
+    if reading_type == "our_library":
+        story.audioSrc = json.loads(story.audioSrc)
+    print(story.content)
+    return render_template("reading/reading_page.html", reading_type=reading_type, story=story)
+
+
 
 # Activities
 # All Activities

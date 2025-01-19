@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}الفرق بين الكتابة القصصية والإبداعية{% endblock %}
+{% block title %}الكتابة المستقلة{% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
 {% endblock %}
@@ -333,6 +333,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		
 		book.appendChild(newPage); // أضف الصفحة الجديدة إلى الكتاب
+
 		// Correction Button
 		document.querySelectorAll(".page .correction-btn").forEach(btn => {
 			btn.addEventListener("click", (e) => {
@@ -340,6 +341,71 @@ document.addEventListener('DOMContentLoaded', function () {
 				allamCorrection(btn); // استدعاء الدالة الخاصة
 			});
 		});
+
+		// @@@@@@@@@@@ Text Counter @@@@@@@@@@@
+	document.querySelectorAll(".text").forEach((textElement) => {
+		const parent = textElement.parentElement; // الوصول إلى العنصر الأب
+		const errorMsg = parent.querySelector(".error-msg.text-error-msg"); // رسالة الخطأ الخاصة بالنص الحالي
+		const charCounter = parent.querySelector(".text-counter .charCount"); // عداد الأحرف الخاص بالنص الحالي
+		const maxLengthElement = parent.querySelector(".text-counter .maxLength");
+		const maxLength = Number(maxLengthElement?.textContent || 500); // الحد الأقصى للأحرف
+	
+		if (textElement) {
+			let timeout;
+	
+			// حدث الإدخال
+			textElement.addEventListener("input", () => {
+				clearTimeout(timeout); // إلغاء المؤقت السابق
+				timeout = setTimeout(() => {
+					const currentText = textElement.innerText; // استخدم innerText للحفاظ على الأسطر الجديدة
+	
+					// إذا تجاوز النص الحد الأقصى
+					if (currentText.length > maxLength) {
+						// قطع النص إلى الحد الأقصى مع الحفاظ على التنسيق
+						const trimmedText = currentText.slice(0, maxLength);
+						textElement.innerText = trimmedText;
+	
+						if (errorMsg) {
+							errorMsg.style.opacity = 1;
+							errorMsg.innerHTML = "لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.";
+						}
+	
+						// إعادة المؤشر إلى نهاية النص
+						const range = document.createRange();
+						const selection = window.getSelection();
+						range.selectNodeContents(textElement);
+						range.collapse(false);
+						selection.removeAllRanges();
+						selection.addRange(range);
+					} else {
+						if (errorMsg) {
+							errorMsg.style.opacity = 0;
+						}
+					}
+	
+					// تحديث عداد الأحرف
+					if (charCounter) charCounter.textContent = currentText.length;
+				}, 100); // تأخير بسيط لتحسين الأداء
+			});
+	
+			// منع لصق النصوص التي تتجاوز الحد الأقصى
+			textElement.addEventListener("paste", (event) => {
+				event.preventDefault();
+				let pastedText = event.clipboardData
+					.getData("text")
+					.slice(0, maxLength - textElement.innerText.length); // استخدم innerText بدل textContent
+				document.execCommand("insertText", false, pastedText);
+			});
+		}
+	});
+	
+	// @@@@@@@@@@@ Text Sitting @@@@@@@@@@@
+	// توحيد ستايل النص داخل صفحة الكتابة
+	document.querySelector(".page .text").addEventListener('paste', (event) => {
+		event.preventDefault(); // منع السلوك الافتراضي
+		const text = (event.clipboardData || window.clipboardData).getData('text/plain'); // الحصول على النص الخام من الحافظة
+		document.execCommand('insertText', false, text); // إدخال النص داخل العنصر بدون تنسيق
+	});
 		nextPage(); // الانتقال إلى الصفحة التالية
 	});
 	
@@ -1093,11 +1159,14 @@ document.addEventListener('DOMContentLoaded', function () {
 			textElement.addEventListener("input", () => {
 				clearTimeout(timeout); // إلغاء المؤقت السابق
 				timeout = setTimeout(() => {
-					const currentText = textElement.textContent;
+					const currentText = textElement.innerText; // استخدم innerText للحفاظ على الأسطر الجديدة
 	
 					// إذا تجاوز النص الحد الأقصى
 					if (currentText.length > maxLength) {
-						textElement.textContent = currentText.slice(0, maxLength); // قطع النص إلى الحد الأقصى
+						// قطع النص إلى الحد الأقصى مع الحفاظ على التنسيق
+						const trimmedText = currentText.slice(0, maxLength);
+						textElement.innerText = trimmedText;
+	
 						if (errorMsg) {
 							errorMsg.style.opacity = 1;
 							errorMsg.innerHTML = "لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.";
@@ -1117,7 +1186,7 @@ document.addEventListener('DOMContentLoaded', function () {
 					}
 	
 					// تحديث عداد الأحرف
-					if (charCounter) charCounter.textContent = textElement.textContent.length;
+					if (charCounter) charCounter.textContent = currentText.length;
 				}, 100); // تأخير بسيط لتحسين الأداء
 			});
 	
@@ -1126,7 +1195,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				event.preventDefault();
 				let pastedText = event.clipboardData
 					.getData("text")
-					.slice(0, maxLength - textElement.textContent.length);
+					.slice(0, maxLength - textElement.innerText.length); // استخدم innerText بدل textContent
 				document.execCommand("insertText", false, pastedText);
 			});
 		}
@@ -1136,9 +1205,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	// توحيد ستايل النص داخل صفحة الكتابة
 	document.querySelector(".page .text").addEventListener('paste', (event) => {
 		event.preventDefault(); // منع السلوك الافتراضي
-        const text = (event.clipboardData || window.clipboardData).getData('text/plain');  // الحصول على النص الخام من الحافظة
-        document.execCommand('insertText', false, text); // إدخال النص داخل العنصر بدون تنسيق
-    });
+		const text = (event.clipboardData || window.clipboardData).getData('text/plain'); // الحصول على النص الخام من الحافظة
+		document.execCommand('insertText', false, text); // إدخال النص داخل العنصر بدون تنسيق
+	});
+	
 	
 	
 	// @@@@@@@@@@@ Save Story @@@@@@@@@@@

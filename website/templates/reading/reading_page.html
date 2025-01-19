@@ -1,16 +1,157 @@
 {% extends "base.html" %}
+{% block title %}{{story.title}}{% endblock %}
 {% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
 {% endblock %}
 
 {% block body %}
-<div>{{reading_type}}</div>
-<!-- Check Type Of Reading (our_library/user_stories) -->
-    {% if reading_type == "our_library" %}
-    <div>our library</div>
-    {% else  %}
-    <div>user stories</div>
-    {% endif %}
-<!-- If  our_library -->
-<!-- Show Diffrent database content, it will recive stories anyway with type -->
+<div class="container self-writing my-5 rounded-4 p-4 py-5 position-relative">
+	<div class="book-container position-relative">
+		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
+		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3"></i>
+		<div class="scene">
+				<article class="book">
+					<section class="page active cover-page">
+						<div class="front">
+                            <!-- Story Title -->
+                            {% if story.title == None %}
+							<input class="button title" type="text" name="title" placeholder="عنوان القصة" value="بدون عنوان" disabled>
+                            {% else  %}
+							<input class="button title" type="text" name="title" placeholder="عنوان القصة" value="{{story.title}}" disabled>
+                            {% endif %}
 
+                            <!-- Cover Image -->
+							<div class="cover-img-container img-container">
+                                {% if story.imgSrc == "" %}
+								<div class="cover-img">لا يوجد غلاف</div> 
+                                {% else  %}
+								<img class="img cover-img" src="../../static/{{story.imgSrc}}"> 
+                                {% endif %}
+							</div>
+						</div>
+						<div class="back">
+							<div class="text">{{story.content[0]}}</div>
+						</div>
+					</section>
+                    <!-- Loop The Rest Of Pages -->
+                    {% for index in range(1, story.content|length, 2) %}
+                    <section class="page">
+                        <div class="front">
+                            <div class="text" contenteditable="true">{{ story.content[index] }}</div>
+                            <!-- Put Audio If our_library Story ?????????????????????????????? -->
+                            {% if reading_type == "our_library" %}
+                                {{ story.audioSrc[index + 1] }}
+                            {% endif %}
+                        </div>
+                        <div class="back">
+                            <div class="text" contenteditable="true">
+                                {% if index + 1 < story.content|length %}
+                                    {{ story.content[index + 1] }}
+                                {% endif %}
+                            </div>
+                        </div>
+                    </section>
+                    {% endfor %}
+				</article>
+			</div>
+		</div>
+        <!-- User Stories Extra Content -->
+        <div class="sitting-buttons">
+            {% if reading_type == "user_stories" %}
+                {% if story.audioSrc != None %}
+                    <div class="record_audio">
+                        <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                            <source id="audioSource" src="../../static/{{story.audioSrc}}" type="audio/mpeg">
+                            المتصفح الخاص بك لا يدعم عنصر الصوت
+                        </audio>
+                    </div>
+                {% else %}
+                    <div class="record_audio">لا يوجد صوت مسجل</div>
+                {% endif %}
+                <div class="edit_delete_buttons">
+                    <button>تعديل القصة</button>
+                    <button>حذف القصة</button>
+                </div>
+            {% endif %}
+        </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const nextButton = document.getElementById('nextButton'); // Next Page Button
+        const prevButton = document.getElementById('prevButton'); // Prev Page Button
+
+        nextButton.addEventListener('click', nextPage);
+        prevButton.addEventListener('click', prevPage);
+
+        // @@@@@@@@@@@ Next Page Button @@@@@@@@@@@
+	function nextPage() {
+		prevButton.style.display = "inline-block"; // Display Prev Button
+	
+		const activePage = document.querySelector('.page.active');
+		if (activePage) {
+			const nextPage = activePage.nextElementSibling;
+			
+			// اجعل الصفحة النشطة مقلوبة
+			activePage.classList.remove('active');
+			activePage.classList.add('flipped');
+			
+			// تحقق إذا كانت الصفحة التالية موجودة
+			if (nextPage && nextPage.classList.contains('page')) {
+				nextPage.classList.add('active'); // اجعل الصفحة التالية نشطة
+				
+				// تعريف المتغير بعد الصفحة التالية
+				const afterNextPage = nextPage.nextElementSibling;
+				
+				if (!afterNextPage || !afterNextPage.classList.contains('page')) {
+					nextButton.style.display = "none";
+				} else {
+					nextButton.style.display = "inline-block";
+				}
+				
+				// Add Page Btn
+				// تحقق إذا كان عدد الصفحات 20
+				const allPages = document.querySelectorAll('.page');
+				const errorMsg = document.querySelector(".sitting-error-msg");
+				if (allPages.length > 20) {
+					nextButton.style.display = "none";
+				}
+			}
+		}
+	}
+	
+	// @@@@@@@@@@@ Prev Page Button @@@@@@@@@@@
+	function prevPage() {
+		const flippedPages = document.querySelectorAll('.page.flipped');
+		const activePage = document.querySelector('.page.active');
+		const previousPage = activePage.previousElementSibling;
+		
+		nextButton.style.display = "inline-block"; // Display Next Btn
+
+		// If Prev Page Was The Cover, Hide PRev Btn And Delete
+		const beforePreviousPage = previousPage.previousElementSibling;
+		if (!beforePreviousPage || !beforePreviousPage.classList.contains('page')) {
+			prevButton.style.display = "none"; // Hide Prev Button			
+		}
+		
+		// Move The Page
+		if (flippedPages.length > 0) {
+			// اجعل آخر صفحة مقلوبة نشطة مرة أخرى
+			const lastFlippedPage = flippedPages[flippedPages.length - 1];
+			lastFlippedPage.classList.remove('flipped');
+			lastFlippedPage.classList.add('active');
+			
+			// إزالة حالة النشط من جميع الصفحات الأخرى
+			const allPages = document.querySelectorAll('.page');
+			allPages.forEach((page) => {
+				if (page !== lastFlippedPage) {
+					page.classList.remove('active');
+				}
+			});
+		}
+	}
+
+    })
+</script>
 {% endblock %}
