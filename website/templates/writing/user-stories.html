@@ -8,7 +8,7 @@
 <h2>قصصي</h2>
 <div class="container user-stories our-library-container">
 {% for story in stories %}
-    <div class="story-box" id="{{story['id']}}">
+    <div class="story-box" >
                 <!-- Cover Image -->
                 {% if story['imgSrc'] is none or story['imgSrc'] | trim == "" %}
                 <div class="no-cover cover">
@@ -28,6 +28,10 @@
 
                 <!-- Story Type -->
                 <p class="story-type" story-type="{{story['type']}}">نوع القصة: <span>{{story['type']}}</span></p>
+                <div class="buttons text-center mt-3">
+                    <button class="button main-button read-btn" id="{{story['id']}}">قراءة</button>
+                    <button class="button main-button">تعديل</button>
+                </div>
         </div>
         
         {% endfor %}
@@ -36,7 +40,7 @@
 {% block script %}
 <script>
     // Send Reding Type (user_stories) To Server
-    document.querySelectorAll(".user-stories .story-box").forEach(story => {
+    document.querySelectorAll(".user-stories .story-box .buttons .read-btn").forEach(story => {
         story.addEventListener("click", async () => {
             try {
                 const data = { message: ["user_stories",story.getAttribute("id")] }; 

@@ -1,7 +1,7 @@
 # This File Is For Routes In The Website
 from flask import Blueprint, render_template, url_for, request, jsonify, redirect,current_app
 from flask_login import login_required, current_user
-from website import db
+from .database import db
 from .models import User_stories,Available_stories
 import requests
 import os
@@ -35,9 +35,8 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTUwMDBPV1lLIiwiaWQiOiJJQk1pZC02OTUwMDBPV1lLIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiZmYwZDk0YjctNGE1Yy00NDhhLTg4OTUtZWRjYzk5NjI1YTA4IiwiaWRlbnRpZmllciI6IjY5NTAwME9XWUsiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiSHVzc2FpIiwibmFtZSI6IkFyd2UgSHVzc2FpIiwiZW1haWwiOiIxNXN1cGVyMTVzdWpvQGdtYWlsLmNvbSIsInN1YiI6IjE1c3VwZXIxNXN1am9AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiMTVzdXBlcjE1c3Vqb0BnbWFpbC5jb20iLCJpYW1faWQiOiJJQk1pZC02OTUwMDBPV1lLIiwibmFtZSI6IkFyd2UgSHVzc2FpIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6Ikh1c3NhaSIsImVtYWlsIjoiMTVzdXBlcjE1c3Vqb0BnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiM2Y4ZWQwZGJhNjI1NDhhZjk3ODdkM2M4YmMwMGU1MmUiLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzcwMzY0MTQsImV4cCI6MTczNzA0MDAxNCwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.FIa3UGkAXzUfJzPP55dqZg7TvBjNrwjXbVks9BknHeoJ36ojObEbBPjihkEnqCJk6Q1zLkXg9pSvXOQG5SGQRSeOO9fWjii6pD_X6oM2b8H3k6WM3hzRk2ZCpdMqk__vYaAW4jL1J20FWFUVvO1QI0j27eYAHvEO3Uwm1mdFx2I1lwxm72E-yHk7Ha2cCFpkMpSpNrz9f_IWYrLqpPmQY5MQAOCsNR2q9m9w4a_1lvdcDrF0J_k1u66Uq7V1MWC3qBo7vZq5Tuuj8EwyEZ76p8KG0PMt1TuZCaughOpjzqzc-G6UF3rhA7WijrmGkr85GWsvtV7EvRG_DqPhpxzRQw",
-    }
-
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTUwMDBPV1lLIiwiaWQiOiJJQk1pZC02OTUwMDBPV1lLIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiY2VmMjBlNmUtNTRkZS00MjRmLWFmMjktMzgxZDVlYjNhMDA0IiwiaWRlbnRpZmllciI6IjY5NTAwME9XWUsiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiSHVzc2FpIiwibmFtZSI6IkFyd2UgSHVzc2FpIiwiZW1haWwiOiIxNXN1cGVyMTVzdWpvQGdtYWlsLmNvbSIsInN1YiI6IjE1c3VwZXIxNXN1am9AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiMTVzdXBlcjE1c3Vqb0BnbWFpbC5jb20iLCJpYW1faWQiOiJJQk1pZC02OTUwMDBPV1lLIiwibmFtZSI6IkFyd2UgSHVzc2FpIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6Ikh1c3NhaSIsImVtYWlsIjoiMTVzdXBlcjE1c3Vqb0BnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiM2Y4ZWQwZGJhNjI1NDhhZjk3ODdkM2M4YmMwMGU1MmUiLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc0MTI4NjIsImV4cCI6MTczNzQxNjQ2MiwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.XSaADWQi4Wdq5vSeXc9nb-lZ-OfyhlyeoppmVR4r3a5-Rmfd5Rw2EJ-SbQlqrKBiTr23CGLIhxHjajs7LsDqP4IgRuFNnwtgvNJuRGDXsl30by_PUcygrh4a9w-PjvJmAV3KJyO5DUGfZqiRQkOA4VmH4JRg-vstwK2o9tryQufRm9rml4Lq8YTXvNknPMt-xhuwcefNNpXx76rVjp7mVlXWVWG4jVmaXZCS2dpG9mF-P6_Us618FShLiUfRg7QmOSLz_qrIn5jn3VMkOxI_pavMTDRbalx9kqqK3dIJh0XRwdVEhLWcTd6-_s6ZOSGBOl3Rdo8pyCa_toh5zgrnrA",
+        }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
 
@@ -67,24 +66,33 @@ def profile_view(request):
 
 # Reading
 #edit story
-@views.route('/reading/edit_story')
-def edit_story():
-    return render_template("/reading/edit_story.html") 
+# @views.route('/reading/edit_story')
+# def edit_story():
+#     return render_template("/reading/edit_story.html") 
 
 # our_library Page
 @views.route('/reading/our_library')
 def our_library():
-    stories = [
-        {"url": "/mulhem-main/reading.html", "image": "images/علاء الدين.jpeg", "alt": "علاء الدين", "title": "علاء الدين و المصباح السحري"},
-        {"url": "/mulhem-main/reading.html", "image": "images/جاك وحبة الفاصولياء.png", "alt": "جاك و حبة الفاصولياء", "title": "جاك وحبة الفاصولياء"},
-        {"url": "/mulhem-main/reading.html", "image": "images/نور و الالوان المفقودة.jpeg", "alt": "نور و الألوان المفقودة", "title": "نور والألوان المفقودة"},
-        {"url": "tryme.html", "image": "images/الفتى المخادع.jpeg", "alt": "الفتى المخادع", "title": "الفتى المخادع"},
-        {"url": "tryme.html", "image": "images/ذات الرداء الأحمر.jpg", "alt": "ذات الرداء الأحمر", "title": "ذات الرداء الأحمر (ليلى والذئب)"},
-        {"url": "tryme.html", "image": "images/الأرنب المشاغب.png", "alt": "الأرنب المشاغب", "title": "الأرنب المشاغب باسل"},
-        {"url": "tryme.html", "image": "images/راكان وكنز الجد.jpeg", "alt": "راكان وكنز الجد", "title": "راكان وكنز الجد"},
-        {"url": "tryme.html", "image": "images/التمرة الضائعة.jpeg", "alt": "التمرة الضائعة", "title": "التمرة الضائعة"}
+    # Get This From DataBase
+
+    all_stories = Available_stories.query.all()
+
+    # تحويل الكائنات إلى JSON
+    stories_data = [
+        {
+            "id": story.id,
+            "title": story.title,
+            "content": story.content,
+            "imgSrc": story.imgSrc,
+            "audioSrc": story.audioSrc,
+        }
+        for story in all_stories
     ]
-    return render_template("/reading/our_library.html", stories=stories)
+
+    for story in stories_data:
+        print(story['imgSrc'])
+
+    return render_template("/reading/our_library.html", stories=stories_data)
 
 # Get Reading Type
 @views.route('/reading/get-reading-type', methods=['POST'])
@@ -126,12 +134,11 @@ def reading_page():
         print(f"No story found for id={story_id} in {reading_type}")
         return "Story not found", 404
 
-    print(f"Story found: {story}")
-    print(story.content)
-    story.content = json.loads(story.content)
+    story.content = json.loads(story.content) # Covnert Json To String
+
+    # Covnert Audios Json To String If Our_library
     if reading_type == "our_library":
-        story.audioSrc = json.loads(story.audioSrc)
-    print(story.content)
+        story.audioSrc = json.loads(story.audioSrc) 
     return render_template("reading/reading_page.html", reading_type=reading_type, story=story)
 
 
@@ -181,8 +188,17 @@ def storyGenerator():
 @views.route('/writing/self-writing')
 @login_required
 def self_writing():
-    return render_template("/writing/self-writing.html", user=current_user) 
+    # الحصول على القصة من الرابط (وإذا لم تكن موجودة، تعيين قيمة افتراضية)
+    allam_story = request.args.get('allam_story')
+    print(allam_story, "dkfakjfkejfk")
+    print(type(allam_story))
 
+    # إذا لم يكن allam_story موجودًا، يمكنك إرسال رسالة أو تعيين قيمة افتراضية
+    if allam_story:
+        json_object = json.loads(allam_story)
+        return render_template("/writing/self-writing.html", user=current_user, allam_story=json_object)
+    else:
+        return render_template("/writing/self-writing.html", user=current_user)
 
 # Save Story
 @views.route('/save-user-story', methods=['POST'])
@@ -211,7 +227,6 @@ def save_user_story():
     if existing_story:
         if existing_story.title is not None:
             return jsonify({"response": "A story with this title already exists.", "status": "duplicate"}), 400
-
     try:
         # إنشاء القصة الجديدة
         new_Story = User_stories(
@@ -270,11 +285,83 @@ def save_user_story():
             else:
                 return jsonify({"response": "Audio file not found.", "file": old_name}), 404
             
-        return jsonify({"response": "Story saved successfully!", "storyID": storyID, "userID": user_id,"imageUpdated": bool(imageSrc) ,"imageFormat": old_ext}), 200
+        # Redirect إلى صفحة /edit_user_story مع ID القصة
+        return jsonify({"redirect_url": f"/edit_user_story?storyID={storyID}"}), 200
+
     except Exception as e:
         db.session.rollback()
         print(f"Error: {e}")
         return jsonify({"response": "Failed to save story", "error": str(e)}), 500
+
+# Edit User Story Page
+@views.route('/edit_user_story',methods=['GET'])
+@login_required
+def edit_user_story():
+    storyID = request.args.get('storyID', None)
+    if not storyID:
+        return "Story ID is required", 400
+    print(storyID)
+    
+    # تحويل story_id إلى عدد صحيح
+    storyID = int(storyID) if storyID.isdigit() else None
+    # جلب القصة من قاعدة البيانات باستخدام storyID
+    story = User_stories.query.get(storyID)
+    if not story:
+        return "Story not found", 404
+    # Covnert Json To String
+    story.content = json.loads(story.content) 
+    
+    print(story)
+    # معالجة القصة (عرضها أو تعديلها)
+    return render_template('writing/edit_user_story.html', story=story)
+
+# Uddate User Story
+@views.route('/update-user-story', methods=['POST'])
+@login_required
+def update_user_story():
+    data = request.json
+    if not data:
+        return jsonify({"response": "Invalid request, no data provided."}), 400
+    if 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400
+
+    # استلام بيانات القصة
+    story_id = data.get('id', None)  # جلب الـ ID الخاص بالقصة
+    title = data.get('title', '')
+    content = data.get('message', None)  # استلام المصفوفة
+    imageSrc = data.get('imageSrc', '')  # اسم الصورة
+    audioSrc = data.get('audioSrc', '')  # اسم الصوت
+    story_type = data.get('type', '')
+    user_id = current_user.id
+
+    if not story_id:
+        return jsonify({"response": "Story ID is required for update."}), 400
+
+    # جلب القصة المراد تحديثها
+    story = User_stories.query.filter_by(id=story_id, user_id=user_id).first()
+
+    if not story:
+        return jsonify({"response": "Story not found or access denied."}), 404
+
+    # تحقق من وجود عنوان مشابه
+    existing_story = User_stories.query.filter(User_stories.id != story_id, User_stories.title == title, User_stories.user_id == user_id).first()
+    if existing_story:
+        return jsonify({"response": "A story with this title already exists.", "status": "duplicate"}), 400
+
+    # تحديث بيانات القصة
+    story.title = title
+    story.content = json.dumps(content)
+    story.imgSrc = imageSrc
+    story.audioSrc = audioSrc
+    story.type = story_type
+
+    db.session.commit()
+
+    return jsonify({"response": "Story updated successfully.", "status": "success", "storyID": story.id}), 200
+
+
+      
+
 
 # User Stories Page
 @views.route('/writing/user-stories')
@@ -445,36 +532,107 @@ def allam_story_generator():
     if not isinstance(data, dict) or 'message' not in data or not data.get('message'):
         return jsonify({"response": "Invalid request, 'message' is required."}), 400
 
-    prompt = f""" اكتب قصة قصيرة للأطفال بحيث تكون القصة مقسمة إلى أجزاء داخل مصفوفة، وكل جزء لا يتعدى 500 حرف 
-تفاصيل القصة: {data.get('message')} .
-يجب أن تحتوي القصة فقط على النصوص المخصصة للأطفال بدون إضافة أي تعليقات أو عناوين.
-إذا وجدت تفاصيل غير منطقية أو غير لائقة، قم بتجاهلها واستبدالها بما تراه مناسبًا، مع الحفاظ على جودة القصة وسلامتها للأطفال.
-"""
+    prompt = f"""Input:اكتب قصة طويلة للأطفال بصيغة JSON. يجب أن يحتوي JSON على عنوان القصة والقصة نفسها مقسمة إلى أجزاء، بحيث لا يتعدى كل جزء 500 حرف. يجب أن تكون القصة مكتوبة بلغة مناسبة للأطفال، خالية من التفاصيل غير المنطقية أو غير اللائقة. إذا وجدت أي تفاصيل غير مناسبة، تجاهلها واستبدلها بما تراه مناسبًا، مع الحفاظ على جودة القصة وسلامتها للأطفال.
+    الصيغة المطلوبة:
+    {{"title": "عنوان القصة", "story": ["الجزء الأول من القصة…","الجزء الثاني من القصة…",…]}}
+    تفاصيل القصة:{{'characters': [{{"name": "اروى", "description": "ذكية"}}], "place": "المدرسة", "time": "صباح", "problem": "لم تحل الواجب", "solution": "اعترفت"}}
+    Output:{{"title": "أروى والواجب المدرسي","story": ["في صباح يوم جميل، استيقظت أروى وهي تشعر بالحماس ليوم جديد في المدرسة. كانت فتاة ذكية ومجتهدة، ولكن هذه المرة كان هناك شيء يقلقها. فقد كان المعلم قد كلفهم بواجب صعب، ولم تتمكن أروى من إنهائه بسبب ضيق الوقت. حاولت حله ليلة البارحة، لكن الأسئلة بدت صعبة، ولم تستطع التركيز بسبب المهام الأخرى التي انشغلت بها. وبينما ترتب حقيبتها، بدأت تتساءل كيف ستتعامل مع الموقف؟","أخذت أروى حقيبتها وركضت إلى المدرسة. كانت الطريق تبدو طويلة هذه المرة، حيث لم يتوقف عقلها عن التفكير في الواجب. ماذا ستقول للمعلم؟ كيف ستبرر عدم حل الواجب؟ شعرت أن قلبها ينبض بسرعة. عندما اقتربت من باب المدرسة، حاولت أن تهدئ نفسها، لكنها لم تستطع التخلص من القلق","وصلت أروى إلى الفصل، وجلست في مقعدها وهي شاردة الذهن. كان المعلم يشرح الدرس، لكنها لم تكن تتابع. الجميع بدأوا يفتحون دفاترهم استعدادًا لتقديم الواجب. شعرت أروى بالخجل عندما نظرت إلى دفاتر أصدقائها، ووجدتهم قد أتموا المهمة. شعرت أن اللحظة التي تخشاها قد اقتربت. قررت أروى أن تتحلى بالشجاعة.","رفعت يدها وقالت: 'أستاذ، لم أتمكن من حل الواجب، لكنني أعدك بأنني سأحاول المرة القادمة.' تفاجأت حين ابتسم المعلم وقال: 'الصدق هو أهم شيء يا أروى. لا بأس، لكن عليك تعلم إدارة وقتك.' شعرت أروى بالراحة، وعادت إلى المنزل وهي مليئة بالعزيمة. منذ ذلك اليوم، أصبحت أروى أكثر تنظيمًا في وقتها. تعلمت أن الصدق والمثابرة هما مفتاح النجاح، ولم تعد تخشى مواجهة التحديات."]}}
 
-    # نص القصة
-    result = generate_AllamResponse(prompt, 100)
-    # result = '\nفي مساء جميل، ذهب محمد إلى نادي الحي للعب مع أصحابه. كان محمد يحب اللعب مع أصحابه كثيرًا، لكن في هذا اليوم تشاجر مع صاحبه بسبب لعبة.\n\nمحمد كان غاضبًا جدًا من صاحبه، ولم يكن يعرف كيف يتصالح معه. لكن بعد تفكير قليل، قرر محمد أن يذهب إلى صاحبه ويعتذر له عن ما حدث.\n\nعندما وصل محمد إلى صاحبه، وجده جالسًا وحيدًا ويبكي. اقترب محمد منه وقال له: "أنا آسف على ما حدث بيننا".'
+    Input:اكتب قصة طويلة للأطفال بصيغة JSON. يجب أن يحتوي JSON على عنوان القصة والقصة نفسها مقسمة إلى أجزاء، بحيث لا يتعدى كل جزء 500 حرف. يجب أن تكون القصة مكتوبة بلغة مناسبة للأطفال، خالية من التفاصيل غير المنطقية أو غير اللائقة. إذا وجدت أي تفاصيل غير مناسبة، تجاهلها واستبدلها بما تراه مناسبًا، مع الحفاظ على جودة القصة وسلامتها للأطفال.
+    الصيغة المطلوبة:
+    {{"title": "عنوان القصة", "story": ["الجزء الأول من القصة…","الجزء الثاني من القصة…",…]}}
+    تفاصيل القصة:{data.get('message')}
+    Output:"""
 
-    if result.startswith('\n'):
-        result = result[1:]
-    # تقسيم النص إلى أسطر
-    lines = result.split('\n')
-    lines = [line.strip() for line in lines if line.strip()]
+    result = generate_AllamResponse(prompt, 500)
+    # result = '''{
+    #     "title": "أروى والواجب المدرسي",
+    #     "story": [
+    #         "في صباح يوم جميل، استيقظت أروى وهي تشعر بالحماس ليوم جديد في المدرسة. كانت فتاة ذكية ومجتهدة، ولكن هذه المرة كان هناك شيء يقلقها. فقد كان المعلم قد كلفهم بواجب صعب، ولم تتمكن أروى من إنهائه بسبب ضيق الوقت. حاولت حله ليلة البارحة، لكن الأسئلة بدت صعبة، ولم تستطع التركيز بسبب المهام الأخرى التي انشغلت بها. وبينما ترتب حقيبتها، بدأت تتساءل كيف ستتعامل مع الموقف؟",
+    #         "أخذت أروى حقيبتها وركضت إلى المدرسة. كانت الطريق تبدو طويلة هذه المرة، حيث لم يتوقف عقلها عن التفكير في الواجب. ماذا ستقول للمعلم؟ كيف ستبرر عدم حل الواجب؟ شعرت أن قلبها ينبض بسرعة. عندما اقتربت من باب المدرسة، حاولت أن تهدئ نفسها، لكنها لم تستطع التخلص من القلق",
+    #         "وصلت أروى إلى الفصل، وجلست في مقعدها وهي شاردة الذهن. كان المعلم يشرح الدرس، لكنها لم تكن تتابع. الجميع بدأوا يفتحون دفاترهم استعدادًا لتقديم الواجب. شعرت أروى بالخجل عندما نظرت إلى دفاتر أصدقائها، ووجدتهم قد أتموا المهمة. شعرت أن اللحظة التي تخشاها قد اقتربت. قررت أروى أن تتحلى بالشجاعة.",
+    #         "رفعت يدها وقالت: 'أستاذ، لم أتمكن من حل الواجب، لكنني أعدك بأنني سأحاول المرة القادمة.' تفاجأت حين ابتسم المعلم وقال: 'الصدق هو أهم شيء يا أروى. لا بأس، لكن عليك تعلم إدارة وقتك.' شعرت أروى بالراحة، وعادت إلى المنزل وهي مليئة بالعزيمة. منذ ذلك اليوم، أصبحت أروى أكثر تنظيمًا في وقتها. تعلمت أن الصدق والمثابرة هما مفتاح النجاح، ولم تعد تخشى مواجهة التحديات."
+    #     ]
+    # }'''
+    print(result)
 
-    # تحويل القائمة إلى JSON
-    story_json = json.dumps(lines)
-    redirect_url = url_for('views.show_generated_story', story=story_json)
+    global result_cleaned 
+
+    if "Input:" in result:
+        # استخراج النص من البداية حتى كلمة "Input"
+        input_index = result.find("Input")  # إيجاد موقع الكلمة
+        result_cleaned = result[:input_index].strip()  # قص النص من البداية حتى الكلمة
+    else:
+        result_cleaned = result  # Or handle the error as needed
+
+    print(result_cleaned)
+    # تحويل السلسلة النصية إلى JSON
+    json_object = json.loads(result_cleaned)
+
+    print(json_object)
+    print(type(json_object))  # <class 'dict'>
+    
+    # إرسال الـ JSON بشكل مشفر عبر الرابط
+    redirect_url = url_for('views.self_writing', allam_story=json.dumps(json_object))
     return jsonify({"redirect": redirect_url})
 
 
 # Show Generated Story Page
-@views.route('/show-generated-story', methods=['GET'])
-def show_generated_story():
-    # استلام القصة وتحويلها إلى قائمة
-    story_json = request.args.get('story', '[]')
-    story = json.loads(story_json)
-    return render_template('/writing/show-generated-story.html', story=story)
+# @views.route('/update-story', methods=['GET'])
+# def update_story():
+#     return render_template('/writing/show-generated-story.html')
 
+
+# Edit Availble Stores
+@views.route('/allam-edit-aval-story', methods=['POST'])
+def allam_edit_aval_story():
+    data = request.json
+    if not isinstance(data, dict) or 'message' not in data or not data.get('message'):
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400
+
+    prompt = f"""Input:اكتب قصة طويلة للأطفال بصيغة JSON. يجب أن يحتوي JSON على عنوان القصة والقصة نفسها مقسمة إلى أجزاء، بحيث لا يتعدى كل جزء 500 حرف. يجب أن تكون القصة مكتوبة بلغة مناسبة للأطفال، خالية من التفاصيل غير المنطقية أو غير اللائقة. إذا وجدت أي تفاصيل غير مناسبة، تجاهلها واستبدلها بما تراه مناسبًا، مع الحفاظ على جودة القصة وسلامتها للأطفال.
+    الصيغة المطلوبة:
+    {{"title": "عنوان القصة", "story": ["الجزء الأول من القصة…","الجزء الثاني من القصة…",…]}}
+    تفاصيل القصة:{{'characters': [{{"name": "اروى", "description": "ذكية"}}], "place": "المدرسة", "time": "صباح", "problem": "لم تحل الواجب", "solution": "اعترفت"}}
+    Output:{{"title": "أروى والواجب المدرسي","story": ["في صباح يوم جميل، استيقظت أروى وهي تشعر بالحماس ليوم جديد في المدرسة. كانت فتاة ذكية ومجتهدة، ولكن هذه المرة كان هناك شيء يقلقها. فقد كان المعلم قد كلفهم بواجب صعب، ولم تتمكن أروى من إنهائه بسبب ضيق الوقت. حاولت حله ليلة البارحة، لكن الأسئلة بدت صعبة، ولم تستطع التركيز بسبب المهام الأخرى التي انشغلت بها. وبينما ترتب حقيبتها، بدأت تتساءل كيف ستتعامل مع الموقف؟","أخذت أروى حقيبتها وركضت إلى المدرسة. كانت الطريق تبدو طويلة هذه المرة، حيث لم يتوقف عقلها عن التفكير في الواجب. ماذا ستقول للمعلم؟ كيف ستبرر عدم حل الواجب؟ شعرت أن قلبها ينبض بسرعة. عندما اقتربت من باب المدرسة، حاولت أن تهدئ نفسها، لكنها لم تستطع التخلص من القلق","وصلت أروى إلى الفصل، وجلست في مقعدها وهي شاردة الذهن. كان المعلم يشرح الدرس، لكنها لم تكن تتابع. الجميع بدأوا يفتحون دفاترهم استعدادًا لتقديم الواجب. شعرت أروى بالخجل عندما نظرت إلى دفاتر أصدقائها، ووجدتهم قد أتموا المهمة. شعرت أن اللحظة التي تخشاها قد اقتربت. قررت أروى أن تتحلى بالشجاعة.","رفعت يدها وقالت: 'أستاذ، لم أتمكن من حل الواجب، لكنني أعدك بأنني سأحاول المرة القادمة.' تفاجأت حين ابتسم المعلم وقال: 'الصدق هو أهم شيء يا أروى. لا بأس، لكن عليك تعلم إدارة وقتك.' شعرت أروى بالراحة، وعادت إلى المنزل وهي مليئة بالعزيمة. منذ ذلك اليوم، أصبحت أروى أكثر تنظيمًا في وقتها. تعلمت أن الصدق والمثابرة هما مفتاح النجاح، ولم تعد تخشى مواجهة التحديات."]}}
+
+    Input:اكتب قصة طويلة للأطفال بصيغة JSON. يجب أن يحتوي JSON على عنوان القصة والقصة نفسها مقسمة إلى أجزاء، بحيث لا يتعدى كل جزء 500 حرف. يجب أن تكون القصة مكتوبة بلغة مناسبة للأطفال، خالية من التفاصيل غير المنطقية أو غير اللائقة. إذا وجدت أي تفاصيل غير مناسبة، تجاهلها واستبدلها بما تراه مناسبًا، مع الحفاظ على جودة القصة وسلامتها للأطفال.
+    الصيغة المطلوبة:
+    {{"title": "عنوان القصة", "story": ["الجزء الأول من القصة…","الجزء الثاني من القصة…",…]}}
+    تفاصيل القصة:{data.get('message')}
+    Output:"""
+
+    # result = generate_AllamResponse(prompt, 2500)
+    result = '''{
+        "title": "أروى والواجب المدرسي",
+        "story": [
+            "في صباح يوم جميل، استيقظت أروى وهي تشعر بالحماس ليوم جديد في المدرسة. كانت فتاة ذكية ومجتهدة، ولكن هذه المرة كان هناك شيء يقلقها. فقد كان المعلم قد كلفهم بواجب صعب، ولم تتمكن أروى من إنهائه بسبب ضيق الوقت. حاولت حله ليلة البارحة، لكن الأسئلة بدت صعبة، ولم تستطع التركيز بسبب المهام الأخرى التي انشغلت بها. وبينما ترتب حقيبتها، بدأت تتساءل كيف ستتعامل مع الموقف؟",
+            "أخذت أروى حقيبتها وركضت إلى المدرسة. كانت الطريق تبدو طويلة هذه المرة، حيث لم يتوقف عقلها عن التفكير في الواجب. ماذا ستقول للمعلم؟ كيف ستبرر عدم حل الواجب؟ شعرت أن قلبها ينبض بسرعة. عندما اقتربت من باب المدرسة، حاولت أن تهدئ نفسها، لكنها لم تستطع التخلص من القلق",
+            "وصلت أروى إلى الفصل، وجلست في مقعدها وهي شاردة الذهن. كان المعلم يشرح الدرس، لكنها لم تكن تتابع. الجميع بدأوا يفتحون دفاترهم استعدادًا لتقديم الواجب. شعرت أروى بالخجل عندما نظرت إلى دفاتر أصدقائها، ووجدتهم قد أتموا المهمة. شعرت أن اللحظة التي تخشاها قد اقتربت. قررت أروى أن تتحلى بالشجاعة.",
+            "رفعت يدها وقالت: 'أستاذ، لم أتمكن من حل الواجب، لكنني أعدك بأنني سأحاول المرة القادمة.' تفاجأت حين ابتسم المعلم وقال: 'الصدق هو أهم شيء يا أروى. لا بأس، لكن عليك تعلم إدارة وقتك.' شعرت أروى بالراحة، وعادت إلى المنزل وهي مليئة بالعزيمة. منذ ذلك اليوم، أصبحت أروى أكثر تنظيمًا في وقتها. تعلمت أن الصدق والمثابرة هما مفتاح النجاح، ولم تعد تخشى مواجهة التحديات."
+        ]
+    }'''
+    print(result)
+
+    global result_cleaned 
+
+    if "Input:" in result:
+        # استخراج النص من البداية حتى كلمة "Input"
+        input_index = result.find("Input")  # إيجاد موقع الكلمة
+        result_cleaned = result[:input_index].strip()  # قص النص من البداية حتى الكلمة
+    else:
+        result_cleaned = result  # Or handle the error as needed
+
+    print(result_cleaned)
+    # تحويل السلسلة النصية إلى JSON
+    json_object = json.loads(result_cleaned)
+
+    print(json_object)
+    print(type(json_object))  # <class 'dict'>
+    
+    # إرسال الـ JSON بشكل مشفر عبر الرابط
+    redirect_url = url_for('views.self_writing', allam_story=json.dumps(json_object))
+    return jsonify({"redirect": redirect_url})
 
 # Corrcetion
 @views.route('/allam-correction', methods=['POST'])
@@ -483,15 +641,15 @@ def allam_correction():
     if not data or 'message' not in data or not data['message']:
         return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
 
-    prompt = f"""Input: صحح الكلمات الخاطئة: كان هناك ولد يدعى أحمدون كيوت وطيب، لكنه يقابل شخصا ذو وجه معفن يؤذيه.
-        Output: {{"spelling": [["أحمدون", "أحمد"]],"language_errors": [["كيوت", "لطيف"]], "inappropriate_words": [["معفن", "غير لطيف"]]}}
+    prompt = f"""Input: صحح الكلمات الخاطئة: كان هناك ولد يدعى أحمدون طيب في المدرست، لكنه يقابل شخصا ذو وجه مخيف ومعفن يؤذيه.
+        Output: [["أحمدون","أحمد"],["ومعفن", "وغير لطيف"],["المردست", "المدرسة"]]
         Input: صحح الأخطاء: كان هناك ولد يدعى أحمد.
-        Output: {{}}
+        Output: []
         Input: صحح الأخطاء: {data['message']}
         Output:"""
 
     result = generate_AllamResponse(prompt, 3500)
-    # result = {"spelling": [],"grammar": [["أحمد", "أحمدون"]],"inappropriate_words": [["كيوت", "كيوت"]]}
+    # result = ""
     
     # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
     if result is None:

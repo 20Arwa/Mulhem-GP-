@@ -81,7 +81,7 @@ nav .sign-log button:active {
 
 /* Buttons */
 .button {
-    padding: 8px 13px;
+    padding: 3px 15px;
     font-weight: 600;
     border: none;
     border-radius: 10px;
@@ -90,11 +90,13 @@ nav .sign-log button:active {
 .main-button {
     color: var(--font-1);
     background-color: var(--main-dark); 
+    border: 2px solid transparent;
 }
 .main-button:hover {
     color: var(--font-1);
     background-color: var(--main-dark); 
-    transform: scale(1.05);
+    border-color: white;
+    /* transform: scale(1.05); */
     /* box-shadow: 0 0 10px var(--main-dark); */
     
 }
@@ -240,6 +242,24 @@ footer a {
 .swal2-loading {
   padding: 30px;
 }
+
+
+/* Animations */
+/* تعريف حركة الاهتزاز */
+@keyframes shake {
+  0%, 100% {
+      transform: translateX(0);
+  }
+  25% {
+      transform: translateX(-5px);
+  }
+  75% {
+      transform: translateX(5px);
+  }
+}
+
+
+
 
 /* Drag And Drop Question */
 .quiz-wrapper .answers {

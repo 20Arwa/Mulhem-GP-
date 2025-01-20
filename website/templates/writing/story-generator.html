@@ -145,7 +145,7 @@ async function submitStory() {
       throw new Error('رد غير صالح من الخادم. تأكد أن الخادم يعيد JSON.');
     }
   
-    // التحقق من وجود رابط إعادة توجيه في الرد
+    // التحقق من وجود رابط إعادة توجيه لصفحة الكتابة في الرد
     if (responseData.redirect) {
       window.location.href = responseData.redirect;
     } else {

@@ -1,0 +1,36 @@
+/* Drag And Drop Question */
+Copyright (c) 2024 by Coran Spicer (https://codepen.io/cgspicer/pen/AXjZxa) 
+
+
+Small Confitti
+/* Copyright (c) 2024 by Michael Hobizal (https://codepen.io/mikehobizal/pen/gOdmmr) */
+
+Big Confitti
+// Copyright (c) 2024 by Chris Coyier  (https://codepen.io/chriscoyier/pen/vYKvEQx)
+
+Book Shape
+/* Copyright (c) 2024 by Timo Hausmann (https://codepen.io/timohausmann/pen/AaJWvo) */
+
+Voice Recorder
+https://github.com/davidsproject/VRecorder
+
+
+Allam Model
+@misc{bari2024allamlargelanguagemodels,
+      title={ALLaM: Large Language Models for Arabic and English}, 
+      author={M Saiful Bari and Yazeed Alnumay and Norah A. Alzahrani and Nouf M. Alotaibi and Hisham A. Alyahya and Sultan AlRashed and Faisal A. Mirza and Shaykhah Z. Alsubaie and Hassan A. Alahmed and Ghadah Alabduljabbar and Raghad Alkhathran and Yousef Almushayqih and Raneem Alnajim and Salman Alsubaihi and Maryam Al Mansour and Majed Alrubaian and Ali Alammari and Zaki Alawami and Abdulmohsen Al-Thubaity and Ahmed Abdelali and Jeril Kuriakose and Abdalghani Abujabal and Nora Al-Twairesh and Areeb Alowisheq and Haidar Khan},
+      year={2024},
+      eprint={2407.15390},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2407.15390}, 
+}
+
+Images Model
+https://huggingface.co/dreamlike-art/dreamlike-anime-1.0
+
+Audios
+https://elevenlabs.io/app/speech-synthesis/text-to-speech
+
+
+

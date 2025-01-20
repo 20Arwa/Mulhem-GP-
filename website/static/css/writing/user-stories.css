@@ -5,8 +5,8 @@
     border: 2px solid;
 }
 .user-stories .story-box .cover {
-    width: 250px;
-    height: 250px;
+    /* width: 250px;
+    height: 250px; */
 }
 .user-stories .story-box:has(.story-type[story-type="كتابة مستقلة"]) {
     border-color: #6BA659;

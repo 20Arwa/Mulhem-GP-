@@ -1,32 +1,31 @@
 {% extends "base.html" %}
-{% block title %}الكتابة المستقلة{% endblock %}
+{% block title %}تعديل قصتي{% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
 {% endblock %}
 {% block body %}
-<!-- If Story Is From Allam (Generated Or Edited) -->
- <!-- نوع القصة -->
-{% if allam_story != undefined %}
-	<div class="container self-writing my-5 rounded-4 p-4 py-5 position-relative" id="قصة مُلهِم">
-{% else %}
-	<div class="container self-writing my-5 rounded-4 p-4 py-5 position-relative" id="كتابة مستقلة">
-{% endif %}
+<div>{{story.id}}" data-story-type="{{story.type}}</div>
+<div class="container self-writing edit-user-story my-5 rounded-4 p-4 py-5 position-relative"  data-story-id="{{story.id}}" data-story-type="{{story.type}}">
 	<div class="book-container position-relative">
 		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
 		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3"></i>
-		<div class="correction-word" title="انقر للتصحيح"></div>
 		<div class="scene">
 				<article class="book">
 					<section class="page active cover-page">
 						<div class="front">
-							<!-- If Story Is From Allam (Generated Or Edited) -->
-							{% if allam_story != undefined %}
-								<input class="button title" type="text" name="title" placeholder="عنوان القصة" value="{{allam_story['title']}}">
-							{% else %}
-								<input class="button title" type="text" name="title" placeholder="عنوان القصة">
-							{% endif %}
+                            <!-- Title -->
+                            {% if story.title == None %}
+                                <input class="button title" type="text" name="title" placeholder="عنوان القصة" value="">
+                            {% else %}
+                                <input class="button title" type="text" name="title" placeholder="عنوان القصة" value="{{story.title}}">
+                            {% endif %}
+                            <!-- Cover Image -->
 							<div class="cover-img-container img-container">
-								<img class="img cover-img" src=""> 
+                                {% if story.imgSrc == "" %}
+								    <img class="img cover-img" src=""> 
+                                {% else %}
+								    <img class="img cover-img" src="../../static/{{story.imgSrc}}"> 
+                                {% endif %}
 							</div>
 							<div class="buttons d-flex align-items-center justify-content-center">
 								<button class="generate-coverImage-btn button active"><i class="fa-solid fa-folder-plus"></i> توليد صورة</button>
@@ -39,13 +38,8 @@
 							</div>
 						</div>
 						<div class="back">
-							<!-- If Story Is From Allam (Generated Or Edited) -->
-							{% if allam_story != undefined %}
-							<div class="text fs-5" contenteditable="true">{{allam_story['story'][0]}}</div>
-							{% else %}
-								<div class="text" contenteditable="true"></div>
-							{% endif %}
-							<!-- <div class="correction-word" title="انقر للتصحيح"></div> -->
+							<div class="text" contenteditable="true">{{story.content[0]}}</div>
+							<div class="correction-word" title="انقر للتصحيح"></div>
 							<div class="counter-sound">
 								<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
 							</div>
@@ -53,57 +47,33 @@
 							<button class="correction-btn">صحح أخطائي</button>
 						</div>
 					</section>
-
-					<!-- If Story Is From Allam (Generated Or Edited) -->
-					{% if allam_story != undefined %}
-						{% for index in range(1, allam_story['story']|length, 2) %}
-						<section class="page">
-							<div class="front">
-								<div class="text fs-5" contenteditable="true">{{allam_story['story'][index]}}</div>
-								<!-- <div class="correction-word" title="انقر للتصحيح"></div> -->
-								<div class="counter-sound">
-									<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
-								</div>
-								<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-								<button class="correction-btn">صحح أخطائي</button>
-							</div>
-							<div class="back">
-								<div class="text fs-5" contenteditable="true">
-									{% if index + 1 < allam_story['story']|length %}
-                                    {{ allam_story['story'][index + 1] }}
-                                	{% endif %}
-								</div>
-								<!-- <div class="correction-word" title="انقر للتصحيح"></div> -->
-								<div class="counter-sound">
-									<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
-								</div>
-								<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-								<button class="correction-btn">صحح أخطائي</button>
-							</div>
-						</section>						
-						{% endfor %}
-					{% else %}
-						<section class="page">
-							<div class="front">
-								<div class="text" contenteditable="true"></div>
-								<!-- <div class="correction-word" title="انقر للتصحيح"></div> -->
-								<div class="counter-sound">
-									<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
-								</div>
-								<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-								<button class="correction-btn">صحح أخطائي</button>
-							</div>
-							<div class="back">
-								<div class="text" contenteditable="true"></div>
-								<!-- <div class="correction-word" title="انقر للتصحيح"></div> -->
-								<div class="counter-sound">
-									<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
-								</div>
-								<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-								<button class="correction-btn">صحح أخطائي</button>
-							</div>
-						</section>
-					{% endif %}
+                    <!-- Rest Of Pages -->
+                    {% for index in range(1, story.content|length, 2) %}
+                    <section class="page">
+                        <div class="front">
+                            <div class="text fs-5" contenteditable="true">{{story.content[index]}}</div>
+                            <div class="correction-word" title="انقر للتصحيح"></div>
+                            <div class="counter-sound">
+                                <div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
+                            </div>
+                            <span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
+                            <button class="correction-btn">صحح أخطائي</button>
+                        </div>
+                        <div class="back">
+                            <div class="text fs-5" contenteditable="true">
+                                {% if index + 1 < story.content|length %}
+                                {{ story.content[index + 1] }}
+                                {% endif %}
+                            </div>
+                            <div class="correction-word" title="انقر للتصحيح"></div>
+                            <div class="counter-sound">
+                                <div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
+                            </div>
+                            <span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
+                            <button class="correction-btn">صحح أخطائي</button>
+                        </div>
+                    </section>						
+                    {% endfor %}
 				</article>
 			</div>
 		</div>
@@ -129,19 +99,18 @@
 					<ul class="dropdown-menu text-center">
 						<li><a class="dropdown-item starting">لا أعرف عن ماذا أكتب</a></li>
 						<li><a class="dropdown-item completion">لا أعرف كيف أكمل قصتي</a></li>
-						<!-- <li><a class="dropdown-item correction" href="#allam-response">صحح أخطائي</a></li> -->
 						<li><a class="dropdown-item elements" href="#allam-response">تحقق من عناصر قصتي</a></li>
 					</ul>
 				</div>
 
 				<div class="record d-flex flex-column align-items-center">
-					<div class="display-voice-record"></div>
-					<div class="d-flex">
-						<div class="controllers-voice-record"></div>
-					</div>
-				</div>
-				
-				<!-- <button class="later-btn"><i class="fa-solid fa-stopwatch"></i>سأكمل لاحقا</button> -->
+                    <div class="display-voice-record" data-audio-src="{% if story.audioSrc %}../../static/{{ story.audioSrc | safe }}{% else %}""{% endif %}"></div>
+                    <div class="d-flex">
+                        <div class="controllers-voice-record"></div>
+                    </div>
+                </div>
+                
+                
 				<button class="out-btn"><i class="fa-solid fa-right-from-bracket"></i>خروج</button>
 				<button class="save-btn"><i class="fa-solid fa-right-from-bracket"></i>حفظ</button>
 			</div>
@@ -357,6 +326,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		newPage.innerHTML = `
 			<div class="front">
 				<div class="text" contenteditable="true"></div>
+				<div class="correction-word" title="انقر للتصحيح"></div>
 				<div class="counter-sound">
 					<div class="text-counter">
 						عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span>
@@ -367,6 +337,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			</div>
 			<div class="back">
 				<div class="text" contenteditable="true"></div>
+				<div class="correction-word" title="انقر للتصحيح"></div>
 				<div class="counter-sound">
 					<div class="text-counter">
 						عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span>
@@ -389,63 +360,71 @@ document.addEventListener('DOMContentLoaded', function () {
 		});
 
 		// @@@@@@@@@@@ Text Counter @@@@@@@@@@@
-		document.querySelectorAll(".text").forEach((textElement) => {
-			const parent = textElement.parentElement; // الوصول إلى العنصر الأب
-			const errorMsg = parent.querySelector(".error-msg.text-error-msg"); // رسالة الخطأ الخاصة بالنص الحالي
-			const textCounterElement = parent.querySelector(".text-counter"); // عداد الأحرف الخاص بالنص الحالي
-			const charCounter = parent.querySelector(".text-counter .charCount"); // عداد الأحرف الخاص بالنص الحالي
-			const maxLengthElement = parent.querySelector(".text-counter .maxLength");
-			const maxLength = Number(maxLengthElement?.textContent || 500); // الحد الأقصى للأحرف
-		
-			if (textElement) {
-				let timeout;
-		
-				// حدث الإدخال
-				textElement.addEventListener("input", () => {
-					textCounterElement.style.opacity = "1";
-					clearTimeout(timeout); // إلغاء المؤقت السابق
-					timeout = setTimeout(() => {
-						const currentText = textElement.innerText; // استخدم innerText للحفاظ على الأسطر الجديدة
-		
-						// إذا تجاوز النص الحد الأقصى
-						if (currentText.length > maxLength) {
-							// قطع النص إلى الحد الأقصى مع الحفاظ على التنسيق
-							const trimmedText = currentText.slice(0, maxLength);
-							textElement.innerText = trimmedText;
-		
-							if (errorMsg) {
-								errorMsg.style.opacity = 1;
-								errorMsg.innerHTML = "لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.";
-							}
-		
-							// إعادة المؤشر إلى نهاية النص
-							const range = document.createRange();
-							const selection = window.getSelection();
-							range.selectNodeContents(textElement);
-							range.collapse(false);
-							selection.removeAllRanges();
-							selection.addRange(range);
-						} else {
-							if (errorMsg) {
-								errorMsg.style.opacity = 0;
-							}
+	document.querySelectorAll(".text").forEach((textElement) => {
+		const parent = textElement.parentElement; // الوصول إلى العنصر الأب
+		const errorMsg = parent.querySelector(".error-msg.text-error-msg"); // رسالة الخطأ الخاصة بالنص الحالي
+		const textCounterElement = parent.querySelector(".text-counter"); // عداد الأحرف الخاص بالنص الحالي
+		const charCounter = parent.querySelector(".text-counter .charCount"); // عداد الأحرف الخاص بالنص الحالي
+		const maxLengthElement = parent.querySelector(".text-counter .maxLength");
+		const maxLength = Number(maxLengthElement?.textContent || 500); // الحد الأقصى للأحرف
+	
+		if (textElement) {
+			let timeout;
+	
+			// حدث الإدخال
+			textElement.addEventListener("input", () => {
+				textCounterElement.style.display = "block";
+				clearTimeout(timeout); // إلغاء المؤقت السابق
+				timeout = setTimeout(() => {
+					const currentText = textElement.innerText; // استخدم innerText للحفاظ على الأسطر الجديدة
+	
+					// إذا تجاوز النص الحد الأقصى
+					if (currentText.length > maxLength) {
+						// قطع النص إلى الحد الأقصى مع الحفاظ على التنسيق
+						const trimmedText = currentText.slice(0, maxLength);
+						textElement.innerText = trimmedText;
+	
+						if (errorMsg) {
+							errorMsg.style.opacity = 1;
+							errorMsg.innerHTML = "لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.";
 						}
-		
-						// تحديث عداد الأحرف
-						if (charCounter) charCounter.textContent = currentText.length;
-					}, 100); // تأخير بسيط لتحسين الأداء
-				});
-		
-				// منع لصق النصوص التي تتجاوز الحد الأقصى
-				textElement.addEventListener("paste", (event) => {
-					event.preventDefault();
-					let pastedText = event.clipboardData
-						.getData("text")
-						.slice(0, maxLength - textElement.innerText.length); // استخدم innerText بدل textContent
-					document.execCommand("insertText", false, pastedText);
-				});
-			}
-		});
+	
+						// إعادة المؤشر إلى نهاية النص
+						const range = document.createRange();
+						const selection = window.getSelection();
+						range.selectNodeContents(textElement);
+						range.collapse(false);
+						selection.removeAllRanges();
+						selection.addRange(range);
+					} else {
+						if (errorMsg) {
+							errorMsg.style.opacity = 0;
+						}
+					}
+	
+					// تحديث عداد الأحرف
+					if (charCounter) charCounter.textContent = currentText.length;
+				}, 100); // تأخير بسيط لتحسين الأداء
+			});
+	
+			// منع لصق النصوص التي تتجاوز الحد الأقصى
+			textElement.addEventListener("paste", (event) => {
+				event.preventDefault();
+				let pastedText = event.clipboardData
+					.getData("text")
+					.slice(0, maxLength - textElement.innerText.length); // استخدم innerText بدل textContent
+				document.execCommand("insertText", false, pastedText);
+			});
+		}
+	});
+	
+	// @@@@@@@@@@@ Text Sitting @@@@@@@@@@@
+	// توحيد ستايل النص داخل صفحة الكتابة
+	document.querySelector(".page .text").addEventListener('paste', (event) => {
+		event.preventDefault(); // منع السلوك الافتراضي
+		const text = (event.clipboardData || window.clipboardData).getData('text/plain'); // الحصول على النص الخام من الحافظة
+		document.execCommand('insertText', false, text); // إدخال النص داخل العنصر بدون تنسيق
+	});
 		nextPage(); // الانتقال إلى الصفحة التالية
 	});
 	
@@ -476,9 +455,10 @@ document.addEventListener('DOMContentLoaded', function () {
 						nextButton.style.display = "none"; // إخفاء زر الصفحة التالية
 						deletePageBtn.setAttribute('disabled', 'disabled'); // تعطيل زر الحذف
 					}
-
+	
 					// حذف الصفحة الحالية
 					currentSection.remove();
+					console.log('تم حذف الصفحة.');
 				} else {
 					Swal.fire({
 						icon: 'error',
@@ -772,7 +752,12 @@ document.addEventListener('DOMContentLoaded', function () {
 			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
 			return;
 		}
-	
+		else if (!repeatedPattern.test(fullStory)) {
+			corrcErrorMsg.innerHTML = "النص يحتوي على كلمات عشوائية وغير مفهومة!";
+			corrcErrorMsg.style.opacity = 1;
+			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
+			return;
+		} 
 		// التحقق من أن النص يحتوي على أحرف مفهومة وليس رموزًا فقط
 		else if (!symbolsRegex.test(textElement.textContent)) {
 			corrcErrorMsg.innerHTML = "النص يحتوي على رموز عشوائية فقط";
@@ -816,46 +801,37 @@ document.addEventListener('DOMContentLoaded', function () {
                 throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
             }
 
-           result = await response.json();
-		//const result = {response: " [[\"بيتن\", \"بيت\"],[\"رائع\", \"رائع\"],[\"جكيل\", \"جميل\"]] "};
+            result = await response.json();
+			const jsonObject = JSON.parse(result.response); // Convert String To JSONS
 
-			// دالة لتحديد الأخطاء في النص
-			function highlightErrors(textElement, errors) {
-				console.log("aftr", errors)
-
-				const textContent = textElement.textContent.trim(); // إزالة المسافات الزائدة من النص
+				function highlightErrors(textElement, errorTypes) {
+				const textContent = textElement.textContent; // النص الكامل
 				const words = textContent.split(/(\s+|[,.!?؛؟])/); // تقسيم النص إلى كلمات وعلامات الترقيم
 				let hasErrors = false; // متغير لتتبع وجود الأخطاء
-				console.log("Wordsسسسسسسسس:", words);
-			
+
 				// إنشاء محتوى جديد مع الأخطاء المحددة
 				const newContent = words.map(word => {
-				const trimmedWord = word.trim(); // إزالة المسافات من الكلمة
-				// البحث في قائمة الأخطاء
-				const error = errors.find(err => err[0] === word.trim() && err[0] !== err[1]); // البحث عن الكلمة في قائمة الأخطاء
-				console.log(errors.find(err => err[0] === word.trim()));
-				console.log(errors.find(err => err[0]),word.trim());
-				console.log("lksmdl");
-				console.log(errors.find(err[0] !== err[1]));
-
-					console.log("Error2:", error);
-					if (error) {
-						console.log(error,"error3")
-						hasErrors = true; // تحديد وجود الأخطاء
-						// إذا وُجد خطأ، إنشاء <span>
-						const span = document.createElement("span");
-						span.className = `error position-relative error-word`; // إضافة class واحد لجميع الأخطاء
-						span.dataset.suggestion = error[1]; // الاقتراح
-						span.textContent = error[0]; // النص الخاطئ
-						return span.outerHTML; // تحويل العنصر إلى نص HTML
+					// البحث في كل نوع من الأخطاء
+					for (const [errorType, errors] of Object.entries(errorTypes)) {
+						const error = errors.find(err => err[0] === word && err[0] !== err[1]); // البحث عن الكلمة في قائمة الأخطاء
+						if (error) {
+							hasErrors = true; // تحديد وجود الأخطاء
+							// إذا وُجد خطأ، إنشاء <span>
+							const span = document.createElement("span");
+							span.className = `${errorType}-error position-relative error-word`; // إضافة نوع الخطأ كـ class
+							span.dataset.suggestion = error[1]; // الاقتراح
+							span.textContent = error[0]; // النص الخاطئ
+							span.dataset.errorType = errorType; // نوع الخطأ
+							return span.outerHTML; // تحويل العنصر إلى نص HTML
+						}
 					}
 					return word; // الكلمة صحيحة تُترك كما هي
 				}).join(''); // إعادة تجميع النصوص
 			
 				// استبدال النص في العنصر
 				textElement.innerHTML = newContent;
-			
-				// $$$$$$ إذا لم يكن هناك أخطاء $$$$$$
+
+				// $$$$$$ If No Errors $$$$$$ 
 				if (!hasErrors) {
 					Swal.fire({
 						title: 'رائع جدا!',
@@ -863,66 +839,38 @@ document.addEventListener('DOMContentLoaded', function () {
 						icon: 'success',
 						confirmButtonText: 'عودة للكتابة',
 						reverseButtons: true, 
-					});
-				} else {
+					})
+					return;
+				}
+				else {
 					Swal.fire({
 						title: 'أحسنت!',
 						text: 'لكن هناك بعض الأخطاء الصغيرة. اضغط على الأجزاء الملوّنة لتصحيحها وتحسين قصتك',
 						icon: 'info',
 						confirmButtonText: 'العودة لتصحيح الأخطاء',
 						reverseButtons: true,
-					});
+					})
 				}
 			}
 			
-			// الرد من الخادم في التنسيق الجديد
-			const response_n = JSON.parse(result.response); // تحويل النص إلى JSON
-			console.log("bfor", response_n)
-			highlightErrors(textElement, response_n); // تطبيق الأخطاء على النص
+			highlightErrors(textElement, jsonObject); // تطبيق الدالة
 			
-				
+		
 			// Show Correction On Mouse Over
-			var correctionWord = document.querySelector(".correction-word");	
-			// تعريف متغير لتتبع الكلمة الحالية
-		let activeErrorElement = null;
-
-		// حدث عند مرور الماوس على الكلمة
-		textElement.addEventListener('mouseover', (e) => {
-			const target = e.target;
-
-			// التأكد من أن العنصر يحتوي على خطأ وتصحيح
-			if (target.classList.contains('error-word') && target.dataset.suggestion) {
-				activeErrorElement = target; // تعيين الكلمة النشطة
-				correctionWord.style.display = 'block'; // عرض عنصر التصحيح
-				correctionWord.textContent = `الكلمة الصحيحة: ${target.dataset.suggestion}`; // تحديث النص
-			}
-		});
-
-		// حدث عند النقر على التصحيح
-		correctionWord.addEventListener('click', () => {
-			if (activeErrorElement) {
-				// تحديث النص وتصحيح الخطأ
-				activeErrorElement.textContent = activeErrorElement.dataset.suggestion;
-				activeErrorElement.classList.remove('error-word'); // إزالة التنسيق الخاص بالخطأ
-				activeErrorElement = null; // إعادة تعيين العنصر النشط
-				correctionWord.style.display = 'none'; // إخفاء التصحيح
-			}
-		});
-
-
-		// التأكد عند النقر على كلمة
-		//textElement.addEventListener('click', (e) => {
-		//	const target = e.target;
-		//	if (target.classList.contains('error-word') && target.dataset.suggestion) {
-		//		activeErrorElement = target;
-		//		// تحديث النص التصحيحي
-		//		correctionWord.style.display = 'block';
-		//		correctionWord.textContent = `الكلمة الصحيحة: ${target.dataset.suggestion}`;
-		//	}
-		//});
-
-
-
+			var correctionWord = document.querySelector(".back .correction-word");	
+			textElement.addEventListener('mouseover', (e) => {
+				if (e.target.classList.contains('spelling-error') || e.target.classList.contains('grammar-error') || e.target.classList.contains('inappropriate_words-error')) {
+					correctionWord.style.display = 'block';
+					correctionWord.textContent = `الكلمة الصحيحة: ${e.target.dataset.suggestion}`;
+			
+					// إضافة حدث النقر لتعديل الكلمة المحددة فقط
+					correctionWord.onclick = () => {
+						e.target.textContent = e.target.dataset.suggestion;
+						e.target.className = ""; // إزالة كل الأخطاء
+						correctionWord.style.display = 'none';
+					};
+				}
+			});
 		} catch (error) {
             Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
             // عرض رسالة خطأ
@@ -1229,7 +1177,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 			// حدث الإدخال
 			textElement.addEventListener("input", () => {
-				textCounterElement.style.opacity = "1";
+				textCounterElement.style.display = "block";
 				clearTimeout(timeout); // إلغاء المؤقت السابق
 				timeout = setTimeout(() => {
 					const currentText = textElement.innerText; // استخدم innerText للحفاظ على الأسطر الجديدة
@@ -1276,11 +1224,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 	// @@@@@@@@@@@ Text Sitting @@@@@@@@@@@
 	// توحيد ستايل النص داخل صفحة الكتابة
-	//document.querySelector(".page .text").addEventListener('paste', (event) => {
-	//	event.preventDefault(); // منع السلوك الافتراضي
-	//	const text = (event.clipboardData || window.clipboardData).getData('text/plain'); // الحصول على النص الخام من الحافظة
-	//	document.execCommand('insertText', false, text); // إدخال النص داخل العنصر بدون تنسيق
-	//});
+	document.querySelector(".page .text").addEventListener('paste', (event) => {
+		event.preventDefault(); // منع السلوك الافتراضي
+		const text = (event.clipboardData || window.clipboardData).getData('text/plain'); // الحصول على النص الخام من الحافظة
+		document.execCommand('insertText', false, text); // إدخال النص داخل العنصر بدون تنسيق
+	});
 	
 	
 	
@@ -1309,6 +1257,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	saveBtn.addEventListener("click",async () => {
 		// Get Elements
 		var title = document.querySelector(".page.cover-page .front .title");
+        var  storyID = document.querySelector(".edit-user-story").getAttribute("id");
 		var titleText = document.querySelector(".page.cover-page .front .title").value;
 		var image = document.querySelector(".page.cover-page .front .cover-img");
 		var imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
@@ -1343,12 +1292,14 @@ document.addEventListener('DOMContentLoaded', function () {
 			return; // الخروج فقط في حالة النص غير العربي
 		}
 		const data = {
-			title: title.value || null, // إذا كان الحقل فارغًا، يتم إرساله كقيمة فارغة
-			imageSrc: imageSrc || "", 
-			audioSrc: audioSrc || "", 
-			type: type || "",
-			message: fullStoryArray || ""
-		};
+            id: storyID || null, // إضافة الـ ID الخاص بالقصة
+            title: title.value || null,
+            imageSrc: imageSrc || "",
+            audioSrc: audioSrc || "",
+            type: type || "",
+            message: fullStoryArray || ""
+        };
+        
 		
 		// Call function to send the story
 		await SendStory(data);
@@ -1357,10 +1308,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	//Save Story Function
 	async function handleUserExit(event) {
 		// Get Elements
+		var  storyID = document.querySelector(".edit-user-story").dataset.storyId;
+        console.log(storyID)
 		var title = document.querySelector(".page.cover-page .front .title");
 		var image = document.querySelector(".page.cover-page .front .cover-img");
 		var imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
-		var type = document.querySelector(".self-writing").getAttribute("id");
+		var type = document.querySelector(".self-writing").dataset.storyType;
 		var audio = document.querySelector(".record audio");
 		var audioSrc = "";
 		if (audio) {
@@ -1409,12 +1362,14 @@ document.addEventListener('DOMContentLoaded', function () {
 					}
 
 					const data = {
-						title: title.value || null, // إذا كان الحقل فارغًا، يتم إرساله كقيمة فارغة
-						imageSrc: imageSrc || "", // نفس الشيء هنا
-						audioSrc: audioSrc || "", 
-						type: type || "",
-						message: fullStoryArray || ""
-					};
+                        id: storyID || null, // إضافة الـ ID الخاص بالقصة
+                        title: title.value || null,
+                        imageSrc: imageSrc || "",
+                        audioSrc: audioSrc || "",
+                        type: type || "",
+                        message: fullStoryArray || ""
+                    };
+                    
 					
 					// Call function to send the story
 					if (await SendStory(data))
@@ -1442,7 +1397,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 	
 			// Send data to the server
-			const response = await fetch('http://127.0.0.1:5000/save-user-story', {
+			const response = await fetch('http://127.0.0.1:5000/update-user-story', {
 				method: 'POST',
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(data)
@@ -1463,15 +1418,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				} else {
 					console.log("لا توجد صورة جديدة لتحديثها.");
 			}		
-			Swal.fire({
-				title: 'تم حفظ القصة!',
-				text: '',
-				icon: 'success',
-				showConfirmButton: false, // إخفاء زر "OK"
-			});
-			
-			setTimeout(() => {window.location.replace(result.redirect_url); },1000)  // تحديث الصفحة الجديدة بدون إضافتها إلى سجل التاريخ
-
+			Swal.fire('تم حفظ القصة!', '', 'success');
 			return true;
 			} else {
 				const result = await response.json();

@@ -2,10 +2,12 @@
 {% block title %}{{story.title}}{% endblock %}
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reading/edit_story.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/reading/reading_page.css') }}">
 {% endblock %}
 
 {% block body %}
-<div class="container self-writing my-5 rounded-4 p-4 py-5 position-relative">
+<div class="container self-writing reading-page my-5 rounded-4 p-4 py-5 position-relative" id="{{story.id}}">
 	<div class="book-container position-relative">
 		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
 		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3"></i>
@@ -31,6 +33,13 @@
 						</div>
 						<div class="back">
 							<div class="text">{{story.content[0]}}</div>
+							<!-- Put Audio If our_library Story -->
+							{% if reading_type == "our_library" %}
+							<audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+								<source id="audioSource" src="../../static/{{story.audioSrc[0]}}" type="audio/mpeg">
+								المتصفح الخاص بك لا يدعم عنصر الصوت
+							</audio>
+						    {% endif %}
 						</div>
 					</section>
                     <!-- Loop The Rest Of Pages -->
@@ -38,10 +47,15 @@
                     <section class="page">
                         <div class="front">
                             <div class="text" contenteditable="true">{{ story.content[index] }}</div>
-                            <!-- Put Audio If our_library Story ?????????????????????????????? -->
+
+                            <!-- Put Audio If our_library Story -->
                             {% if reading_type == "our_library" %}
-                                {{ story.audioSrc[index + 1] }}
+								<audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+									<source id="audioSource" src="../../static/{{story.audioSrc[index]}}" type="audio/mpeg">
+									المتصفح الخاص بك لا يدعم عنصر الصوت
+								</audio>
                             {% endif %}
+
                         </div>
                         <div class="back">
                             <div class="text" contenteditable="true">
@@ -49,31 +63,94 @@
                                     {{ story.content[index + 1] }}
                                 {% endif %}
                             </div>
+
+							<!-- Put Audio If our_library Story -->
+							{% if index + 1 < story.content|length %}
+								{% if reading_type == "our_library" %}
+								<audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+									<source id="audioSource" src="../../static/story.audioSrc[index]" type="audio/mpeg">
+									المتصفح الخاص بك لا يدعم عنصر الصوت
+								</audio>
+							  {% endif %}
+							{% endif %}
+
                         </div>
                     </section>
                     {% endfor %}
 				</article>
 			</div>
 		</div>
+
+        <!-- Our Library Extra Content -->
+		{% if reading_type == "our_library" %}
+		<div class="sitting-buttons">
+            <button class="edit-availble-btn">
+				<i class="fa-regular fa-pen-to-square"></i>
+				تغيير القصة
+			</button>
+        </div>
+		{% endif %}
+
         <!-- User Stories Extra Content -->
         <div class="sitting-buttons">
-            {% if reading_type == "user_stories" %}
-                {% if story.audioSrc != None %}
-                    <div class="record_audio">
-                        <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
-                            <source id="audioSource" src="../../static/{{story.audioSrc}}" type="audio/mpeg">
-                            المتصفح الخاص بك لا يدعم عنصر الصوت
-                        </audio>
-                    </div>
-                {% else %}
-                    <div class="record_audio">لا يوجد صوت مسجل</div>
-                {% endif %}
-                <div class="edit_delete_buttons">
-                    <button>تعديل القصة</button>
-                    <button>حذف القصة</button>
-                </div>
-            {% endif %}
-        </div>
+			{% if reading_type == "user_stories" %}
+				{% if story.audioSrc != "" %}
+				<div class="record_audio">
+					<audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+						<source id="audioSource" src="../../static/{{story.audioSrc}}" type="audio/mpeg">
+						المتصفح الخاص بك لا يدعم عنصر الصوت
+					</audio>
+				</div>
+				{% else %}
+				<div class="record_audio">لا يوجد صوت مسجل</div>
+				{% endif %}
+				<div class="edit-delete_buttons">
+						<button class="edit-user-story">
+							<i class="fa-solid fa-pencil"></i>
+							تعديل القصة
+						</button>
+						<button class="delete-user-story">
+							<i class="fa-regular fa-trash-can"></i>
+							حذف القصة
+						</button>
+				</div>
+
+				{% endif %}
+		</div>
+
+			<!-- Edit Availble Story -->
+		<div class="response edit-availble-story p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center">
+			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
+			<div class="edit-story-container my-5">
+				<h1> <i class="fa-solid fa-pen user-icon"></i> اضف لمستك الى القصة </h1>   
+				<form id="storyForm">
+				
+				<label class="story-label"> <i class="fa-solid fa-user-minus"></i> احذف شخصية من شخصيات القصة: </label>
+				<input type="text" name="deletcharcter" id="deletcharcter" class="story-input" maxlength="200" placeholder="من هي الشخصية؟">
+				
+				<div id="characters" class="story-characters-group">
+				<!-- Initially empty; characters will be added here -->
+				</div>
+				
+				<button type="button" class="story-btn-small" onclick="addCharacter()"> <i class="fa-solid fa-user-plus"></i> إضافة شخصية جديدة </button>
+			
+				<div class="story-spacing"></div>
+				<label class="story-label"> <i class="fa-solid fa-exchange-alt"></i> تغير حدث في القصة:</label>
+				<input type="text" name="event" id="event" class="story-input" maxlength="200" placeholder="ما الحدث الذي تود تغيره؟">
+				
+				<div class="story-spacing"></div>
+				<label class="story-label"> <i class="fa-solid fa-pen-to-square"></i> تغير بداية القصة: </label>
+				<textarea id="beginning" class="story-input-textarea" maxlength="250" placeholder="كيف ستبدأ القصة؟"></textarea>
+				
+				<label class="story-label"> <i class="fa-solid fa-pen-to-square"></i> تغير نهاية القصة: </label>
+				<textarea id="End" class="story-input-textarea" maxlength="250" placeholder="كيف ستنتهي القصة؟"></textarea>
+			
+				<div class="error-msg text-center" style="opacity: 0; transition: opacity 0.3s;">يجب إدخال النصوص باللغة العربية فقط</div>
+				
+				<button type="button" class="story-btn-main" onclick="submitStory()" >أنشئ القصة</button>
+			</form>
+			</div>
+		</div>
 </div>
 {% endblock %}
 {% block script %}
@@ -152,6 +229,193 @@
 		}
 	}
 
-    })
+	// Edit User Story
+	var editUserBtn = document.querySelector(".edit-delete_buttons .edit-user-story");
+	if (editUserBtn != null) {
+		editUserBtn.addEventListener("click", () => {
+			// جلب معرف القصة من عنصر HTML
+			const storyId = document.querySelector(".self-writing").getAttribute("id");
+	
+			// إعادة التوجيه إلى صفحة التعديل مع معرف القصة
+			window.location.href = `/edit_user_story?storyID=${storyId}`;
+		});
+	}
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+})
+
+	// Edit Availble Story Functions
+	function addCharacter() {
+		const charactersDiv = document.getElementById("characters");
+		const characterInputs = charactersDiv.querySelectorAll(".story-character-row");
+		
+		if (characterInputs.length < 3) {
+			const newRow = document.createElement("div");
+			newRow.className = "story-character-row";
+		
+			const nameInput = document.createElement("input");
+			nameInput.type = "text";
+			nameInput.className = "story-input story-character-name";
+			nameInput.placeholder = `اسم الشخصية ${characterInputs.length + 1}...`;
+		
+			const descInput = document.createElement("input");
+			descInput.type = "text";
+			descInput.className = "story-input story-character-description";
+			descInput.placeholder = `وصف الشخصية ${characterInputs.length + 1}...`;
+		
+			newRow.appendChild(nameInput);
+			newRow.appendChild(descInput);
+			charactersDiv.appendChild(newRow);
+		} else {
+			alert("يمكنك إضافة 3 شخصيات كحد أقصى!");
+		}
+	}
+		
+		async function submitStory() {
+		const errorMsg = document.querySelector(".edit-story-container .error-msg");
+		
+		// Collect character data
+		const characters = [...document.querySelectorAll(".story-character-row")].map(row => ({
+			name: row.querySelector(".story-character-name").value.trim(),
+			description: row.querySelector(".story-character-description").value.trim(),
+		}));
+		
+		// Collect other inputs
+		const deleteCharacter = document.getElementById("deletcharcter").value.trim();
+		const event = document.getElementById("event").value.trim();
+		const beginning = document.getElementById("beginning").value.trim();
+		const end = document.getElementById("End").value.trim();
+		const arabicRegex = /^[\u0600-\u06FF\s.,،؟!:؛()«»"'\-—_…\[\]{}<>*+\/\\|~`^%$#@&0-9\u0660-\u0669]*$/; 
+
+		
+		// Prepare story elements
+		var storyElements = { characters, deleteCharacter, event, beginning, end };
+		
+		// Check if at least one input is filled
+		if (!deleteCharacter && !event && !beginning && !end && characters.every(c => !c.name)) {
+			errorMsg.style.opacity = 1;
+			errorMsg.innerHTML = "يجب إدخال نص واحد على الأقل.";
+			return; // Exit the function
+		}
+		
+		// Check if all inputs are in Arabic
+		else if (![deleteCharacter, event, beginning, end].concat(characters.map(c => c.name)).every(text => arabicRegex.test(text))) {
+			errorMsg.style.opacity = 1;
+			errorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
+			return; // Exit the function
+		}else {
+			errorMsg.style.opacity = 0; // Clear error message
+		}
+
+
+
+		
+
+		// Send To Allam
+		const data = { message: storyElements };
+
+		// إظهار رسالة التحميل
+		Swal.fire({
+			title: 'جاري تعديل القصة...',
+			text: 'الرجاء الانتظار قليلاً',
+			allowOutsideClick: false,
+			showConfirmButton: false,
+			didOpen: () => {
+				Swal.showLoading(); // عرض المؤشر الدائري
+			}
+		});
+		try {
+			const response = await fetch('http://127.0.0.1:5000/allam-edit-aval-story', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data),
+			});
+			
+			Swal.close(); // إغلاق رسالة التحميل
+			
+			if (!response.ok) {
+				throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+			}
+			
+			// محاولة تحليل الرد كـ JSON
+			let responseData;
+				try {
+					responseData = await response.json();
+				} catch (jsonError) {
+					throw new Error('رد غير صالح من الخادم. تأكد أن الخادم يعيد JSON.');
+				}
+				
+				// Show success message
+				Swal.fire({
+					title: 'تم تعديل القصة!',
+					text: 'سيتم إعادة توجيهك لصفحة الكتابة',
+					icon: 'success',
+					confirmButtonText: 'موافق',
+					reverseButtons: true,
+				});
+				
+				// التحقق من وجود رابط إعادة توجيه لصفحة الكتابة في الرد
+				if (responseData.redirect) {
+					setTimeout(() => {window.location.href = responseData.redirect;},1000)  // تحديث الصفحة الجديدة بدون إضافتها إلى سجل التاريخ
+				} else {
+					// عرض القصة إذا لم يتم إرسال رابط إعادة توجيه
+					Swal.fire({
+					title: 'تم!',
+					html: `<div style="text-align: right; white-space: pre-line;">${responseData.response}</div>`,
+					icon: 'success',
+					confirmButtonText: 'موافق',
+					reverseButtons: true,
+					});
+				}
+				} catch (error) {
+				Swal.close();
+				Swal.fire({
+					title: 'خطأ!',
+					text: error.message,
+					icon: 'error',
+					confirmButtonText: 'موافق',
+					reverseButtons: true,
+				});
+			}
+		}
+
+
+
+
+
+		
+		
+	
+
+
+
+	// Clcik On Edit Availble
+	var editAvalForm = document.querySelector(".edit-availble-story.response");
+	document.querySelector(".sitting-buttons .edit-availble-btn").addEventListener("click", (e) => {
+		e.preventDefault(); // Prevent page reload
+		editAvalForm.style.display = "block";
+		// Go Down To completion
+		const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
+		window.scrollTo({ 
+			top: editAvalForm.getBoundingClientRect().top + window.pageYOffset - offset, 
+			behavior: 'smooth' 
+		});
+	});
+	// Click On Close Edit Availble
+	document.querySelector(".edit-availble-story.response .close-icon").addEventListener("click", () => {
+		editAvalForm.style.display = "none";
+		window.scrollBy({top: -420});	
+	});
+	// Click On Submit Change
+
 </script>
 {% endblock %}
