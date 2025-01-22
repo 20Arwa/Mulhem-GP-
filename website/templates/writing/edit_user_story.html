@@ -4,8 +4,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
 {% endblock %}
 {% block body %}
-<div>{{story.id}}" data-story-type="{{story.type}}</div>
-<div class="container self-writing edit-user-story my-5 rounded-4 p-4 py-5 position-relative"  data-story-id="{{story.id}}" data-story-type="{{story.type}}">
+<div class="page-title container mt-5 ">صفحة الكتابة</div>
+<div class="container self-writing edit-user-story mb-5 p-4 py-5 position-relative"  data-story-id="{{story.id}}" data-story-type="{{story.type}}">
 	<div class="book-container position-relative">
 		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
 		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3"></i>
@@ -191,7 +191,7 @@
 		</div>
 
 		<!-- Story Completion -->
-		<div class="response response-completion p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="completion">
+		<div class="response response-completion p-4 p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="completion">
 			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
 			<div class="d-flex justify-content-between mb-5">
 				<h3>✍️📖المساعدة في الإكمال:</h3>
@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 		});
 
-		// @@@@@@@@@@@ Text Counter @@@@@@@@@@@
+	// @@@@@@@@@@@ Text Counter @@@@@@@@@@@
 	document.querySelectorAll(".text").forEach((textElement) => {
 		const parent = textElement.parentElement; // الوصول إلى العنصر الأب
 		const errorMsg = parent.querySelector(".error-msg.text-error-msg"); // رسالة الخطأ الخاصة بالنص الحالي
@@ -370,10 +370,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 		if (textElement) {
 			let timeout;
-	
 			// حدث الإدخال
 			textElement.addEventListener("input", () => {
-				textCounterElement.style.display = "block";
+				textCounterElement.style.opacity = "1";
 				clearTimeout(timeout); // إلغاء المؤقت السابق
 				timeout = setTimeout(() => {
 					const currentText = textElement.innerText; // استخدم innerText للحفاظ على الأسطر الجديدة
@@ -384,10 +383,9 @@ document.addEventListener('DOMContentLoaded', function () {
 						const trimmedText = currentText.slice(0, maxLength);
 						textElement.innerText = trimmedText;
 	
-						if (errorMsg) {
-							errorMsg.style.opacity = 1;
-							errorMsg.innerHTML = "لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.";
-						}
+						console.log("dkfjei")
+						errorMsg.style.opacity = 1;
+						errorMsg.innerHTML = "لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.";
 	
 						// إعادة المؤشر إلى نهاية النص
 						const range = document.createRange();
@@ -397,11 +395,8 @@ document.addEventListener('DOMContentLoaded', function () {
 						selection.removeAllRanges();
 						selection.addRange(range);
 					} else {
-						if (errorMsg) {
-							errorMsg.style.opacity = 0;
-						}
+						errorMsg.style.opacity = 0;
 					}
-	
 					// تحديث عداد الأحرف
 					if (charCounter) charCounter.textContent = currentText.length;
 				}, 100); // تأخير بسيط لتحسين الأداء
@@ -416,14 +411,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				document.execCommand("insertText", false, pastedText);
 			});
 		}
-	});
-	
-	// @@@@@@@@@@@ Text Sitting @@@@@@@@@@@
-	// توحيد ستايل النص داخل صفحة الكتابة
-	document.querySelector(".page .text").addEventListener('paste', (event) => {
-		event.preventDefault(); // منع السلوك الافتراضي
-		const text = (event.clipboardData || window.clipboardData).getData('text/plain'); // الحصول على النص الخام من الحافظة
-		document.execCommand('insertText', false, text); // إدخال النص داخل العنصر بدون تنسيق
 	});
 		nextPage(); // الانتقال إلى الصفحة التالية
 	});
@@ -1103,7 +1090,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 			
             result = await response.json();
-			const resultQues = result.split("Input:")[0].trim();
 			
 			// Show Response To User
 			var completionContain  = document.querySelector(".response-completion");
@@ -1117,7 +1103,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 			completionContain.style.display = "block";
-			completionContain.querySelector(".text").innerHTML = resultQues;
+			completionContain.querySelector(".text").innerHTML = result.response;
 		
 		} catch (error) {
 			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
@@ -1177,7 +1163,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 			// حدث الإدخال
 			textElement.addEventListener("input", () => {
-				textCounterElement.style.display = "block";
+				textCounterElement.style.opacity = "1";
 				clearTimeout(timeout); // إلغاء المؤقت السابق
 				timeout = setTimeout(() => {
 					const currentText = textElement.innerText; // استخدم innerText للحفاظ على الأسطر الجديدة
@@ -1252,16 +1238,20 @@ document.addEventListener('DOMContentLoaded', function () {
 	//	handleUserExit()
 	});
 	
+
+
+
+	// from heeeeeeeeeeeeeeeeeeeere SAVE
 	// Click On Save Button
 	var saveBtn = document.querySelector(".save-btn");
 	saveBtn.addEventListener("click",async () => {
 		// Get Elements
 		var title = document.querySelector(".page.cover-page .front .title");
-        var  storyID = document.querySelector(".edit-user-story").getAttribute("id");
 		var titleText = document.querySelector(".page.cover-page .front .title").value;
+        var storyID = document.querySelector(".edit-user-story").dataset.storyId;
+		console.log(storyID)
 		var image = document.querySelector(".page.cover-page .front .cover-img");
 		var imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
-		var type = document.querySelector(".self-writing").getAttribute("id");
 		var audio = document.querySelector(".record audio");
 		var audioSrc = "";
 		if (audio) {
@@ -1296,11 +1286,9 @@ document.addEventListener('DOMContentLoaded', function () {
             title: title.value || null,
             imageSrc: imageSrc || "",
             audioSrc: audioSrc || "",
-            type: type || "",
             message: fullStoryArray || ""
         };
         
-		
 		// Call function to send the story
 		await SendStory(data);
 	})
@@ -1308,12 +1296,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	//Save Story Function
 	async function handleUserExit(event) {
 		// Get Elements
-		var  storyID = document.querySelector(".edit-user-story").dataset.storyId;
-        console.log(storyID)
+		var storyID = document.querySelector(".edit-user-story").dataset.storyId;
 		var title = document.querySelector(".page.cover-page .front .title");
 		var image = document.querySelector(".page.cover-page .front .cover-img");
 		var imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
-		var type = document.querySelector(".self-writing").dataset.storyType;
 		var audio = document.querySelector(".record audio");
 		var audioSrc = "";
 		if (audio) {
@@ -1333,6 +1319,9 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (!title.value && !imageSrc && !fullStory.trim()) {
 			window.location.href = '/writing/writing-types'; // Go To Writing Types Page
 		} else {
+
+			// Send Story If No Change No Need To this ######################
+			
 			// Sweet Alert
 			Swal.fire({
 				title: 'حفظ القصة',
@@ -1366,7 +1355,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: title.value || null,
                         imageSrc: imageSrc || "",
                         audioSrc: audioSrc || "",
-                        type: type || "",
                         message: fullStoryArray || ""
                     };
                     
@@ -1387,7 +1375,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		try {
 			// Show loading alert
 			Swal.fire({
-				title: 'جاري حفظ قصتك...',
+				title: 'جاري تحديث قصتك...',
 				text: 'الرجاء الانتظار قليلاً',
 				allowOutsideClick: false,
 				showConfirmButton: false,
@@ -1405,8 +1393,10 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 			// Handle response
 			if (response.ok) {
-				let result = await response.json();
+				let result = await response.json(); 
 
+				console.log("res", result)
+				console.log("res", result.imageUpdated)
 				if (result.imageUpdated) { // تحقق إذا كانت الصورة قد تم تحديثها
 					let storyID = result.storyID; // جلب ID القصة من الخادم
 					var userID = result.userID;  // جلب ID المستخدم من الخادم
@@ -1418,7 +1408,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				} else {
 					console.log("لا توجد صورة جديدة لتحديثها.");
 			}		
-			Swal.fire('تم حفظ القصة!', '', 'success');
+			Swal.fire('تم تحديث القصة!', '', 'success');
 			return true;
 			} else {
 				const result = await response.json();
@@ -1432,15 +1422,15 @@ document.addEventListener('DOMContentLoaded', function () {
 					});
 				} else {
 					Swal.fire({
-						title: 'فشل الحفظ',
-						text: 'حدث خطأ أثناء حفظ القصة.',
+						title: 'فشل تحديث القصة',
+						text: 'حدث خطأ أثناء تحديث القصة.',
 						icon: 'error',
 						confirmButtonText: 'حاول مرة أخرى'
 					});
 				}
 			}
 		} catch (error) {
-			Swal.fire('فشل الحفظ', 'حدث خطأ أثناء التواصل مع الخادم', 'error');
+			Swal.fire('فشل التحديث', 'حدث خطأ أثناء التواصل مع الخادم', 'error');
 			console.error(error);
 		}
 	}

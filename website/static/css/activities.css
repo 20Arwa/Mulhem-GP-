@@ -361,12 +361,16 @@ i.text-sound:hover {
 }
 .characters_activity .section-3 .small-activity .question .square {
     cursor: pointer;
-    background-color: transparent;
+    border-radius: 15px;
+    transition: var(--transition-seconds);
+}
+.characters_activity .section-3 .small-activity .question .square:hover {
+    background-color: rgb(233 181 253 / 50%);
 }
 .characters_activity .section-3 .small-activity .question:first-of-type .rabbit {
     width: 59px;
-    height: 127px;
-    top: 44px;
+    height: 134px;
+    top: 40px;
     left: 61px;
 }
 .characters_activity .section-3 .small-activity .question:first-of-type .fox {
@@ -377,8 +381,8 @@ i.text-sound:hover {
 }
 .characters_activity .section-3 .small-activity .question:last-of-type .rabbit {
     width: 59px;
-    height: 127px;
-    top: 47px;
+    height: 134px;
+    top: 40px;
     left: 59px;
 }
 .characters_activity .section-3 .small-activity .question:last-of-type .fox {
@@ -444,3 +448,8 @@ i.text-sound:hover {
 }
 
 
+
+/* @@@@@@@@@@@@@ activity_2 Page @@@@@@@@@@@@@ */
+.activity_2_exer1 .form-floating textarea:focus-visible {
+    outline-color: var(--main-dark);
+}

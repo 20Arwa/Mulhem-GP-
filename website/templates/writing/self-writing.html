@@ -5,9 +5,10 @@
 {% endblock %}
 {% block body %}
 <!-- If Story Is From Allam (Generated Or Edited) -->
+<div class="page-title container mt-5 ">صفحة الكتابة</div>
  <!-- نوع القصة -->
 {% if allam_story != undefined %}
-	<div class="container self-writing my-5 rounded-4 p-4 py-5 position-relative" id="قصة مُلهِم">
+	<div class="container self-writing mb-5 p-4 py-5 position-relative" id="قصة مُلهِم">
 {% else %}
 	<div class="container self-writing my-5 rounded-4 p-4 py-5 position-relative" id="كتابة مستقلة">
 {% endif %}
@@ -56,7 +57,7 @@
 
 					<!-- If Story Is From Allam (Generated Or Edited) -->
 					{% if allam_story != undefined %}
-						{% for index in range(1, allam_story['story']|length, 2) %}
+						{% for index in range(1, allam_story['story']|length+1, 2) %}
 						<section class="page">
 							<div class="front">
 								<div class="text fs-5" contenteditable="true">{{allam_story['story'][index]}}</div>
@@ -222,7 +223,7 @@
 		</div>
 
 		<!-- Story Completion -->
-		<div class="response response-completion p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="completion">
+		<div class="response response-completion p-4 p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="completion">
 			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
 			<div class="d-flex justify-content-between mb-5">
 				<h3>✍️📖المساعدة في الإكمال:</h3>
@@ -399,7 +400,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		
 			if (textElement) {
 				let timeout;
-		
 				// حدث الإدخال
 				textElement.addEventListener("input", () => {
 					textCounterElement.style.opacity = "1";
@@ -413,10 +413,9 @@ document.addEventListener('DOMContentLoaded', function () {
 							const trimmedText = currentText.slice(0, maxLength);
 							textElement.innerText = trimmedText;
 		
-							if (errorMsg) {
-								errorMsg.style.opacity = 1;
-								errorMsg.innerHTML = "لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.";
-							}
+							console.log("dkfjei")
+							errorMsg.style.opacity = 1;
+							errorMsg.innerHTML = "لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.";
 		
 							// إعادة المؤشر إلى نهاية النص
 							const range = document.createRange();
@@ -426,11 +425,8 @@ document.addEventListener('DOMContentLoaded', function () {
 							selection.removeAllRanges();
 							selection.addRange(range);
 						} else {
-							if (errorMsg) {
-								errorMsg.style.opacity = 0;
-							}
+							errorMsg.style.opacity = 0;
 						}
-		
 						// تحديث عداد الأحرف
 						if (charCounter) charCounter.textContent = currentText.length;
 					}, 100); // تأخير بسيط لتحسين الأداء
@@ -821,24 +817,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
 			// دالة لتحديد الأخطاء في النص
 			function highlightErrors(textElement, errors) {
-				console.log("aftr", errors)
 
 				const textContent = textElement.textContent.trim(); // إزالة المسافات الزائدة من النص
 				const words = textContent.split(/(\s+|[,.!?؛؟])/); // تقسيم النص إلى كلمات وعلامات الترقيم
 				let hasErrors = false; // متغير لتتبع وجود الأخطاء
-				console.log("Wordsسسسسسسسس:", words);
 			
 				// إنشاء محتوى جديد مع الأخطاء المحددة
 				const newContent = words.map(word => {
 				const trimmedWord = word.trim(); // إزالة المسافات من الكلمة
 				// البحث في قائمة الأخطاء
 				const error = errors.find(err => err[0] === word.trim() && err[0] !== err[1]); // البحث عن الكلمة في قائمة الأخطاء
-				console.log(errors.find(err => err[0] === word.trim()));
-				console.log(errors.find(err => err[0]),word.trim());
-				console.log("lksmdl");
-				console.log(errors.find(err[0] !== err[1]));
 
-					console.log("Error2:", error);
 					if (error) {
 						console.log(error,"error3")
 						hasErrors = true; // تحديد وجود الأخطاء
@@ -1155,7 +1144,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 			
             result = await response.json();
-			const resultQues = result.split("Input:")[0].trim();
 			
 			// Show Response To User
 			var completionContain  = document.querySelector(".response-completion");
@@ -1169,7 +1157,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 			completionContain.style.display = "block";
-			completionContain.querySelector(".text").innerHTML = resultQues;
+			completionContain.querySelector(".text").innerHTML = result.response;
 		
 		} catch (error) {
 			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
@@ -1465,7 +1453,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}		
 			Swal.fire({
 				title: 'تم حفظ القصة!',
-				text: '',
+				text: 'ستتم إعادة توجيهك لصفحة التعديل',
 				icon: 'success',
 				showConfirmButton: false, // إخفاء زر "OK"
 			});

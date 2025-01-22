@@ -7,7 +7,8 @@
 {% endblock %}
 
 {% block body %}
-<div class="container self-writing reading-page my-5 rounded-4 p-4 py-5 position-relative" id="{{story.id}}">
+<div class="page-title container mt-5 ">صفحة القراءة</div>
+<div class="container self-writing reading-page mb-5 p-4 py-5 position-relative" id="{{story.id}}">
 	<div class="book-container position-relative">
 		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
 		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3"></i>
@@ -229,7 +230,7 @@
 		}
 	}
 
-	// Edit User Story
+	// @@@@@@@@@@@ Edit User Story @@@@@@@@@@@
 	var editUserBtn = document.querySelector(".edit-delete_buttons .edit-user-story");
 	if (editUserBtn != null) {
 		editUserBtn.addEventListener("click", () => {
@@ -240,20 +241,10 @@
 			window.location.href = `/edit_user_story?storyID=${storyId}`;
 		});
 	}
-
-
-	
-	
-	
-	
-	
-	
-	
-	
 	
 })
 
-	// Edit Availble Story Functions
+	// @@@@@@@@@@@ Add Character Button In Edit Story @@@@@@@@@@@
 	function addCharacter() {
 		const charactersDiv = document.getElementById("characters");
 		const characterInputs = charactersDiv.querySelectorAll(".story-character-row");
@@ -280,125 +271,145 @@
 		}
 	}
 		
-		async function submitStory() {
-		const errorMsg = document.querySelector(".edit-story-container .error-msg");
-		
-		// Collect character data
-		const characters = [...document.querySelectorAll(".story-character-row")].map(row => ({
-			name: row.querySelector(".story-character-name").value.trim(),
-			description: row.querySelector(".story-character-description").value.trim(),
+	// @@@@@@@@@@@ Submit Edit Story @@@@@@@@@@@
+	async function submitStory() {
+	const errorMsg = document.querySelector(".edit-story-container .error-msg");
+	const arabicRegex = /^[\u0600-\u06FF\s.,،؟!:؛()«»"'\-—_…\[\]{}<>*+\/\\|~`^%$#@&0-9\u0660-\u0669]*$/; 
+
+	const AllStory = document.querySelectorAll(".page .text");
+
+	var fullStory = ""; // تعريف مصفوفة لتخزين النصوص
+	AllStory.forEach(text => {
+		const trimmedText = text.textContent.trim();
+		if (trimmedText) { // التحقق من أن النص ليس فارغًا
+			fullStory += trimmedText + " "; // دمج النصوص في نص واحد مع إضافة مسافة للفصل
+		}
+	});
+
+	console.log(fullStory);
+
+	
+	// Collect character data
+	const addNewCharacters = [...document.querySelectorAll(".story-character-row")].map(row => ({
+		name: row.querySelector(".story-character-name").value.trim(),
+		description: row.querySelector(".story-character-description").value.trim(),
+	}));
+	
+	// Collect other inputs
+	const deleteCharacter = document.getElementById("deletcharcter").value.trim();
+	const changeEvent = document.getElementById("event").value.trim();
+	const changebeginning = document.getElementById("beginning").value.trim();
+	const changeEnding = document.getElementById("End").value.trim();
+	
+	// Check if at least one input is filled
+	if (!deleteCharacter && !changeEvent && !changebeginning && !changeEnding && addNewCharacters.every(c => !c.name)) {
+		errorMsg.style.opacity = 1;
+		errorMsg.innerHTML = "يجب إدخال نص واحد على الأقل.";
+		return; // Exit the function
+	}
+	
+	// Check if all inputs are in Arabic
+	else if (![deleteCharacter, changeEvent, changebeginning, changeEnding ].concat(addNewCharacters.map(c => c.name)).every(text => arabicRegex.test(text))) {
+		errorMsg.style.opacity = 1;
+		errorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
+		return; // Exit the function
+	}else {
+		errorMsg.style.opacity = 0; // Clear error message
+	}
+
+
+	// Create the object only with non-empty values
+	const storyElements = {};
+
+	if (addNewCharacters.length > 0) {
+		storyElements["إضافة شخصية جديدة"] = addNewCharacters.map(char => ({
+			"الاسم": char.name,
+			"وصف الشخصية": char.description,
 		}));
-		
-		// Collect other inputs
-		const deleteCharacter = document.getElementById("deletcharcter").value.trim();
-		const event = document.getElementById("event").value.trim();
-		const beginning = document.getElementById("beginning").value.trim();
-		const end = document.getElementById("End").value.trim();
-		const arabicRegex = /^[\u0600-\u06FF\s.,،؟!:؛()«»"'\-—_…\[\]{}<>*+\/\\|~`^%$#@&0-9\u0660-\u0669]*$/; 
+	}
+	if (deleteCharacter) {
+		storyElements["حذف شخصية"] = deleteCharacter;
+	}
+	if (changeEvent) {
+		storyElements["تغيير الحدث"] = changeEvent;
+	}
+	if (changebeginning) {
+		storyElements["تغيير البداية"] = changebeginning;
+	}
+	if (changeEnding) {
+		storyElements["تغيير النهاية"] = changeEnding;
+	}
+	console.log(storyElements,"")
 
-		
-		// Prepare story elements
-		var storyElements = { characters, deleteCharacter, event, beginning, end };
-		
-		// Check if at least one input is filled
-		if (!deleteCharacter && !event && !beginning && !end && characters.every(c => !c.name)) {
-			errorMsg.style.opacity = 1;
-			errorMsg.innerHTML = "يجب إدخال نص واحد على الأقل.";
-			return; // Exit the function
+	// Send To Allam
+	const data = { message: [fullStory,storyElements] };
+
+	// إظهار رسالة التحميل
+	Swal.fire({
+		title: 'جاري تعديل القصة...',
+		text: 'الرجاء الانتظار قليلاً',
+		allowOutsideClick: false,
+		showConfirmButton: false,
+		didOpen: () => {
+			Swal.showLoading(); // عرض المؤشر الدائري
 		}
-		
-		// Check if all inputs are in Arabic
-		else if (![deleteCharacter, event, beginning, end].concat(characters.map(c => c.name)).every(text => arabicRegex.test(text))) {
-			errorMsg.style.opacity = 1;
-			errorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
-			return; // Exit the function
-		}else {
-			errorMsg.style.opacity = 0; // Clear error message
-		}
-
-
-
-		
-
-		// Send To Allam
-		const data = { message: storyElements };
-
-		// إظهار رسالة التحميل
-		Swal.fire({
-			title: 'جاري تعديل القصة...',
-			text: 'الرجاء الانتظار قليلاً',
-			allowOutsideClick: false,
-			showConfirmButton: false,
-			didOpen: () => {
-				Swal.showLoading(); // عرض المؤشر الدائري
-			}
+	});
+	try {
+		const response = await fetch('http://127.0.0.1:5000/allam-edit-aval-story', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(data),
 		});
-		try {
-			const response = await fetch('http://127.0.0.1:5000/allam-edit-aval-story', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(data),
+		
+		Swal.close(); // إغلاق رسالة التحميل
+		
+		if (!response.ok) {
+			throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+		}
+		
+		// محاولة تحليل الرد كـ JSON
+		let responseData;
+			try {
+				responseData = await response.json();
+				console.log(responseData,"responseData")
+			} catch (jsonError) {
+				throw new Error('رد غير صالح من الخادم. تأكد أن الخادم يعيد JSON.');
+			}
+			
+			// Show success message
+			Swal.fire({
+				title: 'تم تعديل القصة!',
+				text: 'سيتم إعادة توجيهك لصفحة الكتابة',
+				icon: 'success',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
 			});
 			
-			Swal.close(); // إغلاق رسالة التحميل
-			
-			if (!response.ok) {
-				throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
-			}
-			
-			// محاولة تحليل الرد كـ JSON
-			let responseData;
-				try {
-					responseData = await response.json();
-				} catch (jsonError) {
-					throw new Error('رد غير صالح من الخادم. تأكد أن الخادم يعيد JSON.');
-				}
-				
-				// Show success message
+			// التحقق من وجود رابط إعادة توجيه لصفحة الكتابة في الرد
+			if (responseData.redirect) {
+				setTimeout(() => {window.location.href = responseData.redirect;},1000)  // تحديث الصفحة الجديدة بدون إضافتها إلى سجل التاريخ
+			} else {
+				// عرض القصة إذا لم يتم إرسال رابط إعادة توجيه
 				Swal.fire({
-					title: 'تم تعديل القصة!',
-					text: 'سيتم إعادة توجيهك لصفحة الكتابة',
-					icon: 'success',
-					confirmButtonText: 'موافق',
-					reverseButtons: true,
-				});
-				
-				// التحقق من وجود رابط إعادة توجيه لصفحة الكتابة في الرد
-				if (responseData.redirect) {
-					setTimeout(() => {window.location.href = responseData.redirect;},1000)  // تحديث الصفحة الجديدة بدون إضافتها إلى سجل التاريخ
-				} else {
-					// عرض القصة إذا لم يتم إرسال رابط إعادة توجيه
-					Swal.fire({
-					title: 'تم!',
-					html: `<div style="text-align: right; white-space: pre-line;">${responseData.response}</div>`,
-					icon: 'success',
-					confirmButtonText: 'موافق',
-					reverseButtons: true,
-					});
-				}
-				} catch (error) {
-				Swal.close();
-				Swal.fire({
-					title: 'خطأ!',
-					text: error.message,
-					icon: 'error',
-					confirmButtonText: 'موافق',
-					reverseButtons: true,
+				title: 'تم!',
+				html: `<div style="text-align: right; white-space: pre-line;">${responseData.response}</div>`,
+				icon: 'success',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
 				});
 			}
+			} catch (error) {
+			Swal.close();
+			Swal.fire({
+				title: 'خطأ!',
+				text: error.message,
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
 		}
+	}
 
-
-
-
-
-		
-		
-	
-
-
-
-	// Clcik On Edit Availble
 	var editAvalForm = document.querySelector(".edit-availble-story.response");
 	document.querySelector(".sitting-buttons .edit-availble-btn").addEventListener("click", (e) => {
 		e.preventDefault(); // Prevent page reload

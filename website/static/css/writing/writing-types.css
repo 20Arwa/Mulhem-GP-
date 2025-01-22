@@ -1,18 +1,21 @@
-.writing-types .type > div {
+.writing-types .type > .type-box {
     color: var(--font-4);
     cursor: pointer;
     transition: var(--transition-seconds);
     background-color: var(--main-light);
 }
-.writing-types .type > div:hover {
+.writing-types .type .type-box:hover {
     color: var(--font-1);
     box-shadow: 2px 5px 10px var(--main-dark);
     background-color: var(--main-dark);
     /* transform: scale(1.05); */
 }
-/* .writing-types .type > div button {
+.writing-types .type .type-box h3 {
+    color: var(--font-3);
+}
+/* .writing-types .type > type-box button {
     cursor: pointer;
 }
-.writing-types .type > div:has(button:hover) {
+.writing-types .type > type-box:has(button:hover) {
 
 } */

@@ -27,7 +27,7 @@ def generate_AllamResponse(prompt, max_tokens):
             "repetition_penalty": 1
         },
         "model_id": "sdaia/allam-1-13b-instruct",
-        "project_id": "3431790e-e856-4155-9294-c15efc460c95"
+        "project_id": "39e03a85-4bff-42b5-8ded-e7829de8fc0a"
 
     }
 
@@ -35,8 +35,8 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTUwMDBPV1lLIiwiaWQiOiJJQk1pZC02OTUwMDBPV1lLIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiY2VmMjBlNmUtNTRkZS00MjRmLWFmMjktMzgxZDVlYjNhMDA0IiwiaWRlbnRpZmllciI6IjY5NTAwME9XWUsiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiSHVzc2FpIiwibmFtZSI6IkFyd2UgSHVzc2FpIiwiZW1haWwiOiIxNXN1cGVyMTVzdWpvQGdtYWlsLmNvbSIsInN1YiI6IjE1c3VwZXIxNXN1am9AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiMTVzdXBlcjE1c3Vqb0BnbWFpbC5jb20iLCJpYW1faWQiOiJJQk1pZC02OTUwMDBPV1lLIiwibmFtZSI6IkFyd2UgSHVzc2FpIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6Ikh1c3NhaSIsImVtYWlsIjoiMTVzdXBlcjE1c3Vqb0BnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiM2Y4ZWQwZGJhNjI1NDhhZjk3ODdkM2M4YmMwMGU1MmUiLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc0MTI4NjIsImV4cCI6MTczNzQxNjQ2MiwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.XSaADWQi4Wdq5vSeXc9nb-lZ-OfyhlyeoppmVR4r3a5-Rmfd5Rw2EJ-SbQlqrKBiTr23CGLIhxHjajs7LsDqP4IgRuFNnwtgvNJuRGDXsl30by_PUcygrh4a9w-PjvJmAV3KJyO5DUGfZqiRQkOA4VmH4JRg-vstwK2o9tryQufRm9rml4Lq8YTXvNknPMt-xhuwcefNNpXx76rVjp7mVlXWVWG4jVmaXZCS2dpG9mF-P6_Us618FShLiUfRg7QmOSLz_qrIn5jn3VMkOxI_pavMTDRbalx9kqqK3dIJh0XRwdVEhLWcTd6-_s6ZOSGBOl3Rdo8pyCa_toh5zgrnrA",
-        }
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMWE5NDJiYWMtY2MzNy00M2FjLWEwMzctM2U4NTg3YzA3YTJiIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc1NTUyMTEsImV4cCI6MTczNzU1ODgxMSwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.Sts-B8USnH4cbiSxeSr8T-Qa67TGzK-k1bmcKYtc1e6NEFFfXt8qxWyloD4hSUqPNwg-TdIXmHe9A9P_i1WGzn7m5dKaOPDESyIQ2dfj-ETQ7WJtHenBbS0p7kr86pSUM23YaGYmEwbVrx9zcPlFM6xe2GXnb9RfsAjH6_Bvc21Q1CeEoknnmhLLwtU6O9Rp7nhm3ajqQ5a_MMtAFYMDGyL0sWRlLH6prndU81aSXkkv66b-akpCzOIj1zQ17ObPPiw7gMgXUGS19shYDllC92QBmggO4D95jqNzRHTlCBl-sQpQ9YAYmajENaOdiM7N-AshWHxPUmDvbpo1syfTBQ",
+    }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
 
@@ -255,7 +255,6 @@ def save_user_story():
 
             # استخراج امتداد الصورة القديمة
             old_ext = os.path.splitext(imageSrc)[1]  # هذا سيعيد الامتداد مع النقطة مثل ".png" أو ".jpg"
-            print("IMage IS There")
 
             # تحقق إذا كان الملف القديم موجودًا
             if os.path.exists(old_name):
@@ -264,7 +263,6 @@ def save_user_story():
                 new_Story.imgSrc = f"images/users/{user_id}/{user_id}_{storyID}{ext}"
                 db.session.commit()
             else:
-                print("After")
                 return jsonify({"response": "Image file not found.", "file": old_name}), 404
     
         # تغيير اسم الملف إذا كان الصوت موجود
@@ -331,34 +329,113 @@ def update_user_story():
     content = data.get('message', None)  # استلام المصفوفة
     imageSrc = data.get('imageSrc', '')  # اسم الصورة
     audioSrc = data.get('audioSrc', '')  # اسم الصوت
-    story_type = data.get('type', '')
+    user_id = current_user.id
+
+    # جلب القصة المراد تحديثها
+    story = User_stories.query.filter_by(id=story_id, user_id=user_id).first()
+
+    # تحقق من تكرار العنوان اذا تم تغييره
+    if story.title != title:
+        existing_story = User_stories.query.filter(User_stories.id != story_id, User_stories.title == title, User_stories.user_id == user_id).first()
+        if existing_story:
+            return jsonify({"response": "A story with this title already exists.", "status": "duplicate"}), 400
+        else:
+            story.title = title
+        
+    # تغيير اسم الملف إذا كانت الصورة موجودة
+    print("image src", imageSrc)
+    
+    if imageSrc:
+        # استخراج امتداد الملف
+        ext = os.path.splitext(imageSrc)[1]  # مثال: .png أو .jpg
+
+        # إنشاء المسار الكامل للملف القديم والجديد
+        old_name = os.path.join(current_app.root_path, 'static/images/users', str(user_id), imageSrc)
+        new_name = os.path.join(current_app.root_path, 'static/images/users', str(user_id), f"{user_id}_{story_id}{ext}")
+
+        # تحقق إذا كان الملف القديم موجودًا
+        if os.path.exists(new_name):
+            # حذف الصورة القديمة إذا كانت موجودة
+            os.remove(new_name)
+
+        os.rename(old_name,new_name)  # تغيير اسم الملف
+        # تحديث المسار في قاعدة البيانات
+        story.imgSrc = f"images/users/{user_id}/{user_id}_{story_id}{ext}"
+        db.session.commit()
+
+
+    # تغيير اسم الملف إذا كان الصوت موجود
+    if audioSrc:
+        # استخراج امتداد الملف
+        ext = os.path.splitext(audioSrc)[1]  # مثال: .png أو .jpg
+
+        # إنشاء المسار الكامل للملف القديم والجديد
+        old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), audioSrc)
+        new_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), f"{user_id}_{story_id}{ext}")
+
+        # تحقق إذا كان الملف القديم موجودًا
+        if os.path.exists(new_name):
+            # حذف الصوت القديم إذا كانت موجودة
+            os.remove(new_name)
+
+        os.rename(old_name, new_name)  # تغيير اسم الملف
+        # تحديث المسار في قاعدة البيانات
+        story.audioSrc = f"audio/users/{user_id}/{user_id}_{story_id}{ext}"
+        db.session.commit()
+
+    # تحديث بيانات القصة
+    story.content = json.dumps(content)
+
+    db.session.commit()
+    return jsonify({"response": "Story updated successfully.", "status": "success"}), 200
+
+
+@views.route('/check-changes-userStories', methods=['POST'])
+@login_required
+def check_changes_userStories():
+    data = request.json
+    if not data:
+        return jsonify({"response": "Invalid request, no data provided."}), 400
+    if 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400
+
+    # استلام بيانات القصة
+    story_id = data.get('id', None)
+    title = data.get('title', '')
+    content = data.get('message', None)
+    imageSrc = data.get('imageSrc', '')
+    audioSrc = data.get('audioSrc', '')
     user_id = current_user.id
 
     if not story_id:
-        return jsonify({"response": "Story ID is required for update."}), 400
+        return jsonify({"response": "Story ID is required for check."}), 400
 
-    # جلب القصة المراد تحديثها
+    # جلب القصة من قاعدة البيانات
     story = User_stories.query.filter_by(id=story_id, user_id=user_id).first()
 
     if not story:
         return jsonify({"response": "Story not found or access denied."}), 404
 
-    # تحقق من وجود عنوان مشابه
-    existing_story = User_stories.query.filter(User_stories.id != story_id, User_stories.title == title, User_stories.user_id == user_id).first()
-    if existing_story:
-        return jsonify({"response": "A story with this title already exists.", "status": "duplicate"}), 400
+    # مقارنة البيانات الجديدة مع البيانات الحالية
+    changes_detected = False
+    changes = {}
+    if story.title != title:
+        changes_detected = True
+        changes['title'] = {"old": story.title, "new": title}
+    if story.content != json.dumps(content):
+        changes_detected = True
+        changes['content'] = {"old": story.content, "new": json.dumps(content)}
+    if story.imgSrc != imageSrc:
+        changes_detected = True
+        changes['imageSrc'] = {"old": story.imgSrc, "new": imageSrc}
+    if story.audioSrc != audioSrc:
+        changes_detected = True
+        changes['audioSrc'] = {"old": story.audioSrc, "new": audioSrc}
 
-    # تحديث بيانات القصة
-    story.title = title
-    story.content = json.dumps(content)
-    story.imgSrc = imageSrc
-    story.audioSrc = audioSrc
-    story.type = story_type
+    if not changes_detected:
+        return jsonify({"response": "No changes detected.", "status": "no_changes"}), 200
 
-    db.session.commit()
-
-    return jsonify({"response": "Story updated successfully.", "status": "success", "storyID": story.id}), 200
-
+    return jsonify({"response": "Changes detected.", "status": "changes_detected", "changes": changes}), 200
 
       
 
@@ -577,12 +654,6 @@ def allam_story_generator():
     return jsonify({"redirect": redirect_url})
 
 
-# Show Generated Story Page
-# @views.route('/update-story', methods=['GET'])
-# def update_story():
-#     return render_template('/writing/show-generated-story.html')
-
-
 # Edit Availble Stores
 @views.route('/allam-edit-aval-story', methods=['POST'])
 def allam_edit_aval_story():
@@ -590,30 +661,45 @@ def allam_edit_aval_story():
     if not isinstance(data, dict) or 'message' not in data or not data.get('message'):
         return jsonify({"response": "Invalid request, 'message' is required."}), 400
 
-    prompt = f"""Input:اكتب قصة طويلة للأطفال بصيغة JSON. يجب أن يحتوي JSON على عنوان القصة والقصة نفسها مقسمة إلى أجزاء، بحيث لا يتعدى كل جزء 500 حرف. يجب أن تكون القصة مكتوبة بلغة مناسبة للأطفال، خالية من التفاصيل غير المنطقية أو غير اللائقة. إذا وجدت أي تفاصيل غير مناسبة، تجاهلها واستبدلها بما تراه مناسبًا، مع الحفاظ على جودة القصة وسلامتها للأطفال.
-    الصيغة المطلوبة:
-    {{"title": "عنوان القصة", "story": ["الجزء الأول من القصة…","الجزء الثاني من القصة…",…]}}
-    تفاصيل القصة:{{'characters': [{{"name": "اروى", "description": "ذكية"}}], "place": "المدرسة", "time": "صباح", "problem": "لم تحل الواجب", "solution": "اعترفت"}}
-    Output:{{"title": "أروى والواجب المدرسي","story": ["في صباح يوم جميل، استيقظت أروى وهي تشعر بالحماس ليوم جديد في المدرسة. كانت فتاة ذكية ومجتهدة، ولكن هذه المرة كان هناك شيء يقلقها. فقد كان المعلم قد كلفهم بواجب صعب، ولم تتمكن أروى من إنهائه بسبب ضيق الوقت. حاولت حله ليلة البارحة، لكن الأسئلة بدت صعبة، ولم تستطع التركيز بسبب المهام الأخرى التي انشغلت بها. وبينما ترتب حقيبتها، بدأت تتساءل كيف ستتعامل مع الموقف؟","أخذت أروى حقيبتها وركضت إلى المدرسة. كانت الطريق تبدو طويلة هذه المرة، حيث لم يتوقف عقلها عن التفكير في الواجب. ماذا ستقول للمعلم؟ كيف ستبرر عدم حل الواجب؟ شعرت أن قلبها ينبض بسرعة. عندما اقتربت من باب المدرسة، حاولت أن تهدئ نفسها، لكنها لم تستطع التخلص من القلق","وصلت أروى إلى الفصل، وجلست في مقعدها وهي شاردة الذهن. كان المعلم يشرح الدرس، لكنها لم تكن تتابع. الجميع بدأوا يفتحون دفاترهم استعدادًا لتقديم الواجب. شعرت أروى بالخجل عندما نظرت إلى دفاتر أصدقائها، ووجدتهم قد أتموا المهمة. شعرت أن اللحظة التي تخشاها قد اقتربت. قررت أروى أن تتحلى بالشجاعة.","رفعت يدها وقالت: 'أستاذ، لم أتمكن من حل الواجب، لكنني أعدك بأنني سأحاول المرة القادمة.' تفاجأت حين ابتسم المعلم وقال: 'الصدق هو أهم شيء يا أروى. لا بأس، لكن عليك تعلم إدارة وقتك.' شعرت أروى بالراحة، وعادت إلى المنزل وهي مليئة بالعزيمة. منذ ذلك اليوم، أصبحت أروى أكثر تنظيمًا في وقتها. تعلمت أن الصدق والمثابرة هما مفتاح النجاح، ولم تعد تخشى مواجهة التحديات."]}}
+    # معالجة النصوص لإزالة التقطيع
+    single_line_story =  data['message'][0].replace("\n", "").replace("  ", " ")
 
-    Input:اكتب قصة طويلة للأطفال بصيغة JSON. يجب أن يحتوي JSON على عنوان القصة والقصة نفسها مقسمة إلى أجزاء، بحيث لا يتعدى كل جزء 500 حرف. يجب أن تكون القصة مكتوبة بلغة مناسبة للأطفال، خالية من التفاصيل غير المنطقية أو غير اللائقة. إذا وجدت أي تفاصيل غير مناسبة، تجاهلها واستبدلها بما تراه مناسبًا، مع الحفاظ على جودة القصة وسلامتها للأطفال.
-    الصيغة المطلوبة:
-    {{"title": "عنوان القصة", "story": ["الجزء الأول من القصة…","الجزء الثاني من القصة…",…]}}
-    تفاصيل القصة:{data.get('message')}
-    Output:"""
+    prompt = f"""Input:قم بتطبيق التعديلات المطلوبة على القصة الأصلية، وأعد كتابة القصة الأصلية بأسلوب بسيط وممتع للأطفال مع الحفاظ على الأحداث الرئيسية.
+        -يجب أن تكون القصة في سطر واحد.
+        -حافظ على طول القصة ليكون مشابهًا للقصة الأصلية.
+        -أضف التعديلات المطلوبة بشكل متناسق وطبيعي.
+        -إذا كان التعديل غير منطقي أو غير لائق أو فارغ، من فضلك تجاهله.
+        لقصة الأصلية: في غابة جميلة، عاشت الأرنبة لينا مع أبنائها الأربعة: فلة، مرمر، روان، وباسل، تحت شجرة كبيرة. كانت دائمًا تحذرهم من المخاطر. في صباحٍ هادئ، قالت لهم بلهجة جادة: "لا تدخلوا حديقة السيد محمود. رغم أن فيها خضروات شهية، إلا أنها مليئة بالمصائد. والدكم وقع في واحدة هناك." وافق الجميع على التحذير. بينما خرج فلة ومرمر وروان لجمع التوت، قرر باسل تجاهل التحذير والمغامرة.انتظر باسل حتى غادر الجميع ثم توجه للحديقة. وجد الباب مفتوحًا قليلاً، فانسل إلى الداخل. اندهش برؤية الجزر، الخس، والخضروات الطازجة. بدأ يأكل بشراهة، ناسيًا تحذير والدته. وبينما كان يستمتع، سمع صوت خطوات خلفه. استدار ليجد السيد محمود يقترب حاملاً عصاه وهو يصرخ: "أيها الأرنب اللص!" حاول باسل الهرب، لكنه علقت قدماه في شبكة صغيرة.علق باسل بالشبكة، لكنه بذل جهدًا كبيرًا لتحرير نفسه. فقد معطفه وحذاءيه الجديدين، وركض بأسرع ما يمكن. بحث عن مخرج فرأى نافذة صغيرة في سقيفة الأدوات وقفز منها بصعوبة. عندما خرج، ركض نحو بوابة الحديقة المفتوحة واندفع إلى الخارج. ظل يجري بين الأشجار حتى تأكد أن السيد محمود لم يعد يلاحقه. وصل إلى البيت منهكًا ومبللًا، وشعر بالخجل من والدته. رأت الأم حالة باسل المتعبة فقالت بهدوء: "ما الذي حدث؟" روى لها القصة وهو يشعر بالخجل. قالت الأم: "لقد فقدت معطفك وحذاءيك، لكنك تعلمت درسًا مهمًا اليوم." أحضرت له شاي البابونج ليساعده على الراحة. بينما تناول إخوته العشاء، شعر باسل بالحزن لأنه لم يشاركهم. قبل النوم، وعد والدته أن يلتزم بنصائحها دائمًا. نام مطمئنًا وقد تعلم أن الطاعة تحمي من الأخطار.  التعديلات المطلوبة: {{'إضافة شخصية جديدة': [{{'الاسم': 'عمر', 'وصف الشخصية': 'أخ باسل'}}], 'تغيير الحدث': 'عمر وباسل يذهبان معا'}}     
+        output:في غابة جميلة، عاشت الأرنبة لينا مع أبنائها الخمسة: فلة، مرمر، روان، باسل، وعمر، تحت شجرة كبيرة. كانت دائمًا تحذرهم من المخاطر. في صباح هادئ، قالت لهم بلهجة جادة: "لا تدخلوا حديقة السيد محمود. رغم أن فيها خضروات شهية، إلا أنها مليئة بالمصائد. والدكم وقع في واحدة هناك." وافق الجميع على التحذير. بينما خرج فلة ومرمر وروان لجمع التوت، اقترح عمر على باسل أن يذهبا معًا لاستكشاف الحديقة رغم التحذير.انتظر عمر وباسل حتى غادر الجميع، ثم تسللا إلى الحديقة من بابها المفتوح قليلاً. اندهشا برؤية الجزر والخس والخضروات الطازجة، وبدآ يأكلان بشراهة، ناسيين تحذير والدتهما. فجأة، سمعا صوت خطوات خلفهما. استدارا ليجدا السيد محمود يقترب حاملاً عصاه وهو يصرخ: "أيها الأرانب اللصوص!" حاول الاثنان الهرب، لكن باسل علق في شبكة صغيرة بينما تمكن عمر من الركض بسرعة.عاد عمر مسرعًا لمساعدة أخيه، فمزق الشبكة بعصا وجدها في السقيفة. فقد باسل معطفه وحذاءيه الجديدين، وركضا معًا نحو نافذة صغيرة في سقيفة الأدوات وقفزا منها بصعوبة. ركضا بين الأشجار حتى تأكدا أن السيد محمود لم يعد يلاحقهما.وصلا إلى البيت منهكين ومبللين، وشعرا بالخجل من والدتهما. رأت الأم حالتهما المتعبة فقالت بهدوء: "ما الذي حدث؟" روى لها عمر القصة وهو يشعر بالخجل، وأكمل باسل التفاصيل. قالت الأم: "لقد فقدتما معطفًا وحذاءً، لكنكما تعلمتما درسًا مهمًا اليوم." أحضرت لهما شاي البابونج ليساعدهما على الراحة. بينما تناول الإخوة العشاء، شعر باسل وعمر بالحزن لأنهما لم يشاركاهم. قبل النوم، وعدا والدتهما أن يلتزما بنصائحها دائمًا. ناما مطمئنين وقد تعلما أن الطاعة تحمي من الأخطار.
 
-    # result = generate_AllamResponse(prompt, 2500)
-    result = '''{
-        "title": "أروى والواجب المدرسي",
-        "story": [
-            "في صباح يوم جميل، استيقظت أروى وهي تشعر بالحماس ليوم جديد في المدرسة. كانت فتاة ذكية ومجتهدة، ولكن هذه المرة كان هناك شيء يقلقها. فقد كان المعلم قد كلفهم بواجب صعب، ولم تتمكن أروى من إنهائه بسبب ضيق الوقت. حاولت حله ليلة البارحة، لكن الأسئلة بدت صعبة، ولم تستطع التركيز بسبب المهام الأخرى التي انشغلت بها. وبينما ترتب حقيبتها، بدأت تتساءل كيف ستتعامل مع الموقف؟",
-            "أخذت أروى حقيبتها وركضت إلى المدرسة. كانت الطريق تبدو طويلة هذه المرة، حيث لم يتوقف عقلها عن التفكير في الواجب. ماذا ستقول للمعلم؟ كيف ستبرر عدم حل الواجب؟ شعرت أن قلبها ينبض بسرعة. عندما اقتربت من باب المدرسة، حاولت أن تهدئ نفسها، لكنها لم تستطع التخلص من القلق",
-            "وصلت أروى إلى الفصل، وجلست في مقعدها وهي شاردة الذهن. كان المعلم يشرح الدرس، لكنها لم تكن تتابع. الجميع بدأوا يفتحون دفاترهم استعدادًا لتقديم الواجب. شعرت أروى بالخجل عندما نظرت إلى دفاتر أصدقائها، ووجدتهم قد أتموا المهمة. شعرت أن اللحظة التي تخشاها قد اقتربت. قررت أروى أن تتحلى بالشجاعة.",
-            "رفعت يدها وقالت: 'أستاذ، لم أتمكن من حل الواجب، لكنني أعدك بأنني سأحاول المرة القادمة.' تفاجأت حين ابتسم المعلم وقال: 'الصدق هو أهم شيء يا أروى. لا بأس، لكن عليك تعلم إدارة وقتك.' شعرت أروى بالراحة، وعادت إلى المنزل وهي مليئة بالعزيمة. منذ ذلك اليوم، أصبحت أروى أكثر تنظيمًا في وقتها. تعلمت أن الصدق والمثابرة هما مفتاح النجاح، ولم تعد تخشى مواجهة التحديات."
-        ]
-    }'''
-    print(result)
+        Input:قم بتطبيق التعديلات المطلوبة على القصة الأصلية، وأعد كتابة القصة الأصلية بأسلوب بسيط وممتع للأطفال مع الحفاظ على الأحداث الرئيسية.
+        -يجب أن تكون القصة في سطر واحد.
+        -حافظ على طول القصة ليكون مشابهًا للقصة الأصلية.
+        -أضف التعديلات المطلوبة بشكل متناسق وطبيعي.
+        -إذا كان التعديل غير منطقي أو غير لائق أو فارغ، من فضلك تجاهله.
+        القصة الأصلية: {single_line_story}
+        التعديلات المطلوبة: {data['message'][1]}
+        Output:"""
 
+    # print(prompt)
+   
+    result = generate_AllamResponse(prompt, 600)
+
+#     result = """{'generated_text': "كان يا ما كان، في قديم الزمان، فتاة صغيرة طيبة القلب تُدعى 'ذات الرداء الأحمر'، وذلك بسبب رداء أحمر جميل أهَدته لها ج
+# دتها، وكانت ترتديه دائمًا.في يوم من الأيام، قالت لها والدتها:'يا ابنتي العزيزة، جدتكِ مريضة وتعيش وحدها في الغابة. خذي لها هذه الس
+# لة التي تحتوي على كعك وعصير لتقويتها. تذكري ألا تخرجي عن الطريق، ولا تضيعي الوقت.'وعدت ذات الرداء الأحمر أمها بأنها ستكون حذرة، وانطلقت نحو الغابة. كان يومًا مشرقًا، والغابة تبدو هادئة وجميلة. كانت ذات الرداء الأحمر تسير في الغابة، ظهر لها ذئب كبير بدا ودودًا.
+# قال الذئب بمكر: 'إلى أين أنتِ ذاهبة يا صغيرة؟' ردت ذات الرداء الأحمر:'أنا ذاهبة إلى بيت جدتي المريضة لأعطيها بعض الطعام.'سألها الذ
+# ئب: 'وأين تعيش جدتكِ؟'أجابته:'تحت ثلاثة أشجار بلوط كبيرة في الغابة.'فكر الذئب بخطة شريرة وقال: 'ما رأيكِ أن تجمعي بعض التفاح لجدتك
+# ِ؟ ستفرح كثيرًا بها.'وافقت ذات الرداء الأحمر، وبدأت تجمع التفاح، مما جعلها تبتعد عن الطريق. استغل الذئب فرصة انشغال الفتاة بالتفاح
+#  وركض سريعًا إلى بيت الجدة. طرق الباب قائلاً بصوت ناعم: 'أنا ذات الرداء الأحمر، أحضرت لكِ كعكًا وعصيرًا.'ردت الجدة من الداخل: 'ادخ
+# لي، الباب مفتوح.'دخل الذئب المنزل وانقض على الجدة وأكلها، ثم ارتدى ملابسها واستلقى في سريرها منتظرًا ذات الرداء الأحمر.عندما وصلت 
+# الفتاة إلى المنزل، لاحظت أن الباب مفتوح قليلاً وشعرت بالقلق. دخلت وقالت: 'صباح الخير يا جدتي!' اقتربت ذات الرداء الأحمر من السرير 
+# ولاحظت أن 'جدتها' تبدو غريبة. فقالت:'ما أكبر أذنيكِ!' فأجاب الذئب: 'لكي أسمعكِ جيدًا.' ثم قالت: 'ما أكبر عينيكِ!' فأجاب: 'لكي أراك
+# ِ جيدًا.'وأخيرًا قالت: 'ما أكبر فمكِ!' فرد الذئب: 'لكي آكلكِ!'قفز الذئب وابتلع الفتاة. ولكن لحسن الحظ، كان هناك صياد يمر قرب المنز
+# ل. دخل الصياد ورأى الذئب نائمًا، فشَق بطنه ووجد الجدة وذات الرداء الأحمر سالمتين.ملأ الصياد بطن الذئب بالحجارة وأغلقه. عندما استيق
+# ظ الذئب حاول الهرب لكنه لم يمت.شكرت ذات الرداء الأحمر وجدتها الصياد على شجاعته، وقالت الفتاة:'تعلمت درسًا. لن أخرج عن الطريق مرة أ
+# خرى.' ثم عادت إلى بيتها بأمان. """
+    
     global result_cleaned 
 
     if "Input:" in result:
@@ -623,16 +709,42 @@ def allam_edit_aval_story():
     else:
         result_cleaned = result  # Or handle the error as needed
 
-    print(result_cleaned)
-    # تحويل السلسلة النصية إلى JSON
-    json_object = json.loads(result_cleaned)
+    result_cleaned = result_cleaned.strip().replace('\n', ' ').replace('"', '\\"')
 
-    print(json_object)
-    print(type(json_object))  # <class 'dict'>
+    # قص كلمة القصة المعدلة إذا كان موجود
+    if "القصة المعدلة:" in result_cleaned:
+        result_cleaned = result_cleaned.replace("القصة المعدلة:", "").strip()  # قص النص من البداية حتى الكلمة
+
+    # تقسيم النص إلى أجزاء داخل مصفوفة للكتاب
+    storyParts = []
+    current_part = ""
     
+    for sentence in result_cleaned.split("."):
+        # أضف النقطة مجددًا إلى الجملة
+        sentence = sentence.strip() + "."
+        # إذا إضافة الجملة تجعل الجزء أطول من الحد الأقصى، خزّن الجزء الحالي وابدأ جديدًا
+        if len(current_part) + len(sentence) > 400:
+            storyParts.append(current_part.strip())
+            current_part = sentence
+        else:
+            current_part += sentence
+    # إضافة الجزء الأخير إذا كان غير فارغ
+    if current_part.strip():
+        storyParts.append(current_part.strip())
+
+    full_result = f"""{{
+        "title": "",
+        "story": {json.dumps(storyParts)}
+    }}"""
+
+    # تحويل السلسلة النصية إلى JSON
+    json_object = json.loads(full_result)
     # إرسال الـ JSON بشكل مشفر عبر الرابط
     redirect_url = url_for('views.self_writing', allam_story=json.dumps(json_object))
     return jsonify({"redirect": redirect_url})
+
+
+
 
 # Corrcetion
 @views.route('/allam-correction', methods=['POST'])
@@ -655,6 +767,38 @@ def allam_correction():
     if result is None:
         return jsonify({"response": "Error processing request."}), 500
     return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
+
+
+# Story Completion
+@views.route('/allam-completion', methods=['POST'])
+def allam_completion():
+    data = request.json  # استلام البيانات من JavaScript
+    if not data or 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
+    prompt = f"""Input: ساعد الطفل في إكمال قصته عن طريق تشجيعه ثم طرح سؤالين أو ثلاثة أسئلة قصيرة ملهمة ومساعدة.
+    قصة الطفل: في الحديقة ولد يدعى عمر.
+    Output: بداية رائعة! هل يحب عمر استكشاف الطبيعة؟ هل يلتقي بحيوانات مثيرة في الحديقة؟ هل يتعلم درسًا عن البيئة؟
+    Input: ساعد الطفل في إكمال قصته عن طريق تشجيعه ثم طرح سؤالين أو ثلاثة أسئلة قصيرة ملهمة ومساعدة.
+    قصة الطفل: {data['message']}.
+    Output:"""
+
+    result = generate_AllamResponse(prompt, 70)
+    # result = "أحسنت! قصتك جميلة جدًا. أين يمكن أن يكون أحمد؟ هل يساعد أصدقائه في المدرسة أم في الحي؟"
+    
+    global result_cleaned 
+
+    if "Input:" in result:
+        # استخراج النص من البداية حتى كلمة "Input"
+        input_index = result.find("Input")  # إيجاد موقع الكلمة
+        result_cleaned = result[:input_index].strip()  # قص النص من البداية حتى الكلمة
+    else:
+        result_cleaned = result  # Or handle the error as needed
+    # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
+    print(result_cleaned)
+    if result is None:
+        return jsonify({"response": "Error processing request."}), 500
+    return jsonify({"response": result_cleaned}), 200  # إرجاع النتيجة بشكل صحيح
+
 
 
 # Story Elements
@@ -748,11 +892,11 @@ def allam_activity2():
         return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
 
     prompt = f"""Input:السؤال: اكتب جملة عن شيء مميز لاحظته اليوم وتخيّل أنه بداية لقصة خيالية.  إجابة الطفل: رأيت قطة صغيرة تحاول القفز على سور الحديقة.  
-Output: [True, رائع جدًا! هذا بداية ممتازة لقصة مليئة بالمغامرات. يمكنك تخيّل ما حدث للقطة بعد ذلك!] 
+Output: ["True", "رائع جدًا! هذا بداية ممتازة لقصة مليئة بالمغامرات. يمكنك تخيّل ما حدث للقطة بعد ذلك!"] 
 
 Input:اكتب جملة عن شيء مميز لاحظته اليوم وتخيّل أنه بداية لقصة خيالية.  
    إجابة الطفل: أنا أحب البيتزا. 
-Output: [False, البيتزا لذيذة، لكن حاول أن تكتب عن شيء لاحظته اليوم وكان مميزًا، مثل موقف ممتع أو شيء مثير للاهتمام حدث حولك!]
+Output: ["False","البيتزا لذيذة، لكن حاول أن تكتب عن شيء لاحظته اليوم وكان مميزًا، مثل موقف ممتع أو شيء مثير للاهتمام حدث حولك!"]
 
 Input:اكتب جملة عن شيء مميز لاحظته اليوم وتخيّل أنه بداية لقصة خيالية.  
    إجابة الطفل: {data['message']}. 
@@ -760,6 +904,7 @@ Output:
 """
 
     result = generate_AllamResponse(prompt, 500)
+    # result =  ''' ["True", "رائع جدًا! هذا بداية ممتازة لقصة مليئة بالمغامرات. يمكنك تخيّل ما حدث للقطة بعد ذلك!"] '''
 
     # رد افتراضي لعلام:
     # result = "[True, هذه بداية رائعة لقصة مليئة بالمرح والمغامرات! يمكنك تخيل المزيد من المواقف الممتعة التي حدثت لك ولصديقتك في المول.] "

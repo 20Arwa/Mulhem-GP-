@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}الفرق بين الكتابة القصصية والإبداعية{% endblock %}
+{% block title %}استلهام القصص{% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/activities.css') }}">
 {% endblock %}
@@ -24,8 +24,8 @@
             <form id="myForm" class="d-flex">
                 <i class="fa-solid fa-lightbulb ms-2"></i>
                 <div class="form-floating" style="display: flex; align-items: center;">
-                    <textarea rows="5" cols="50" placeholder="مثال: رأيت قوس قزح بعد المطر. تخيلت أنه يؤدي إلى مدينة سحرية مخفية!" id="floatingTextarea" style="margin-right: 10px;"></textarea>
-                    <button type="submit" class="btn button main-button" style="margin-right: 10px;">إنتهيت</button>
+                    <textarea class="rounded-1 p-1 px-2" rows="5" cols="50" placeholder="مثال: رأيت قوس قزح بعد المطر. تخيلت أنه يؤدي إلى مدينة سحرية مخفية!" id="floatingTextarea" style="margin-right: 10px;"></textarea>
+                    <button type="submit" class="btn button main-button" style="margin-right: 15px;">إنتهيت</button>
                 </div>
             </form>
         </div>
@@ -85,12 +85,20 @@
         const textarea = document.getElementById('floatingTextarea');
         const textLength = textarea.value.length;
 
-        if (textLength < 50) {
+        if (!arabicRegex.test(textarea.value)) {
+            Swal.fire({
+                title: 'خطأ!',
+                text: "يجب إدخال النصوص باللغة العربية فقط",
+                icon: 'error',
+                confirmButtonText: 'موافق',
+                reverseButtons: true,
+            });
+        }
+        else if (textLength < 50) {
             var warningModal = new bootstrap.Modal(document.getElementById('modalWarning'));
             warningModal.show();
-
-            
-        } else {
+        } 
+         else {
 
             //@@@@@@@@@@@@@@@@ Send To Flask
             const data = { message: textarea.value };
@@ -119,14 +127,36 @@
                     throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
                 }
 
-                const result = await response.json();
+                var result = await response.json();
+                console.log(result,"before",typeof(result))
+                console.log(result.response,"before",typeof(result.response))
+                result = JSON.parse(result.response); // تحويل النص إلى JSON
+                console.log(result,"after",typeof(result))
 
-                console.log(result)
-                // Check Answers
                 // Right Answer
+                if (result[0] == "True") {
+                      // Show the modal if the input is valid
+                        var modal = new bootstrap.Modal(document.getElementById('modal3'));
+                        modal.show();
+                        // Call bigConfetti after the modal is shown
+                        bigConfetti();
+                        // Light On The Lamb
+                        // Light On Based on Response
+                        document.querySelector(".form-floating .fa-lightbulb ").classList.add("active");
+                }
                 // Wrong Answer
+                else {
+                    Swal.fire({
+                        title: 'إجابة خاطئة!',
+                        text: result[1],
+                        icon: 'error',
+                        confirmButtonText: 'حاول مرة أخرى',
+                        reverseButtons: true,
+                    });
+                }
             } catch (error) {
                 Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+                console.log(error.message)
                 Swal.fire({
                     title: 'خطأ!',
                     text: error.message,
@@ -135,16 +165,6 @@
                     reverseButtons: true,
                 });
             }
-            //@@@@@@@@@@@@@@@@ Send To Flask
-
-
-
-            // Show the modal if the input is valid
-            var modal = new bootstrap.Modal(document.getElementById('modal3'));
-            modal.show();
-
-            // Call bigConfetti after the modal is shown
-            bigConfetti();
         }
     });
 

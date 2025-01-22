@@ -4,18 +4,20 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/writing-types.css') }}">
 {% endblock %}
 {% block body %}
-<div class="writing-types container mx-auto my-5 row g-5 justify-content-center">
+<div class="writing-types container mx-auto my-5 py-5 row g-5 justify-content-center">
     <!-- {'name': 'كتابة مشتركة', 'description': 'ستقوم أنت وملهم بالمشاركة معا لكتابة قصة رائعة', 'path': '../writing/story-generator'}, --> 
     {% for type in [
-        {'name': 'مولد القصة', 'description': 'كل ما عليك فعله هو إدخال عناصر القصة التي ترغب بها، وسيقوم ملهم بكتابة قصة رائعة لك!', 'path': '../writing/story-generator'},
-        {'name': 'كتابة ذاتية', 'description': 'ستكتب القصة بنفسك وسيقوم ملهم بمساعدتك إذا احتجته', 'path': '../writing/self-writing'}
+        {'name': 'مولد القصة','icon':'fa-solid fa-gears' ,'description': 'كل ما عليك فعله هو إدخال عناصر القصة التي ترغب بها، وسيقوم ملهم بكتابة قصة رائعة لك!', 'path': '../writing/story-generator'},
+        {'name': 'كتابة مستقلة','icon':'fa-solid fa-child-reaching' ,'description': 'ستكتب القصة بنفسك وسيقوم ملهم بمساعدتك في الأخطاء والإكمال والتحقق من عناصر قصتك!', 'path': '../writing/self-writing'}
     ]%}
-        <a class="type col-4" href="{{type.path}}">
-            <div class=" p-3 py-4 rounded-4 text-center h-100 d-flex flex-column justify-content-around">
-                <h3>{{type.name}}</h3>
+        <a class="type col-6 mt-0" href="{{type.path}}">
+            <div class="type-box p-3 py-4 rounded-4 text-center h-100 d-flex flex-column justify-content-around">
+                <!-- <div class="d-flex"> -->
+                    <!--  -->
+                    <h3 class="mb-4"><i class="{{type.icon}} ms-2"></i>{{type.name}}</h3>
+                <!-- </div> -->
                 <p>{{type.description}}</p>
             </div>
-            <p></p>
         </a>
     {% endfor %}
 </div>

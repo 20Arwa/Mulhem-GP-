@@ -1,6 +1,19 @@
+.page-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-dark);
+  color: white;
+  height: 45px;
+  font-weight: 700;
+  font-size: 20px;
+  border-radius: 0.375rem 0.375rem 0 0  !important;
+
+}
 .self-writing  {
   background-color: var(--main-light);
-  padding-top: 4.5rem !important
+  padding-top: 4.5rem !important;
+  border-radius: 0 0 0.375rem 0.375rem !important;
 }
 .self-writing audio.text-audio {
   height: 35px;
@@ -117,8 +130,8 @@
   text-align: right;
   padding: 10px;
   padding-left: 5px;
-  margin: 20px auto 15px;
-  height: 73%;
+  margin: 0px auto 15px;
+  height: 76%;
   width: 98%;
   font-weight: 400;
   font-size: 18px;
@@ -256,14 +269,16 @@
 }
 .self-writing button:hover:not(:disabled), 
 .self-writing button:active {
-  color: var(--font-4) !important;
-  border: 2px solid var(--font-4) !important;
+  /* color: var(--font-4) !important; */
+  border: 2px solid var(--font-3) !important;
   background-color: var(--main-dark) !important;
+  font-size: 17px;
 }
 
 .self-writing button i {
   font-size: 18px;
   margin-left: 5px;
+  transition: var(--transition-seconds);
 }
 /* @@@@@@ Allam Dropdown @@@@@@ */
 .dropdown.allam-help  ul.dropdown-menu {
