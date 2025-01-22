@@ -165,12 +165,15 @@ def characters_activity():
 def activity_2_exer():
     return render_template("/activities/activity_2_exer.html") 
 
-
 #Resson Activitiy 
 @views.route('/activities/reasons')
 def reasons():
     return render_template("/activities/reasons.html") 
 
+# place Activitiy  
+@views.route('/activities/activitie_place')
+def activitie_plac():
+    return render_template("/activities/activitie_place.html")
 
 
 # Start Writing 
@@ -800,6 +803,40 @@ def allam_completion():
     return jsonify({"response": result_cleaned}), 200  # إرجاع النتيجة بشكل صحيح
 
 
+# استدعاء البيانات لعرض صفحة البروفايل
+@views.route('/profile/<int:user_id>', methods=['GET'])
+def get_profile(user_id):
+    user = User.query.get(user_id)
+    if user:
+        return jsonify({
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "age": user.age,
+            "gender": user.gender,
+            "email": user.email
+        })
+    return jsonify({"error": "User not found"}), 404
+
+# تحديث بيانات المستخدم
+@views.route('/profile/<int:user_id>', methods=['POST'])
+def update_profile(user_id):
+    data = request.get_json()
+    user = User.query.get(user_id)
+
+    if user:
+        user.first_name = data.get('first_name', user.first_name)
+        user.last_name = data.get('last_name', user.last_name)
+        user.age = data.get('age', user.age)
+        user.gender = data.get('gender', user.gender)
+        user.email = data.get('email', user.email)
+
+        if 'password' in data:
+            user.password = generate_password_hash(data.get('password'))
+        
+        db.session.commit()
+        return jsonify({"message": "Profile updated successfully"})
+    
+    return jsonify({"error": "User not found"}), 404
 
 # Story Elements
 @views.route('/allam-elements', methods=['POST'])

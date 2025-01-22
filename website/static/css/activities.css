@@ -453,3 +453,187 @@ i.text-sound:hover {
 .activity_2_exer1 .form-floating textarea:focus-visible {
     outline-color: var(--main-dark);
 }
+/* @@@@@@@@@@@@@ place and time @@@@@@@@@@@@@ */
+.plac-container {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 35px;
+    background-color: #dbcef6;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+  }
+  
+  .addr {
+    color: #ffffff;
+    text-align: center;
+  }
+  
+  .definition {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f5edf5;
+    border-radius: 45px;
+    text-align: center;
+  }
+  
+  .story {
+    text-align: right;
+  }
+  
+  .hidden {
+    padding: 10px;
+    display: none;
+   
+  }
+  .Story-place-time{
+    color: #502c66;
+  }
+  
+  .story-content {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    text-align: center;
+    color: #502c66;
+    padding: 10px;
+      border: 2px solid #ece4ec;
+      border-radius: 10px;
+  }
+  
+  .story-content img {
+    width: 150px;
+    height: 150px;
+    image-rendering: crisp-edges;
+    border-radius: 9px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+  }
+
+  .time-questions {
+    margin-bottom: 20px;
+  }
+  
+  .drag-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .dropzone {
+    width: 200px;
+    height: 40px;
+    border: 2px dashed #b391d6;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #f4f4f4;
+    transition: background-color 0.3s;
+  }
+  
+  .dropzone.success {
+    background-color: #e4cfe9;
+   
+  }
+  
+  .draggable {
+    padding: 5px 10px;
+    background-color: #b391d6;
+    border-radius: 10px;
+    cursor: grab;
+    display: inline-block;
+   
+  }
+  
+  .draggable:hover {
+    background-color: #e4cfe9;
+  }
+  
+  .choices button {
+    padding: 8px 12px;
+    margin: 5px;
+    border: none;
+    border-radius: 10px;
+    background-color: #b391d6;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .choices button:hover {
+    background-color: #bbb;
+  }
+  
+  /* تصميم الإجابة الصحيحة */
+  .choices button.correct {
+    background-color: #567854;
+    color: #fff;
+  }
+  
+  /* تصميم الإجابة الخاطئة */
+  .choices button.wrong {
+    background-color: #944343;
+    color: #fff;
+  }
+  
+  
+  .navigation {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .navigation button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #7b4e97;
+    color: #fff;
+    transition: background-color 0.3s;
+  }
+  
+  .navigation button:hover {
+    background-color: #7b4e97;
+  }
+  /* تصميم صندوق الإجابة */
+  .dropzone {
+    width: 150px;
+    height: 40px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+   
+  
+  }
+  
+  /* عند الإجابة الصحيحة */
+  .dropzone.success {
+    background-color: #567854;
+  }
+  
+  /* عند الإجابة الخاطئة */
+  .dropzone.error {
+    background-color: #944343;
+  }
+  
+  /* تصميم صندوق النهاية */
+  #end {
+    text-align: center;
+    padding: 20px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  .endTime{
+    color: #a5b86e;
+    margin-bottom: 15px;
+  }
+  
+  .endPlace {
+    font-size: 16px;
+    color: #373535;
+  }
