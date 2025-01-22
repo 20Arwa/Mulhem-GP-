@@ -5,3 +5,4 @@ app = create_app()
 
 if __name__ == '__main__': # يعني ما يسوي رن للبروجمت إلا إذا سوينا رن دايركت رن لهذا الملف
     app.run(debug=True)
+    

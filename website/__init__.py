@@ -11,7 +11,7 @@ def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'Mulhem2025GP'
 
-    app.config["SQLALCHEMY_DATABASE_URI"] = f'mysql+pymysql://root:1234@localhost/{DB_NAME}'
+    app.config["SQLALCHEMY_DATABASE_URI"] = f'mysql+pymysql://root:ASDas1234567@localhost/{DB_NAME}'
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False  # Disable tracking modifications
     db.init_app(app)  # Bind SQLAlchemy to the app
 
@@ -40,3 +40,4 @@ def create_app():
 def create_database(app):
     with app.app_context():
         db.create_all() # Create all tables in database if don't exist
+

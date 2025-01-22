@@ -2,6 +2,8 @@
 from website import db
 from flask_login import UserMixin
 from sqlalchemy import Enum
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
