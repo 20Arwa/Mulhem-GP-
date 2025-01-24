@@ -11,9 +11,7 @@ import ast
 
 views = Blueprint('views', __name__)
 
-
-
-# Allam
+# Allam Calling Function
 def generate_AllamResponse(prompt, max_tokens):
     # إعداد عنوان URL الخاص بالنموذج
     url = "https://eu-de.ml.cloud.ibm.com/ml/v1/text/generation?version=2023-05-29"
@@ -59,17 +57,7 @@ def generate_AllamResponse(prompt, max_tokens):
 def home():
     return render_template("home.html", user=current_user) 
 
-# profile Page
-def profile_view(request):
-    return render_template(request, 'auth/profile.html')
-
-
 # Reading
-#edit story
-# @views.route('/reading/edit_story')
-# def edit_story():
-#     return render_template("/reading/edit_story.html") 
-
 # our_library Page
 @views.route('/reading/our_library')
 def our_library():
@@ -193,13 +181,12 @@ def storyGenerator():
 def self_writing():
     # الحصول على القصة من الرابط (وإذا لم تكن موجودة، تعيين قيمة افتراضية)
     allam_story = request.args.get('allam_story')
-    print(allam_story, "dkfakjfkejfk")
-    print(type(allam_story))
+    story_type = request.args.get('story_type')
 
     # إذا لم يكن allam_story موجودًا، يمكنك إرسال رسالة أو تعيين قيمة افتراضية
     if allam_story:
         json_object = json.loads(allam_story)
-        return render_template("/writing/self-writing.html", user=current_user, allam_story=json_object)
+        return render_template("/writing/self-writing.html", user=current_user, allam_story=json_object, story_type=story_type)
     else:
         return render_template("/writing/self-writing.html", user=current_user)
 
@@ -440,8 +427,28 @@ def check_changes_userStories():
 
     return jsonify({"response": "Changes detected.", "status": "changes_detected", "changes": changes}), 200
 
-      
 
+
+# Delete User Story
+@views.route('/delete-user-story', methods=['POST'])
+@login_required
+def delete_user_story():
+    data = request.json
+    if not data:
+        return jsonify({"response": "Invalid request, no data provided."}), 400
+    if 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400
+
+    # استلام بيانات القصة
+    story_id = data['message']  # جلب الـ ID الخاص بالقصة
+    story_id = int(story_id) # تحويل إلى رقم
+    user_id = current_user.id
+
+    # جلب القصة المراد حذفها
+    story = User_stories.query.filter_by(id=story_id, user_id=user_id).first()
+    db.session.delete(story)
+    db.session.commit()
+    return jsonify({"response": "Story deleted successfully.", "status": "success"}), 200
 
 # User Stories Page
 @views.route('/writing/user-stories')
@@ -480,7 +487,6 @@ def generate_img():
     promptAllam = f"""Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
 القصة: في غابة جميلة غنّاء سمعت الحيوانات صوت شجار غرابين واقفين على غصن شجرة عالِ، فقَدِم الثعلب المكّار وحاول أن يفهم سبب شجارهما، وما إن اقترب أكثر حتى سأل الغرابين: ما بالكما أيها الغرابان؟ فقال أحدهما: اتفقنا على أن نتشارك قطعة الجبن هذه بعد قسمتها بالتساوي، لكنّ هذا الغراب الأحمق يحاول أخذ مقدار يزيد عن نصيبه، فابتسم الثعلب، وقال: إذن ما رأيكما في أن أساعدكما في حل هذه المشكلة، وأقسم قطعة الجبن بينكما بالتساوي؟.
 Output: ["True", "Two black crows perched on a high tree branch, arguing over a piece of cheese. The crows have glossy black feathers, The surrounding forest is lush with green trees, and soft sunlight filters through the branches, creating a lively and peaceful atmosphere in the background."]
-
 
 Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
 القصة: كان يا مكان في قديم الزمان خهثتبخ ةبن
@@ -634,7 +640,6 @@ def allam_story_generator():
     #         "رفعت يدها وقالت: 'أستاذ، لم أتمكن من حل الواجب، لكنني أعدك بأنني سأحاول المرة القادمة.' تفاجأت حين ابتسم المعلم وقال: 'الصدق هو أهم شيء يا أروى. لا بأس، لكن عليك تعلم إدارة وقتك.' شعرت أروى بالراحة، وعادت إلى المنزل وهي مليئة بالعزيمة. منذ ذلك اليوم، أصبحت أروى أكثر تنظيمًا في وقتها. تعلمت أن الصدق والمثابرة هما مفتاح النجاح، ولم تعد تخشى مواجهة التحديات."
     #     ]
     # }'''
-    print(result)
 
     global result_cleaned 
 
@@ -645,15 +650,11 @@ def allam_story_generator():
     else:
         result_cleaned = result  # Or handle the error as needed
 
-    print(result_cleaned)
     # تحويل السلسلة النصية إلى JSON
     json_object = json.loads(result_cleaned)
-
-    print(json_object)
-    print(type(json_object))  # <class 'dict'>
     
     # إرسال الـ JSON بشكل مشفر عبر الرابط
-    redirect_url = url_for('views.self_writing', allam_story=json.dumps(json_object))
+    redirect_url = url_for('views.self_writing', allam_story=json.dumps(json_object), story_type="قصة مُلهِم")
     return jsonify({"redirect": redirect_url})
 
 
@@ -684,11 +685,9 @@ def allam_edit_aval_story():
         التعديلات المطلوبة: {data['message'][1]}
         Output:"""
 
-    # print(prompt)
-   
     result = generate_AllamResponse(prompt, 600)
 
-#     result = """{'generated_text': "كان يا ما كان، في قديم الزمان، فتاة صغيرة طيبة القلب تُدعى 'ذات الرداء الأحمر'، وذلك بسبب رداء أحمر جميل أهَدته لها ج
+#     result = """كان يا ما كان، في قديم الزمان، فتاة صغيرة طيبة القلب تُدعى 'ذات الرداء الأحمر'، وذلك بسبب رداء أحمر جميل أهَدته لها ج
 # دتها، وكانت ترتديه دائمًا.في يوم من الأيام، قالت لها والدتها:'يا ابنتي العزيزة، جدتكِ مريضة وتعيش وحدها في الغابة. خذي لها هذه الس
 # لة التي تحتوي على كعك وعصير لتقويتها. تذكري ألا تخرجي عن الطريق، ولا تضيعي الوقت.'وعدت ذات الرداء الأحمر أمها بأنها ستكون حذرة، وانطلقت نحو الغابة. كان يومًا مشرقًا، والغابة تبدو هادئة وجميلة. كانت ذات الرداء الأحمر تسير في الغابة، ظهر لها ذئب كبير بدا ودودًا.
 # قال الذئب بمكر: 'إلى أين أنتِ ذاهبة يا صغيرة؟' ردت ذات الرداء الأحمر:'أنا ذاهبة إلى بيت جدتي المريضة لأعطيها بعض الطعام.'سألها الذ
@@ -702,7 +701,7 @@ def allam_edit_aval_story():
 # ل. دخل الصياد ورأى الذئب نائمًا، فشَق بطنه ووجد الجدة وذات الرداء الأحمر سالمتين.ملأ الصياد بطن الذئب بالحجارة وأغلقه. عندما استيق
 # ظ الذئب حاول الهرب لكنه لم يمت.شكرت ذات الرداء الأحمر وجدتها الصياد على شجاعته، وقالت الفتاة:'تعلمت درسًا. لن أخرج عن الطريق مرة أ
 # خرى.' ثم عادت إلى بيتها بأمان. """
-    
+
     global result_cleaned 
 
     if "Input:" in result:
@@ -735,15 +734,23 @@ def allam_edit_aval_story():
     if current_part.strip():
         storyParts.append(current_part.strip())
 
+    # Get Story Title And Image Src
+    storyID = int(data['message'][2])
+    story_database = Available_stories.query.filter_by(id=storyID).first()
+
+    print(story_database.title)
+
     full_result = f"""{{
-        "title": "",
-        "story": {json.dumps(storyParts)}
+        "title": "{story_database.title}",
+        "story": {json.dumps(storyParts)},
+        "imgSrc": "{story_database.imgSrc}"
     }}"""
 
+    print(full_result)
     # تحويل السلسلة النصية إلى JSON
     json_object = json.loads(full_result)
     # إرسال الـ JSON بشكل مشفر عبر الرابط
-    redirect_url = url_for('views.self_writing', allam_story=json.dumps(json_object))
+    redirect_url = url_for('views.self_writing', allam_story=json.dumps(json_object), story_type="قصة معدلة")
     return jsonify({"redirect": redirect_url})
 
 
@@ -763,7 +770,7 @@ def allam_correction():
         Input: صحح الأخطاء: {data['message']}
         Output:"""
 
-    result = generate_AllamResponse(prompt, 3500)
+    result = generate_AllamResponse(prompt, 1000)
     # result = ""
     
     # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
@@ -797,46 +804,10 @@ def allam_completion():
     else:
         result_cleaned = result  # Or handle the error as needed
     # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
-    print(result_cleaned)
     if result is None:
         return jsonify({"response": "Error processing request."}), 500
     return jsonify({"response": result_cleaned}), 200  # إرجاع النتيجة بشكل صحيح
 
-
-# استدعاء البيانات لعرض صفحة البروفايل
-@views.route('/profile/<int:user_id>', methods=['GET'])
-def get_profile(user_id):
-    user = User.query.get(user_id)
-    if user:
-        return jsonify({
-            "first_name": user.first_name,
-            "last_name": user.last_name,
-            "age": user.age,
-            "gender": user.gender,
-            "email": user.email
-        })
-    return jsonify({"error": "User not found"}), 404
-
-# تحديث بيانات المستخدم
-@views.route('/profile/<int:user_id>', methods=['POST'])
-def update_profile(user_id):
-    data = request.get_json()
-    user = User.query.get(user_id)
-
-    if user:
-        user.first_name = data.get('first_name', user.first_name)
-        user.last_name = data.get('last_name', user.last_name)
-        user.age = data.get('age', user.age)
-        user.gender = data.get('gender', user.gender)
-        user.email = data.get('email', user.email)
-
-        if 'password' in data:
-            user.password = generate_password_hash(data.get('password'))
-        
-        db.session.commit()
-        return jsonify({"message": "Profile updated successfully"})
-    
-    return jsonify({"error": "User not found"}), 404
 
 # Story Elements
 @views.route('/allam-elements', methods=['POST'])
@@ -852,17 +823,17 @@ def allam_elements():
     Input: استخرج عناصر القصة الأساسية (الشخصيات، المكان، الزمان، الأسباب، المعضلة) من النص التالي: {data['message']}
     Output:"""
 
-    result = """
-    {
-        "الشخصيات": "أحمد",
-        "المكان": "غير مذكور. أين يمكن أن يكون أحمد؟ في المنزل، المدرسة، أم مكان آخر؟",
-        "الزمان": "صباح جميل",
-        "الأسباب": "غير مذكورة. لماذا أحمد في هذا المكان؟ هل هو ذاهب لإنجاز شيء مهم أم لمجرد التسلية؟",
-        "المعضلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"
-    }
-"""
+#     result = """
+#     {
+#         "الشخصيات": "أحمد",
+#         "المكان": "غير مذكور. أين يمكن أن يكون أحمد؟ في المنزل، المدرسة، أم مكان آخر؟",
+#         "الزمان": "صباح جميل",
+#         "الأسباب": "غير مذكورة. لماذا أحمد في هذا المكان؟ هل هو ذاهب لإنجاز شيء مهم أم لمجرد التسلية؟",
+#         "المعضلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"
+#     }
+# """
 
-    # result = generate_AllamResponse(prompt, 170)
+    result = generate_AllamResponse(prompt, 170)
     
     # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
     if result is None:
@@ -940,7 +911,7 @@ Input:اكتب جملة عن شيء مميز لاحظته اليوم وتخيّ�
 Output:
 """
 
-    result = generate_AllamResponse(prompt, 500)
+    result = generate_AllamResponse(prompt, 300)
     # result =  ''' ["True", "رائع جدًا! هذا بداية ممتازة لقصة مليئة بالمغامرات. يمكنك تخيّل ما حدث للقطة بعد ذلك!"] '''
 
     # رد افتراضي لعلام:

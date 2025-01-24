@@ -1,5 +1,5 @@
 # This File Contain Routes That Have Authentication, Like Login, Logout
-from flask import Blueprint, current_app, render_template, request, flash, redirect, url_for, session
+from flask import Blueprint, current_app, render_template, request, flash, redirect, url_for, session,jsonify
 from website import db
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required,logout_user, current_user
@@ -7,6 +7,7 @@ from flask_mail import Mail, Message
 from .models import User
 from random import *
 from datetime import datetime, timedelta
+import json
 
 auth = Blueprint('auth', __name__)
 
@@ -194,8 +195,90 @@ def logout():
     flash("تم تسجيل خروجك", category='success')
     return redirect(url_for('views.home'))
 
+
+
 # @@@@@@@@@@@@@@ Profile Page @@@@@@@@@@@@@@
 @auth.route('/profile', methods=['GET', 'POST'])
+@login_required
 def profile():
-    return render_template('auth/profile.html')
+    if request.method == 'POST':
+        # Get Inputs
+        first_name = request.form.get('f_name')
+        last_name = request.form.get('l_name')
+        age = request.form.get('age')
+        gender = request.form.get('gender')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(id=current_user.id).first()
+        if not user:
+            flash("User not found.", category='error')
+            return redirect(url_for('auth.profile'))
+
+        # تحديث البيانات الأخرى
+        user.first_name = first_name
+        user.last_name = last_name
+        user.age = age
+        user.gender = gender
+
+        # إذا تم تحديث كلمة المرور
+        if password and password != '***********':  # تأكد من أن المستخدم غير كلمة المرور
+            user.password = generate_password_hash(password)
+
+        # إذا تم تحديث الإيميل
+        if user.email != email:
+            # Start Email Verification
+            otp_num = randint(1000, 9999)
+            session['otp_num'] = otp_num
+            session['otp_time'] = datetime.now()
+            session['temp_user'] = {
+                'f_name': first_name,
+                'l_name': last_name,
+                'age': age,
+                'gender': gender,
+                'email': email,
+                'password': generate_password_hash(password) if password else user.password
+            }
+
+            # إعداد وإرسال الإيميل
+            mail = Mail(current_app)
+            msg = Message(subject='تطبيق ملهم', sender='mulhem2025gp@gmail.com', recipients=[email])
+            msg.html = f'''
+                <html>
+                    <body style="text-align:center">
+                        <h1>رمز التحقق</h1>
+                        <p>رمز التحقق الخاص بك هو: <strong>{otp_num}</strong></p>
+                    </body>
+                </html>
+            '''
+            mail.send(msg)
+
+            db.session.commit()  # حفظ التغييرات قبل التحقق من الإيميل
+            flash("تم إرسال رمز التحقق إلى بريدك الإلكتروني. يرجى إدخال الرمز.", category='info')
+            return redirect(url_for('auth.verify'))
+
+        # حفظ التغييرات في قاعدة البيانات
+        db.session.commit()
+        flash("تم تحديث بيانات الحساب بنجاح!", category='success')
+        return redirect(url_for('auth.profile'))
+
+    return render_template('auth/profile.html', user=current_user)
+
+
+@auth.route('/verify-update', methods=['GET', 'POST'])
+@login_required
+def verify_update():
+    if request.method == 'POST':
+        entered_otp = request.form.get('otp')
+        if session.get('otp_num') == int(entered_otp):
+            current_user.email = session.pop('temp_email')
+            db.session.commit()
+            flash("تم التحقق من الإيميل بنجاح.", "success")
+            return redirect(url_for('auth.profile'))
+        else:
+            flash("رمز التحقق غير صحيح.", "error")
+    return render_template('auth/verify.html')
+
+
+
 

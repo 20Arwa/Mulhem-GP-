@@ -7,20 +7,17 @@
 <div class="all-activities container row mx-auto my-4 g-5 text-center">
     <!-- Object Contains Each Actitvites: title, description, path Of Html Page  -->
     {% for activity in [
+        {'title': 'من عناصر القصة: شخصيات القصة', 'description': 'في هذا النشاط، سنتعرف على أحد عناصر القصة المهمة: الشخصيات! سنتعلم أنواعها وكيف نصفها، ثم نقرأ قصة قصيرة لنستخرج الشخصيات.', 'exercisesPath' : '../activities/characters_activity'},
+        {'title': 'من عناصر القصة: المكان والزمان', 'description': 'في هذا النشاط، سنتعرف على عنصرين من عناصر القصة المهمة:المكان والزمان، ثم سنقرأ قصة ونستخرج ماهو المكان الذي تجري فيه احداث القصة وماهو الزمان الذي يدور فيه لفهم سياق الأحداث بشكل أفضل.', 'exercisesPath': '../activities/activitie_place'},
+        {'title': 'من عناصر القصة: الاسباب في القصة', 'description': 'في هذا النشاط، سنتعرف على أحد عناصر القصة المهمة: الأسباب، سنقرأ قصة ممتعة ونبحث عن الأسباب التي تجعل الأحداث تحدث. سنتعلم كيف تساعدنا الأسباب في فهم القصة وجعلها ممتعة!', 'exercisesPath': '../activities/reasons'},
         {'title': 'الفرق بين الكتابة القصصية والكتابة العادية', 'description': 'في هذا النشاط، سنقرأ معًا قصة ممتعة ونكتشف فكرتها، ثم نقارنها بكتاب يقدم معلومات حقيقية. سنتعلم الفرق بين الكتابة القصصية والكتابة العادية!', 'exercisesPath' : '../activities/activity_1_exer1'},
-        {'title': 'شخصيات القصة', 'description': 'في هذا النشاط، سنتعرف على أحد عناصر القصة المهمة: الشخصيات! سنتعلم أنواعها وكيف نصفها، ثم نقرأ قصة قصيرة لنستخرج الشخصيات.', 'exercisesPath' : '../activities/characters_activity'},
-<<<<<<< HEAD
         {'title': 'استلهام القصص من الواقع الاجتماعي والمحيط اليومي', 'description': 'في هذا النشاط، سنعيش معًا تجربة رائعة لاستلهام القصص من تفاصيل حياتنا اليومية. سنبدأ بالتأمل في أحداث يومية بسيطة أو مواقف ملهمة نمر بها في المنزل، المدرسة، أو الحي. سنحوّل هذه الملاحظات إلى قصة خيالية مبتكرة مليئة بالإبداع.', 'exercisesPath': '../activities/activity_2_exer'},
-        {'title': ' الاسباب في القصة ', 'description': 'في هذا النشاط، سنقرأ قصة ممتعة ونبحث عن الأسباب التي تجعل الأحداث تحدث. سنتعلم كيف تساعدنا الأسباب في فهم القصة وجعلها ممتعة!', 'exercisesPath': '../activities/reasons'},
-=======
-        {'title': 'المكان والزمان', 'description': 'في هذا النشاط، سنتعرف على أحد عناصر القصة المهمة:المكان والزمان', 'exercisesPath': '../activities/activitie_place'}
->>>>>>> 7b75499772c9b118aae7ba589c18d1eb719e6f8f
     ]%}
         <!-- For Each Activity In The Object, This Code Will Be Repeated -->
         <div class="activity col-6">
             <div class=" p-4 pt-5 pb-4 rounded-4 text-center h-100 d-flex flex-column justify-content-around">
                 <h4 class="my-0">{{activity.title}}</h4>
-                <p class="my-4">{{activity.description}}</p>
+                <p class="my-4 text-end">{{activity.description}}</p>
                 <a href="{{activity.exercisesPath}}" class="start-container w-25 d-flex justify-content-around align-items-center mx-auto button main-button">
                     <button class="border-0 bg-transparent">إبدأ</button>
                 </a>

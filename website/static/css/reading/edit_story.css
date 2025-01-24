@@ -42,6 +42,9 @@
     border-radius: 5px;
     font-size: 16px;
   }
+  .edit-story-container .story-input-textarea, .story-input:focus-visible {
+    outline-color: var(--main-very-dark);
+  }
   
   .edit-story-container .story-characters-group {
     margin-top: 10px;

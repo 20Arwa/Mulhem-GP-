@@ -2,37 +2,49 @@
   max-width: 600px;
   margin: auto;
   background-color: #dbcef6;
-  padding: 25px;
+  padding-bottom: 5px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(197, 154, 190, 0.1);
 }
 
 .create-story-container .story-title {
-  font-size: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   text-align: center;
   color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--main-dark);
+  color: white;
+  height: 45px;
+    font-weight: 700;
+    font-size: 23px;
+    padding: 25px;
+    border-radius: 10px 10px 0 0 !important;
 }
 
+.create-story-container form {
+  padding-left: 25px;
+  padding-right: 25px;
+}
 .create-story-container .story-label {
- font-size: medium;
+  font-size: medium;
   color: #7b5ba6;
   font-weight: bold;
   display: block;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .create-story-container .story-input-text, .story-input-select {
   width: 100%;
-  margin: 10px 0;
+  margin: 5px 0 10px;
   padding: 10px;
   border: 1px solid #cfcaca;
   border-radius: 5px;
   font-size: 16px;
 }
-
-.create-story-container .story-characters-group {
-  margin-top: 10px;
+.create-story-container .story-input-text:focus-visible, .story-input-select:focus-visible {
+    outline-color: var(--main-very-dark);
 }
 
 .create-story-container .story-character-row {
@@ -55,13 +67,18 @@
 }
 
 .create-story-container .story-btn-small {
+  margin-top: 0;
   background-color: #7b4e97;
   color: #fff;
+  transition: var(--transition-seconds);
+  border: 3px solid transparent;
+
+
+}
+.create-story-container .story-btn-small:hover {
+  border-color: var(--font-1);
 }
 
-.create-story-container .story-btn-small:hover {
-  background-color: #7b4e97;
-}
 .create-story-container .error-msg {
   color: red;
   opacity: 0;
@@ -75,10 +92,14 @@
   background-color: #7b4e97;
   color: #fff;
   font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition-seconds);
+  border: 3px solid transparent;
+  z-index: 1;
 }
 
 .create-story-container .story-btn-main:hover {
-  background-color: #7b4e97;
+  border-color: var(--font-1);
 }
 
 .create-story-container .story-btn-main:active {
@@ -87,4 +108,14 @@
 
 .create-story-container .story-spacing {
   margin-top: 20px;
+}
+.create-story-container .img-holder{
+  width: 20px;
+    height: 230px;
+}
+.create-story-container img.mulhem{
+  z-index: 0;
+  bottom: -100px;
+  right: -59px;
+  width: 350px;
 }

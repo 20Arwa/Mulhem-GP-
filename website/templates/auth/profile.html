@@ -1,41 +1,72 @@
 {% extends "base.html" %}
-{% block title %}  profile {% endblock %}
+{% block title %} ملفي الشخصي {% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/profile.css') }}">
 {% endblock %}
 {% block body %}
-<div class="profile-container">
-    <h1>
-        <i class="fa-solid fa-user user-icon"></i>   ملفي الشخصي  </h1>
+ <!-- عرض الرسائل -->
+ {% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages %}
+     <div class="alert-container">
+         {% for category, message in messages %}
+         <div class="alert alert-{{ category }}" role="alert">
+             {{ message }}
+         </div>
+         {% endfor %}
+     </div>
+ {% endif %}
+ {% endwith %}
+ 
+<div class="profile-container my-5">
+    <h1 class="page-title container "><i class="fa-solid fa-circle-user user-icon"></i>   ملفي الشخصي  </h1>
     
     <!-- نموذج الإدخال -->
     <form class="profile-form" id="profile-form">
         <label for="first-name">
-            <i class="fa-solid fa-pen-to-square"></i> الاسم الأول :</label>
-        <input type="text" id="first-name" maxlength="9" placeholder="جولي ">
+            <i class="fa-solid fa-user"></i> الاسم الأول :</label>
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <input type="text" name="first-name" maxlength="9" placeholder="جولي" value="{{user.first_name}}" disabled>
+            <i class="fa-solid fa-pen-to-square edit me-3"></i>
+        </div>
 
         <label for="last-name">
-            <i class="fa-solid fa-pen-to-square"></i> الاسم الأخير : </label>
-        <input type="text" id="last-name" maxlength="10" placeholder=" الزهراني">
+            <i class="fa-solid fa-user"></i> الاسم الأخير : </label>
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <input type="text" name="last-name" maxlength="10" placeholder=" الزهراني" value="{{user.last_name}}" disabled>
+            <i class="fa-solid fa-pen-to-square edit me-3"></i>
+        </div>
 
         <label for="age">
             <i class="fa-solid fa-calendar"></i> العمر : </label>
-        <input type="number" id="age" min="8" max="12" placeholder=" 9">
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <input type="number" name="age" min="8" max="12" placeholder=" 9" value="{{user.age}}" disabled>
+            <i class="fa-solid fa-pen-to-square edit me-3"></i>
+        </div>
 
         <label for="gender">
             <i class="fa-solid fa-venus-mars"></i> الجنس : </label>
-        <input type="text" id="gender" maxlength="4" placeholder="أنثى">
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <input type="text" name="gender" maxlength="4" placeholder="أنثى" value="{{user.gender}}" disabled>
+            <i class="fa-solid fa-pen-to-square edit me-3"></i>
+        </div>
 
         <label for="email">
             <i class="fa-solid fa-envelope"></i> الإيميل : </label>
-        <input type="email" id="email" placeholder=" LOOD@gmail.com ">
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <input type="email" name="email" placeholder=" LOOD@gmail.com " value="{{user.email}}" disabled>
+            <i class="fa-solid fa-pen-to-square edit me-3"></i>
+        </div>
 
         <label for="password">
             <i class="fa-solid fa-lock"></i> كلمة المرور : </label>
-        <input type="password" id="password" maxlength="12" placeholder="***********">
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <input type="password" name="password" maxlength="12" placeholder="***********" value="***********" disabled>
+            <i class="fa-solid fa-pen-to-square edit me-3"></i>
+        </div>
 
+        <div class="error-msg text-danger">رسالة خطأ</div>
     <div class="save-container">
-    <button class="save-button" type="button" id="save-button"> حفظ </button>
+    <button class="save-button button main-button mt-4 px-4" type="submit" onclick="checkInputs()" id="save-button"> حفظ </button>
     </div>
 </form>
 <div id="message" style="display:none; color: rgb(94, 218, 94); margin-top: 10px;"></div>
@@ -44,63 +75,44 @@
 {% endblock %}
 {%block script%}
 <script>
+    const saveButton = document.getElementById("save-button");
+    const editIcons = document.querySelectorAll(".edit");
+    var errorMsg = document.querySelector(".error-msg");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const userId = 1; // استبدل بـ id الخاص بالمستخدم
+    function checkInputs() {
+        // Get Form
+        form = document.getElementById("profile-form");
+        form.onsubmit = function (event) {event.preventDefault()} // Prevent Submit Form
+        // Get Inputs
+        f_name = form.elements["first-name"].value;
+        l_name = form.elements["last-name"].value;
+        age = form.elements["age"].value;
+        gender = form.elements["gender"].value;
+        email = form.elements["email"].value;
+        password = form.elements["password"].value;
+        
+        if (f_name == "dkm") {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الاسم الأول يجب أن يتكون من 3 إلى 30 حرفاً";
+        }
+        else {
+            errorMsg.style.opacity = 0;
+            // If All Input Are Valid > Send Form
+            form.onsubmit = function (event) { return true; }
+        }
+    }
 
-    // جلب بيانات المستخدم
-    fetch(`/profile/${userId}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                console.error(data.error);
-                return;
-            }
-
-            // تعبئة الحقول بالبيانات
-            document.getElementById("first-name").value = data.first_name;
-            document.getElementById("last-name").value = data.last_name;
-            document.getElementById("age").value = data.age;
-            document.getElementById("gender").value = data.gender;
-            document.getElementById("email").value = data.email;
-        })
-        .catch(error => console.error("Error fetching user data:", error));
-});
-
-document.getElementById("save-button").addEventListener("click", () => {
-    const userId = 1; // استبدل بـ id الخاص بالمستخدم
-
-    const updatedData = {
-        first_name: document.getElementById("first-name").value,
-        last_name: document.getElementById("last-name").value,
-        age: document.getElementById("age").value,
-        gender: document.getElementById("gender").value,
-        email: document.getElementById("email").value,
-        password: document.getElementById("password").value // تحديث كلمة المرور (اختياري)
-    };
-
-    fetch(`/profile/${userId}`, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(updatedData)
-    })
-        .then(response => response.json())
-        .then(data => {
-            const message = document.getElementById("message");
-            if (data.error) {
-                message.style.color = "red";
-                message.innerText = data.error;
-            } else {
-                message.style.color = "green";
-                message.innerText = data.message;
-            }
-            message.style.display = "block";
-        })
-        .catch(error => console.error("Error updating profile:", error));
-});
-
+    // عند الضغط على أيقونة التعديل
+    editIcons.forEach(icon => {
+        icon.addEventListener("click", (event) => {
+            const input = event.target.previousElementSibling; // الحصول على حقل الإدخال المرتبط
+            input.disabled = false; // تفعيل الحقل
+            input.focus(); // تركيز المؤشر على الحقل
+            saveButton.style.opacity = 1; // إظهار زر الحفظ
+            saveButton.style.pointerEvents = "auto"; // تمكين التفاعل مع الزر
+        });
+    });
 </script>
 {%endblock%}
+
 

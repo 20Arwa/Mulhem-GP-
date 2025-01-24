@@ -1,18 +1,41 @@
-.writing-types .type > .type-box {
+.writing-types .type {
     color: var(--font-4);
     cursor: pointer;
     transition: var(--transition-seconds);
     background-color: var(--main-light);
 }
-.writing-types .type .type-box:hover {
-    color: var(--font-1);
+.writing-types .type:hover {
+    /* color: var(--font-1); */
     box-shadow: 2px 5px 10px var(--main-dark);
     background-color: var(--main-dark);
-    /* transform: scale(1.05); */
 }
-.writing-types .type .type-box h3 {
+.writing-types .type .img-holder {
+    width: 200px;
+    height: 180px;
+}
+.writing-types .type.generator img.mulhem {
+    width: 320px;
+    top: -27px;
+    right: -110px;
+}
+.writing-types .type.self img.mulhem {
+    width: 230px;
+    top: -26px;
+    right: 10px;
+}
+
+
+.writing-types .type .type-box .title {
+    transition: var(--transition-seconds);
     color: var(--font-3);
 }
+.writing-types .type:hover .type-box .title {
+    color: var(--font-1);
+}
+.writing-types .type .type-box p {
+    font-size: 19px;
+}
+
 /* .writing-types .type > type-box button {
     cursor: pointer;
 }

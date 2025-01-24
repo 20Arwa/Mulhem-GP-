@@ -1,12 +1,7 @@
-.user-stories {
-}
+
 .user-stories .story-box {
     color: var(--font-4);
-    border: 2px solid;
-}
-.user-stories .story-box .cover {
-    /* width: 250px;
-    height: 250px; */
+    border: 3px solid;
 }
 .user-stories .story-box:has(.story-type[story-type="كتابة مستقلة"]) {
     border-color: #6BA659;
@@ -24,8 +19,18 @@
 }
 .user-stories .story-box:has(.story-type[story-type="قصة معدلة"]) {
     border-color: #596BA6;
+    /* border-color: A6599E; */
     box-shadow:  rgba(89, 107, 166, 0.2) 0px 8px 15px
 }
 .user-stories .story-box .story-type[story-type="قصة معدلة"] span {
     color: #596BA6;
+}
+.user-stories .buttons button {
+    padding: 4px 8px;
+    font-weight: 500;
+    margin: 0 1px;   
+}
+.user-stories .buttons button i {
+    margin-left: 5px;
+
 }

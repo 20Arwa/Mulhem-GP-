@@ -3,17 +3,15 @@
     color: var(--font-4);
     background-color: var(--main-light);
 }
+.all-activities .activity > div h4 {
+    color: var(--font-3);
+}
 .all-activities .activity .start-container {
     cursor: pointer;
     color: var(--font-1);
     background-color: var(--main-dark);
-    /* transition: 0s; */
 }
-.all-activities .activity .start-container:hover  {
-    /* border-bottom-right-radius: 0; */
-    /* border-bottom-left-radius: 0; */
-    /* transform: none; */
-}
+
 .all-activities .activity .start-container button {
     font-weight: 600;
     color: var(--font-1);
@@ -142,7 +140,7 @@ i.text-sound:hover {
     color: var(--font-4);
     background-color: var(--main-light);
 }
-.activity_1.activity_1_exer1 > .text2, .activity_1.activity_1_exer1 > .text1 {
+.activity_1.activity_1_exer1 > .text2, .activity_1.activity_1_exer1 > .text3 {
     display: none;
 }
 .activity_1 .content .text {

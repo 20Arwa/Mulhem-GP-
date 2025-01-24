@@ -34,7 +34,7 @@
     display:flex;
     justify-content:center;
     align-items: center;
-    margin: 10px 0 5px;
+    margin: 20px 0 5px;
     font-weight: bold;
     color: #7b5ba6;
     font-size: 14px;
@@ -44,6 +44,9 @@
 .profile-form label i {
     margin-left: 8px;
     color: #7b5ba6;
+}
+.profile-form label + div {
+    margin-bottom: 10px;
 }
 
 .profile-form input {
@@ -55,13 +58,24 @@
     outline: none;
     transition: border 0.3s ease;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
-    margin: 0 auto;
     text-align: center;
+    background-color: white;
 }
 
 .profile-form input:focus {
     border-color: #7b5ba6;
-    box-shadow: 0 0 8px rgba(123, 91, 166, 0.5);
+    box-shadow: 0 0 8px rgba(123, 91, 166, 0.9);
+}
+.profile-form div i.edit {
+    margin-bottom: 4px;
+    font-size: 23px;
+    color: var(--font-3);
+    cursor: pointer;
+    transition: var(--transition-seconds);
+}
+.profile-form div i.edit:hover {
+    font-size: 24px;
+    color: var(--font-4)
 }
 
 /* حاوية زر الحفظ */
@@ -73,16 +87,18 @@
 
 /* تصميم زر الحفظ */
 .save-button {
-    background-color: #7b4e97; /* لون بنفسجي */
-    color: #fff; /* لون النص أبيض */
-    border: none; /* إزالة الحدود */
+    opacity: 0;
+}
+/* .save-button {
+    color: #fff; 
+    border: none;
     border-radius: 25px; 
-    padding: 10px 20px; /* حجم الزر الداخلي */
+    padding: 10px 20px; 
     font-size: 1em;
     font-weight: bold;
-    cursor: pointer; /* تغيير المؤشر عند التمرير */
-    transition: background-color 0.3s ease; /* تأثير عند التحويل */
-}
+    cursor: pointer; 
+    transition: background-color 0.3s ease; 
+} */
 
 /* التأثير عند تمرير الماوس على الزر */
 .save-button:hover {

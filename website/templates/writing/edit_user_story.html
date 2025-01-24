@@ -82,15 +82,6 @@
 		<div class="sitting-buttons">
 			<div class="sitting-error-msg error-msg mb-2">رسالة الخطأ</div>
 			<div class="d-flex align-items-center justify-content-center column-gap-2">
-				<button class="add-page-icon">
-					<i class="fa-solid fa-circle-plus"></i>
-					إضافة صفحة
-				</button>
-				<button class="delete-page-icon" disabled>
-					<i class="fa-solid fa-circle-minus"></i>
-					حذف صفحة
-				</button>
-
 				<div class="dropdown allam-help">
 					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
 						<i class="fa-solid fa-circle-question"></i>
@@ -101,7 +92,19 @@
 						<li><a class="dropdown-item completion">لا أعرف كيف أكمل قصتي</a></li>
 						<li><a class="dropdown-item elements" href="#allam-response">تحقق من عناصر قصتي</a></li>
 					</ul>
+					<img class="mulhem position-absolute" src="../../static/images/mulhem-no-crown.png" alt="ملهم">
 				</div>
+
+
+				<button class="add-page-icon">
+					<i class="fa-solid fa-circle-plus"></i>
+					إضافة صفحة
+				</button>
+				<button class="delete-page-icon" disabled>
+					<i class="fa-solid fa-circle-minus"></i>
+					حذف صفحة
+				</button>
+
 
 				<div class="record d-flex flex-column align-items-center">
                     <div class="display-voice-record" data-audio-src="{% if story.audioSrc %}../../static/{{ story.audioSrc | safe }}{% else %}""{% endif %}"></div>
@@ -112,7 +115,7 @@
                 
                 
 				<button class="out-btn"><i class="fa-solid fa-right-from-bracket"></i>خروج</button>
-				<button class="save-btn"><i class="fa-solid fa-right-from-bracket"></i>حفظ</button>
+				<button class="save-btn"><i class="fa-solid fa-floppy-disk"></i>حفظ</button>
 			</div>
 		</div>
 
@@ -537,7 +540,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				cancelButtonText: 'لا',
 				reverseButtons: true // تبديل أماكن أزرار التأكيد والإلغاء
 			});
-	
 			if (!result.isConfirmed) {
 				return; // إذا اختار المستخدم "لا"، توقف
 			}
@@ -562,7 +564,7 @@ document.addEventListener('DOMContentLoaded', function () {
 				reverseButtons: true,
 			});
 			return;
-		} else if (fullStory.length < 20) {
+		} else if (fullStory.length < 250) {
 			Swal.fire({
 				title: 'خطأ!',
 				text: "القصة قصيرة! حاول كتابة المزيد لتمكين التحقق",
@@ -582,26 +584,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 			return;
 		}
-		//else if (!repeatedPattern.test(fullStory)) {
-		//	Swal.fire({
-		//		title: 'خطأ!',
-		//		text: "النص يحتوي على كلمات عشوائية وغير مفهومة!",
-		//		icon: 'error',
-		//		confirmButtonText: 'موافق',
-		//		reverseButtons: true,
-		//	});
-		//	return;
-		//} 
-		else if (gibberishPattern.test(fullStory)) {
-			Swal.fire({
-                title: 'خطأ!',
-                text: 'النص يبدو غير مفهوم!',
-                icon: 'error',
-                confirmButtonText: 'موافق',
-                reverseButtons: true,
-            });
-			return;
-		} 
 		// الكلمات المحظورة
 		if (checkForbiddenWords(fullStory)) {
 			return;
@@ -726,7 +708,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 		// If Text Is Short
-		else if (textElement.textContent.length < 20) {
+		else if (textElement.textContent.length < 50) {
 			corrcErrorMsg.innerHTML = "القصة قصيرة جدا! حاول كتابة المزيد لتحصل على التصحيح"
 			corrcErrorMsg.style.opacity = 1;
 			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
@@ -895,7 +877,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 		// If Text Is Short
-		else if (fullStory.length < 20) {
+		else if (fullStory.length < 150) {
 			sittingErrMsg.innerHTML = "القصة قصيرة! حاول كتابة المزيد لتمكين التحقق"
 			sittingErrMsg.style.opacity = 1;
 			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
@@ -1040,7 +1022,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 		// If Text Is Short
-		else if (fullStory.length < 10) {
+		else if (fullStory.length < 50) {
 			sittingErrMsg.innerHTML = "النص قصير جدا! حاول كتابة المزيد لأتمكن من مساعدتك"
 			sittingErrMsg.style.opacity = 1;
 			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
@@ -1394,9 +1376,6 @@ document.addEventListener('DOMContentLoaded', function () {
 			// Handle response
 			if (response.ok) {
 				let result = await response.json(); 
-
-				console.log("res", result)
-				console.log("res", result.imageUpdated)
 				if (result.imageUpdated) { // تحقق إذا كانت الصورة قد تم تحديثها
 					let storyID = result.storyID; // جلب ID القصة من الخادم
 					var userID = result.userID;  // جلب ID المستخدم من الخادم

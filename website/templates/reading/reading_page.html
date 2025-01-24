@@ -26,17 +26,17 @@
                             <!-- Cover Image -->
 							<div class="cover-img-container img-container">
                                 {% if story.imgSrc == "" %}
-								<div class="cover-img">لا يوجد غلاف</div> 
+								<div class="cover-img no-cover">لا يوجد غلاف</div> 
                                 {% else  %}
 								<img class="img cover-img" src="../../static/{{story.imgSrc}}"> 
                                 {% endif %}
 							</div>
 						</div>
 						<div class="back">
-							<div class="text">{{story.content[0]}}</div>
+							<div class="text position-relative">{{story.content[0]}}</div>
 							<!-- Put Audio If our_library Story -->
 							{% if reading_type == "our_library" %}
-							<audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+							<audio class="w-75 rounded-4 mt-2" controls controlslist="nodownload noplaybackrate">
 								<source id="audioSource" src="../../static/{{story.audioSrc[0]}}" type="audio/mpeg">
 								المتصفح الخاص بك لا يدعم عنصر الصوت
 							</audio>
@@ -47,11 +47,11 @@
                     {% for index in range(1, story.content|length, 2) %}
                     <section class="page">
                         <div class="front">
-                            <div class="text" contenteditable="true">{{ story.content[index] }}</div>
+                            <div class="text" contenteditable="true">{{story.content[index]}}</div>
 
                             <!-- Put Audio If our_library Story -->
                             {% if reading_type == "our_library" %}
-								<audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+								<audio class="w-175 rounded-4 mt-2" controls controlslist="nodownload noplaybackrate">
 									<source id="audioSource" src="../../static/{{story.audioSrc[index]}}" type="audio/mpeg">
 									المتصفح الخاص بك لا يدعم عنصر الصوت
 								</audio>
@@ -66,10 +66,10 @@
                             </div>
 
 							<!-- Put Audio If our_library Story -->
-							{% if index + 1 < story.content|length %}
-								{% if reading_type == "our_library" %}
-								<audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
-									<source id="audioSource" src="../../static/story.audioSrc[index]" type="audio/mpeg">
+							{% if reading_type == "our_library" %}
+								{% if index + 1 < story.content|length %}
+								<audio class="w-75 rounded-4 mt-2" controls controlslist="nodownload noplaybackrate">
+									<source id="audioSource" src="../../static/{{story.audioSrc[index + 1]}}" type="audio/mpeg">
 									المتصفح الخاص بك لا يدعم عنصر الصوت
 								</audio>
 							  {% endif %}
@@ -82,47 +82,52 @@
 			</div>
 		</div>
 
-        <!-- Our Library Extra Content -->
-		{% if reading_type == "our_library" %}
-		<div class="sitting-buttons">
-            <button class="edit-availble-btn">
-				<i class="fa-regular fa-pen-to-square"></i>
-				تغيير القصة
-			</button>
-        </div>
+		<!-- Recorded Audio -->
+		<!-- User Stories Extra Content -->
+		{% if reading_type == "user_stories" %}
+			{% if story.audioSrc != "" %}
+			<div class="record_audio mt-4 mx-auto text-center">
+				<audio class="rounded-4" controls controlslist="nodownload noplaybackrate">
+					<source id="audioSource" src="../../static/{{story.audioSrc}}" type="audio/mpeg">
+					المتصفح الخاص بك لا يدعم عنصر الصوت
+				</audio>
+			</div>
+			{% else %}
+			<p class="record_audio no-audio mt-4 mx-auto text-center">لا يوجد صوت مسجل</p>
+			{% endif %}
 		{% endif %}
+		
+		<!-- Sittings Buttons -->
+        <div class="sitting-buttons d-flex align-items-center justify-content-center column-gap-2 mt-5 position-relative text-center mx-auto">
+			<!-- Our Library Extra Content -->
+			{% if reading_type == "our_library" %}
+				<button class="edit-availble-btn">
+					<i class="fa-regular fa-pen-to-square"></i>
+					تغيير القصة
+				</button>
+			{% endif %}
 
-        <!-- User Stories Extra Content -->
-        <div class="sitting-buttons">
+			<!-- User Stories Extra Content -->
 			{% if reading_type == "user_stories" %}
-				{% if story.audioSrc != "" %}
-				<div class="record_audio">
-					<audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
-						<source id="audioSource" src="../../static/{{story.audioSrc}}" type="audio/mpeg">
-						المتصفح الخاص بك لا يدعم عنصر الصوت
-					</audio>
+				<div class="edit-delete_buttons d-flex column-gap-2">
+					<button class="edit-user-story">
+						<i class="fa-solid fa-pencil"></i>
+						تعديل القصة
+					</button>
+					<!-- <button class="delete-user-story">
+						<i class="fa-regular fa-trash-can"></i>
+						حذف القصة
+					</button> -->
 				</div>
-				{% else %}
-				<div class="record_audio">لا يوجد صوت مسجل</div>
-				{% endif %}
-				<div class="edit-delete_buttons">
-						<button class="edit-user-story">
-							<i class="fa-solid fa-pencil"></i>
-							تعديل القصة
-						</button>
-						<button class="delete-user-story">
-							<i class="fa-regular fa-trash-can"></i>
-							حذف القصة
-						</button>
-				</div>
+			{% endif %}
 
-				{% endif %}
+			<img class="mulhem position-absolute" src="../../static/images/mulhem-read_1.png" alt="ملهم">
 		</div>
 
 			<!-- Edit Availble Story -->
 		<div class="response edit-availble-story p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center">
 			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
-			<div class="edit-story-container my-5">
+			<div class="edit-story-container m-0 mx-auto">
 				<h1> <i class="fa-solid fa-pen user-icon"></i> اضف لمستك الى القصة </h1>   
 				<form id="storyForm">
 				
@@ -231,7 +236,7 @@
 	}
 
 	// @@@@@@@@@@@ Edit User Story @@@@@@@@@@@
-	var editUserBtn = document.querySelector(".edit-delete_buttons .edit-user-story");
+	var editUserBtn = document.querySelector("button.edit-user-story");
 	if (editUserBtn != null) {
 		editUserBtn.addEventListener("click", () => {
 			// جلب معرف القصة من عنصر HTML
@@ -275,7 +280,8 @@
 	async function submitStory() {
 	const errorMsg = document.querySelector(".edit-story-container .error-msg");
 	const arabicRegex = /^[\u0600-\u06FF\s.,،؟!:؛()«»"'\-—_…\[\]{}<>*+\/\\|~`^%$#@&0-9\u0660-\u0669]*$/; 
-
+	const storyID = document.querySelector(".reading-page").getAttribute('id');
+	
 	const AllStory = document.querySelectorAll(".page .text");
 
 	var fullStory = ""; // تعريف مصفوفة لتخزين النصوص
@@ -285,9 +291,6 @@
 			fullStory += trimmedText + " "; // دمج النصوص في نص واحد مع إضافة مسافة للفصل
 		}
 	});
-
-	console.log(fullStory);
-
 	
 	// Collect character data
 	const addNewCharacters = [...document.querySelectorAll(".story-character-row")].map(row => ({
@@ -313,7 +316,14 @@
 		errorMsg.style.opacity = 1;
 		errorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
 		return; // Exit the function
-	}else {
+	}
+	// Check if forbidden words
+	else if ([deleteCharacter, changeEvent, changebeginning, changeEnding]
+	.concat(addNewCharacters.map(c => c.name))
+	.some(text => checkForbiddenWords(text))) {
+	return;
+	}
+	else {
 		errorMsg.style.opacity = 0; // Clear error message
 	}
 
@@ -342,7 +352,7 @@
 	console.log(storyElements,"")
 
 	// Send To Allam
-	const data = { message: [fullStory,storyElements] };
+	const data = { message: [fullStory,storyElements,storyID] };
 
 	// إظهار رسالة التحميل
 	Swal.fire({
@@ -411,22 +421,31 @@
 	}
 
 	var editAvalForm = document.querySelector(".edit-availble-story.response");
-	document.querySelector(".sitting-buttons .edit-availble-btn").addEventListener("click", (e) => {
-		e.preventDefault(); // Prevent page reload
-		editAvalForm.style.display = "block";
-		// Go Down To completion
-		const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
-		window.scrollTo({ 
-			top: editAvalForm.getBoundingClientRect().top + window.pageYOffset - offset, 
-			behavior: 'smooth' 
+	console.log(editAvalForm)
+	if (document.querySelector(".sitting-buttons .edit-availble-btn")) {
+		document.querySelector(".sitting-buttons .edit-availble-btn").addEventListener("click", (e) => {
+			e.preventDefault(); // Prevent page reload
+			editAvalForm.style.display = "block";
+			// Go Down To completion
+			const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
+			window.scrollTo({ 
+				top: editAvalForm.getBoundingClientRect().top + window.pageYOffset - offset, 
+				behavior: 'smooth' 
+			});
 		});
-	});
+	}
 	// Click On Close Edit Availble
 	document.querySelector(".edit-availble-story.response .close-icon").addEventListener("click", () => {
 		editAvalForm.style.display = "none";
 		window.scrollBy({top: -420});	
 	});
-	// Click On Submit Change
+	
+
+
+	// To Fix Third Page Space
+	document.querySelectorAll(".page .back .text").forEach(text => {
+		text.innerText = text.innerText.trim()
+	})
 
 </script>
 {% endblock %}

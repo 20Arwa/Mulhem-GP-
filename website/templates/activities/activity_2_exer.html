@@ -98,6 +98,9 @@
             var warningModal = new bootstrap.Modal(document.getElementById('modalWarning'));
             warningModal.show();
         } 
+        if (checkForbiddenWords(textarea.value)) {
+			return;
+		}
          else {
 
             //@@@@@@@@@@@@@@@@ Send To Flask

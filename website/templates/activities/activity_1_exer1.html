@@ -656,6 +656,9 @@ function CheckCar2Ques() {
             error_msg.classList.add("active");  
 			return;
 		}
+		if (checkForbiddenWords(textarea_laila.value)) {
+			return;
+		}
 
          // Send To Allam  
         const data = { message: textarea_laila.value };  
@@ -730,6 +733,9 @@ function CheckCar2Ques() {
 		else if (!arabicRegex.test(textarea_wolf.value) ) {
             error_msg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط"; 
             error_msg.classList.add("active");  
+			return;
+		}
+        if (checkForbiddenWords(textarea_laila.value)) {
 			return;
 		}
 

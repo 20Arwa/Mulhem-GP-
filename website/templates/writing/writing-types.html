@@ -4,19 +4,21 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/writing-types.css') }}">
 {% endblock %}
 {% block body %}
-<div class="writing-types container mx-auto my-5 py-5 row g-5 justify-content-center">
+<div class="writing-types container mx-auto my-5 py-5 g-5 d-flex justify-content-center column-gap-5">
     <!-- {'name': 'كتابة مشتركة', 'description': 'ستقوم أنت وملهم بالمشاركة معا لكتابة قصة رائعة', 'path': '../writing/story-generator'}, --> 
     {% for type in [
-        {'name': 'مولد القصة','icon':'fa-solid fa-gears' ,'description': 'كل ما عليك فعله هو إدخال عناصر القصة التي ترغب بها، وسيقوم ملهم بكتابة قصة رائعة لك!', 'path': '../writing/story-generator'},
-        {'name': 'كتابة مستقلة','icon':'fa-solid fa-child-reaching' ,'description': 'ستكتب القصة بنفسك وسيقوم ملهم بمساعدتك في الأخطاء والإكمال والتحقق من عناصر قصتك!', 'path': '../writing/self-writing'}
+        {'name': 'مولد القصة','class':'generator', 'icon':'fa-solid fa-gears' ,'description': 'كل ما عليك فعله هو إدخال عناصر القصة التي ترغب بها، وسيقوم ملهم بكتابة قصة رائعة لك!', 'path': '../writing/story-generator', 'mulhem':'../../static/images/mulhem-write.png'},
+        {'name': 'كتابة مستقلة','class':'self', 'icon':'fa-solid fa-child-reaching' ,'description': 'ستكتب القصة بنفسك وسيقوم ملهم بمساعدتك في الأخطاء والإكمال والتحقق من عناصر قصتك!', 'path': '../writing/self-writing', 'mulhem':'../../static/images/mulhem-no-crown.png'}
     ]%}
-        <a class="type col-6 mt-0" href="{{type.path}}">
-            <div class="type-box p-3 py-4 rounded-4 text-center h-100 d-flex flex-column justify-content-around">
-                <!-- <div class="d-flex"> -->
-                    <!--  -->
-                    <h3 class="mb-4"><i class="{{type.icon}} ms-2"></i>{{type.name}}</h3>
-                <!-- </div> -->
-                <p>{{type.description}}</p>
+        <a class="type mt-0 {{type.class}} p-3 py-4 px-4 rounded-4 text-right" href="{{type.path}}">
+            <div class="d-flex align-items-center">
+                <div class="img-holder position-relative">
+                    <img class="mulhem position-absolute" src="{{type.mulhem}}" alt="ملهم">
+                </div>
+                <div class="type-box">
+                        <h2 class="title mb-2"><i class="{{type.icon}} ms-2"></i>{{type.name}}</h2>
+                    <p class="mb-0">{{type.description}}</p>
+                </div>
             </div>
         </a>
     {% endfor %}

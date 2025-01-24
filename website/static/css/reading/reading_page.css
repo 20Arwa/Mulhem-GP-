@@ -1,3 +1,34 @@
+.reading-page .book {
+    height: 490px !important;
+}
+.reading-page .cover-img-container .no-cover {
+    position: relative;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    opacity: 60%;
+}
 .reading-page .book .page .text {
+    height: 85%;
     white-space: pre-line;
+}
+
+.reading-page .record_audio audio {
+    width: 500px;
+}
+.reading-page .record_audio.no-audio {
+    opacity: 60%;
+}
+.reading-page .sitting-buttons {
+    z-index: 1;
+}
+.reading-page img.mulhem{
+    width: 170px;
+    bottom: -85px;
+    right: -65px;
+    z-index: -1;
+}
+.reading-page .response.edit-availble-story{
+    width: 60%;
 }

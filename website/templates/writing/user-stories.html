@@ -5,8 +5,7 @@
 {% endblock %}
 
 {% block body %}
-<h2>قصصي</h2>
-<div class="container user-stories our-library-container">
+<div class="container user-stories our-library-container" >
 {% for story in stories %}
     <div class="story-box" >
                 <!-- Cover Image -->
@@ -29,8 +28,9 @@
                 <!-- Story Type -->
                 <p class="story-type" story-type="{{story['type']}}">نوع القصة: <span>{{story['type']}}</span></p>
                 <div class="buttons text-center mt-3">
-                    <button class="button main-button read-btn" id="{{story['id']}}">قراءة</button>
-                    <button class="button main-button">تعديل</button>
+                    <button class="button main-button read-btn" id="{{story['id']}}"><i class="fa-solid fa-book-open"></i>قراءة</button>
+                    <button class="button main-button edit-user-story" id="{{story['id']}}"><i class="fa-solid fa-pencil"></i>تعديل</button>
+                    <button class="button main-button delete-story" id="{{story['id']}}"><i class="fa-solid fa-trash-can"></i>حذف</button>
                 </div>
         </div>
         
@@ -39,11 +39,12 @@
 {% endblock %}
 {% block script %}
 <script>
+
     // Send Reding Type (user_stories) To Server
     document.querySelectorAll(".user-stories .story-box .buttons .read-btn").forEach(story => {
         story.addEventListener("click", async () => {
             try {
-                const data = { message: ["user_stories",story.getAttribute("id")] }; 
+                const data = { message: ["user_stories",story.getAttribute('id')] }; 
                 const response = await fetch('http://127.0.0.1:5000/reading/get-reading-type', {
                     method: 'POST',
                     headers: {
@@ -64,5 +65,82 @@
             }
         })
     })
+
+    
+    // Click On Edit Story
+    // @@@@@@@@@@@ Edit User Story @@@@@@@@@@@
+	var allEditBtn = document.querySelectorAll(".buttons .edit-user-story");
+    allEditBtn.forEach(btn => {
+        btn.addEventListener("click", () => {
+            // إعادة التوجيه إلى صفحة التعديل مع معرف القصة
+            window.location.href = `/edit_user_story?storyID=${btn.getAttribute('id')}`;
+        });
+    })
+    
+    // Click On Delete Story
+	var allDeleteBtn = document.querySelectorAll(".buttons .delete-story");
+    allDeleteBtn.forEach(btn => {
+        btn.addEventListener("click", async () => {
+            // Warn Message
+            Swal.fire({
+                title: 'حذف القصة',
+                text: 'هل أنت متأكد أنك تريد حذف هذه القصة لا يمكن التراجع عن هذا الإجراء.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'نعم، احذفها',
+                cancelButtonText: 'إلغاء',
+                reverseButtons: true, // تبديل أماكن الأزرار
+            }).then(async (result)  => {
+                if (result.isConfirmed) {
+                    // Send Story ID
+                    const data = { message: btn.getAttribute('id')  };
+                    try {
+                        // Show loading alert
+                        Swal.fire({
+                            title: 'جاري حذف قصتك...',
+                            text: 'الرجاء الانتظار قليلاً',
+                            allowOutsideClick: false,
+                            showConfirmButton: false,
+                            didOpen: () => {
+                                Swal.showLoading(); // عرض المؤشر الدائري
+                            }
+                        });
+                        // Send data to the server
+                        const response = await fetch('http://127.0.0.1:5000/delete-user-story', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify(data)
+                        });
+                
+                        // Handle response
+                        if (response.ok) {
+                            Swal.fire('تم حذف القصة!', '', 'success');
+                            btn.closest('.story-box').remove(); // إزالة القصة من الصفحة
+                            return true;
+                        } else {
+                            Swal.fire({
+                                title: 'فشل حذف القصة',
+                                text: 'حدث خطأ أثناء تحديث القصة.',
+                                icon: 'error',
+                                confirmButtonText: 'حاول مرة أخرى'
+                            });
+                        }
+                    } catch (error) {
+                        Swal.fire('فشل الحذف', 'حدث خطأ أثناء التواصل مع الخادم', 'error');
+                        console.error(error);
+                    }
+
+
+
+
+                } else {
+                    console.log('تم إلغاء عملية الحذف.');
+                }
+            });
+        });
+
+
+    })
+    
 </script>
 {% endblock %}

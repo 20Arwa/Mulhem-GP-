@@ -29,7 +29,8 @@
   font-size: 40px;
   opacity: 50%;
   cursor: pointer;
-  color: var(--font-3)
+  color: var(--font-3);
+  transition: var(--transition-seconds);
 }
 .self-writing #nextButton:hover,
 .self-writing #prevButton:hover {
@@ -235,9 +236,6 @@
 .page .buttons button.active {
   display: block;
 }
-.cover-page .buttons button:hover {
-  color: var(--font-4);
-}
 .cover-page .buttons  input[type="file"] {
   appearance: none; /* لإخفاء الشكل الافتراضي */
   display: none;
@@ -281,6 +279,9 @@
   transition: var(--transition-seconds);
 }
 /* @@@@@@ Allam Dropdown @@@@@@ */
+.dropdown.allam-help {
+  z-index: 1;
+}
 .dropdown.allam-help  ul.dropdown-menu {
   padding: 0;
 }
@@ -300,7 +301,16 @@
 .dropdown.allam-help .dropdown-toggle::after {
   margin-right: 5px;
 }
+.dropdown.allam-help img.mulhem {
+  top: -195px;
+  right: -120px;
+  width: 260px;
+  z-index: -1;
+}
 /* @@@@@@ Response Square White @@@@@@ */
+.self-writing .response {
+  margin-top: 3.5rem !important;
+}
 .self-writing .response h3 {
   color: var(--font-4);
 }
@@ -390,6 +400,13 @@
 /* @@@@@@ Record @@@@@@ */
 .record {
   width: fit-content;
+}
+.record #record , .record #stop {
+  width: 220px;
+  justify-content: center;
+}
+.record .display-voice-record audio {
+  width: 220px;
 }
 
 /* @@@@@@ Sweet Alert @@@@@@ */

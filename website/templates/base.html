@@ -9,6 +9,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <!-- Mulhem Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@100;200;300;400;500;600;700&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet">
     <!-- Bootstrap -->
@@ -22,9 +26,9 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid container">
             <!-- شعار التطبيق -->
-            <a class="navbar-brand me-0" href="/">
+            <a class="navbar-brand me-0 d-flex align-items-center" href="/">
             <img src="/static/images/logo.png" alt="Logo" width="80" height="60">
-            مُــلــهِــمْ 
+            مُـــلـــهِـــمْ 
             </a>
             <!-- زر التبديل (للعرض على الأجهزة الصغيرة) -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,30 +36,34 @@
             </button>
             <!-- روابط التنقل -->
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                    <a class="nav-link active" href="/">الصفحة الرئيسية<i class="fa-solid fa-house"></i></a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="/reading/our_library"><i class="fa-solid fa-book-open-reader  ms-1"></i>القراءة</a>
-                    </li>
-                    
-                    
-                    {% if current_user.is_authenticated == true %} <!-- Show Those Links If User Logged In -->
-                    <li class="nav-item">
-                    <a class="nav-link" href="/writing/writing-types">الكتابة</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="/writing/user-stories">قصصي</a>
-                    </li>
-                    {% endif %}
-                    <li class="nav-item">
-                    <a class="nav-link" href="/activities/all_activities">انشطة تعليمية</a>
-                    </li>
-                </ul>
+              <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/' %}active{% endif %}" href="/"><i class="fa-solid fa-house"></i> الصفحة الرئيسية</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/reading/our_library' %}active{% endif %}" href="/reading/our_library"><i class="fa-solid fa-book-open-reader"></i> القراءة</a>
+                </li>
+                {% if current_user.is_authenticated %}
+                <!-- Show Link If User Logged In -->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/writing/writing-types' %}active{% endif %}" href="/writing/writing-types"><i class="fa-solid fa-pencil"></i> الكتابة</a>
+                </li>
+                {% endif %}
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/activities/all_activities' %}active{% endif %}" href="/activities/all_activities"><i class="fa-solid fa-person-chalkboard"></i> أنشطة تعليمية</a>
+                </li>
+                {% if current_user.is_authenticated %}
+                <!-- Show Link If User Logged In -->
+                <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/writing/user-stories' %}active{% endif %}" href="/writing/user-stories"><i class="fa-solid fa-book"></i> قصصي</a>
+                </li>
+                {% endif %}
+            </ul>
+            
             </div>
-            <div class="sign-log">
+            <div class="sign-log d-flex align-items-center">
               {% if current_user.is_authenticated %} <!-- Show Those Links If User Logged In -->
+              <a class="profile ms-3" href="{{ url_for('auth.profile') }}" alt="ملفي الشخصي"><button type="button"><i class="fa-solid fa-circle-user"></i></button></a>
               <a href="{{ url_for('auth.logout') }}"><button type="button">تسجيل الخروج</button></a>
               {% else %} <!-- Show Those If User Not Logged In -->
               <a href="{{ url_for('auth.signUp') }}"><button type="button" class="">إنشاء حساب</button></a>
@@ -88,8 +96,7 @@
 
     <!-- Start Footer -->
     <footer>
-    
-      <div class="row container justify-content-around">
+      <div class="row container justify-content-around align-items-center mx-auto my-4 mt-1">
         <div class="col-md-3">
           <div class="footer-menu">
             <img src="/static/images/logo.png" alt="logo" width="100" height="100">
@@ -141,12 +148,12 @@
           <div class="footer-menu">
           
               <ul class="menu-list list-unstyled">
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="#" class="nav-link">الاسئلة الشائعة</a>
                 </li>
                 <li class="menu-item">
                   <a href="#" class="nav-link">سياسة الخصوصية </a>
-                </li>
+                </li> -->
                 <li class="menu-item">
                   <a href="#" class="nav-link"> معلومات عنا </a>
                 </li>
