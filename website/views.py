@@ -33,8 +33,8 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMWE5NDJiYWMtY2MzNy00M2FjLWEwMzctM2U4NTg3YzA3YTJiIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc1NTUyMTEsImV4cCI6MTczNzU1ODgxMSwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.Sts-B8USnH4cbiSxeSr8T-Qa67TGzK-k1bmcKYtc1e6NEFFfXt8qxWyloD4hSUqPNwg-TdIXmHe9A9P_i1WGzn7m5dKaOPDESyIQ2dfj-ETQ7WJtHenBbS0p7kr86pSUM23YaGYmEwbVrx9zcPlFM6xe2GXnb9RfsAjH6_Bvc21Q1CeEoknnmhLLwtU6O9Rp7nhm3ajqQ5a_MMtAFYMDGyL0sWRlLH6prndU81aSXkkv66b-akpCzOIj1zQ17ObPPiw7gMgXUGS19shYDllC92QBmggO4D95jqNzRHTlCBl-sQpQ9YAYmajENaOdiM7N-AshWHxPUmDvbpo1syfTBQ",
-    }
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiNGQyYjkwNGUtN2Q3Ni00ZWNhLWI5M2ItN2E1NTRhMTg0NWExIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc3MTI0ODksImV4cCI6MTczNzcxNjA4OSwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.f0vjW6mnf7vLZ9hFGd2REZgj_RI-zujlxFZDlj19WGrzQDeb6tzuEJAHmiMIW0vgaNswHNbaqQU21MNYdY_2zj0FZWaemfAnfdd4CW1bLs8kBN_od10oO_xk6FSHlcyFGEEgRzU5kAUvX_ZgY8PVXxmqkyrd0n2jKndVhS3odiZIdRNKDrZ9ovHf6x-Nu44JO9-XOXwKRkvA6bCIImPJ2lkOHrcM9c_UaLcnMPVf1DvYxhuA71FBU5tsH-f8k7_0n4LAJrYG0qFsxCY6I-6N8FIakFMbbCOwupTdSNp_svQSGPn68orMyTU0BV4NriVQ2mt6J2Dcm4tVmhETgT7pBw"
+        }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
 
@@ -157,6 +157,11 @@ def activity_2_exer():
 @views.route('/activities/reasons')
 def reasons():
     return render_template("/activities/reasons.html") 
+
+# problem Activity
+@views.route('/activities/problem')
+def problem():
+    return render_template("/activities/problem.html") 
 
 # place Activitiy  
 @views.route('/activities/activitie_place')
@@ -514,7 +519,7 @@ Output:"""
         result_cleaned = result[1]  # Or handle the error as needed
 
     # Send To Colab And Recive Image
-    colab_url = "https://d881-34-125-154-110.ngrok-free.app/colab-message"  # رابط ngrok من Colab
+    colab_url = "https://04d9-35-247-139-23.ngrok-free.app/colab-message"  # رابط ngrok من Colab
     prompt = {"message": f"{result_cleaned}"} # Send Prompt From Allam
     # prompt = {"message": " A white duck is sleeping under a fruitful beech tree in a forest. The tree is filled with beech nuts, and the sunlight filters through the leaves, creating a peaceful and serene atmosphere. Suddenly, a beech nut falls from the tree and lands on the duck's head, waking it up with a start. The duck, initially frightened, realizes that it was just a falling nut and not a hunter's shot."} # Send Prompt From Allam
     # إرسال الطلب إلى Colab
