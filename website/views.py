@@ -158,6 +158,11 @@ def activity_2_exer():
 def reasons():
     return render_template("/activities/reasons.html") 
 
+# problem Activity
+@views.route('/activities/problem')
+def problem():
+    return render_template("/activities/problem.html") 
+
 # place Activitiy  
 @views.route('/activities/activitie_place')
 def activitie_plac():
@@ -524,7 +529,7 @@ Output:"""
         result_cleaned = result[1]  # Or handle the error as needed
 
     # Send To Colab And Recive Image
-    colab_url = "https://d881-34-125-154-110.ngrok-free.app/colab-message"  # رابط ngrok من Colab
+    colab_url = "https://04d9-35-247-139-23.ngrok-free.app/colab-message"  # رابط ngrok من Colab
     prompt = {"message": f"{result_cleaned}"} # Send Prompt From Allam
     # prompt = {"message": " A white duck is sleeping under a fruitful beech tree in a forest. The tree is filled with beech nuts, and the sunlight filters through the leaves, creating a peaceful and serene atmosphere. Suddenly, a beech nut falls from the tree and lands on the duck's head, waking it up with a start. The duck, initially frightened, realizes that it was just a falling nut and not a hunter's shot."} # Send Prompt From Allam
     # إرسال الطلب إلى Colab

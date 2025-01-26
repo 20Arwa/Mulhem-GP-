@@ -1,0 +1,220 @@
+{% extends "base.html" %}
+{% block title %}المشكلة{% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/activities.css') }}">
+{% endblock %}
+<!-- Questions & Answers -->
+{% block body %}
+<div class="activity characters_activity container my-5 p-4 py-5 px-5 rounded-4 position-relative">
+    <div id="carouselCaracthers" class="carousel slide">
+        <div class="carousel-inner">
+            <!-- @@@@@@@@@@@@@ Section 1 @@@@@@@@@@@@@ -->
+            <div class="carousel-item section-1 active">
+                <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>ماهي المشكلة ؟<i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <p> "المشكلة هي حالة أو موقف يواجهه الشخص ويجعله يشعر بالتحدي أو الحيرة. يمكن أن تكون مشكلة داخلية، مثل شعور الشخص بالحزن أو الخوف، أو مشكلة خارجية، مثل مواجهة صعوبة في تحقيق هدف ما. الشخص أو الشخصيات في القصة يسعون لحل هذه المشكلة، مما يجعل الأحداث تتطور وتنتقل من مرحلة إلى أخرى."
+                    </p>
+                </div>
+                <div class="small-activity text-center pt-3  mx-auto">
+                    <div class="content mx-auto">
+                        <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج المشكلة من القصة التالية:</h5>
+                        <div class="story d-flex align-items-center gap-2 rounded-4 p-3 py-2 mx-auto my-3 border border-2 border-white">
+                            <div class="right-side text-center">  
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>قصة رحلة الحديقة</h5>
+                                <img class="my-3 rounded-4" src="../..//static/images/فرحان.jpeg" alt=" فرحان">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/فرحان.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side text-end mb-0">
+                                كان هناك أرنب صغير يدعى "فرحان" يحب الجزر كثيرًا.<br>
+                                في يوم من الأيام، وجد حقلاً مليئًا بالجزر، ولكن كان هناك سياج عالٍ يمنعه من الدخول.<br>
+                                فكر فرحان وسأل صديقته السلحفاة "لولا" للمساعدة.<br>
+                                تعاونوا معًا ووجدوا مكانًا منخفضًا في السياج.<br>
+                                دخلوا الحقل وأكلوا الجزر حتى شبعوا.<br>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="question">
+                        <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>ما هي المشكلة التي واجهها الأرنب "فرحان" في القصة؟ </h6>
+                        <div class="options">
+                            <div class="confetti-right confetti-click">
+                                <button class="right button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i> كان هناك سياج عالٍ يمنعه من دخول حقل الجزر. 
+                                </button>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
+                            </div>
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>لم يكن لديه أصدقاء.
+                            </button>
+                            
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>كان خائفًا من الحيوانات الأخرى.
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="carousel-item section-3 ">
+                
+                <div class="small-activity text-center pt-3  mx-auto">
+                    <div class="content mx-auto">
+                        <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج المشكلة من القصة التالية:</h5>
+                        <div class="story d-flex align-items-center gap-2 rounded-4 p-3 py-2 mx-auto my-3 border border-2 border-white">
+                            <div class="right-side text-center">  
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>مغامرة مريم والكتاب السحري</h5>
+                                <img class="my-3 rounded-4" src="../..//static/images/الكتاب السحري.jpeg" alt=" فرحان">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/الكتاب السحري.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side text-end mb-0">
+                                ذات يوم، كانت مريم تسير في طريقها إلى المدرسة عندما لاحظت مكتبة قديمة لم ترها من قبل.<br>
+                                دفعها الفضول للدخول. كانت المكتبة مليئة بالكتب القديمة والمخطوطات، لكن شيئًا غريبًا جذب انتباهها.<br>
+                                كان هناك كتاب كبير مفتوح على طاولة في المنتصف، وتوهجت صفحاته بلون ذهبي خافت.<br>
+                                اقتربت مريم من الكتاب بحذر، وعندما لمسته، انفتح باب سحري أمامها.<br>
+                                وجدت نفسها فجأة في عالم مليء بالقصص والشخصيات الخيالية.<br>
+                                لكن سرعان ما أدركت أن هناك مشكلة كبيرة: الكلمات بدأت تختفي من الكتب، وإذا لم تُحل المشكلة، ستختفي كل القصص إلى الأبد!<br>
+                            </p>
+                            
+                        </div>
+                    </div>
+
+                    <div class="time-questions">
+                        <p class="Story-place-time" >ما المشكلة التي تواجه مريم في القصة؟ اسحب الإجابة الصحيحة إلى المربع الفارغ.</p>
+                        <div class="drag-container-1">
+                            <div class="dropzone" ondrop="drop(event, 'الكلمات تختفي من الكتب.')" ondragover="allowDrop(event)"></div>
+                            <div class="options">
+                                <span class="draggable" draggable="true" ondragstart="drag(event)" id="place1">في الحديقة</span>
+                                
+                                <span class="draggable" draggable="true" ondragstart="drag(event)" id="place2"> مريم لا تجد كتابًا يناسبها.</span>                             </span>
+                                   
+                                <div class="confetti-right confetti-click">
+                                    <span class="draggable" draggable="true" ondragstart="drag(event)" id="place3">الكلمات تختفي من الكتب.</span>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
+                                </div>
+
+                              </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <button class="carousel-control-prev h-50 top-50 translate-middle-y" type="button" id="carouselPrev"  data-bs-target="#carouselCaracthers" data-bs-slide="prev">
+                <i class="fa-regular fa-circle-right"></i>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next h-50 top-50 translate-middle-y" type="button" id="carouselNext" data-bs-target="#carouselCaracthers" data-bs-slide="next">
+                <i class="fa-regular fa-circle-left"></i>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+</div>
+{% endblock %}
+{% block script %}
+<script>
+    const myCarousel = document.querySelector('#carouselCaracthers');
+    const carousel = new bootstrap.Carousel(myCarousel, {
+        wrap: false // Stops Going Back To First Section
+    });
+    // Hide And Display Arrows
+    const nextButton = document.querySelector('#carouselNext');
+    const prevButton = document.querySelector('#carouselPrev');
+    prevButton.style.display = 'none';
+    myCarousel.addEventListener('slid.bs.carousel', (event) => {
+        const totalItems = document.querySelectorAll('#carouselCaracthers .carousel-item').length; // Number Of Items
+        const currentIndex = event.to; // Current Item
+        // Hide Prev Button If User In First Item
+        if (currentIndex === 0) {
+            prevButton.style.display = 'none';
+        } else {
+            prevButton.style.display = 'flex';
+        }
+        // Hide Next Button If User Reach Last Item
+        if (currentIndex === totalItems - 1) {
+            nextButton.style.display = 'none';
+            // Check If All Answerd
+            let allTrue = false; // Start as false
+            // Check if all Questions Are Answerd
+            if (
+                Array.from(document.querySelectorAll(".section-1 .small-activity .question button.right")).every(button => button.classList.contains("active-right")) &&
+                Array.from(document.querySelectorAll(".section-3 .small-activity .question .answer img")).every(img => img.classList.contains("active-right")) &&
+                Array.from(document.querySelectorAll(".section-4 .small-activity .question button.right")).every(button => button.classList.contains("active-right")) &&
+                Array.from(document.querySelectorAll(".section-4 .small-activity .question input[type='text']")).every(input => input.classList.contains("active-right"))
+                ) {
+                    allTrue = true;
+                    bigConfetti(); // Turn On Big Confetti
+                    document.querySelector(".section-5 .allQues-error-msg").style.opacity = 0;
+                    // Enable Go Back To Activity Button 
+                    document.querySelector(".section-5 .go-back").style.opacity = '100%'; 
+                    document.querySelector(".section-5 .go-back").setAttribute("href", "../activities/all_activities");
+                }
+                else {
+                // Disable Go Back To Activity Button 
+                document.querySelector(".section-5 .go-back").style.opacity = '50%';
+                document.querySelector(".section-5 .go-back").setAttribute("href", "#");
+                // Show Error Message In Last Item
+                document.querySelector(".section-5 .allQues-error-msg").style.opacity = 1;
+            }
+        } else {
+            nextButton.style.display = 'flex'; 
+        }
+    });
+
+    // @@@@@@@@@ Multiple Choice Questions @@@@@@@@@
+    function optionClick(button) {
+        if (button.classList.contains("wrong")) {
+            button.classList.add("active-wrong")
+        }
+        else {
+            button.classList.add("active-right")
+        }
+    }
+
+    
+// التعامل مع السحب والإفلات
+function allowDrop(event) {
+    event.preventDefault();
+}
+
+function drag(event) {
+    event.dataTransfer.setData('text', event.target.id);
+}
+
+function drop(event, correctAnswer) {
+    event.preventDefault();
+    const data = event.dataTransfer.getData('text');
+    const draggedElement = document.getElementById(data);
+
+    if (draggedElement.textContent === correctAnswer) {
+        event.target.textContent = draggedElement.textContent;
+        event.target.classList.add('success');
+        event.target.classList.remove('error');
+        
+    } else {
+        event.target.classList.add('error');
+        setTimeout(() => {
+            event.target.classList.remove('error');
+           }, 1000); // إزالة اللون الأحمر بعد ثانية
+    }
+    
+}
+
+</script>
+{% endblock %}
