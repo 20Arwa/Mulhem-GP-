@@ -26,6 +26,7 @@
 							{% else %}
 								<input class="button title" type="text" name="title" placeholder="عنوان القصة">
 							{% endif %}
+
 							<div class="cover-img-container img-container">
 								{% if story_type == "قصة معدلة" %}
 								<img class="img cover-img" src="../../static/{{allam_story['imgSrc']}}"> 
@@ -115,7 +116,7 @@
 		
 		<!-- @@@@@@@@@@@@@ Buttons @@@@@@@@@@@@ -->
 		<div class="sitting-buttons">
-			<div class="sitting-error-msg error-msg mb-2">رسالة الخطأ</div>
+			<div class="sitting-error-msg error-msg my-3">رسالة الخطأ</div>
 			<div class="d-flex align-items-center justify-content-center column-gap-2">
 				
 				<div class="dropdown allam-help position-relative">
@@ -124,9 +125,10 @@
 						اطلب مساعدة مُلهِم
 					</button>
 					<ul class="dropdown-menu text-center">
-						<li><a class="dropdown-item starting">لا أعرف عن ماذا أكتب</a></li>
-						<li><a class="dropdown-item completion">لا أعرف كيف أكمل قصتي</a></li>
-						<li><a class="dropdown-item elements" href="#allam-response">تحقق من عناصر قصتي</a></li>
+						<li><a class="dropdown-item starting">🤔 لا أعرف عن ماذا أكتب</a></li>
+						<li><a class="dropdown-item completion">✍️ لا أعرف كيف أكمل قصتي</a></li>
+						<li><a class="dropdown-item elements" href="#allam-response">✅ تحقق من عناصر قصتي</a></li>
+						<li><a class="dropdown-item titles" href="#allam-response">💡 اقترح عناوين لقصتي</a></li>
 					</ul>
 					<img class="mulhem position-absolute" src="../../static/images/mulhem-no-crown.png" alt="ملهم">
 				</div>
@@ -238,8 +240,8 @@
 			<div class="text">
 			</div>
 		</div>
-
-
+		
+		
 		<!-- Story Elements -->
 		<div class="response response-elements p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="elements">
 			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
@@ -247,6 +249,18 @@
 				<h3>📚✨التحقق من عناصر القصة:</h3>
 			</div>
 			<div class="elements mb-3">
+			</div>
+		</div>
+		
+		<!-- Story Titles -->
+		<div class="response response-titles p-4 p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="titles">
+			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
+			<div class="d-flex justify-content-between mb-4">
+				<h3>🎨✨عناوين مقترحة لقصتك الجميلة:</h3>
+			</div>
+			<div class="text text-end">
+				<ul>
+				</ul>
 			</div>
 		</div>
 
@@ -710,6 +724,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}).then((result) => {
 				if (result.isConfirmed) {
 					coverImage.setAttribute("src", "");
+					document.querySelector(".delete-coverImage-btn").style.display = "none"
 				}
 			})
 	});
@@ -742,8 +757,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 		// If Text Is Short
-		else if (textElement.textContent.length < 50) {
-			corrcErrorMsg.innerHTML = "القصة قصيرة جدا! حاول كتابة المزيد لتحصل على التصحيح"
+		else if (textElement.textContent.length < 10) {
+			corrcErrorMsg.innerHTML = "القصة قصيرة جدا! حاول كتابة المزيد لأتمكن من تصحيح أخطائك"
 			corrcErrorMsg.style.opacity = 1;
 			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
 			return;
@@ -1020,7 +1035,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			responseElems.innerHTML = ""; // إزالة المحتوى السابق
 		
 			// ترتيب العناصر وعرضها
-			const elementOrder = ["الشخصيات", "المكان", "الزمان", "الأسباب", "المعضلة"];
+			const elementOrder = ["الشخصيات", "المكان", "الزمان", "الأسباب", "المشكلة"];
 			elementOrder.forEach(key => {
 				if (key in jsonObject) {
 					const elementDiv = document.createElement("div"); // إنشاء div لكل عنصر
@@ -1107,7 +1122,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		 // إظهار رسالة التحميل
 		Swal.fire({
-            title: 'جاري التحقق من الإجابة...',
+            title: 'جاري المساعدة في الإكمال...',
             text: 'الرجاء الانتظار قليلاً',
             allowOutsideClick: false,
             showConfirmButton: false,
@@ -1167,6 +1182,126 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.querySelector(".response-completion").style.display = "none";
 		window.scrollBy({top: -420});	
 	});
+
+
+
+	// @@@@@@@@@@@ Allam Titles @@@@@@@@@@@
+	async function allamTitles() {
+		var sittingErrMsg = document.querySelector(".sitting-error-msg");
+
+		// Get All Text
+		var AllStory = document.querySelectorAll(".page .text");
+		var fullStory = "";
+		AllStory.forEach(text => {fullStory += text.textContent.trim() + " "})
+		
+		// If Text Is Empty
+		if (fullStory.trim().length == 0) {
+			sittingErrMsg.innerHTML = "لا يوجد نص للتحقق منه، أضف نصاً أولاً"
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// If Text Is Short
+		else if (fullStory.length < 200) {
+			sittingErrMsg.innerHTML = "يجب أن تكون القصة بطول 200 حرفا وأكثر ليتمكن مُلهِم من اقتراح العناوين!"
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// If Text Is Not Arabic
+		else if (!arabicRegex.test(fullStory) ) {
+			sittingErrMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// الكلمات المحظورة
+		if (checkForbiddenWords(fullStory)) {
+			return;
+		}
+		else {
+			sittingErrMsg.style.opacity = 0; // Remove Error Message
+		}
+
+		// Send To Allam
+		const data = { message: fullStory }; 
+
+		 // إظهار رسالة التحميل
+		Swal.fire({
+            title: 'جاري انشاء العناوين المقترحة...',
+            text: 'الرجاء الانتظار قليلاً',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading(); // عرض المؤشر الدائري
+            }
+        });
+
+		try {
+            const response = await fetch('http://127.0.0.1:5000/allam-titles', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			});
+
+            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+			
+            if (!response.ok) {
+                throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+            }
+			
+            var result = await response.json();
+            result = JSON.parse(result.response); // تحويل النص إلى JSON
+
+			console.log(result)
+			console.log(result[0])
+			
+			// Show Response To User
+			var TitlesContain  = document.querySelector(".response-titles");
+			TitlesContain.style.display = "block";
+
+			const ulElement = TitlesContain.querySelector(".text ul");
+			ulElement.innerHTML = ""; // مسح المحتوى الحالي داخل <ul> إذا كان موجودًا
+			// إضافة كل عنصر من المصفوفة كعنصر <li>
+			result.forEach((title) => {
+				const liElement = document.createElement("li"); // إنشاء عنصر <li>
+				liElement.textContent = title; // تعيين النص للعنصر
+				ulElement.appendChild(liElement); // إضافة <li> إلى <ul>
+			});
+						
+			const scrollPosition = document.body.scrollHeight;
+			window.scrollTo({
+				top: scrollPosition,
+				behavior: 'smooth'
+			});
+
+			
+
+
+		
+		} catch (error) {
+			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+			Swal.fire({
+				title: 'خطأ!',
+				text: error.message,
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
+		}
+	}
+	// Click Titles Button
+	document.querySelector(".dropdown.allam-help .titles").addEventListener("click", (e) => {
+		e.preventDefault(); // Prevent page reload
+		allamTitles(); 
+	});
+	// Click On Close Titles
+	document.querySelector(".response-titles .close-icon").addEventListener("click", () => {
+		document.querySelector(".response-titles").style.display = "none";
+		window.scrollBy({top: -420});	
+	});
+
+
 
 	// @@@@@@@@@@@ Starting Ideas @@@@@@@@@@@
 	var startingIdeas = document.querySelector(".response-starting");
@@ -1267,17 +1402,20 @@ document.addEventListener('DOMContentLoaded', function () {
 		handleUserExit()
 	})
 	// مستمع لحدث beforeunload
-	window.addEventListener('beforeunload',(event) => {
-		//event.preventDefault(); 
-		//event.returnValue = 'إذا خرجت الآن دون حفظ القصة، قد تضيع قصتك الجميلة! هل تريد حفظها قبل المغادرة؟';
-		//handleUserExit()
+	window.addEventListener('beforeunload', (event) => {
+		// عرض نافذة تحذيرية باللغة العربية
+		//const userConfirmed = confirm('إذا خرجت الآن دون حفظ القصة، قد تضيع قصتك الجميلة! هل تريد حفظها قبل المغادرة؟');
+		// إذا وافق المستخدم على المغادرة، نترك الحدث يعمل
+		//if (!userConfirmed) {
+			// منع المغادرة
+		//	event.preventDefault();
+		//	event.returnValue = '';
+		//} else {
+			// تنفيذ إجراء معين عند المغادرة (اختياري)
+		//	handleUserExit();
+		//}
 	});
-
-	// مستمع لحدث unload
-	window.addEventListener('unload',(event) => {
-		//	event.preventDefault(); 
-	//	handleUserExit()
-	});
+	
 	
 	// Click On Save Button
 	var saveBtn = document.querySelector(".save-btn");
@@ -1303,6 +1441,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		AllStory.forEach(text => {
 		fullStoryArray.push(text.textContent.trim())}); // إضافة النصوص إلى المصفوفة
 
+		console.log(titleText.trim())
 		// If Title Is Not Arabic
 		if (!titleText.trim()) { 
 			console.log("العنوان فارغ، لا حاجة للتحقق.");
@@ -1317,16 +1456,29 @@ document.addEventListener('DOMContentLoaded', function () {
 			});
 			return; // الخروج فقط في حالة النص غير العربي
 		}
-		const data = {
-			title: title.value || null, // إذا كان الحقل فارغًا، يتم إرساله كقيمة فارغة
-			imageSrc: imageSrc || "", 
-			audioSrc: audioSrc || "", 
-			type: type || "",
-			message: fullStoryArray || ""
-		};
-		
-		// Call function to send the story
-		await SendStory(data);
+
+		// Check If AnyThing To Save
+		if (!title.value && !imageSrc && !fullStory.trim()) {
+			Swal.fire({
+				title: 'لا يوجد شي لحفظه',
+				text: 'اكتب عنواناً أو نصاً أو ضع صورة ليتم حفظ القصة',
+				icon: 'info',
+				confirmButtonText: 'حسنا',
+				reverseButtons: true // تبديل أماكن أزرار التأكيد والإلغاء
+			});
+		}
+		else {
+			const data = {
+				title: title.value || null, // إذا كان الحقل فارغًا، يتم إرساله كقيمة فارغة
+				imageSrc: imageSrc || "", 
+				audioSrc: audioSrc || "", 
+				type: type || "",
+				message: fullStoryArray || ""
+			};
+			
+			// Call function to send the story
+			await SendStory(data);
+		}
 	})
 	
 	//Save Story Function
@@ -1422,7 +1574,6 @@ document.addEventListener('DOMContentLoaded', function () {
 				headers: { 'Content-Type': 'application/json' },
 				body: JSON.stringify(data)
 			});
-	
 			// Handle response
 			if (response.ok) {
 				let result = await response.json();
@@ -1468,7 +1619,12 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 			}
 		} catch (error) {
-			Swal.fire('فشل الحفظ', 'حدث خطأ أثناء التواصل مع الخادم', 'error');
+			Swal.fire({
+				title: 'فشل الحفظ',
+				text: 'حدث خطأ أثناء التواصل مع الخادم',
+				icon: 'error',
+				confirmButtonText: 'حسنا' // تغيير النص إلى "حسنا"
+			});
 			console.error(error);
 		}
 	}

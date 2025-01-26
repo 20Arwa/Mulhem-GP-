@@ -15,7 +15,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(255), nullable=False)
     # Relationship With Other Tables: 
     user_stories = db.relationship('User_stories')
-    
+
 class Available_stories(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     title = db.Column(db.String(255), nullable=True, unique=True)
@@ -25,10 +25,14 @@ class Available_stories(db.Model):
 
 class User_stories(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-    title = db.Column(db.String(255), nullable=True, unique=True)
+    title = db.Column(db.String(255), nullable=True)  # أزلنا unique=True هنا
     content = db.Column(db.JSON, nullable=True)
     type = db.Column(Enum('قصة مُلهِم', 'كتابة مستقلة', 'قصة معدلة', name='story_types'), nullable=False)
     imgSrc = db.Column(db.String(255), nullable=True)
     audioSrc = db.Column(db.String(255), nullable=True)
-    aval_edited_id = db.Column(db.Integer, db.ForeignKey('available_stories.id'), nullable=True) # Foreignkey
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'),nullable=True) # Foreignkey
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # Foreignkey...جعلنا nullable=False لضمان ارتباط القصة بمستخدم
+
+    # يعني كل يوزر يكون عنده قصص بعناوين فريدة
+    __table_args__ = (
+        db.UniqueConstraint('user_id', 'title', name='unique_title_per_user'),
+    )

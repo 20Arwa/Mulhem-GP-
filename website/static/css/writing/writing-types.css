@@ -2,12 +2,10 @@
     color: var(--font-4);
     cursor: pointer;
     transition: var(--transition-seconds);
-    background-color: var(--main-light);
+    background: var(--gradient-light);
 }
 .writing-types .type:hover {
-    /* color: var(--font-1); */
     box-shadow: 2px 5px 10px var(--main-dark);
-    background-color: var(--main-dark);
 }
 .writing-types .type .img-holder {
     width: 200px;

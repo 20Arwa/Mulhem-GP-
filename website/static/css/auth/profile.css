@@ -2,7 +2,7 @@
 .profile-container {
     width: 200%;
     align-items: center;
-    max-width: 600px;
+    max-width: 450px;
     margin: 20px auto;
     background: #dbcef6;
     padding: 20px;
@@ -49,8 +49,9 @@
     margin-bottom: 10px;
 }
 
-.profile-form input {
-    width: calc(40% - 10px);
+.profile-form input,
+.profile-form select {
+    width: 80%;
     display: block;
     padding: 8px;
     border: 1px solid #ccc;
@@ -77,30 +78,17 @@
     font-size: 24px;
     color: var(--font-4)
 }
+.profile-form .error-msg {
+    opacity: 0;
+}
 
-/* حاوية زر الحفظ */
-.save-container {
+/* حاوية زر التعديل */
+.edit-container {
     display: flex;
     justify-content: center; /* محاذاة الزر في المنتصف */
     margin-top: 20px;
 }
-
-/* تصميم زر الحفظ */
-.save-button {
-    opacity: 0;
-}
-/* .save-button {
-    color: #fff; 
-    border: none;
-    border-radius: 25px; 
-    padding: 10px 20px; 
-    font-size: 1em;
-    font-weight: bold;
-    cursor: pointer; 
-    transition: background-color 0.3s ease; 
-} */
-
 /* التأثير عند تمرير الماوس على الزر */
-.save-button:hover {
+.edit-button:hover {
     background-color: #b391d6; /* تغيير لون الزر عند التمرير */
 }

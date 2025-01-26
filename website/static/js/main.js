@@ -1,3 +1,15 @@
+// Make Flash Message Dissapear After Seconds
+  setTimeout(() => {
+    const flashMessages = document.getElementById('flash-messages');
+    if (flashMessages) {
+      flashMessages.style.transition = "opacity 0.5s ease"; // تأثير اختفاء سلس
+      flashMessages.style.opacity = "0"; // اجعل الرسائل شفافة
+      setTimeout(() => flashMessages.remove(), 500); // أزل الرسائل من DOM بعد اختفائها
+    }
+}, 5000); // 5000 ميلي ثانية (5 ثوانٍ)
+
+
+// Drag And Drop Quiz
 document.addEventListener('DOMContentLoaded', function () {
     // Select all quiz wrappers (for multiple questions)
     const quizWrappers = document.querySelectorAll('.quiz-wrapper');

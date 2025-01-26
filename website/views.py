@@ -33,7 +33,7 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMWE5NDJiYWMtY2MzNy00M2FjLWEwMzctM2U4NTg3YzA3YTJiIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc1NTUyMTEsImV4cCI6MTczNzU1ODgxMSwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.Sts-B8USnH4cbiSxeSr8T-Qa67TGzK-k1bmcKYtc1e6NEFFfXt8qxWyloD4hSUqPNwg-TdIXmHe9A9P_i1WGzn7m5dKaOPDESyIQ2dfj-ETQ7WJtHenBbS0p7kr86pSUM23YaGYmEwbVrx9zcPlFM6xe2GXnb9RfsAjH6_Bvc21Q1CeEoknnmhLLwtU6O9Rp7nhm3ajqQ5a_MMtAFYMDGyL0sWRlLH6prndU81aSXkkv66b-akpCzOIj1zQ17ObPPiw7gMgXUGS19shYDllC92QBmggO4D95jqNzRHTlCBl-sQpQ9YAYmajENaOdiM7N-AshWHxPUmDvbpo1syfTBQ",
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiYTgzNDAwODktMDVlYi00MjExLWIwMWMtYWFhNDMzYzlkZDcyIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc4MDQ2MDcsImV4cCI6MTczNzgwODIwNywiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.QIcPRYqPebDRZLBUffN80Nwho8BAkWanXQmY1PQ8oRi4_8HOXzp87y1BnFlGA2-hR3PsPu7FAB1Di7fm0y7YlXni4VYi-YwamdFVBO5gDuz3rMXqQ9qKPu5M8rkiYV-bQctw3-QI43BflRHWjzJtT2sey0UzlHx271OCnEsDcpqspMACuZ1nSR46LcoxRY-abl_8M4xItGti_eaPfTKitTVsv6thbcLcOzfKH_qB-M4YjY_TIVJxR-bTG0VSeB15f2jkbaK62OrOaaSpXiduXAjVfQyoxaO5hhSstnWOLR8XiAhEGkGr3zox7VNx9j1s-z9Wp1h28B7bYZVz2xj-1A",
     }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
@@ -127,7 +127,7 @@ def reading_page():
     # Covnert Audios Json To String If Our_library
     if reading_type == "our_library":
         story.audioSrc = json.loads(story.audioSrc) 
-    return render_template("reading/reading_page.html", reading_type=reading_type, story=story)
+    return render_template("reading/reading_page.html", reading_type=reading_type, story=story, user=current_user)
 
 
 
@@ -172,6 +172,7 @@ def writing_types():
 
 # Story Generator
 @views.route('/writing/story-generator')
+@login_required
 def storyGenerator():
     return render_template("/writing/story-generator.html") 
 
@@ -212,11 +213,12 @@ def save_user_story():
     print("Type of message:", type(data.get('message', None)))
     print(f"Received data type: {type(content)} - Content: {content}")
 
-    # تحقق إذا كان العنوان موجودًا بالفعل
-    existing_story = User_stories.query.filter_by(title=title).first()
-    if existing_story:
-        if existing_story.title is not None:
-            return jsonify({"response": "A story with this title already exists.", "status": "duplicate"}), 400
+   # تحقق إذا كان العنوان موجودًا بالفعل لنفس المستخدم
+    if title:
+        existing_story = User_stories.query.filter_by(title=title, user_id=user_id).first()
+        if existing_story:
+            return jsonify({"response": "A story with this title already exists for this user.", "status": "duplicate"}), 400
+
     try:
         # إنشاء القصة الجديدة
         new_Story = User_stories(
@@ -321,37 +323,45 @@ def update_user_story():
     audioSrc = data.get('audioSrc', '')  # اسم الصوت
     user_id = current_user.id
 
+
     # جلب القصة المراد تحديثها
     story = User_stories.query.filter_by(id=story_id, user_id=user_id).first()
 
-    # تحقق من تكرار العنوان اذا تم تغييره
-    if story.title != title:
-        existing_story = User_stories.query.filter(User_stories.id != story_id, User_stories.title == title, User_stories.user_id == user_id).first()
+    # تحقق من تكرار العنوان إذا تم تغييره
+    if title and story.title != title:
+        existing_story = User_stories.query.filter(
+            User_stories.id != story_id,
+            User_stories.title == title,
+            User_stories.user_id == user_id
+        ).first()
         if existing_story:
-            return jsonify({"response": "A story with this title already exists.", "status": "duplicate"}), 400
+            return jsonify({"response": "A story with this title already exists for this user.", "status": "duplicate"}), 400
         else:
             story.title = title
-        
-    # تغيير اسم الملف إذا كانت الصورة موجودة
-    print("image src", imageSrc)
     
     if imageSrc:
         # استخراج امتداد الملف
         ext = os.path.splitext(imageSrc)[1]  # مثال: .png أو .jpg
 
-        # إنشاء المسار الكامل للملف القديم والجديد
+        # المسارات القديمة والجديدة
         old_name = os.path.join(current_app.root_path, 'static/images/users', str(user_id), imageSrc)
         new_name = os.path.join(current_app.root_path, 'static/images/users', str(user_id), f"{user_id}_{story_id}{ext}")
+        
+        # إذا كان هناك صورة حالية للقصة (يتم حذفها أولًا)
+        if story.imgSrc:
+            current_image_path = os.path.join(current_app.root_path, 'static', story.imgSrc)
+            if os.path.exists(current_image_path):
+                os.remove(current_image_path)  # حذف الصورة القديمة
 
-        # تحقق إذا كان الملف القديم موجودًا
-        if os.path.exists(new_name):
-            # حذف الصورة القديمة إذا كانت موجودة
-            os.remove(new_name)
+        # تحقق إذا كانت الصورة الجديدة موجودة باسمها القديم
+        if os.path.exists(old_name):
+            os.rename(old_name, new_name)  # تغيير اسم الملف
+            # تحديث المسار في قاعدة البيانات
+            story.imgSrc = f"images/users/{user_id}/{user_id}_{story_id}{ext}"
+            db.session.commit()
+        else:
+            return jsonify({"response": "Uploaded image not found.", "status": "error"}), 404
 
-        os.rename(old_name,new_name)  # تغيير اسم الملف
-        # تحديث المسار في قاعدة البيانات
-        story.imgSrc = f"images/users/{user_id}/{user_id}_{story_id}{ext}"
-        db.session.commit()
 
 
     # تغيير اسم الملف إذا كان الصوت موجود
@@ -454,7 +464,7 @@ def delete_user_story():
 @views.route('/writing/user-stories')
 @login_required
 def user_stories():
-    all_stories = User_stories.query.all()
+    all_stories = User_stories.query.filter_by(user_id=current_user.id).all()
 
     # تحويل الكائنات إلى JSON
     stories_data = [
@@ -808,6 +818,37 @@ def allam_completion():
         return jsonify({"response": "Error processing request."}), 500
     return jsonify({"response": result_cleaned}), 200  # إرجاع النتيجة بشكل صحيح
 
+# Titles Suggenstion
+@views.route('/allam-titles', methods=['POST'])
+def allam_titles():
+    data = request.json  # استلام البيانات من JavaScript
+    if not data or 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
+
+    
+    prompt = f"""Input:اقترح للطفل ٥ عناوين مناسبة للقصة اللتي كتبها، يجب أن تكون العناوين مناسبة للأطفال.
+    قصة الطفل: في يوم من الأيام، وجد عصفور صغير جناحه مكسورًا، لكنه قرر أن يحاول الطيران مجددًا. مع كل محاولة، كان يقفز أعلى. وفي النهاية، استطاع أن يحلق في السماء، مؤمنًا بأن الإرادة تصنع المستحيل.  
+    Output:["جناح الأمل","حين حلّق الحلم","العصفور الذي لم يستسلم","رحلة نحو السماء","إرادة تصنع المعجزات"]
+
+    Input:اقترح للطفل ٥ عناوين مناسبة للقصة اللتي كتبها، يجب أن تكون العناوين مناسبة للأطفال.
+    قصة الطفل: {data['message']}. 
+    Output:"""
+
+    result = generate_AllamResponse(prompt, 70)
+    # result = '''["جناح الأمل","حين حلّق الحلم","العصفور الذي لم يستسلم","رحلة نحو السماء","إرادة تصنع المعجزات"]'''
+
+    global result_cleaned 
+
+    if "Input:" in result:
+        # استخراج النص من البداية حتى كلمة "Input"
+        input_index = result.find("Input")  # إيجاد موقع الكلمة
+        result_cleaned = result[:input_index].strip()  # قص النص من البداية حتى الكلمة
+    else:
+        result_cleaned = result  # Or handle the error as needed
+    # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
+    if result is None:
+        return jsonify({"response": "Error processing request."}), 500
+    return jsonify({"response": result_cleaned}), 200  # إرجاع النتيجة بشكل صحيح
 
 # Story Elements
 @views.route('/allam-elements', methods=['POST'])
@@ -817,10 +858,10 @@ def allam_elements():
         return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
 
 
-    prompt = f"""Input: استخرج عناصر القصة الأساسية (الشخصيات، المكان، الزمان، الأسباب، المعضلة) من النص التالي: في الحديقة، كان هناك ولد يدعى أحمد، وهو هنا ليتعلم عن الطبيعة.
-    Output: {{"الشخصيات": "أحمد", "المكان": "الحديقة", "الزمان": "غير مذكور. متى حدثت القصة؟ في الصباح أم في المساء؟", "الأسباب": "أحمد هنا ليتعلم عن الطبيعة.", "المعضلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"}}
+    prompt = f"""Input: استخرج عناصر القصة الأساسية (الشخصيات، المكان، الزمان، الأسباب، المشكلة) من النص التالي: في الحديقة، كان هناك ولد يدعى أحمد، وهو هنا ليتعلم عن الطبيعة.
+    Output: {{"الشخصيات": "أحمد", "المكان": "الحديقة", "الزمان": "غير مذكور. متى حدثت القصة؟ في الصباح أم في المساء؟", "الأسباب": "أحمد هنا ليتعلم عن الطبيعة.", "المشكلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"}}
 
-    Input: استخرج عناصر القصة الأساسية (الشخصيات، المكان، الزمان، الأسباب، المعضلة) من النص التالي: {data['message']}
+    Input: استخرج عناصر القصة الأساسية (الشخصيات، المكان، الزمان، الأسباب، المشكلة) من النص التالي: {data['message']}
     Output:"""
 
 #     result = """
@@ -829,17 +870,24 @@ def allam_elements():
 #         "المكان": "غير مذكور. أين يمكن أن يكون أحمد؟ في المنزل، المدرسة، أم مكان آخر؟",
 #         "الزمان": "صباح جميل",
 #         "الأسباب": "غير مذكورة. لماذا أحمد في هذا المكان؟ هل هو ذاهب لإنجاز شيء مهم أم لمجرد التسلية؟",
-#         "المعضلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"
+#         "المشكلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"
 #     }
 # """
 
     result = generate_AllamResponse(prompt, 170)
+
+    if "Input:" in result:
+        # استخراج النص من البداية حتى كلمة "Input"
+        input_index = result.find("Input")  # إيجاد موقع الكلمة
+        result_cleaned = result[:input_index].strip()  # قص النص من البداية حتى الكلمة
+    else:
+        result_cleaned = result  # Or handle the error as needed
     
     # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
     if result is None:
         return jsonify({"response": "Error processing request."}), 500
 
-    return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
+    return jsonify({"response": result_cleaned}), 200  # إرجاع النتيجة بشكل صحيح
 
 
 

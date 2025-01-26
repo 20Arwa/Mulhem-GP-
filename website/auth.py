@@ -198,86 +198,59 @@ def logout():
 
 
 # @@@@@@@@@@@@@@ Profile Page @@@@@@@@@@@@@@
-@auth.route('/profile', methods=['GET', 'POST'])
+@auth.route('/profile')
 @login_required
 def profile():
-    if request.method == 'POST':
-        # Get Inputs
-        first_name = request.form.get('f_name')
-        last_name = request.form.get('l_name')
-        age = request.form.get('age')
-        gender = request.form.get('gender')
-        email = request.form.get('email')
-        password = request.form.get('password')
-
-        user = User.query.filter_by(id=current_user.id).first()
-        if not user:
-            flash("User not found.", category='error')
-            return redirect(url_for('auth.profile'))
-
-        # تحديث البيانات الأخرى
-        user.first_name = first_name
-        user.last_name = last_name
-        user.age = age
-        user.gender = gender
-
-        # إذا تم تحديث كلمة المرور
-        if password and password != '***********':  # تأكد من أن المستخدم غير كلمة المرور
-            user.password = generate_password_hash(password)
-
-        # إذا تم تحديث الإيميل
-        if user.email != email:
-            # Start Email Verification
-            otp_num = randint(1000, 9999)
-            session['otp_num'] = otp_num
-            session['otp_time'] = datetime.now()
-            session['temp_user'] = {
-                'f_name': first_name,
-                'l_name': last_name,
-                'age': age,
-                'gender': gender,
-                'email': email,
-                'password': generate_password_hash(password) if password else user.password
-            }
-
-            # إعداد وإرسال الإيميل
-            mail = Mail(current_app)
-            msg = Message(subject='تطبيق ملهم', sender='mulhem2025gp@gmail.com', recipients=[email])
-            msg.html = f'''
-                <html>
-                    <body style="text-align:center">
-                        <h1>رمز التحقق</h1>
-                        <p>رمز التحقق الخاص بك هو: <strong>{otp_num}</strong></p>
-                    </body>
-                </html>
-            '''
-            mail.send(msg)
-
-            db.session.commit()  # حفظ التغييرات قبل التحقق من الإيميل
-            flash("تم إرسال رمز التحقق إلى بريدك الإلكتروني. يرجى إدخال الرمز.", category='info')
-            return redirect(url_for('auth.verify'))
-
-        # حفظ التغييرات في قاعدة البيانات
-        db.session.commit()
-        flash("تم تحديث بيانات الحساب بنجاح!", category='success')
-        return redirect(url_for('auth.profile'))
-
     return render_template('auth/profile.html', user=current_user)
 
-
-@auth.route('/verify-update', methods=['GET', 'POST'])
+# Update Profile
+@auth.route('/update_profile')
 @login_required
-def verify_update():
-    if request.method == 'POST':
-        entered_otp = request.form.get('otp')
-        if session.get('otp_num') == int(entered_otp):
-            current_user.email = session.pop('temp_email')
-            db.session.commit()
-            flash("تم التحقق من الإيميل بنجاح.", "success")
-            return redirect(url_for('auth.profile'))
-        else:
-            flash("رمز التحقق غير صحيح.", "error")
-    return render_template('auth/verify.html')
+def update_profile():
+    return render_template('auth/update_profile.html', user=current_user)
+
+# Update Profile DataBase
+@auth.route('/update_user_profile', methods=['POST'])
+@login_required
+def update_user_profile():
+    data = request.json
+    if not data:
+        return jsonify({"response": "Invalid request, no data provided."}), 400
+
+    first_name = data.get('first_name', '')
+    last_name = data.get('last_name', '')
+    age = data.get('age', '')
+    gender = data.get('gender', '')
+    email = data.get('email', '')
+    password = data.get('password', None)
+
+    user = User.query.filter_by(id=current_user.id).first()
+    if not user:
+        return jsonify({"response": "User not found."}), 400
+
+    # التحقق من وجود البريد الإلكتروني مسبقًا مع استثناء المستخدم الحالي
+    if email and email != user.email:
+        email_exists = User.query.filter(User.email == email, User.id != current_user.id).first()
+        if email_exists:
+            return jsonify({"response": "البريد الإلكتروني مستخدم بالفعل"}), 400
+
+    # تحديث البيانات
+    user.first_name = first_name
+    user.last_name = last_name
+    user.age = age
+    user.gender = gender
+    user.email = email
+
+    # تحديث كلمة المرور إذا كانت جديدة
+    if password and password != "***********":
+        user.password = generate_password_hash(password)
+
+    try:
+        db.session.commit()
+        return jsonify({"response": "تم تحديث بياناتك بنجاح!"}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"response": f"حدث خطأ أثناء تحديث البيانات: {e}"}), 400
 
 
 

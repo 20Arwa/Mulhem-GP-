@@ -14,7 +14,7 @@
                     <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>ليلى والذئب </h5>
                     <img class="my-3 rounded-4" src="../..//static/images/ذات الرداء الأحمر.jpg" alt="ليلى والذئب">
                     <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
-                        <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                        <source id="audioSource" src="../../static/audio/activity/activity_1_liala.mp3" type="audio/mpeg">
                         المتصفح الخاص بك لا يدعم عنصر الصوت
                     </audio>
                 </div>
@@ -193,7 +193,7 @@
                         <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>الذئب</h5>
                         <img class="my-3 rounded-4" src="../..//static/images/wolf.jpg" alt="الذئب">
                         <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
-                            <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                            <source id="audioSource" src="../../static/audio/activity/activity_1_wolf.mp3" type="audio/mpeg">
                             المتصفح الخاص بك لا يدعم عنصر الصوت
                         </audio>
                     </div>
@@ -680,15 +680,12 @@ function CheckCar2Ques() {
                 headers: { 'Content-Type': 'application/json' },  
                 body: JSON.stringify(data),  
             });
-
             Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
-
             if (!response.ok) {
                 throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
             }
             const result = await response.json();
             var resultTrim = result.response.trim();
-
             // عرض النتيجة بناءً على الرد
             Swal.fire({
                 title:  resultTrim === "True" ? 'إجابة صحيحة!' : 'إجابة خاطئة!',
@@ -696,7 +693,6 @@ function CheckCar2Ques() {
                 confirmButtonText:  resultTrim === "True" ? 'عودة للنشاط' : 'إعادة المحاولة',
                 reverseButtons: true,
             });
-
             // Light On Based on Response
             resultTrim === "True" ? textarea_wolf.previousSibling.classList.add("active") : textarea_wolf.previousSibling.classList.remove("active");
         } catch (error) {
