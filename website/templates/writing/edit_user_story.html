@@ -2,6 +2,11 @@
 {% block title %}تعديل قصتي{% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
+	<style>
+		.edit-user-story .cover-page .buttons button {
+			display: block;
+		}
+	</style>
 {% endblock %}
 {% block body %}
 <div class="page-title container mt-5 ">صفحة الكتابة</div>
@@ -80,7 +85,7 @@
 		
 		<!-- @@@@@@@@@@@@@ Buttons @@@@@@@@@@@@ -->
 		<div class="sitting-buttons">
-			<div class="sitting-error-msg error-msg mb-2">رسالة الخطأ</div>
+			<div class="sitting-error-msg error-msg my-2">رسالة الخطأ</div>
 			<div class="d-flex align-items-center justify-content-center column-gap-2">
 				<div class="dropdown allam-help">
 					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -223,6 +228,12 @@
 
 <script type="module">
 document.addEventListener('DOMContentLoaded', function () {
+	// Hide Delete Button If No Cover Image
+	if (document.querySelector("img.cover-img").getAttribute('src') == "") {
+		document.querySelector(".cover-page .delete-coverImage-btn").style.display = "none";
+	}
+
+
 	const addPageBtn = document.querySelector(".add-page-icon"); // Add Page Button
 	const deletePageBtn = document.querySelector(".delete-page-icon"); // Delete Page Button
 
@@ -676,6 +687,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			}).then((result) => {
 				if (result.isConfirmed) {
 					coverImage.setAttribute("src", "");
+					document.querySelector(".delete-coverImage-btn").style.display = "none"
 				}
 			})
 	});
@@ -708,8 +720,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			return;
 		}
 		// If Text Is Short
-		else if (textElement.textContent.length < 50) {
-			corrcErrorMsg.innerHTML = "القصة قصيرة جدا! حاول كتابة المزيد لتحصل على التصحيح"
+		else if (textElement.textContent.length < 10) {
+			corrcErrorMsg.innerHTML = "القصة قصيرة جدا! حاول كتابة المزيد لأتمكن من تصحيح أخطائك"
 			corrcErrorMsg.style.opacity = 1;
 			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
 			return;
@@ -717,19 +729,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		// If Text Is Not Arabic
 		else if (!arabicRegex.test(textElement.textContent) ) {
 			corrcErrorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
-			corrcErrorMsg.style.opacity = 1;
-			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		else if (!repeatedPattern.test(fullStory)) {
-			corrcErrorMsg.innerHTML = "النص يحتوي على كلمات عشوائية وغير مفهومة!";
-			corrcErrorMsg.style.opacity = 1;
-			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
-			return;
-		} 
-		// التحقق من أن النص يحتوي على أحرف مفهومة وليس رموزًا فقط
-		else if (!symbolsRegex.test(textElement.textContent)) {
-			corrcErrorMsg.innerHTML = "النص يحتوي على رموز عشوائية فقط";
 			corrcErrorMsg.style.opacity = 1;
 			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
 			return;
@@ -961,7 +960,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			responseElems.innerHTML = ""; // إزالة المحتوى السابق
 		
 			// ترتيب العناصر وعرضها
-			const elementOrder = ["الشخصيات", "المكان", "الزمان", "الأسباب", "المعضلة"];
+			const elementOrder = ["الشخصيات", "المكان", "الزمان", "الأسباب", "المشكلة"];
 			elementOrder.forEach(key => {
 				if (key in jsonObject) {
 					const elementDiv = document.createElement("div"); // إنشاء div لكل عنصر
@@ -1048,7 +1047,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		 // إظهار رسالة التحميل
 		Swal.fire({
-            title: 'جاري التحقق من الإجابة...',
+            title: 'جاري المساعدة في الإكمال...',
             text: 'الرجاء الانتظار قليلاً',
             allowOutsideClick: false,
             showConfirmButton: false,
@@ -1208,22 +1207,20 @@ document.addEventListener('DOMContentLoaded', function () {
 		handleUserExit()
 	})
 	// مستمع لحدث beforeunload
-	window.addEventListener('beforeunload',(event) => {
-		//event.preventDefault(); 
-		//event.returnValue = 'إذا خرجت الآن دون حفظ القصة، قد تضيع قصتك الجميلة! هل تريد حفظها قبل المغادرة؟';
-		//handleUserExit()
-	});
-
-	// مستمع لحدث unload
-	window.addEventListener('unload',(event) => {
-		//	event.preventDefault(); 
-	//	handleUserExit()
+	window.addEventListener('beforeunload', (event) => {
+		// عرض نافذة تحذيرية باللغة العربية
+		//const userConfirmed = confirm('إذا خرجت الآن دون حفظ القصة، قد تضيع قصتك الجميلة! هل تريد حفظها قبل المغادرة؟');
+		// إذا وافق المستخدم على المغادرة، نترك الحدث يعمل
+		//if (!userConfirmed) {
+			// منع المغادرة
+		//	event.preventDefault();
+		//	event.returnValue = '';
+		//} else {
+			// تنفيذ إجراء معين عند المغادرة (اختياري)
+		//	handleUserExit();
+		//}
 	});
 	
-
-
-
-	// from heeeeeeeeeeeeeeeeeeeere SAVE
 	// Click On Save Button
 	var saveBtn = document.querySelector(".save-btn");
 	saveBtn.addEventListener("click",async () => {
@@ -1231,7 +1228,6 @@ document.addEventListener('DOMContentLoaded', function () {
 		var title = document.querySelector(".page.cover-page .front .title");
 		var titleText = document.querySelector(".page.cover-page .front .title").value;
         var storyID = document.querySelector(".edit-user-story").dataset.storyId;
-		console.log(storyID)
 		var image = document.querySelector(".page.cover-page .front .cover-img");
 		var imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
 		var audio = document.querySelector(".record audio");
@@ -1265,7 +1261,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		}
 		const data = {
             id: storyID || null, // إضافة الـ ID الخاص بالقصة
-            title: title.value || null,
+            title: titleText || null,
             imageSrc: imageSrc || "",
             audioSrc: audioSrc || "",
             message: fullStoryArray || ""
@@ -1299,10 +1295,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 		// Check If At Least One Exists
 		if (!title.value && !imageSrc && !fullStory.trim()) {
-			window.location.href = '/writing/writing-types'; // Go To Writing Types Page
+			window.location.href = '/writing/user-stories'; // Go To Writing Types Page
 		} else {
-
-			// Send Story If No Change No Need To this ######################
 			
 			// Sweet Alert
 			Swal.fire({
@@ -1343,11 +1337,11 @@ document.addEventListener('DOMContentLoaded', function () {
 					
 					// Call function to send the story
 					if (await SendStory(data))
-						setTimeout(() => {window.location.href = '/writing/writing-types'},800)
+						setTimeout(() => {window.location.href = '/writing/user-stories'},800)
 
 				}
 				else if (result.isDismissed) {
-					window.location.href = '/writing/writing-types'; // Go To Writing Types Page
+					window.location.href = '/writing/user-stories'; // Go To Writing Types Page
 				}
 			});
 		}
@@ -1409,7 +1403,12 @@ document.addEventListener('DOMContentLoaded', function () {
 				}
 			}
 		} catch (error) {
-			Swal.fire('فشل التحديث', 'حدث خطأ أثناء التواصل مع الخادم', 'error');
+			Swal.fire({
+				title: 'فشل التحديث',
+				text: 'حدث خطأ أثناء التواصل مع الخادم',
+				icon: 'error',
+				confirmButtonText: 'حسنا' // تغيير النص إلى "حسنا"
+			});			
 			console.error(error);
 		}
 	}

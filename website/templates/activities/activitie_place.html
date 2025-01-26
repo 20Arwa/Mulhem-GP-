@@ -4,302 +4,430 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/activities.css') }}">
 {% endblock %}
 {% block body %}
-  <div class="plac-container">
-        <!-- تعريف المكان والزمان -->
-        <div id="title">
-          <h1 class="addr">المكان والزمان</h1>
-      </div>
-      <div id="definition" class="definition">
-          <p> المكان عنصر هام جداً، ليست هناك أحداث خارج المكان الذي تجري فيه الأحداث، وتتحرك فوقه، كوخاً أم قرية أم مدينة، أم غيرها <br> من الأماكن التي يصعب حصرها. ويكون السؤال عنها بأين ؟
-            <br> الزمان مثله، مثل المكان، بل يرتبط به ارتباطاً وثيقاً، إذ لامكان، من دون زمان، والثاني منهما، هو الماضي، أو الحاضر، أو المستقبل، <br> صباحاً، او مساءاً تبعاً للكاتب. والسؤال عنه يكون، بمتى؟ </p> 
-      </div>
-
-        <!-- قصة 1: ليلى والذئب -->
-        <div class="story" id="story-1">
-            <h3 class="Story-place-time">قصة ليلى والذئب</h3>
-            <div class="story-content">
-                <img src="C:\Users\kholo\source\repos\Project1\v.L\mulhem\website\static\images\laila.jpg" alt="ليلى والذئب">
-                
-                
-                <p>
-                    في قديم الزمان، كانت هناك فتاة تُدعى "ذات الرداء الأحمر"، ترتدي دائمًا رداءً أحمر جميلًا أهَدته لها جدتها. طلبت منها <br> والدتها إيصال سلة طعام لجدتها المريضة التي تعيش وحدها في الغابة، مع تحذيرها بعدم الابتعاد عن الطريق.أثناء رحلتها، <br> ظهر لها ذئب ماكر وسألها عن وجهتها، فأخبرته بمكان منزل جدتها. خطط الذئب بخبث لإيقاعها في الفخ، فأقنعها بجمع <br> الأزهار كهدية لجدتها، مما تسبب في تأخيرها. استغل الذئب الوقت وذهب إلى منزل الجدة، خدعها بصوته الناعم وأكلها، ثم <br> ارتدى ملابسها وانتظر ذات الرداء الأحمر عندما وصلت الفتاة، لاحظت أن هناك شيئًا غريبًا في "جدتها"، وسألتها عن أذنيها <br> وعينيها وفمها الكبير فجأة، قفز الذئب ليأكلها، لكن لحسن الحظ، كان هناك صياد قريب سمع الضجة. اقتحم المنزل، وقتل <br> الذئب،وحرر الجدة والفتاة. شكرت ذات الرداء الأحمر وجدتُها الصياد.
-                </p>
-               
-            </div>
-            <div class="time-questions">
-                <p class="Story-place-time" >أين كانت ليلى عندما رأت الذئب ؟ اسحب الإجابة إلى المربع الفارغ.</p>
-                <div class="drag-container">
-                    <div class="dropzone" ondrop="drop(event, 'في الغابة')" ondragover="allowDrop(event)"></div>
-                    <div class="options">
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place1">في المدينة</span>
-                        <div class="confetti-right confetti-click">
-                            <span class="draggable" draggable="true" ondragstart="drag(event)" id="place2">في الغابة</span>
-                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
-                        </div>
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place3">في المنزل</span>
-                    </div>
-                </div>
-                <p class="Story-place-time" > متى كانت ليلى في طريقها إلى جدتها ؟</p>
-                <div class="choices">
-                    <div class="confetti-right confetti-click">
-                        <button class="right" onclick="checkAnswer(this, 'في الصباح الباكر')">في الصباح الباكر</button>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
-                    </div>
-
-                  <button onclick="checkAnswer(this, ' المساء')">في المساء</button>
-                  <button onclick="checkAnswer(this, ' الماضي')">في الماضي </button>
-              </div>
-            </div>  
-            <div class="navigation">
-                <button onclick="nextStory(1)">التالي &rarr;</button>
-            </div>
+<div class="activity activity_1 activity_1_exer1 plac-container container my-5 p-4 px-5 rounded-4">
+    <!-- تعريف المكان والزمان -->
+    <div class="text1">
+        <div class="text my-5 bg-white rounded-4 p-3 px-4 text-center">
+                <h3 class="mb-0 text-center title">المكان والزمان</h3>
+                <p class="me-2 my-4 text-end">المكان عنصر هام جداً، ليست هناك أحداث خارج المكان الذي تجري فيه الأحداث، وتتحرك فوقه، كوخاً أم قرية أم مدينة، أم غيرها <br> من الأماكن التي يصعب حصرها. ويكون السؤال عنها بأين ؟
+                    <br> الزمان مثله، مثل المكان، بل يرتبط به ارتباطاً وثيقاً، إذ لامكان، من دون زمان، والثاني منهما، هو الماضي، أو الحاضر، أو المستقبل، <br> صباحاً، او مساءاً تبعاً للكاتب. والسؤال عنه يكون، بمتى؟ </p>
+            <audio class="w-50 rounded-4" controls controlslist="nodownload noplaybackrate">
+                <source id="audioSource" src="../../static/audio/activity/زمان مكان تعريف.mp3" type="audio/mpeg">
+                المتصفح الخاص بك لا يدعم عنصر الصوت
+            </audio>
         </div>
-
-        <!-- قصة 2: الشجاعة في مواجهة التحديات -->
-        <div class="story hidden" id="story-2">
-            <h3 class="Story-place-time"> الشجاعة في مواجهة التحديات </h3>
-            <div class="story-content">
-                <img src="C:\Users\kholo\source\repos\Project1\v.L\mulhem\website\static\images\hasan.jpg" alt=" الشجاعة في مواجهة التحديات ">
-                <p>
-                    في صباح يومٍ مشمس، كان “حسن” يستعد للذهاب إلى مدرسته لكنه كان متوترًا قليلًا لأنه كان سيخوض اختبارًا في <br> الرياضيات لأول مرة عندما وصل إلى المدرسة، دخل الصف ووجد أصدقائه يتحدثون عن الاختبار شعر حسن ببعض <br> القلق,لكن معلمته “مريم” دخلت وقالت بابتسامة: “صباح الخير يا أبطال! اليوم سنختبر مهاراتكم في الرياضيات، لكن لا <br> داعي للقلق،كلنا هنا لنتعلم معًا.” بدأ الاختبار، وكان حسن يشعر ببعض التوتر، لكنه تذكر كلمات معلمته. قرر أن يأخذ نفسًا <br> عميقًا،ثم بدأ الإجابة على الأسئلة واحدة تلو الأخرى بهدوء وتركيز. بعد فترة، عادت معلمة مريم لتوزيع الأوراق،وقالت: <br> “أنتم جميعًا قدمتم أداءً جيدًا.المهم ليس الفوز أو الدرجات، بل أنكم حاولتم وقدمتم أفضل ما لديكم.” شعر حسن بالسعادة <br> لأنه لم يستسلم للقلق ونجح في مواجهة التحدي. وتعلم أنه لا يوجد شيء يستحق الخوف طالما أن الشخص يبذل جهده.
-                </p>
-            </div>
-            <div class="time-questions">
-                <p class="Story-place-time"> أين كان حسن عندما شعر بالتوتر بسبب الإختبار ؟ اسحب الإجابة إلى المربع الفارغ</p>
-                <div class="drag-container">
-                    <div class="dropzone" ondrop="drop(event, 'في المدرسة')" ondragover="allowDrop(event)"></div>
-                    <div class="options">
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place4">في المنزل</span>
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place5">في المدرسة</span>
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place6">في الحديقه</span>
-                    </div>
-                </div>
-                <p class="Story-place-time" >متى كان حسن متوترًا ؟ </p>
-                <div class="choices">
-                    <button onclick="checkAnswer(this, ' عندما كان في  ')"> عندما كان في المنزل  </button>
-                    <div class="confetti-right confetti-click">
-                        <button onclick="checkAnswer(this, 'في الصباح')">في الصباح</button>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
-                    </div>
-                    <button onclick="checkAnswer(this, 'في ')"> في المساء </button>
-                </div>
-            </div>
-            <div class="navigation">
-                <button onclick="prevStory(2)">&larr; السابق</button>
-                <button onclick="nextStory(2)">التالي &rarr;</button>
-            </div>
-        </div>
-
-        <!-- قصة 3: مغامرة القبطان الصغير  -->
-        <div class="story hidden" id="story-3">
-            <h3 class="Story-place-time"> مغامرة القبطان الصغير </h3>
-            <div class="story-content">
-                <img src="C:\Users\kholo\source\repos\Project1\v.L\mulhem\website\static\images\sami.jpg" alt=" مغامرة القبطان الصغير ">
-            
-                <p>
-                    في يوم من أيام الشتاء الباردة، كان هناك قبطان صغير اسمه “سامي”، يعيش على متن سفينة كبيرة تبحر في البحر الهادئ<br>
-                    كانت السفينة تسير ببطء بسبب الرياح الضعيفة،وكانت الأمواج ناعمة، مما جعل الرحلة هادئة جدًا. في تلك اللحظة،قرر <br>
-                    سامي أن يذهب في مغامرة داخل السفينة. كان يحمل حقيبته الصغيرة ويذهب إلى غرف الطاقم، حيث يراقب البحارة وهم <br>
-                    يعملون لكن فجأة، سمع صوتًا غريبًا قادمًا من أسفل السفينة هرع سامي ليرى ما يحدث، وعندما وصل إلى غرفة المحرك <br>
-                    اكتشف أن هناك مشكلة صغيرة في أحد المحركات. لم يكن القبطان الصغير خائفًا، بل قرر أن يساعد بحماسية أخذ مفك <br>
-                    البراغي وبدأ في فك القطع المكسورة، وعندما أصلحها، عاد المحرك للعمل من جديد عندما علم باقي أفراد الطاقم بما فعله <br>
-                    سامي، صفقوا له وقالوا له: “أنت قبطان شجاع!”، بينما ابتسم سامي وقال: “كلنا يجب أن نساعد بعضنا في البحر!” ومنذ <br>
-                    ذلك اليوم، أصبح سامي معروفًا بين أفراد الطاقم بشجاعته وذكائه، وأصبح حلمه أن يكون قبطان السفينة يومًا ما.
-                </p>
-            </div>
-            <div class="time-questions">
-                <p class="Story-place-time" >أين كانت مغامرة سامي ؟ اسحب الإجابة إلى المربع الفارغ.</p>
-                <div class="drag-container">
-                    <div class="dropzone" ondrop="drop(event, 'على متن سفينة في البحر')" ondragover="allowDrop(event)"></div>
-                    <div class="options">
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place7">في القرية</span>
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place8">على متن سفينة في البحر</span>
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place9">في المنزل</span>
-                    </div>
-                </div>
-                <p class="Story-place-time" >متى كانت مغامرة سامي على السفينة؟</p>
-                <div class="choices">
-                    <button onclick="checkAnswer(this, 'في العمل')">في وقت العمل</button>
-                    <button onclick="checkAnswer(this, 'مشمس')"> في يوم مشمس </button>
-                    <div class="confetti-right confetti-click">
-                        <button onclick="checkAnswer(this, 'في يوم من أيام الشتاء')">في يوم من أيام الشتاء </button>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
-                    </div>
-                </div>
-            </div>
-            <div class="navigation">
-                <button onclick="prevStory(3)">&larr; السابق</button>
-                <button onclick="nextStory(3)">التالي &rarr;</button>
-            </div>
-        </div>
-
-        <!-- قصة 4: قصة محمود والعصفور  -->
-        <div class="story hidden" id="story-4">
-            <h3 class="Story-place-time">قصة محمود والعصفور </h3>
-            <div class="story-content">
-                <img src="C:\Users\kholo\source\repos\Project1\v.L\mulhem\website\static\images\App.jpg" alt="قصة محمود والعصفور  ">
-                <p>
-                    في صباح يوم دافئ من أيام الخريف، كان هناك طفل صغير يُدعى “محمود” يعيش في مزرعة صغيرة تقع بين الجبال كانت <br> المزرعة مليئة بالحيوانات والنباتات التي يحب محمود أن يعتني بها. في ذلك اليوم، قرر محمود أن يذهب إلى البستان لقطف <br> التفاح الناضج. حمل سلة صغيرة وبدأ في جمع التفاح الأحمر اللامع الذي كان يزين الأشجار بينما كان يقطف التفاح، سمع <br> صوتًا ضعيفًا قادمًا من وراء الأشجار محمود اقترب بحذر ليكتشف أنه كان عصفورًا صغيرًا عالقًا في أحد الأغصان شعر <br> بالقلق وقرر مساعدته. ببطء، أخرج العصفور من بين الأغصان وحرره بحذر. عندما شعر العصفور بالحرية، طار بعيدًا،<br> وحلق في السماء الزرقاء.ابتسم محمود وهو يشاهد العصفور يطير، وقال لنفسه: “إن المساعدة تجعل العالم أجمل.” وعاد <br> إلى المزرعة وهو يشعر بالفخر لأنه أنقذ العصفور.
-                </p>
-            </div>
-            <div class="time-questions">
-                <p class="Story-place-time">أين كان محمود عندما وجد العصفور العالق؟ اسحب الإجابة إلى المربع الفارغ.</p>
-                <div class="drag-container">
-                    <div class="dropzone" ondrop="drop(event, 'في بستان مزرعته')" ondragover="allowDrop(event)"></div>
-                    <div class="options">
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place10">في الحديقة</span>
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place11">في بستان مزرعته</span>
-                        <span class="draggable" draggable="true" ondragstart="drag(event)" id="place12">على الشاطئ</span>
-                    </div>
-                </div>
-                <p class="Story-place-time">متى كان يقطف محمود التفاح؟</p>
-                <div class="choices">
-                    <button onclick="checkAnswer(this, 'بعد المطر ')"> في مساء ممطر </button>
-                    <div class="confetti-right confetti-click">
-                        <button onclick="checkAnswer(this, 'في صباح يوم دافئ من أيام الخريف')">في صباح يوم دافئ من أيام الخريف </button>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
-                    </div>
-                    <button class="=wrong-button" onclick="checkAnswer(this, 'قبل المساء')">في المساء </button>
-                </div>
-            </div>
-            <div class="navigation">
-                <button onclick="prevStory(4)">&larr; السابق</button>
-                <button onclick="finish()">إنهاء النشاط</button>
-            </div>
-        </div>
-        <!-- نهاية النشاط -->
-        <div class="story hidden" id="end">
-          <h2 class="endTime"> تهانينا!
-            <br>
-            🌟 لقد انتهيت من النشاط بنجاح.🌟 </h2>
-          <p class="endPlace"> "المكان والزمان هما أساس كل قصة رائعة! المكان يجعل الأحداث تبدو حقيقية ومليئة بالحياة، والزمان يساعدنا نفهم متى تحدث الأشياء. عندما تختار المكان والزمان بعناية، تصبح قصتك ممتعة ومليئة بالإثارة للقارئ!" </p>
-        
-        </button>
-      </div>
     </div>
+
+    <div id="carousel1" class="carousel slide">
+        <div class="carousel-inner">
+                <!-- قصة 1: ليلى والذئب -->
+                <div class="carousel-item active">
+                    <div class="story" id="story-1">
+
+                        <!-- Story -->
+                        <h4><i class="fa-regular fa-comment fs-4 ms-2"></i>اقرأ أو استمع للنص التالي وأجب عن الأسئلة:</h4>
+                        <div class="content">
+                            <div class=".story-white text d-flex align-items-center gap-2 my-5 mt-3 bg-white rounded-4 p-3 px-4">
+                                <div class="right-side text-center"> 
+                                    <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>ليلى والذئب </h5> 
+                                    <img class="my-3 rounded-4" src="../..//static/images/activity_laila.jpg" alt="ليلى والذئب">
+                                    <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                        <source id="audioSource" src="../../static/audio/activity/زمان مكان_ قصة ليلى.mp3" type="audio/mpeg">
+                                        المتصفح الخاص بك لا يدعم عنصر الصوت
+                                    </audio>
+                                </div>
+                                <p class="left-side me-2"> في قديم الزمان، كانت هناك فتاة تُدعى "ذات الرداء الأحمر"، ترتدي دائمًا رداءً أحمر جميلًا أهَدته لها جدتها. طلبت منها والدتها إيصال سلة طعام لجدتها المريضة التي تعيش وحدها في الغابة، مع تحذيرها بعدم الابتعاد عن الطريق.أثناء رحلتها، ظهر لها ذئب ماكر وسألها عن وجهتها، فأخبرته بمكان منزل جدتها. خطط الذئب بخبث لإيقاعها في الفخ، فأقنعها بجمع  الأزهار كهدية لجدتها، مما تسبب في تأخيرها. استغل الذئب الوقت وذهب إلى منزل الجدة، خدعها بصوته الناعم وأكلها، ثم ارتدى ملابسها وانتظر ذات الرداء الأحمر عندما وصلت الفتاة، لاحظت أن هناك شيئًا غريبًا في "جدتها"، وسألتها عن أذنيها  وعينيها وفمها الكبير فجأة، قفز الذئب ليأكلها، لكن لحسن الحظ، كان هناك صياد قريب سمع الضجة. اقتحم المنزل، وقتل الذئب،وحرر الجدة والفتاة. شكرت ذات الرداء الأحمر وجدتُها الصياد.</p>
+                            </div>
+                        </div>
+
+
+
+                        <!-- Qustions -->
+                        <div class="time-questions text-center">
+                            <!-- 1 -->
+                            <div class="quiz-wrapper">
+                                <h5 class="my-2 d-flex justify-content-center align-items-center"> 
+                                    <i class="fa-regular fa-comment fs-5 ms-1"></i>
+                                        أين كانت ليلى عندما رأت الذئب ؟ اسحب الإجابة إلى المربع الفارغ.
+                                        <div class="answers options">
+                                        <div class="confetti-right">
+                                            <span class="target rounded-3 me-3" data-accept="forest">&nbsp;</span>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        </div>
+                                </div>
+                                </h5>
+                                <ul class="drag-options options d-flex justify-content-center">
+                                    <li class="option" data-target="city"> <button class="button main-button m-1">في المدينة</button></li>
+                                    <li class="option" data-target="forest"> <button class="button main-button m-1">في الغابة</button></li>
+                                    <li class="option" data-target="home"> <button class="button main-button m-1">في المنزل</button></li>
+                                </ul>
+                            </div>
+
+
+                            <!-- 2 -->
+                            <h5 class="my-2 mt-5"> 
+                                <i class="fa-regular fa-comment fs-5 ms-1"></i>متى كانت ليلى في طريقها إلى جدتها ؟
+                            </h5>
+                            <div class="options">
+                                <div class="confetti-right confetti-click">
+                                    <button class="right button last-ques main-button m-1" onclick="optionClick(this)">
+                                        <i class="fa-solid fa-lightbulb ms-1"></i>في الصباح الباكر
+                                    </button>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                </div>
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>في المساء
+                                </button>
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>في الماضي
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- قصة 2: الشجاعة في مواجهة التحديات -->
+                <div class="carousel-item">
+                    <div class="story hidden" id="story-2">
+                        <!-- Story -->
+                        <h4><i class="fa-regular fa-comment fs-4 ms-2"></i>اقرأ أو استمع للنص التالي وأجب عن الأسئلة:</h4>
+                        <div class="content">
+                            <div class=".story-white text d-flex align-items-center gap-2 my-5 mt-3 bg-white rounded-4 p-3 px-4">
+                                <div class="right-side text-center"> 
+                                    <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>الشجاعة في مواجهة التحديات</h5> 
+                                    <img class="my-3 rounded-4" src="../..//static/images/activity_hasan.jpg" alt="">
+                                    <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                        <source id="audioSource" src="../../static/audio/activity/زمان مكان_الشجاعة في مواجهة التحديات.mp3" type="audio/mpeg">
+                                        المتصفح الخاص بك لا يدعم عنصر الصوت
+                                    </audio>
+                                </div>
+                                <p class="left-side me-2">في صباح يومٍ مشمس، كان “حسن” يستعد للذهاب إلى مدرسته لكنه كان متوترًا قليلًا لأنه كان سيخوض اختبارًا في  الرياضيات لأول مرة عندما وصل إلى المدرسة، دخل الصف ووجد أصدقائه يتحدثون عن الاختبار شعر حسن ببعض  القلق,لكن معلمته “مريم” دخلت وقالت بابتسامة: “صباح الخير يا أبطال! اليوم سنختبر مهاراتكم في الرياضيات، لكن لا  داعي للقلق،كلنا هنا لنتعلم معًا.” بدأ الاختبار، وكان حسن يشعر ببعض التوتر، لكنه تذكر كلمات معلمته. قرر أن يأخذ نفسًا  عميقًا،ثم بدأ الإجابة على الأسئلة واحدة تلو الأخرى بهدوء وتركيز. بعد فترة، عادت معلمة مريم لتوزيع الأوراق،وقالت:  “أنتم جميعًا قدمتم أداءً جيدًا.المهم ليس الفوز أو الدرجات، بل أنكم حاولتم وقدمتم أفضل ما لديكم.” شعر حسن بالسعادة  لأنه لم يستسلم للقلق ونجح في مواجهة التحدي. وتعلم أنه لا يوجد شيء يستحق الخوف طالما أن الشخص يبذل جهده.</p>
+                            </div>
+                        </div>
+
+
+                        <!-- Qustions -->
+                        <div class="time-questions text-center">
+                            <!-- 1 -->
+                            <div class="quiz-wrapper">
+                                <h5 class="my-2 d-flex justify-content-center align-items-center"> 
+                                    <i class="fa-regular fa-comment fs-5 ms-1"></i>
+                                    أين كان حسن عندما شعر بالتوتر بسبب الإختبار ؟ اسحب الإجابة إلى المربع الفارغ.
+                                    <div class="answers options">
+                                        <div class="confetti-right">
+                                            <span class="target rounded-3 me-3" data-accept="school">&nbsp;</span>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                            <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                        </div>
+                                </div>
+                                </h5>
+                                <ul class="drag-options options d-flex justify-content-center">
+                                    <li class="option" data-target="home"> <button class="button main-button m-1">في المنزل</button></li>
+                                    <li class="option" data-target="school"> <button class="button main-button m-1">في المدرسة</button></li>
+                                    <li class="option" data-target="park"> <button class="button main-button m-1">في الحديقة</button></li>
+                                </ul>
+                            </div>
+
+
+                            <!-- 2 -->
+                            <h5 class="my-2 mt-5"> 
+                                <i class="fa-regular fa-comment fs-5 ms-1"></i>متى كان حسن متوترًا ؟
+                            </h5>
+                            <div class="options">
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>عندما كان في المنزل
+                                </button>
+                                <div class="confetti-right confetti-click">
+                                    <button class="right button last-ques main-button m-1" onclick="optionClick(this)">
+                                        <i class="fa-solid fa-lightbulb ms-1"></i>في الصباح 
+                                    </button>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                </div>
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>في المساء
+                                </button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                
+                <!-- قصة 3: مغامرة القبطان الصغير  -->
+                <div class="carousel-item">
+                <div class="story hidden" id="story-3">
+                    <!-- Story -->
+                    <h4><i class="fa-regular fa-comment fs-4 ms-2"></i>اقرأ أو استمع للنص التالي وأجب عن الأسئلة:</h4>
+                    <div class="content">
+                        <div class=".story-white text d-flex align-items-center gap-2 my-5 mt-3 bg-white rounded-4 p-3 px-4">
+                            <div class="right-side text-center"> 
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>مغامرة القبطان الصغير</h5> 
+                                <img class="my-3 rounded-4" src="../..//static/images/activity_sami.jpg" alt="">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/activity/زمان مكان_ مغامرة القبطان.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side me-2">
+                                في يوم من أيام الشتاء الباردة، كان هناك قبطان صغير اسمه “سامي”، يعيش على متن سفينة كبيرة تبحر في البحر الهادئ
+                                كانت السفينة تسير ببطء بسبب الرياح الضعيفة،وكانت الأمواج ناعمة، مما جعل الرحلة هادئة جدًا. في تلك اللحظة،قرر 
+                                سامي أن يذهب في مغامرة داخل السفينة. كان يحمل حقيبته الصغيرة ويذهب إلى غرف الطاقم، حيث يراقب البحارة وهم 
+                                يعملون لكن فجأة، سمع صوتًا غريبًا قادمًا من أسفل السفينة هرع سامي ليرى ما يحدث، وعندما وصل إلى غرفة المحرك 
+                                اكتشف أن هناك مشكلة صغيرة في أحد المحركات. لم يكن القبطان الصغير خائفًا، بل قرر أن يساعد بحماسية أخذ مفك 
+                                البراغي وبدأ في فك القطع المكسورة، وعندما أصلحها، عاد المحرك للعمل من جديد عندما علم باقي أفراد الطاقم بما فعله 
+                                سامي، صفقوا له وقالوا له: “أنت قبطان شجاع!”، بينما ابتسم سامي وقال: “كلنا يجب أن نساعد بعضنا في البحر!” ومنذ 
+                                ذلك اليوم، أصبح سامي معروفًا بين أفراد الطاقم بشجاعته وذكائه، وأصبح حلمه أن يكون قبطان السفينة يومًا ما.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Qustions -->
+                    <div class="time-questions text-center">
+                        <!-- 1 -->
+                        <div class="quiz-wrapper">
+                            <h5 class="my-2 d-flex justify-content-center align-items-center"> 
+                                <i class="fa-regular fa-comment fs-5 ms-1"></i>
+                                أين كانت مغامرة سامي ؟ اسحب الإجابة إلى المربع الفارغ.                                    
+                            <div class="answers options">
+                                <div class="confetti-right">
+                                    <span class="target rounded-3 me-3" data-accept="sea">&nbsp;</span>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                </div>
+                            </div>
+                            </h5>
+                            <ul class="drag-options options d-flex justify-content-center">
+                                <li class="option" data-target="vellage"> <button class="button main-button m-1">في القرية</button></li>
+                                <li class="option" data-target="sea"> <button class="button main-button m-1">على متن سفينة في البحر</button></li>
+                                <li class="option" data-target="home"> <button class="button main-button m-1">في المنزل</button></li>
+                            </ul>
+                        </div>
+                        <!-- 2 -->
+                        <h5 class="my-2 mt-5"> 
+                            <i class="fa-regular fa-comment fs-5 ms-1"></i>متى كانت مغامرة سامي على السفينة؟
+                        </h5>
+                        <div class="options">
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>في وقت العمل
+                            </button>
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>في يوم مشمس
+                            </button>
+                            <div class="confetti-right confetti-click">
+                                <button class="right button last-ques main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>في يوم من أيام الشتاء 
+                                </button>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- قصة 4: قصة محمود والعصفور  -->
+            <div class="carousel-item">
+                <div class="story hidden" id="story-4">
+                    <!-- Story -->
+                    <h4><i class="fa-regular fa-comment fs-4 ms-2"></i>اقرأ أو استمع للنص التالي وأجب عن الأسئلة:</h4>
+                    <div class="content">
+                        <div class=".story-white text d-flex align-items-center gap-2 my-5 mt-3 bg-white rounded-4 p-3 px-4">
+                            <div class="right-side text-center"> 
+                                <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>قصة محمود والعصفور </h5> 
+                                <img class="my-3 rounded-4" src="../..//static/images/activity_mahmod.jpg" alt="">
+                                <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
+                                    <source id="audioSource" src="../../static/audio/activity/زمان مكان_محمود والعصفور.mp3" type="audio/mpeg">
+                                    المتصفح الخاص بك لا يدعم عنصر الصوت
+                                </audio>
+                            </div>
+                            <p class="left-side me-2">
+                                في صباح يوم دافئ من أيام الخريف، كان هناك طفل صغير يُدعى “محمود” يعيش في مزرعة صغيرة تقع بين الجبال كانت  المزرعة مليئة بالحيوانات والنباتات التي يحب محمود أن يعتني بها. في ذلك اليوم، قرر محمود أن يذهب إلى البستان لقطف  التفاح الناضج. حمل سلة صغيرة وبدأ في جمع التفاح الأحمر اللامع الذي كان يزين الأشجار بينما كان يقطف التفاح، سمع  صوتًا ضعيفًا قادمًا من وراء الأشجار محمود اقترب بحذر ليكتشف أنه كان عصفورًا صغيرًا عالقًا في أحد الأغصان شعر  بالقلق وقرر مساعدته. ببطء، أخرج العصفور من بين الأغصان وحرره بحذر. عندما شعر العصفور بالحرية، طار بعيدًا، وحلق في السماء الزرقاء.ابتسم محمود وهو يشاهد العصفور يطير، وقال لنفسه: “إن المساعدة تجعل العالم أجمل.” وعاد  إلى المزرعة وهو يشعر بالفخر لأنه أنقذ العصفور.
+                            </p>
+                        </div>
+                    </div>
+                    <!-- Qustions -->
+                    <div class="time-questions text-center">
+                        <!-- 1 -->
+                        <div class="quiz-wrapper">
+                            <h5 class="my-2 d-flex justify-content-center align-items-center"> 
+                                <i class="fa-regular fa-comment fs-5 ms-1"></i>
+                                أين كان محمود عندما وجد العصفور العالق؟ اسحب الإجابة إلى المربع الفارغ.
+                            <div class="answers options">
+                                <div class="confetti-right">
+                                    <span class="target rounded-3 me-3" data-accept="pstan">&nbsp;</span>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                </div>
+                            </div>
+                            </h5>
+                            <ul class="drag-options options d-flex justify-content-center">
+                                <li class="option" data-target="park"> <button class="button main-button m-1">في الحديقة</button></li>
+                                <li class="option" data-target="pstan"> <button class="button main-button m-1">في بستان مزرعته</button></li>
+                                <li class="option" data-target="sea"> <button class="button main-button m-1">على الشاطئ</button></li>
+                            </ul>
+                        </div>
+                        <!-- 2 -->
+                        <h5 class="my-2 mt-5"> 
+                            <i class="fa-regular fa-comment fs-5 ms-1"></i>متى كان يقطف محمود التفاح؟
+                        </h5>
+                        <div class="options">
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>في مساء ممطر
+                            </button>
+                            <div class="confetti-right confetti-click">
+                                <button class="right button last-ques main-button m-1" onclick="optionClick(this)">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>في صباح يوم دافئ من أيام الخريف 
+                                </button>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                                <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
+                            </div>
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <i class="fa-solid fa-lightbulb ms-1"></i>في المساء
+                            </button>
+                        </div>
+                        <div class="allQues-error-msg mt-3 text-danger">قم بالإجابة على جميع الأسئلة لإنهاء النشاط</div>
+                    </div>
+                </div>
+            </div>
+                
+
+
+
+        </div>
+
+
+            <button class="carousel-control-prev" type="button" id="carouselPrev1"  data-bs-target="#carousel1" data-bs-slide="prev">
+                <i class="fa-regular fa-circle-right"></i>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" id="carouselNext1" data-bs-target="#carousel1" data-bs-slide="next">
+                <i class="fa-regular fa-circle-left"></i>
+                <span class="visually-hidden">Next</span>
+            </button>
+
+    </div>
+
+
+    <!-- Modal3 > Shows When Questions Are Done -->
+    <div class="modal modal3 fade modal-finishStory" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content align-items-center text-center">
+                <div class="modal-header">
+                    <h2 class="modal-title fs-3 d-flex align-items-center" id="exampleModalLabel">
+                        <!-- <i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i> -->
+                        تهانينا
+                        <!-- <i class="fa-solid fa-star fs-5 me-1" style="color: #FFD43B;"></i> -->
+                    </h2>
+                </div>
+                <div class="modal-body">🌟 لقد انتهيت من النشاط بنجاح.🌟<br>المكان والزمان هما أساس كل قصة رائعة! المكان يجعل الأحداث تبدو حقيقية ومليئة بالحياة، والزمان يساعدنا نفهم متى تحدث الأشياء. عندما تختار المكان والزمان بعناية، تصبح قصتك ممتعة ومليئة بالإثارة للقارئ!</div>
+                <a href="../activities/all_activities" class="mb-4 mt-3"><button type="button" class="btn button main-button" data-bs-dismiss="modal">ارجع للأنشطة</button></a>
+            </div>
+        </div>
+    </div>
+
+
+</div>
 {% endblock %}
 {% block script %}
- <script>
-      let currentStory = 1;
-// الانتقال إلى القصة التالية
-function nextStory(current) {
-    document.getElementById(`story-${current}`).classList.add('hidden');
-    const next = document.getElementById(`story-${current + 1}`);
-    if (next) next.classList.remove('hidden');
-}
+<script>
+// @@@@@@@@@@@@@@@@@@@@@@@@ Start Text 1 @@@@@@@@@@@@@@@@@@@@@@@@
+    var modal = new bootstrap.Modal(document.getElementById('modal'));
 
-// العودة إلى القصة السابقة
-function prevStory(current) {
-    document.getElementById(`story-${current}`).classList.add('hidden');
-    const prev = document.getElementById(`story-${current - 1}`);
-    if (prev) prev.classList.remove('hidden');
-}
-
-// إنهاء النشاط
-function finish() {
-    const stories = document.querySelectorAll('.story');
-    let allCompleted = true;
-
-    // التحقق من إكمال جميع الأسئلة
-    stories.forEach(story => {
-        const dropzones = story.querySelectorAll('.dropzone');
-        dropzones.forEach(zone => {
-            if (!zone.classList.contains('success')) {
-                allCompleted = false;
-            }
-        });
+    const myCarousel1 = document.querySelector('#carousel1');
+    const carousel1 = new bootstrap.Carousel(myCarousel1, {
+        wrap: false // Stops Going Back To First Section
     });
+    // Hide And Display Arrows
+    const nextButton = document.querySelector('#carouselNext1');
+    const prevButton = document.querySelector('#carouselPrev1');
 
-    if (allCompleted) {
-        stories.forEach(story => story.classList.add('hidden'));
-        document.getElementById('definition').classList.add('hidden'); // إخفاء التعريف
-        document.getElementById('title').classList.add('hidden'); // إخفاء العنوان
-        document.getElementById('end').classList.remove('hidden'); // عرض صندوق النهاية
-    } else {
-        alert('أجب على جميع الأسئلة لإكمال النشاط!');
-    }
-}
-
-// التعامل مع السحب والإفلات
-function allowDrop(event) {
-    event.preventDefault();
-}
-
-function drag(event) {
-    event.dataTransfer.setData('text', event.target.id);
-}
-
-function drop(event, correctAnswer) {
-    event.preventDefault();
-    const data = event.dataTransfer.getData('text');
-    const draggedElement = document.getElementById(data);
-
-    if (draggedElement.textContent === correctAnswer) {
-        event.target.textContent = draggedElement.textContent;
-        event.target.classList.add('success');
-        event.target.classList.remove('error');
-        
-    } else {
-        event.target.classList.add('error');
-        setTimeout(() => {
-            event.target.classList.remove('error');
-           }, 1000); // إزالة اللون الأحمر بعد ثانية
-    }
+    prevButton.style.display = 'none'; // Hide Prev Button At The Beggining
     
-}
+    // On Moving The Carousel
+    myCarousel1.addEventListener('slid.bs.carousel', (event) => {
+        const totalItems = document.querySelectorAll('#carousel1 .carousel-item').length; // Number of items
+        const currentIndex = event.to; // Current index (Question)
 
-// التحقق من الإجابات الصحيحة (اختيار)
-function checkAnswer(button, correctAnswer) {
-    const buttons = button.parentElement.querySelectorAll('button');
-   
+        // Hide Prev Button If User In First Item
+        if (currentIndex === 0) {
+            prevButton.style.display = 'none';
+        } else {
+            prevButton.style.display = 'flex';
+        }
+        // Hide Next Button If User Reach Last Item
+        if (currentIndex === totalItems - 1) {
+            nextButton.style.display = 'none';
+        } else {
+            nextButton.style.display = 'flex'; 
+        }
 
-    // التحقق من صحة الإجابة
-    if (button.textContent.trim() === correctAnswer) {
-        button.classList.add('correct'); // الإجابة الصحيحة تصبح خضراء
-    } else {
-        const audio = document.getElementById('sound-wrong');
-        audio.currentTime = 0; // Return Voice To The Start
-        audio.play();
-        button.classList.add('wrong'); // الإجابة الخاطئة تصبح حمراء
-       
-
-        // إظهار الإجابة الصحيحة
-        buttons.forEach(btn => {
-            if (btn.textContent.trim() === correctAnswer) {
-                btn.classList.add('correct');
+         // Check If All Answerd
+         let allTrue = false; // Start as false
+         // Check if all Questions Are Answerd
+        if (
+            Array.from(document.querySelectorAll(".options button.right")).every(button => button.classList.contains("active-right")) &&
+            Array.from(document.querySelectorAll(".quiz-wrapper .target")).every(button => button.classList.contains("active-right"))
+            ) {
+                console.log("dfknskfn")
+                allTrue = true;
+                modal.show();
+            bigConfetti(); // Show Confetti
             }
-        });
+    });
+    
+ // Click On Options (Multible Choise Question)
+ function optionClick(button) {
+    if (button.classList.contains("wrong")) {
+        button.classList.add("active-wrong")
+    }
+    else if (button.classList.contains("right")) {
+        button.classList.add("active-right");
     }
 }
-    </script>
-    {% endblock %}
+</script>
+{% endblock %}

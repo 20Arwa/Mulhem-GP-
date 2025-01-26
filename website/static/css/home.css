@@ -1,0 +1,179 @@
+/* Landing */
+.home-landing {
+    color: white;
+    height: calc(100vh - 95px);
+}
+.home-landing .text.thought {
+    color: var(--main-very-dark);
+    margin-right: 100px !important;
+    margin-top: 120px !important;
+}
+.text.thought span {
+    font-weight: 700;
+}
+.text.thought {
+    /* display:flex; */
+    background-color:#fff;
+    padding:20px;
+    border-radius:30px;
+    min-width:40px;
+    /* max-width:220px; */
+    min-height:40px;
+    margin:20px;
+    position:relative;
+    /* align-items:center;
+    justify-content:center; */
+    text-align:center;
+    z-index: 1;
+}
+.text.thought:before,
+.text.thought:after {
+    content:"";
+    background-color:#fff;
+    border-radius:50%;
+    display:block;
+    position:absolute;
+    z-index:-1;
+}
+.text.thought:before {
+    width:44px;
+    height:44px;
+    top:-12px;
+    left:28px;
+    box-shadow:-50px 30px 0 -12px #fff;
+}
+.text.thought:after {
+    bottom:-10px;
+    right:26px;
+    width:30px;
+    height:30px;
+    box-shadow:40px -34px 0 0 #fff,
+            -28px -6px 0 -2px #fff,
+            -24px 17px 0 -6px #fff,
+            -5px 25px 0 -10px #fff;
+}
+.text.thought h2 {
+    font-size: 36px;
+}
+.text.thought p {
+    font-size: 20px;
+}
+
+
+.home-landing .img .mulhem {
+    left: 180px;
+    width: 210px;
+    top: 10px;
+    position: absolute;
+   
+}
+.home-landing .wavy {
+    width: 100%;
+    height: 60px;
+    position: absolute;
+    bottom: -10px;
+    background: radial-gradient(circle, #dbcef65c 10%, transparent 11%) 0% 0% / 3em 3em, radial-gradient(circle at left bottom, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right bottom, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at left top, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right top, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em rgb(255, 255, 255);
+    --mask:
+        radial-gradient(78.26px at 50% 105px,#000 99%,#0000 101%) calc(50% - 70px) 0/140px 100%,
+        radial-gradient(78.26px at 50% -70px,#0000 99%,#000 101%) 50% 35px/140px 100% repeat-x;
+    -webkit-mask: var(--mask);
+            mask: var(--mask);     
+}
+
+
+.home a {
+    text-decoration: none; 
+    color: var(--font-4);
+    display: inline-block; 
+    align-items: center; 
+    transition: color 0.3s;
+}
+
+.home a:hover {
+    color: var(--main-very-dark); 
+}
+.home .img-e {
+    max-width: 100%; 
+    height: 250px;
+    width: 350px;
+    margin-right: 10px; 
+    border-radius: 5px; 
+}
+
+.home .section-1 {
+    padding: 20px 0;
+}
+.home .story-box {
+    text-align: center;
+    background-color: white;
+    background: var(--gradient-light);;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    border-radius: 10px; 
+    transition: transform 0.3s;
+    width:250px;
+    cursor: pointer;
+}
+.home .story-box img {
+    width: 230px;
+    height: 230px;
+    border-radius: 10px; 
+    margin: 0 auto;
+}
+.home .story-box img.img-icon {
+    width: 170px;
+    height: 170px;
+    margin: 25px auto;
+}
+.home .story-box p {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 18px;
+}
+
+.home .menu-item p{
+    margin: 10px 0 5px;
+    font-size: 20px;
+    color:black;
+}
+
+.home .story-box:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+
+}
+
+.home .line-container {
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.home .line {
+    flex-grow: 1; /* Allow the line to grow */
+    height: 3px; /* Height of the line */
+    background-color: var(--main-very-dark);
+}
+
+.home .line-text {
+    font-size: 25px;
+    font-weight: 500;
+    padding: 0 10px; /* Space around the text */
+    background: transparent; /* Background color to cover the line */
+    color: var(--main-very-dark);
+    position: relative; /* Position relative for better control */
+    z-index: 1; /* Ensure text is above the line */
+}
+.home .section-container{
+Display: flex;
+justify-content: center;
+align-items:center;
+}
+
+/* COPY RIGHT */
+/* Wavy Shape */
+/* https://css-generators.com/wavy-shapes/ */
+/* Bubble */
+/* https://codepen.io/quadbaup/pen/rKOKQv */

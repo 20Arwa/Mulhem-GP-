@@ -1,25 +1,25 @@
 .create-story-container {
   max-width: 600px;
   margin: auto;
-  background-color: #dbcef6;
+  background: var(--gradient-light);
   padding-bottom: 5px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(197, 154, 190, 0.1);
 }
 
 .create-story-container .story-title {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   text-align: center;
   color: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-dark);
+  /* background-color: var(--main-dark); */
   color: white;
   height: 45px;
     font-weight: 700;
     font-size: 23px;
-    padding: 25px;
+    padding: 30px;
     border-radius: 10px 10px 0 0 !important;
 }
 

@@ -1,10 +1,21 @@
 /* @@@@@@@@@@@@@ all_activities Page @@@@@@@@@@@@@ */
 .all-activities .activity > div {
     color: var(--font-4);
-    background-color: var(--main-light);
+    background: var(--gradient-light);
 }
-.all-activities .activity > div h4 {
+.all-activities .activity .img-holder .mulhem {
+    width: 135px;
+    top: -32px;
+    right: -18px;
+}
+.all-activities .activity .text {
+    width: 80%
+}
+.all-activities .activity .text h4 {
     color: var(--font-3);
+}
+.all-activities .activity .text p {
+    font-size: 16px;
 }
 .all-activities .activity .start-container {
     cursor: pointer;
@@ -61,7 +72,7 @@
 .carousel .carousel-control-next i,
 .carousel .carousel-control-prev i {
     font-size: 40px;
-    color: var(--font-3)
+    color: var(--main-very-dark)
 }
 
 
@@ -453,7 +464,6 @@ i.text-sound:hover {
 }
 /* @@@@@@@@@@@@@ place and time @@@@@@@@@@@@@ */
 .plac-container {
-    max-width: 1100px;
     margin: 30px auto;
     padding: 35px;
     background-color: #dbcef6;
@@ -461,12 +471,12 @@ i.text-sound:hover {
     border-radius: 8px;
   }
   
-  .addr {
+  .plac-container .addr {
     color: #ffffff;
     text-align: center;
   }
   
-  .definition {
+  .plac-container .definition {
     margin-bottom: 20px;
     padding: 10px;
     background-color: #f5edf5;
@@ -474,20 +484,20 @@ i.text-sound:hover {
     text-align: center;
   }
   
-  .story {
+  .plac-container .story {
     text-align: right;
   }
   
-  .hidden {
+  .plac-container .hidden {
     padding: 10px;
-    display: none;
+    /* display: none; */
    
   }
-  .Story-place-time{
+  .plac-container .Story-place-time{
     color: #502c66;
   }
   
-  .story-content {
+  .plac-container .story-content {
     display: flex;
     align-items: flex-start;
     gap: 10px;
@@ -498,7 +508,7 @@ i.text-sound:hover {
       border-radius: 10px;
   }
   
-  .story-content img {
+  .plac-container .story-content img {
     width: 150px;
     height: 150px;
     image-rendering: crisp-edges;
@@ -507,11 +517,11 @@ i.text-sound:hover {
     margin-bottom: 10px;
   }
 
-  .time-questions {
+  .plac-container .time-questions {
     margin-bottom: 20px;
   }
   
-  .drag-container {
+  .plac-container .drag-container {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -530,7 +540,7 @@ i.text-sound:hover {
     align-items: center;
   }
   
-  .dropzone {
+  .plac-container .dropzone {
     width: 200px;
     height: 40px;
     border: 2px dashed #b391d6;
@@ -540,12 +550,12 @@ i.text-sound:hover {
     transition: background-color 0.3s;
   }
   
-  .dropzone.success {
+  .plac-container .dropzone.success {
     background-color: #e4cfe9;
    
   }
   
-  .draggable {
+  .plac-container .draggable {
     padding: 5px 10px;
     background-color: #b391d6;
     border-radius: 10px;
@@ -554,11 +564,11 @@ i.text-sound:hover {
    
   }
   
-  .draggable:hover {
+  .plac-container .draggable:hover {
     background-color: #e4cfe9;
   }
   
-  .choices button {
+  .plac-container .choices button {
     padding: 8px 12px;
     margin: 5px;
     border: none;
@@ -568,30 +578,30 @@ i.text-sound:hover {
     transition: background-color 0.3s;
   }
   
-  .choices button:hover {
+  .plac-container .choices button:hover {
     background-color: #bbb;
   }
   
   /* تصميم الإجابة الصحيحة */
-  .choices button.correct {
+  .plac-container .choices button.correct {
     background-color: #567854;
     color: #fff;
   }
   
   /* تصميم الإجابة الخاطئة */
-  .choices button.wrong {
+  .plac-container .choices button.wrong {
     background-color: #944343;
     color: #fff;
   }
   
   
-  .navigation {
+  .plac-container .plac-container .navigation {
     margin-top: 20px;
     display: flex;
     justify-content: space-between;
   }
   
-  .navigation button {
+  .plac-container .plac-container .navigation button {
     padding: 10px 15px;
     border: none;
     border-radius: 5px;
@@ -601,11 +611,11 @@ i.text-sound:hover {
     transition: background-color 0.3s;
   }
   
-  .navigation button:hover {
+  .plac-container .plac-container .navigation button:hover {
     background-color: #7b4e97;
   }
   /* تصميم صندوق الإجابة */
-  .dropzone {
+  .plac-container .plac-container .dropzone {
     width: 150px;
     height: 40px;
     border: none;
@@ -618,17 +628,17 @@ i.text-sound:hover {
   }
   
   /* عند الإجابة الصحيحة */
-  .dropzone.success {
+  .plac-container .plac-container .dropzone.success {
     background-color: #567854;
   }
   
   /* عند الإجابة الخاطئة */
-  .dropzone.error {
+  .plac-container .plac-container .dropzone.error {
     background-color: #944343;
   }
   
   /* تصميم صندوق النهاية */
-  #end {
+  .plac-container .plac-container #end {
     text-align: center;
     padding: 20px;
     background-color: #fafafa;
@@ -636,12 +646,36 @@ i.text-sound:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   }
   
-  .endTime{
+  .plac-container .endTime{
     color: #a5b86e;
     margin-bottom: 15px;
   }
   
-  .endPlace {
+  .plac-container .endPlace {
     font-size: 16px;
     color: #373535;
   }
+ 
+.plac-container .text1 .text .title {
+    color: var(--font-3);
+}
+.plac-container .carousel .story-white {
+    width: 95%;
+    margin: 0 auto;
+}
+.plac-container .carousel #story-3 .quiz-wrapper .target  {
+    width:185px;
+}
+.plac-container .carousel #story-4 .quiz-wrapper .target  {
+    width:150px
+}
+.plac-container .carousel-control-next,
+.plac-container .carousel-control-prev {
+    width: 0 !important;
+}
+.plac-container .carousel-control-next {
+    left: -24px !important;
+}
+.plac-container .carousel-control-prev {
+    right: -24px !important;
+}

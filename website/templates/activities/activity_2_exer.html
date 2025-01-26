@@ -131,10 +131,7 @@
                 }
 
                 var result = await response.json();
-                console.log(result,"before",typeof(result))
-                console.log(result.response,"before",typeof(result.response))
                 result = JSON.parse(result.response); // تحويل النص إلى JSON
-                console.log(result,"after",typeof(result))
 
                 // Right Answer
                 if (result[0] == "True") {

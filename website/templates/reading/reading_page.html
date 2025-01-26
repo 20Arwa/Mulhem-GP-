@@ -1,5 +1,14 @@
 {% extends "base.html" %}
-{% block title %}{{story.title}}{% endblock %}
+
+<!-- Page Title -->
+{% block title %}
+	{% if story.title == None %}
+		بدون عنوان
+	{% else  %}
+		{{story.title}}
+	{% endif %}
+{% endblock %}
+
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='css/reading/edit_story.css') }}">
@@ -101,7 +110,7 @@
         <div class="sitting-buttons d-flex align-items-center justify-content-center column-gap-2 mt-5 position-relative text-center mx-auto">
 			<!-- Our Library Extra Content -->
 			{% if reading_type == "our_library" %}
-				<button class="edit-availble-btn">
+				<button class="edit-availble-btn" data-user="{{user.is_authenticated}}">
 					<i class="fa-regular fa-pen-to-square"></i>
 					تغيير القصة
 				</button>
@@ -421,19 +430,39 @@
 	}
 
 	var editAvalForm = document.querySelector(".edit-availble-story.response");
-	console.log(editAvalForm)
-	if (document.querySelector(".sitting-buttons .edit-availble-btn")) {
-		document.querySelector(".sitting-buttons .edit-availble-btn").addEventListener("click", (e) => {
+	var editAvalStoryBtn = document.querySelector(".sitting-buttons .edit-availble-btn");
+	if (editAvalStoryBtn) {
+		editAvalStoryBtn.addEventListener("click", (e) => {
 			e.preventDefault(); // Prevent page reload
-			editAvalForm.style.display = "block";
-			// Go Down To completion
-			const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
-			window.scrollTo({ 
-				top: editAvalForm.getBoundingClientRect().top + window.pageYOffset - offset, 
-				behavior: 'smooth' 
-			});
+	
+			// Check If User Is Logged In
+			if (editAvalStoryBtn.getAttribute("data-user") == "True") {
+				editAvalForm.style.display = "block";
+				// Go Down To completion
+				const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
+				window.scrollTo({ 
+					top: editAvalForm.getBoundingClientRect().top + window.pageYOffset - offset, 
+					behavior: 'smooth' 
+				});
+			} 
+			else {
+				Swal.fire({
+					title: 'تعديل القصة',
+					text: 'يجب عليك تسجيل الدخول لتتمكن من تغيير القصة',
+					icon: 'info',
+					showCancelButton: true,
+					confirmButtonText: 'تسجيل الدخول',
+					cancelButtonText: 'عودة للقراءة',
+					reverseButtons: true // Swaps the position of confirm and cancel buttons
+				}).then((result) => { // تأكد من جعل الدالة داخل then متزامنة
+					if (result.isConfirmed) {
+						window.location.href = '/login'; // Go To Writing Types Page
+					}
+				});
+			}	
 		});
 	}
+	
 	// Click On Close Edit Availble
 	document.querySelector(".edit-availble-story.response .close-icon").addEventListener("click", () => {
 		editAvalForm.style.display = "none";

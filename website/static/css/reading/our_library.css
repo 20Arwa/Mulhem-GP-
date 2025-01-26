@@ -20,7 +20,7 @@
 }
 
 .our-library-container .story-box {
-    background-color: #dbcef6;
+    background: var(--gradient-light);
     padding: 15px;
     display: inline-block;
     margin: 10px;

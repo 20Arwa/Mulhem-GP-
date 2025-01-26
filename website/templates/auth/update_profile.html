@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% block title %} تعديل ملفي الشخصي {% endblock %}
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/auth/profile.css') }}">
+    <style>
+        .update-profile .bg-white {
+            display: flex;
+            align-items: center;
+            width: 80%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            outline: none;
+            transition: border 0.3s ease;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        .update-profile .bg-white:has(input:focus),
+        .update-profile .bg-white:has(select:focus) {
+            border-color: #7b5ba6;
+            box-shadow: 0 0 8px rgba(123, 91, 166, 0.9);
+        }
+        .update-profile .bg-white i {
+            margin-left: 10px;
+            font-size: 23px;
+            color: var(--font-3);
+            transition: var(--transition-seconds);
+        }
+        .update-profile input,
+        .update-profile select {
+            padding: 0;
+            text-align: start;
+            width: 100%;
+            border: none;
+            outline: none;
+            box-shadow: none;
+        }
+        .update-profile input:focus,
+        .update-profile select:focus {
+            border: none;
+            box-shadow: none;
+        }
+    </style>
+{% endblock %}
+{% block body %}
+ <!-- عرض الرسائل -->
+ {% with messages = get_flashed_messages(with_categories=true) %}
+ {% if messages %}
+     <div class="alert-container">
+         {% for category, message in messages %}
+         <div class="alert alert-{{ category }}" role="alert">
+             {{ message }}
+         </div>
+         {% endfor %}
+     </div>
+ {% endif %}
+ {% endwith %}
+ 
+<div class="profile-container update-profile my-5">
+    <h1 class="page-title container mb-4"><i class="fa-solid fa-user-pen user-icon fs-3"></i>تعديل ملفي الشخصي</h1>
+    
+    <!-- نموذج الإدخال -->
+    <form class="profile-form" id="profile-form">
+        <label for="first-name">
+            <i class="fa-solid fa-user"></i> الاسم الأول :</label>
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <div class="bg-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <input type="text" id="first_name" name="first-name" maxlength="9" placeholder="جولي" value="{{user.first_name}}" >
+            </div>
+        </div>
+
+        <label for="last-name">
+            <i class="fa-solid fa-user"></i> الاسم الأخير : </label>
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <div class="bg-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <input type="text" id="last_name" name="last-name" maxlength="10" placeholder=" الزهراني" value="{{user.last_name}}" >
+            </div>
+        </div>
+
+        <label for="age">
+            <i class="fa-solid fa-calendar"></i> العمر : </label>
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <div class="bg-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <input type="number" id="age" name="age" min="8" max="11" placeholder=" 9" value="{{user.age}}" >
+            </div>
+        </div>
+
+        <label for="gender">
+            <i class="fa-solid fa-venus-mars"></i> الجنس : </label>
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <div class="bg-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <select name="gender" form="profile-form" class="" id="gender">    
+                    <option value="أنثى" {% if user.gender == 'أنثى' %}selected{% endif %}>أنثى</option>
+                    <option value="ذكر" {% if user.gender == 'ذكر' %}selected{% endif %}>ذكر</option>
+                </select>            
+            </div>
+        </div>
+
+        <label for="email">
+            <i class="fa-solid fa-envelope"></i> الإيميل : </label>
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <div class="bg-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <input type="email" id="email" name="email" placeholder=" LOOD@gmail.com " value="{{user.email}}" >
+            </div>
+        </div>
+
+        <label for="password">
+            <i class="fa-solid fa-lock"></i> كلمة المرور : </label>
+        <div class="d-flex align-items-center justify-content-center mx-auto">
+            <div class="bg-white">
+                <i class="fa-solid fa-pen-to-square"></i>
+                <input type="password" id="password" name="password" maxlength="128" placeholder="***********" value="***********" >
+            </div>
+        </div>
+
+        <div class="error-msg text-danger text-center mx-auto">رسالة خطأ</div>
+    <div class="save-container mx-auto text-center">
+    <button class="save-button button main-button mt-1 px-4" type="button" onclick="checkInputs()" id="save-button"> حفظ </button>
+    </div>
+</form>
+<div id="message" style="display:none; color: rgb(94, 218, 94); margin-top: 10px;"></div>
+</div>
+
+{% endblock %}
+{%block script%}
+<script>
+    async function checkInputs() {
+        const f_name = document.getElementById("first_name").value.trim();
+        const l_name = document.getElementById("last_name").value.trim();
+        const age = document.getElementById("age").value.trim();
+        const gender = document.getElementById("gender").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value.trim();
+        const passwordChanged = password && password !== "***********";    
+        const errorMsg = document.querySelector(".error-msg");
+    
+        console.log(password, typeof(password), password.length)
+        console.log()
+        // Validations
+        if (password.length == 0) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "لا يمكن ترك كلمة المرور فارغة عند التغيير";
+            return;
+        }
+        if (passwordChanged) {
+            if (password.length < 8) {
+                errorMsg.style.opacity = 1;
+                errorMsg.innerHTML = "كلمة المرور لا يجب أن تقل عن 8 أحرف";
+                return;
+            } else if (!/[A-Z]/.test(password)) {
+                errorMsg.style.opacity = 1;
+                errorMsg.innerHTML = "يجب أن تحتوي كلمة المرور على حرف كبير واحد على الأقل";
+                return;
+            } else if (!/[a-z]/.test(password)) {
+                errorMsg.style.opacity = 1;
+                errorMsg.innerHTML = "يجب أن تحتوي كلمة المرور على حرف صغير واحد على الأقل";
+                return;
+            } else if (!/\d/.test(password)) {
+                errorMsg.style.opacity = 1;
+                errorMsg.innerHTML = "يجب أن تحتوي كلمة المرور على رقم واحد على الأقل";
+                return;
+            } else if (/\s/.test(password)) {
+                errorMsg.style.opacity = 1;
+                errorMsg.innerHTML = "يجب أن لا تحتوي كلمة المرور على مسافات";
+                return;
+            }
+        }
+        
+        if (f_name.length < 2 || f_name.length > 30) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الاسم الأول يجب أن يتكون من 3 إلى 30 حرفاً";
+            return;
+        }
+        else if (l_name.length < 2 || l_name.length > 30){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الاسم الأخير يجب أن يتكون من 3 إلى 30 حرفاً";
+            return;
+        }
+        else if (/\d/.test(f_name)){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الاسم الأول يجب أن يتكون من حروف فقط";
+            return;
+        }
+        else if (/\d/.test(l_name)){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الاسم الأخير يجب أن يتكون من حروف فقط";
+        }
+        else if (age == ""){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى ادخال عمرك";
+        }
+        else if (gender == ""){  
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى اختيار الجنس";
+        } else if (!email) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "الرجاء إدخال البريد الإلكتروني";
+        } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            errorMsg.style.opacity = 1;
+            errorMsg.innerHTML = "يرجى إدخال بريد إلكتروني صالح";
+        } 
+        else {
+            errorMsg.style.opacity = 0;
+    
+            const data = {
+                first_name: f_name || "",
+                last_name: l_name || "",
+                age: age || "",
+                gender: gender || "",
+                email: email || "",
+                password: password || "",
+            };
+            try {
+                Swal.fire({
+                    title: 'جاري تحديث بياناتك...',
+                    text: 'الرجاء الانتظار قليلاً',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+    
+                const response = await fetch('http://127.0.0.1:5000/update_user_profile', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data),
+                });
+    
+                if (response.ok) {
+                    Swal.fire('تم تحديث بياناتك!', '', 'success');
+                } else {
+                    const result = await response.json();
+                    Swal.fire({
+                        title: 'خطأ',
+                        text: result.response,
+                        icon: 'error',
+                        confirmButtonText: 'حسنا',
+                    });
+                }
+            } catch (error) {
+                Swal.fire({
+                    title: 'فشل التحديث',
+                    text: 'حدث خطأ أثناء التواصل مع الخادم',
+                    icon: 'error',
+                    confirmButtonText: 'حسنا',
+                });
+                console.error(error);
+            }
+        }
+    }
+    
+</script>
+{%endblock%}
+
+

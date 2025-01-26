@@ -135,16 +135,13 @@ if (existingAudioSrc && existingAudioSrc !== '""') {
 if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
     navigator.mediaDevices.getUserMedia({ audio: true }).then((stream) => {
         mediaRecorder = new MediaRecorder(stream);
-
         mediaRecorder.ondataavailable = (e) => {
             chunks.push(e.data);
         };
-
         mediaRecorder.onstop = async () => {
             const blob = new Blob(chunks, { type: 'audio/ogg; codecs=opus' });
             chunks = [];
             audioURL = window.URL.createObjectURL(blob);
-
             try {
                 const formData = new FormData();
                 formData.append('audio', blob, 'recorded_audio.ogg');
@@ -153,11 +150,9 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                     method: 'POST',
                     body: formData,
                 });
-
                 if (!response.ok) {
                     throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
                 }
-
                 const result = await response.json();
                 if (result.success) {
                     console.log('تم رفع الصوت بنجاح:', result.file_path);

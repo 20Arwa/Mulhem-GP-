@@ -17,12 +17,17 @@
     ]%}
         <!-- For Each Activity In The Object, This Code Will Be Repeated -->
         <div class="activity col-6">
-            <div class=" p-4 pt-5 pb-4 rounded-4 text-center h-100 d-flex flex-column justify-content-around">
-                <h4 class="my-0">{{activity.title}}</h4>
-                <p class="my-4 text-end">{{activity.description}}</p>
-                <a href="{{activity.exercisesPath}}" class="start-container w-25 d-flex justify-content-around align-items-center mx-auto button main-button">
-                    <button class="border-0 bg-transparent">إبدأ</button>
-                </a>
+            <div class=" p-4 pt-5 pb-4 bs-2 rounded-4 text-center h-100 d-flex justify-content-between">
+                <div class="img-holder position-relative">
+                    <img class="mulhem position-absolute" src="../../static/images/mulhem-explain.png" alt="ملهم">
+                </div>
+                <div class="text">
+                    <h4 class="my-0 text-end">{{activity.title}}</h4>
+                    <p class="my-4 text-end">{{activity.description}}</p>
+                    <a href="{{activity.exercisesPath}}" class="start-container w-25 d-flex justify-content-around align-items-center mx-auto button main-button">
+                        <button class="border-0 bg-transparent">إبدأ</button>
+                    </a>
+                </div>
             </div>
         </div>
     {% endfor %}

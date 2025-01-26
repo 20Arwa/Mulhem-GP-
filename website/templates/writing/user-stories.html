@@ -6,6 +6,16 @@
 
 {% block body %}
 <div class="container user-stories our-library-container" >
+
+    <!-- If No Story -->
+    {% if stories|length == 0 %}
+    <div class="no-stories p-4 rounded-4 text-center">
+        <h3>لا توجد قصص حتى الان!</h3>
+        <p class="my-4 fs-5">ابدأ الآن بكتابة قصتك الأولى وشاركنا خيالك المدهش.! 🌟</p>
+        <a href="../writing/writing-types"><button class="go-write button main-button mt-3">اذهب لصفحة الكتابة</button></a>
+    </div>
+    {% endif %}
+
 {% for story in stories %}
     <div class="story-box" >
                 <!-- Cover Image -->
@@ -39,7 +49,6 @@
 {% endblock %}
 {% block script %}
 <script>
-
     // Send Reding Type (user_stories) To Server
     document.querySelectorAll(".user-stories .story-box .buttons .read-btn").forEach(story => {
         story.addEventListener("click", async () => {
@@ -111,7 +120,6 @@
                             headers: { 'Content-Type': 'application/json' },
                             body: JSON.stringify(data)
                         });
-                
                         // Handle response
                         if (response.ok) {
                             Swal.fire('تم حذف القصة!', '', 'success');
@@ -126,7 +134,12 @@
                             });
                         }
                     } catch (error) {
-                        Swal.fire('فشل الحذف', 'حدث خطأ أثناء التواصل مع الخادم', 'error');
+                        Swal.fire({
+                            title: 'فشل الحذف',
+                            text: 'حدث خطأ أثناء التواصل مع الخادم',
+                            icon: 'error',
+                            confirmButtonText: 'حسنا' // تغيير النص إلى "حسنا"
+                        });
                         console.error(error);
                     }
 

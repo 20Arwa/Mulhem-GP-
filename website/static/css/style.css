@@ -5,6 +5,8 @@
     --main-dark: #b391d6;
     --main-very-dark: #7b4e97;
     --main-light: #dbcef6;
+    --gradient-dark: linear-gradient(to bottom, #7b5ba6, #b391d6 100%);
+    --gradient-light: linear-gradient(to bottom left, #dbcef6, #c9b4e9, #a58ed4 160%);;
     --font-1: white; 
     --font-2: #9E887F;
     --font-3: #7b5ba6;
@@ -31,10 +33,10 @@ body {
   background-size: 20px 20px;
   background-position: 0 0, 10px 10px; */
   
-  /* ++++ */
+  /* ++++
   background-color: white;
 background: radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent) 25px 25px, linear-gradient(var(--main-light) 2px, transparent 2px) 0 -1px, linear-gradient(90deg, var(--main-light) 2px, #ffffff 2px) -1px 0;
-background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px; 
+background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;  */
 }
 body {
   background: radial-gradient(circle, #dbcef65c 10%, transparent 11%) 0% 0% / 3em 3em, radial-gradient(circle at left bottom, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right bottom, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at left top, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right top, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em rgb(255, 255, 255);
@@ -61,9 +63,15 @@ audio {
   border: 2px solid var(--font-3);
 }
 /* Navbar */
+.gradian-background {
+  /* background: linear-gradient(to bottom, #8a68b8, #b391d6 70%); */
+  /* background: linear-gradient(to bottom, #7b5ba6, #b391d6 70%); */
+  /* background: linear-gradient(to bottom, #7b5ba6, #ab81d8 75%); */
+  background: var(--gradient-dark);
+}
 nav {
-    font-size: 17px;
-    background-color: var(--main-dark);
+    font-size: 18px;
+    background-color: transparent;
     color: var(--font-1);
 }
 nav .navbar-brand {
@@ -75,6 +83,10 @@ nav .navbar-brand {
 }
 nav .navbar-brand:hover {
   color: var(--font-1)
+}
+nav .navbar-brand img {
+  width: 95px;
+  height: 75px;
 }
 nav .navbar-nav li  {
     margin: 0 4px;
@@ -94,34 +106,33 @@ nav .navbar-nav li a:active  {
 }
 nav .sign-log button {
   font-size: 16px;
-    padding: 5px 12px;
-    border: none;
-    color: var(--font-1);
-    background-color: var(--main-very-dark);
+  font-weight: 500;
+    padding: 4px 10px;
+    border: 2px solid transparent;
+    color: var(--font-3);
+    background-color: var(--font-1);
     border-radius: 0.375rem;
-    opacity: 65%;
+    opacity: 90%;
     transition: var(--transition-seconds);
   }
   nav .sign-log a:not(.profile) button:hover,  
   nav .sign-log a:not(.profile) button:focus,  
   nav .sign-log a:not(.profile) button:active {
     opacity: 100%;
-    background-color: var(--main-very-dark);
+    border-color: var(--main-dark);
 }
 nav .sign-log .profile button {
   background-color: transparent;
   font-size: 30px;
   padding: 0;
-  opacity: 100%;
-  color: var(--main-very-dark);
-}
-nav .sign-log .profile button:hover {
+  opacity: 90%;
   color:var(--font-1)
 }
-/* nav .sign-log .profile{
-  font-size: 25px;
-  padding: 0;
-} */
+nav .sign-log .profile button:hover {
+  opacity: 100%;
+  color: var(--main-light);
+}
+
 
 /* Flash Message */
 .alert-dismissible .btn-close {
@@ -224,46 +235,54 @@ nav .sign-log .profile button:hover {
     text-decoration: underline;
   }
   
-  
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* footer style */
-
 footer {
-  background-color: #b391d6;
+  background: var(--gradient-dark);
   color: #ecf0f1;
   font-family: Arial, sans-serif;
-  padding: 10px ;  /* Adjust padding as needed */
+  padding: 60px 10px 15px;  /* Adjust padding as needed */
   width: 100%;
   bottom: 5px;
   font-size: 25px;
   height: 20%;
   margin-bottom: 0;
+  position: relative;
   
 }
+footer .wavy {
+  font-size: 16px;
+  width: 100%;
+    height: 44px;
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%) rotateX(180deg);
+    --mask: radial-gradient(78.26px at 50% 105px, #000 99%, #0000 101%) calc(50% - 70px) 0 / 140px 100%, radial-gradient(78.26px at 50% -70px, #0000 99%, #000 101%) 50% 35px / 140px 100% repeat-x;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
+    background: radial-gradient(circle, #dbcef65c 10%, transparent 11%) 0% 0% / 3em 3em, radial-gradient(circle at left bottom, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right bottom, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at left top, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right top, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em rgb(255, 255, 255);
+  }
+
 footer .footer-menu > img{
   width: 110px;
   height: 90px;
 }
 
 footer ul {
+  padding: 0;
+  margin-bottom: 0;
   list-style-type: none;
-  /* padding: 25px; */
-
 }
-footer ul li{
-  font-size: 22px;
+footer  .nav-link {
+  font-size: 21px;
+  transition: var(--transition-seconds);
+}
+footer  .nav-link:hover {
+  color: var(--font-4)
+}
+footer  .contact:hover {
+  color: var(--font-1)
 }
 footer p {
   font-size: 16px; /* Increase font size to 18 pixels */

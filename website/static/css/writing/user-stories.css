@@ -1,4 +1,16 @@
 
+.user-stories .no-stories {
+    background: var(--gradient-light);;
+    color: var(--font-4);
+}
+.user-stories .no-stories h3 {
+    color: var(--font-3);
+}
+.user-stories .story-box {
+    color: var(--font-4);
+    border: 3px solid;
+    cursor:auto;
+}
 .user-stories .story-box {
     color: var(--font-4);
     border: 3px solid;
@@ -32,5 +44,4 @@
 }
 .user-stories .buttons button i {
     margin-left: 5px;
-
 }

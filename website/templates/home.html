@@ -1,195 +1,166 @@
 {% extends "base.html" %}
 
 {% block title %}الصفحة الرئيسية{% endblock %}
-
-{% block body %}
-
-
-<style>
- 
-  a {
-      text-decoration: none; 
-      color:black; 
-      display: inline-block; 
-      align-items: center; 
-      transition: color 0.3s;
-  }
-
-  a:hover {
-      color: rgb(0, 76, 185); 
-  }
-  .img-e {
-      max-width: 100%; 
-      height: 250px;
-      width: 350px;
-      margin-right: 10px; 
-      border-radius: 5px; 
-  }
-
-  .story-box {
-      background-color: white;
-      padding: 15px;
-      display: inline-block;
-      margin: 10px;
-      border-radius: 5px; 
-      transition: transform 0.3s;
-      width:280px;
-      height: 320px;;
-  }
-
-  .menu-item p{
-      margin: 10px 0;
-      font-size: 20px;
-      color:black;
-  }
-
-  .story-box:hover {
-      transform: scale(1.05); 
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-
-  }
-
-  .line-container {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 20px 0; /* Space above and below the line */
-        }
-
-        .line {
-            flex-grow: 1; /* Allow the line to grow */
-            height: 2px; /* Height of the line */
-            background-color: #b391d6; /* Color of the line */
-        }
-
-        .line-text {
-            padding: 0 10px; /* Space around the text */
-            background: white; /* Background color to cover the line */
-            color: #b391d6;
-            position: relative; /* Position relative for better control */
-            z-index: 1; /* Ensure text is above the line */
-        }
-        .section-container{
-          Display: flex;
-          justify-content: center;
-          align-items:center
-        }
-       
-
-</style>
-
-<div class="home container">
-    <!-- Diffrent Welcom If User Logged In Or Not -->
-    {% if user.is_authenticated %}
-
-        {% if user.gender == "أنثى"%}
-        <h2>مرحبا بكِ يا {{user.first_name}} في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h2>
-        {% else %}
-        <h2>مرحبا بكَ يا {{user.first_name}} في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h2>
-        {% endif %}
-
-    {% else %}
-        <h2>مرحبا بك في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h2>
-    {% endif %}
-
-</div>
-<div class="section-1">
-<div class="line-container">
-  <div class="line"></div>
-  <span class="line-text"> اقرأ القصص وعدّلها</span>
-  <div class="line"></div>
-</div>
-
-<div class ="section-container">
-<div class="story-box">
-  <div calss=" img-e">
-  <a href="try.html" target="_blank">
-    
-      <img src="/static/images/علاء الدين.jpeg" alt="علاء الدين"  height="270px"  width="250px"  >
-      <p>علاء الدين و المصباح السحري</p>
-  </a>
-</div> 
-
-</div>
-
-<div class="story-box">
-  <a href="tstory-boxry.html" target="_blank">
-      <img src="/static/images/جاك وحبة الفاصولياء.png" alt="جاك و حبة الفاصولياء"  height="270px"  width="250px"   max-width="100%" >
-      <p>جاك وحبة الفاصولياء</p>
-  </a>
-</div>
-
-
-    
-<div class="story-box">
-  <a href="try.html" target="_blank">
-      <img src="/static/images/open-book.png" alt=" اقرأ المزيد "  height="270px"  width="250px"   max-width="100%" >
-      <p>اقرأ المزيد </p>
-  </a>
-</div>
-</div>
-</div>
-  </section>
-  
-  
-<div class="line-container">
-  <div class="line"></div>
-  <span class="line-text"> <img src="/static/images/pencil1.png"></span>
-  <div class="line"></div>
-</div>
-  
-<section>
-  <div class="section-2">
-  <div class="section-container">
-<div class="story-box">
-  <div calss=" img-e">
-  <a href="try.html" target="_blank">
-    
-      <img src="/static/images/teacher1.png" alt=" دروس الكتابة"  height="270px"  width="250px"  >
-      <p>دروس الكتابة </p>
-  </a>
-</div> 
-
-</div>
-
-<div class="story-box">
-  <a href="tstory-boxry.html" target="_blank">
-      <img src="/static/images/writing.png" alt="أبدع واكتب قصة "  height="270px"  width="250px"   max-width="100%" >
-      <p>أبدع واكتب قصة </p>
-  </a>
-</div>
-
-<div class="story-box">
-  <a href="try.html" target="_blank">
-      <img src="/static/images/publishing.png" alt=" منصة النشر "    height="270px"  width="250px"   max-width="100%" >
-      <p> منصة النشر </p>
-  </a>
-</div>
-
- 
-</div>
-  </div>
-  </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+{% block styles %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
 
+
+
+{% block landing %}
+ <!-- Landing -->
+ <div class="home-landing">
+  <div class="content container d-flex justify-content-between">
+
+    <!-- Text -->
+    <div class="text thought w-50">
+      <!-- If User Logged In -->
+      {% if user.is_authenticated %}
+        {% if user.gender == "أنثى"%}
+        <h2 class="mb-4 mt-2">مرحبًا بكِ مجددًا يا {{user.first_name}}</h2>
+        {% else %}
+        <h2 class="mb-4 mt-2">مرحبًا بكَ مجددًا يا {{user.first_name}}</h2>
+        {% endif %}
+      <p class="w-75 mx-auto">سعيد بعودتك إلى عالم <span>مُلهِم</span>. انطلق في رحلتك الإبداعية، واستمتع بتطوير مهاراتك، وعِش تجربة ممتعة في عالم الكتابة والقصص.</p>
+
+
+      <!-- If User Not Logged In -->
+      {% else %}
+      <!-- <h2>مرحبا بك في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h2> -->
+      <h2 class="mb-4 mt-2">مرحبا بك في موقعنا <span>مُلهِم</span></h2>
+      <!-- <p>أنا <span>مُلهِم</span>، هنا لأساعدك على استكشاف متعة الكتابة والإبداع. استعد للانطلاق في رحلة تعليمية ممتعة حيث يمكنك تطوير مهاراتك في الكتابة واكتشاف قصص جديدة.</p> -->
+      <p>أنا <span>مُلهِم</span> هنا لأساعدك على استكشاف متعة الكتابة والإبداع.</p>
+      <p class="mb-2">سجل دخولك الآن لتبدأ رحلتك الإبداعية!</p>
+      <div class="account-buttons">
+        <a href="{{ url_for('auth.signUp') }}"><button type="button" class="button main-button ms-1">إنشاء حساب</button></a>
+        <a href="{{ url_for('auth.login') }}"><button type="button" class="button main-button">تسجيل الدخول</button></a>
+      </div>
+      {% endif %}
+    </div>
+
+
+
+     <!-- Mulhem -->
+     <div class="img position-relative">
+      <img src="../static/images/mulhem-hi.png" alt="مُلهِم" class="mulhem">
+    </div>
+    
+  </div>
+
+  <div class="wavy"></div>
+</div>
+{% endblock %}
+
+{% block body %}
+<div class="home">
+  <div class="section-1 my-5">
+
+  <div class="line-container mb-3">
+    <div class="line"></div>
+    <span class="line-text"> اقرأ القصص وعدّلها</span>
+    <div class="line"></div>
+  </div>
+  
+  <div class ="section-container">
+    <div class="story-box our" id="7">
+      <a>
+          <img src="/static/images/التمرة الضائعة.jpeg" alt="التمرة الضائعة"  height="270px"  width="250px"   max-width="100%" >
+          <p>التمرة الضائعة</p>
+      </a>
+    </div>
+  <div class="story-box our" id="9">
+    <div calss=" img-e">
+    <a>
+        <img src="/static/images/علاء الدين.jpeg" alt="علاء الدين"  height="270px"  width="250px"  >
+        <p>علاء الدين و المصباح السحري</p>
+    </a>
+  </div> 
+  
+  </div>
+  <div class="story-box">
+    <a href="../reading/our_library" target="_blank">
+        <img class="img-icon" src="/static/images/open-book.png" alt=" اقرأ المزيد "  height="270px"  width="250px"   max-width="100%" >
+        <p>اقرأ المزيد </p>
+    </a>
+  </div>
+  </div>
+  </div>
+    </section>
+    
+    
+  <div class="line-container mb-3">
+    <div class="line"></div>
+    <span class="line-text"><i class="fa-solid fa-pencil"></i></span>
+    <div class="line"></div>
+  </div>
+    
+  <section>
+
+
+    <div class="section-2 mb-5">
+    <div class="section-container">
+  <div class="story-box">
+    <div calss=" img-e">
+    <a href="../activities/all_activities" target="_blank">
+      
+        <img class="img-icon" src="/static/images/teacher1.png" alt=" دروس الكتابة"  height="270px"  width="250px"  >
+        <p>أنشطة الكتابة </p>
+    </a>
+  </div> 
+  
+  </div>
+  
+  
+  <div class="story-box">
+    <a href="/writing/story-generator" target="_blank">
+      <img class="img-icon" src="/static/images/publishing.png" alt="  انشاء قصة "    height="270px"  width="250px"   max-width="100%" >
+      <p> دع مُلهِم يكتب لك قصة </p>
+    </a>
+  </div>
+  
+  <div class="story-box">
+    <a href="/writing/self-writing" target="_blank">
+        <img class="img-icon" src="/static/images/writing.png" alt="أبدع واكتب قصة "  height="270px"  width="250px"   max-width="100%" >
+        <p>أبدع واكتب قصة </p>
+    </a>
+  </div>
+   
+  </div>
+    </div>
+    </section>
+</div>
 <body>
+{% endblock %}
+{% block script %}
+<script>
+    // Send Reding Type (our_library) To Server
+    document.querySelectorAll(".home .story-box.our").forEach(story => {
+        story.addEventListener("click", async () => {
+            try {
+                const data = { message: ["our_library",story.getAttribute("id")] }; 
+                const response = await fetch('http://127.0.0.1:5000/reading/get-reading-type', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data),
+                });            
+                if (!response.ok) {
+                    throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+                }
+                const result = await response.json();
+                if (result.redirect) {
+                    // إعادة التوجيه إلى الرابط المولد
+                    window.open(result.redirect, '_blank');
+                }
+            } catch (error) {
+                console.error('حدث خطأ:', error);
+            }
+        })
+    })
+
+</script>
+{% endblock %}
 
 
 

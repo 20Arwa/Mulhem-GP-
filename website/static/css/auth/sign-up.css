@@ -16,7 +16,7 @@
     position: absolute;
     background-color: white;
     z-index: -1;
-    left: -70px;
+    left: -80px;
     top: 50%;
     transform: translateY(-50%);
 }
@@ -27,8 +27,16 @@
     position: relative;
     z-index: -2;
 }
+.sign-container .hello-msg .text {
+    margin-bottom: 150px;
+}
 .sign-container .hello-msg p {
     font-size: 18px;
+}
+.sign-container .hello-msg .mulhem {
+    width: 150px;
+    bottom: 0;
+    right: 70px;
 }
 /* Form */
 .sign-container #sign-up > h2 {

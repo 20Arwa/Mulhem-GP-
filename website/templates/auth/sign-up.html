@@ -7,13 +7,14 @@
 <!-- Content -->
 <div class="sign-container d-flex justify-space-between my-5 mx-auto border rounded-2">
     <div class="circle rounded-circle"></div>
-    <div class="hello-msg text-center d-flex align-items-center w-50 rounded-end-2 pe-4">
+    <div class="hello-msg text-center d-flex align-items-center w-50 rounded-end-2 pe-4 position-relative">
         <div class="text w-75">
             <h4 class="mb-4">مــرحــبــا بــك</h4>
             <p>ابدأ رحلتك الإبداعية مع مُلهِم! انضم إلينا لتكتشف عالمًا مليئًا بالقصص والإبداع.</p>
         </div>
+        <img class="mulhem position-absolute" src="../../static/images/mulhem-hi-2.png" alt="ملهم">
     </div>
-    <form method="POST" id="sign-up" class="d-flex flex-column align-items-center m-4 p-4 py-2 ps-5 w-50">
+    <form method="POST" id="sign-up" class="d-flex flex-column align-items-center m-2 p-4 py-2 ps-5 w-50">
         <h2 class="mb-5">إنشاء حساب</h2>
         <div class="field row">
             <div>
@@ -26,7 +27,7 @@
             </div>
             <div>
                 <label for="age">العمر</label>
-                <input type="number" name="age" min="8" max="12" placeholder="10" >
+                <input type="number" name="age" min="8" max="11" placeholder="10" >
             </div>
             <div>
                 <label for="gender">الجنس</label>
@@ -54,7 +55,7 @@
         <div class="error-msg">رسالة خطأ</div>
         <input type="submit" class="button main-button" value="إنشاء حساب" onclick="checkInputs()" class="btn btn-primary" id="liveAlertBtn">
         <div class="have-account mt-2">
-            <p>هل لديك حساب بالفعل؟ <a href="../auth/login.html">تسجيل الدخول</a></p>
+            <p>هل لديك حساب بالفعل؟ <a href="../login">تسجيل الدخول</a></p>
         </div>
     </form>
 </div>

@@ -135,13 +135,10 @@ async function submitStory() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
-  
     Swal.close(); // إغلاق رسالة التحميل
-  
     if (!response.ok) {
       throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
     }
-  
     // محاولة تحليل الرد كـ JSON
     let responseData;
     try {
@@ -149,7 +146,6 @@ async function submitStory() {
     } catch (jsonError) {
       throw new Error('رد غير صالح من الخادم. تأكد أن الخادم يعيد JSON.');
     }
-  
     // التحقق من وجود رابط إعادة توجيه لصفحة الكتابة في الرد
     if (responseData.redirect) {
       window.location.href = responseData.redirect;
