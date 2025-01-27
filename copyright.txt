@@ -11,6 +11,12 @@ Big Confitti
 Book Shape
 /* Copyright (c) 2024 by Timo Hausmann (https://codepen.io/timohausmann/pen/AaJWvo) */
 
+Bubble Shape
+https://codepen.io/quadbaup/pen/rKOKQv
+
+Wavy Shape
+https://css-generators.com/wavy-shapes/
+
 Voice Recorder
 https://github.com/davidsproject/VRecorder
 

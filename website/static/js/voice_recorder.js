@@ -156,7 +156,7 @@ if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
                 const result = await response.json();
                 if (result.success) {
                     console.log('تم رفع الصوت بنجاح:', result.file_path);
-                    audioURL = result.file_path;
+                    audioURL = '../../'+result.file_path;
                     application(2); // التبديل إلى حالة "Download" بعد رفع الصوت
                 } else {
                     console.error('فشل رفع الصوت:', result.message);

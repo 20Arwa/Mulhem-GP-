@@ -145,7 +145,7 @@ i.text-sound:hover {
 /* @@@@@@@@@@@@@ activity_1 Page @@@@@@@@@@@@@ */
 .activity_1 {
     color: var(--font-4);
-    background-color: var(--main-light);
+    background: var(--gradient-light);
 }
 .activity_1 {
     color: var(--font-4);
@@ -251,7 +251,7 @@ i.text-sound:hover {
 /* @@@@@@@@@@@@@ character_activity Page @@@@@@@@@@@@@ */
 .characters_activity {
     color: var(--font-4);
-    background-color: var(--main-light);
+    background: var(--gradient-light);
     margin-top: 120px !important;
 }
 .characters_activity .decore-imgs {
@@ -461,6 +461,10 @@ i.text-sound:hover {
 /* @@@@@@@@@@@@@ activity_2 Page @@@@@@@@@@@@@ */
 .activity_2_exer1 .form-floating textarea:focus-visible {
     outline-color: var(--main-dark);
+}
+/* @@@@@@@@@@@@@ reasons activity @@@@@@@@@@@@@ */
+.reasons_activiy {
+    margin-top: 3rem !important;
 }
 /* @@@@@@@@@@@@@ place and time @@@@@@@@@@@@@ */
 .plac-container {

@@ -7,6 +7,8 @@ import requests
 import os
 import json
 import ast
+from elevenlabs import ElevenLabs
+
 
 
 views = Blueprint('views', __name__)
@@ -33,7 +35,7 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiYTgzNDAwODktMDVlYi00MjExLWIwMWMtYWFhNDMzYzlkZDcyIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc4MDQ2MDcsImV4cCI6MTczNzgwODIwNywiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.QIcPRYqPebDRZLBUffN80Nwho8BAkWanXQmY1PQ8oRi4_8HOXzp87y1BnFlGA2-hR3PsPu7FAB1Di7fm0y7YlXni4VYi-YwamdFVBO5gDuz3rMXqQ9qKPu5M8rkiYV-bQctw3-QI43BflRHWjzJtT2sey0UzlHx271OCnEsDcpqspMACuZ1nSR46LcoxRY-abl_8M4xItGti_eaPfTKitTVsv6thbcLcOzfKH_qB-M4YjY_TIVJxR-bTG0VSeB15f2jkbaK62OrOaaSpXiduXAjVfQyoxaO5hhSstnWOLR8XiAhEGkGr3zox7VNx9j1s-z9Wp1h28B7bYZVz2xj-1A",
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiOGRjOWM3NWUtYzUxZC00NmFiLTgxNjktMjczNTc5ZWExMjM4IiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc5NTg2OTIsImV4cCI6MTczNzk2MjI5MiwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.ScWXfMoyEL7sxK9a4C-F8tElbS669vhqOHYeboDGbEhhsJUInN4PChKTRgpw3_XDm6h1OvX_LOc5E653VXKO2ln-KlJ_s6BC0aXa1ozcCDsBKtdWgUiV7MK9qnC8itycdIvKw8AcBtoBD7WJUeJ9GyA475galyBeuA5Tef__CgI1h8qKhwFhRWgAoY5ylGD4iizJbfCLOy9fMUN2LhHBjqRG6HE6mQC-1l9fpzGUWf8IUeoe5X75KSnDTxqW6ZI-FchNPEm3-ms3u9ponzVy_fPWmEWgpyAfewEZFCPuNh1shLJiKhTNArjjoYIdsVse8jVWZRtmdiPUyBVTzlHv0g",
     }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
@@ -210,20 +212,20 @@ def save_user_story():
     title = data.get('title', '')
     content = data.get('message', None)  # استلام المصفوفة
     imageSrc = data.get('imageSrc', '')  # اسم الصورة المرسل
-    audioSrc = data.get('audioSrc', '')  # اسم الصورة المرسل
+    recordedaudioSrc = data.get('audioSrc', '')  # الصوت المسجل
+    genertedAudiosSrcs = data.get('genertedAudiosSrcs', '')  # صوت كل صفحة
     story_type = data.get('type', '')
     user_id = current_user.id
 
-    print("Data received on the server:", data)
-    print("Type of message:", type(data.get('message', None)))
-    print(f"Received data type: {type(content)} - Content: {content}")
+    print(genertedAudiosSrcs)
 
    # تحقق إذا كان العنوان موجودًا بالفعل لنفس المستخدم
     if title:
         existing_story = User_stories.query.filter_by(title=title, user_id=user_id).first()
         if existing_story:
             return jsonify({"response": "A story with this title already exists for this user.", "status": "duplicate"}), 400
-
+    
+    # تخزين القصة في الداتا بيس
     try:
         # إنشاء القصة الجديدة
         new_Story = User_stories(
@@ -231,7 +233,8 @@ def save_user_story():
             content=json.dumps(content),
             type=story_type,
             imgSrc=imageSrc,
-            audioSrc=audioSrc,
+            generAudios=genertedAudiosSrcs,
+            audioSrc=recordedaudioSrc,
             user_id=user_id
         )
         db.session.add(new_Story)
@@ -241,7 +244,7 @@ def save_user_story():
         storyID = new_Story.id
         old_ext = None
 
-        # تغيير اسم الملف إذا كانت الصورة موجودة
+        #### تغيير اسم الملف إذا كانت الصورة موجودة ####
         if imageSrc:
             # استخراج امتداد الملف
             ext = os.path.splitext(imageSrc)[1]  # مثال: .png أو .jpg
@@ -261,21 +264,54 @@ def save_user_story():
                 db.session.commit()
             else:
                 return jsonify({"response": "Image file not found.", "file": old_name}), 404
-    
-        # تغيير اسم الملف إذا كان الصوت موجود
-        if audioSrc:
+            
+        
+        #### تغيير اسم الملف إذا كان صوت القصص موجود ####
+        editedGenertedAudiosSrcs = []  #مصفوفة لتخزين المسارات الجديدة 
+        # تكرار على جميع أسماء الملفات
+        for audio_src in genertedAudiosSrcs:
+            if audio_src:  # التحقق إذا كان الاسم غير فارغ
+                # استخراج رقم الصفحة
+                pageNum = os.path.splitext(audio_src)[0].split('_')[-1]
+
+                print(pageNum)
+                # إنشاء المسار الكامل للملف القديم والجديد
+                old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), 'story', audio_src)
+                new_name = os.path.join(current_app.root_path,'static/audio/users',str(user_id),'story',f"{user_id}_{storyID}_{pageNum}.mp3")
+
+                # تحقق إذا كان الملف القديم موجودًا
+                if os.path.exists(old_name):
+                    os.rename(old_name, new_name)  # تغيير اسم الملف
+                    # تحديث المسار
+                    new_Path = f"audio/users/{user_id}/story/{user_id}_{storyID}_{pageNum}.mp3"
+                    editedGenertedAudiosSrcs.append(new_Path)  # إضافة المسار الجديد إلى المصفوفة
+                else:
+                    return jsonify({"response": "Audio file not found.", "file": old_name}), 404
+            else:
+                # إذا كان الاسم فارغًا، أضفه كما هو في المصفوفة
+                editedGenertedAudiosSrcs.append("")
+
+        # Add The Edited To DataBase
+        new_Story.generAudios = editedGenertedAudiosSrcs
+        db.session.commit()
+        print(editedGenertedAudiosSrcs)
+
+
+        #### تغيير اسم الملف إذا كان الصوت المسجل موجود ####
+        if recordedaudioSrc:
             # استخراج امتداد الملف
-            ext = os.path.splitext(audioSrc)[1]  # مثال: .png أو .jpg
+            ext = os.path.splitext(recordedaudioSrc)[1]  # مثال: .png أو .jpg
 
             # إنشاء المسار الكامل للملف القديم والجديد
-            old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), audioSrc)
-            new_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), f"{user_id}_{storyID}{ext}")
+            old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id),'record', recordedaudioSrc)
+            new_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), 'record', f"{user_id}_{storyID}{ext}")
 
+            print(old_name,new_name)
             # تحقق إذا كان الملف القديم موجودًا
             if os.path.exists(old_name):
                 os.rename(old_name, new_name)  # تغيير اسم الملف
                 # تحديث المسار في قاعدة البيانات
-                new_Story.audioSrc = f"audio/users/{user_id}/{user_id}_{storyID}{ext}"
+                new_Story.audioSrc = f"audio/users/{user_id}/record/{user_id}_{storyID}{ext}"
                 db.session.commit()
             else:
                 return jsonify({"response": "Audio file not found.", "file": old_name}), 404
@@ -325,7 +361,8 @@ def update_user_story():
     title = data.get('title', '')
     content = data.get('message', None)  # استلام المصفوفة
     imageSrc = data.get('imageSrc', '')  # اسم الصورة
-    audioSrc = data.get('audioSrc', '')  # اسم الصوت
+    genertedAudiosSrcs = data.get('genertedAudiosSrcs', '')  # صوت كل صفحة
+    recordedaudioSrc = data.get('audioSrc', '')  # اسم الصوت
     user_id = current_user.id
 
 
@@ -344,6 +381,7 @@ def update_user_story():
         else:
             story.title = title
     
+    #### تغيير اسم الملف إذا كانت الصورة موجودة ####
     if imageSrc:
         # استخراج امتداد الملف
         ext = os.path.splitext(imageSrc)[1]  # مثال: .png أو .jpg
@@ -366,17 +404,63 @@ def update_user_story():
             db.session.commit()
         else:
             return jsonify({"response": "Uploaded image not found.", "status": "error"}), 404
+        
+    #### تغيير اسم الملف إذا كان صوت القصص موجود ####
+    editedGenertedAudiosSrcs = []  #مصفوفة لتخزين المسارات الجديدة 
+    # تكرار على جميع أسماء الملفات
+    for index, audio_src in enumerate(genertedAudiosSrcs):
+        if audio_src:  # التحقق إذا كان الاسم غير فارغ
+            pageNum = os.path.splitext(audio_src)[0].split('_')[-1] # استخراج رقم الصفحة
+
+            # إنشاء المسار الكامل للملف القديم والجديد
+            old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), 'story', audio_src)
+            new_name = os.path.join(current_app.root_path,'static/audio/users',str(user_id),'story',f"{user_id}_{story_id}_{pageNum}.mp3")
+
+            print(index,"index")
+            # التحقق من وجود صوت في المصفوفة
+             # التحقق إذا كان هناك ملف موجود في قاعدة البيانات
+            if index < len(story.generAudios) and story.generAudios[index] != "":
+                current_audio_path = os.path.join(current_app.root_path, 'static', story.generAudios[index])
+
+                # استخراج اسم الملف الحالي المخزن في قاعدة البيانات للمقارنة
+                current_db_audio_name = os.path.basename(story.generAudios[index])
+
+                # التحقق إذا كان الاسم الجديد يختلف عن الاسم المخزن
+                if current_db_audio_name != audio_src:
+                    if os.path.exists(current_audio_path):  # إذا كان الملف موجودًا فعليًا
+                        os.remove(current_audio_path)  # حذف الملف القديم
+            else:
+                print(f"Audio not found in database for index {index}")
+
+            print(old_name,new_name)
+            # تحقق إذا كان الملف القديم موجودًا
+            if os.path.exists(old_name):
+                os.rename(old_name, new_name)  # تغيير اسم الملف
+                # تحديث المسار
+                new_Path = f"audio/users/{user_id}/story/{user_id}_{story_id}_{pageNum}.mp3"
+                editedGenertedAudiosSrcs.append(new_Path)  # إضافة المسار الجديد إلى المصفوفة
+            else:
+                return jsonify({"response": "Audio file not found.", "file": old_name}), 404
+        else:
+            # إذا كان الاسم فارغًا، أضفه كما هو في المصفوفة
+            editedGenertedAudiosSrcs.append("")
+
+    # Add The Edited To DataBase
+    story.generAudios = editedGenertedAudiosSrcs
+    db.session.commit()
+    print(editedGenertedAudiosSrcs)
+    # طباعة المسارات الجديدة
 
 
 
-    # تغيير اسم الملف إذا كان الصوت موجود
-    if audioSrc:
+    #### تغيير اسم الملف إذا كان الصوت موجود ####
+    if recordedaudioSrc:
         # استخراج امتداد الملف
-        ext = os.path.splitext(audioSrc)[1]  # مثال: .png أو .jpg
+        ext = os.path.splitext(recordedaudioSrc)[1]  # مثال: .png أو .jpg
 
         # إنشاء المسار الكامل للملف القديم والجديد
-        old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), audioSrc)
-        new_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), f"{user_id}_{story_id}{ext}")
+        old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), 'record', recordedaudioSrc)
+        new_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), 'record',f"{user_id}_{story_id}{ext}")
 
         # تحقق إذا كان الملف القديم موجودًا
         if os.path.exists(new_name):
@@ -385,7 +469,7 @@ def update_user_story():
 
         os.rename(old_name, new_name)  # تغيير اسم الملف
         # تحديث المسار في قاعدة البيانات
-        story.audioSrc = f"audio/users/{user_id}/{user_id}_{story_id}{ext}"
+        story.audioSrc = f"audio/users/{user_id}/record/{user_id}_{story_id}{ext}"
         db.session.commit()
 
     # تحديث بيانات القصة
@@ -499,20 +583,30 @@ def generate_img():
     if not data or 'message' not in data or not data['message']:
         return jsonify({"response": "Invalid request, 'message' is required."}), 400  # توصف تفصيليTrue", "A white duck sleeping peacefully under a tall hazelnut tree in the heart of the forest. The tree is laden with ripe hazelnuts, and one falls gently onto the duck's head. The startled duck wakes up, its feathers fluffed with panic, mistakenly believing a hunter has fired at it. The forest around is serene, with sunlight streaming through the branches, casting soft shadows on the ground."]
 
-    promptAllam = f"""Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
+    promptAllam = f"""Input: استخرج من القصة التفاصيل وصف تفصيلي ، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي متوسط الطول باللغة الإنجليزية فقط.
 القصة: في غابة جميلة غنّاء سمعت الحيوانات صوت شجار غرابين واقفين على غصن شجرة عالِ، فقَدِم الثعلب المكّار وحاول أن يفهم سبب شجارهما، وما إن اقترب أكثر حتى سأل الغرابين: ما بالكما أيها الغرابان؟ فقال أحدهما: اتفقنا على أن نتشارك قطعة الجبن هذه بعد قسمتها بالتساوي، لكنّ هذا الغراب الأحمق يحاول أخذ مقدار يزيد عن نصيبه، فابتسم الثعلب، وقال: إذن ما رأيكما في أن أساعدكما في حل هذه المشكلة، وأقسم قطعة الجبن بينكما بالتساوي؟.
 Output: ["True", "Two black crows perched on a high tree branch, arguing over a piece of cheese. The crows have glossy black feathers, The surrounding forest is lush with green trees, and soft sunlight filters through the branches, creating a lively and peaceful atmosphere in the background."]
 
-Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
+Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي متوسط الطول باللغة الإنجليزية فقط.
 القصة: كان يا مكان في قديم الزمان خهثتبخ ةبن
 Output: ["False"]
 
-Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
+Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي متوسط الطول باللغة الإنجليزية فقط.
 القصة: {data['message']}.
 Output:"""
+#     promptAllam = f"""Input: استخرج من القصة التفاصيل وصف تفصيلي متوسط الطول، قم بوصف شخصية البطل فقط (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية .إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
+# القصة: في غابة جميلة غنّاء سمعت الحيوانات صوت شجار غرابين واقفين على غصن شجرة عالِ، فقَدِم الثعلب المكّار وحاول أن يفهم سبب شجارهما، وما إن اقترب أكثر حتى سأل الغرابين: ما بالكما أيها الغرابان؟ فقال أحدهما: اتفقنا على أن نتشارك قطعة الجبن هذه بعد قسمتها بالتساوي، لكنّ هذا الغراب الأحمق يحاول أخذ مقدار يزيد عن نصيبه، فابتسم الثعلب، وقال: إذن ما رأيكما في أن أساعدكما في حل هذه المشكلة، وأقسم قطعة الجبن بينكما بالتساوي؟.
+# Output: ["True", "The two crows are sleek and striking with their glossy black feathers shimmering under the soft sunlight filtering through the lush forest. Their sharp beaks and alert, beady eyes reflect their frustration as they argue over a piece of cheese. One crow flaps its wings dramatically, while the other stands firmly on the high tree branch, its feathers slightly ruffled. Both are perched against a backdrop of vibrant green leaves and the tranquil atmosphere of the forest, which contrasts with the tension of their quarrel."]
+# Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
+# القصة: كان يا مكان في قديم الزمان خهثتبخ ةبن
+# Output: ["False"]
+
+# Input: استخرج من القصة التفاصيل وصف تفصيلي متوسط الطول، قم بوصف شخصية البطل فقط (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية .إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
+# القصة: {data['message']}.
+# Output:"""
     
     
-    result = generate_AllamResponse(promptAllam, 150) # Get Prompt For Image 
+    result = generate_AllamResponse(promptAllam, 250) # Get Prompt For Image 
     result = ast.literal_eval(result)  # تحويل النص إلى مصفوفة
     global result_cleaned 
     # result =""
@@ -529,7 +623,7 @@ Output:"""
         result_cleaned = result[1]  # Or handle the error as needed
 
     # Send To Colab And Recive Image
-    colab_url = "https://04d9-35-247-139-23.ngrok-free.app/colab-message"  # رابط ngrok من Colab
+    colab_url = "https://d642-34-125-61-194.ngrok-free.app/colab-message"  # رابط ngrok من Colab
     prompt = {"message": f"{result_cleaned}"} # Send Prompt From Allam
     # prompt = {"message": " A white duck is sleeping under a fruitful beech tree in a forest. The tree is filled with beech nuts, and the sunlight filters through the leaves, creating a peaceful and serene atmosphere. Suddenly, a beech nut falls from the tree and lands on the duck's head, waking it up with a start. The duck, initially frightened, realizes that it was just a falling nut and not a hunter's shot."} # Send Prompt From Allam
     # إرسال الطلب إلى Colab
@@ -565,6 +659,64 @@ Output:"""
             return jsonify({"response_from_colab": response_data})
     else:
         return jsonify({"error": f"Failed to send message to Colab, Status Code: {response.status_code}, Content: {response.text}"}), 500
+
+
+# Gnerate Audio
+@views.route('/generate-story-audio', methods=['POST'])
+@login_required
+def generate_audio():
+    data = request.json
+    if not data or 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400
+
+    # إعداد ElevenLabs
+    client = ElevenLabs(api_key="sk_9f4c4bb0168aaeb56465e37fb8f0e118f46994006fc36716")
+
+    # تحويل النص إلى صوت
+    text = data['message'][0]
+    response = client.text_to_speech.convert(
+        voice_id="jBpfuIE2acCO8z3wKNLl",
+        output_format="mp3_44100_128",
+        text=text,
+        model_id="eleven_multilingual_v2",
+    )
+
+    # إنشاء المسار
+    base_dir = os.path.dirname(os.path.abspath(__file__))  # مسار views.py
+    folder_path = os.path.join(base_dir, "static", "audio", "users", str(current_user.id), "story")
+    os.makedirs(folder_path, exist_ok=True)  # إنشاء المجلد إذا لم يكن موجودًا
+
+    audio_path = os.path.join(folder_path, f"{current_user.id}_page{data['message'][1]}.mp3")
+    print("data['message'][1]",data['message'][1])
+
+    # حفظ الصوت
+    try:
+        with open(audio_path, "wb") as audio_file:
+            for chunk in response:
+                audio_file.write(chunk)
+    except Exception as e:
+        return jsonify({"message": f"Error saving audio file: {str(e)}"}), 500
+
+    # إنشاء المسار النسبي
+    relative_audio_path = url_for('static', filename=f"audio/users/{current_user.id}/story/{current_user.id}_page{data['message'][1]}.mp3")
+    # relative_audio_path = url_for('static', filename=f"audio/users/6/6_page0.mp3")
+    print("relative_audio_path",relative_audio_path)
+    # إرجاع الاستجابة
+    return jsonify({"message": "successfully", "audio_path": relative_audio_path})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Upoaded Image
 @views.route('/save-uploaded-img', methods=['POST'])
@@ -608,7 +760,7 @@ def saveRecordedAudio():
         base_dir = os.path.dirname(os.path.abspath(__file__))
         user_id = str(current_user.id)  # الحصول على user id
         audio_filename = f'{user_id}.ogg'  # حفظ الملف باسم المستخدم
-        audio_path = os.path.join(base_dir, 'static', 'audio', 'users', user_id, audio_filename)
+        audio_path = os.path.join(base_dir, 'static', 'audio', 'users', user_id ,'record', audio_filename)
 
         # Ensure the directory exists
         os.makedirs(os.path.dirname(audio_path), exist_ok=True)
@@ -616,7 +768,7 @@ def saveRecordedAudio():
         file.save(audio_path)
 
         # Return relative path for client
-        relative_path = f'/static/audio/users/{user_id}/{audio_filename}'
+        relative_path = f'/static/audio/users/{user_id}/record/{audio_filename}'
         return jsonify({'success': True, 'file_path': relative_path})
 
     return jsonify({'success': False, 'message': 'File not saved'}), 500
@@ -975,4 +1127,3 @@ Output:
         return jsonify({"response": "Error processing request."}), 500
 
     return jsonify({"response": result}), 200  # إرجاع النتيجة بشكل صحيح
-# Audio

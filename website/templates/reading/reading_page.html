@@ -49,6 +49,11 @@
 								<source id="audioSource" src="../../static/{{story.audioSrc[0]}}" type="audio/mpeg">
 								المتصفح الخاص بك لا يدعم عنصر الصوت
 							</audio>
+							{% elif reading_type == "user_stories" %}
+							<audio class="w-75 rounded-4 mt-2" controls controlslist="nodownload noplaybackrate">
+								<source id="audioSource" src="../../static/{{story.generAudios[0]}}" type="audio/mpeg">
+								المتصفح الخاص بك لا يدعم عنصر الصوت
+							</audio>
 						    {% endif %}
 						</div>
 					</section>
@@ -64,7 +69,12 @@
 									<source id="audioSource" src="../../static/{{story.audioSrc[index]}}" type="audio/mpeg">
 									المتصفح الخاص بك لا يدعم عنصر الصوت
 								</audio>
-                            {% endif %}
+							{% elif reading_type == "user_stories" %}
+							<audio class="w-75 rounded-4 mt-2" controls controlslist="nodownload noplaybackrate">
+								<source id="audioSource" src="../../static/{{story.generAudios[index]}}" type="audio/mpeg">
+								المتصفح الخاص بك لا يدعم عنصر الصوت
+							</audio>
+						    {% endif %}
 
                         </div>
                         <div class="back">
@@ -81,7 +91,14 @@
 									<source id="audioSource" src="../../static/{{story.audioSrc[index + 1]}}" type="audio/mpeg">
 									المتصفح الخاص بك لا يدعم عنصر الصوت
 								</audio>
-							  {% endif %}
+								{% endif %}
+							{% elif reading_type == "user_stories" %}
+								{% if index + 1 < story.content|length %}
+								<audio class="w-75 rounded-4 mt-2" controls controlslist="nodownload noplaybackrate">
+									<source id="audioSource" src="../../static/{{story.generAudios[index + 1]}}" type="audio/mpeg">
+									المتصفح الخاص بك لا يدعم عنصر الصوت
+								</audio>
+								{% endif %}
 							{% endif %}
 
                         </div>

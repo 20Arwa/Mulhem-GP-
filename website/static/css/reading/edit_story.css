@@ -1,7 +1,7 @@
 .edit-story-container {
     max-width: 600px;
     margin: auto;
-    background-color: #dbcef6;
+    background: var(--gradient-light);
     padding: 25px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(197, 154, 190, 0.1);

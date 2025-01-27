@@ -29,6 +29,7 @@ class User_stories(db.Model):
     content = db.Column(db.JSON, nullable=True)
     type = db.Column(Enum('قصة مُلهِم', 'كتابة مستقلة', 'قصة معدلة', name='story_types'), nullable=False)
     imgSrc = db.Column(db.String(255), nullable=True)
+    generAudios = db.Column(db.JSON, nullable=True)
     audioSrc = db.Column(db.String(255), nullable=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False) # Foreignkey...جعلنا nullable=False لضمان ارتباط القصة بمستخدم
 

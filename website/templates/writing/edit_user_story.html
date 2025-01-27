@@ -9,7 +9,7 @@
 	</style>
 {% endblock %}
 {% block body %}
-<div class="page-title container mt-5 ">صفحة الكتابة</div>
+<div class="page-title container mt-5 ">صفحة تعديل الكتابة</div>
 <div class="container self-writing edit-user-story mb-5 p-4 py-5 position-relative"  data-story-id="{{story.id}}" data-story-type="{{story.type}}">
 	<div class="book-container position-relative">
 		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
@@ -27,7 +27,7 @@
                             <!-- Cover Image -->
 							<div class="cover-img-container img-container">
                                 {% if story.imgSrc == "" %}
-								    <img class="img cover-img" src=""> 
+								<img class="img cover-img" src=""> 
                                 {% else %}
 								    <img class="img cover-img" src="../../static/{{story.imgSrc}}"> 
                                 {% endif %}
@@ -47,9 +47,16 @@
 							<div class="correction-word" title="انقر للتصحيح"></div>
 							<div class="counter-sound">
 								<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
+								<audio class="story-audio rounded-4" controls controlslist="nodownload noplaybackrate">
+									<source id="audioSource" src="../../static/{{story.generAudios[0]}}" type="audio/mpeg">
+									المتصفح الخاص بك لا يدعم عنصر الصوت
+								</audio>
 							</div>
 							<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-							<button class="correction-btn">صحح أخطائي</button>
+							<div class="corrcet-audio-buttons mt-2">
+								<button class="correction-btn">صحح أخطائي</button>
+								<button class="generate-audio-btn">توليد الصوت</button>
+							</div>
 						</div>
 					</section>
                     <!-- Rest Of Pages -->
@@ -60,9 +67,16 @@
                             <div class="correction-word" title="انقر للتصحيح"></div>
                             <div class="counter-sound">
                                 <div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
+								<audio class="story-audio rounded-4" controls controlslist="nodownload noplaybackrate">
+									<source id="audioSource" src="../../static/{{story.generAudios[index]}}" type="audio/mpeg">
+									المتصفح الخاص بك لا يدعم عنصر الصوت
+								</audio>
                             </div>
                             <span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-                            <button class="correction-btn">صحح أخطائي</button>
+                            <div class="corrcet-audio-buttons mt-2">
+								<button class="correction-btn">صحح أخطائي</button>
+								<button class="generate-audio-btn">توليد الصوت</button>
+							</div>
                         </div>
                         <div class="back">
                             <div class="text fs-5" contenteditable="true">
@@ -73,9 +87,16 @@
                             <div class="correction-word" title="انقر للتصحيح"></div>
                             <div class="counter-sound">
                                 <div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
+								<audio class="story-audio rounded-4" controls controlslist="nodownload noplaybackrate">
+									<source id="audioSource" src="../../static/{{story.generAudios[index + 1]}}" type="audio/mpeg">
+									المتصفح الخاص بك لا يدعم عنصر الصوت
+								</audio>
                             </div>
                             <span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-                            <button class="correction-btn">صحح أخطائي</button>
+                            <div class="corrcet-audio-buttons mt-2">
+								<button class="correction-btn">صحح أخطائي</button>
+								<button class="generate-audio-btn">توليد الصوت</button>
+							</div>
                         </div>
                     </section>						
                     {% endfor %}
@@ -115,7 +136,7 @@
                     <div class="display-voice-record" data-audio-src="{% if story.audioSrc %}../../static/{{ story.audioSrc | safe }}{% else %}""{% endif %}"></div>
                     <div class="d-flex">
                         <div class="controllers-voice-record"></div>
-                    </div>
+                    </div> 
                 </div>
                 
                 
@@ -340,25 +361,33 @@ document.addEventListener('DOMContentLoaded', function () {
 		newPage.innerHTML = `
 			<div class="front">
 				<div class="text" contenteditable="true"></div>
-				<div class="correction-word" title="انقر للتصحيح"></div>
 				<div class="counter-sound">
-					<div class="text-counter">
-						عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span>
-					</div>
+					<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
+					<audio class="story-audio rounded-4" controls controlslist="nodownload noplaybackrate">
+						<source id="audioSource" src="" type="audio/mpeg">
+						المتصفح الخاص بك لا يدعم عنصر الصوت
+					</audio>
 				</div>
 				<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-				<button class="correction-btn">صحح أخطائي</button>
+				<div class="corrcet-audio-buttons mt-2">
+					<button class="correction-btn">صحح أخطائي</button>
+					<button class="generate-audio-btn">توليد الصوت</button>
+				</div>
 			</div>
 			<div class="back">
 				<div class="text" contenteditable="true"></div>
-				<div class="correction-word" title="انقر للتصحيح"></div>
 				<div class="counter-sound">
-					<div class="text-counter">
-						عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span>
-					</div>
+					<div class="text-counter">عدد الأحرف: <span class="charCount">0</span>/<span class="maxLength">500</span></div>
+					<audio class="story-audio rounded-4" controls controlslist="nodownload noplaybackrate">
+						<source id="audioSource" src="" type="audio/mpeg">
+						المتصفح الخاص بك لا يدعم عنصر الصوت
+					</audio>
 				</div>
 				<span class="error-msg text-error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-				<button class="correction-btn">صحح أخطائي</button>
+				<div class="corrcet-audio-buttons mt-2">
+					<button class="correction-btn">صحح أخطائي</button>
+					<button class="generate-audio-btn">توليد الصوت</button>
+				</div>
 			</div>
 		`;
 
@@ -370,6 +399,14 @@ document.addEventListener('DOMContentLoaded', function () {
 			btn.addEventListener("click", (e) => {
 				e.preventDefault(); // منع إعادة تحميل الصفحة
 				allamCorrection(btn); // استدعاء الدالة الخاصة
+			});
+		});
+
+		// Click Generate Audio Button
+		document.querySelectorAll(".page .generate-audio-btn").forEach(btn => {
+			btn.addEventListener("click", (e) => {
+				e.preventDefault(); // منع إعادة تحميل الصفحة
+				generateAudio(btn); // استدعاء الدالة الخاصة
 			});
 		});
 
@@ -605,7 +642,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	
 		// إظهار رسالة التحميل
 		Swal.fire({
-			title: 'جاري إنشاء غلاف القصة...',
+			title: 'جاري توليد غلاف القصة...',
 			text: 'الرجاء الانتظار قليلاً',
 			allowOutsideClick: false,
 			showConfirmButton: false,
@@ -695,8 +732,125 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	
 	
+	
 	// @@@@@@@@@@@ Generate Audio @@@@@@@@@@@
-	//async function sendTextGetAudio() {    }
+	async function generateAudio(button) {
+		const audio = button.parentElement.parentElement.querySelector(".story-audio");
+  		const audioSource = audio.querySelector("source");
+
+		console.log(audio,audioSource)
+		console.log(audio.getAttribute("src"),audioSource.getAttribute("src"))
+		
+		var textElement = button.parentElement.parentElement.querySelector(".text");
+		var corrcErrorMsg = button.parentElement.previousElementSibling;
+		
+		// If Text Is Empty
+		if (textElement.textContent.length == 0) {
+			corrcErrorMsg.innerHTML = "لا يوجد نص لتوليد صوت له، أضف نصاً أولاً"
+			corrcErrorMsg.style.opacity = 1;
+			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// If Text Is Short
+		else if (textElement.textContent.length < 10) {
+			corrcErrorMsg.innerHTML = "القصة قصيرة جدا! حاول كتابة المزيد لتوليد الصوت"
+			corrcErrorMsg.style.opacity = 1;
+			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// If Text Is Not Arabic
+		else if (!arabicRegex.test(textElement.textContent) ) {
+			corrcErrorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
+			corrcErrorMsg.style.opacity = 1;
+			setTimeout(() => {corrcErrorMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		else {
+			corrcErrorMsg.style.opacity = 0; // Remove Error Message
+		}
+		// الكلمات المحظورة
+	 	if (checkForbiddenWords(textElement.textContent)) {
+			return;
+		}
+		// تحقق إذا كان هناك صوت موجود بالفعل
+		if (audioSource.getAttribute("src").trim() != '../../static/' && audioSource.getAttribute("src").trim() != '') {
+			const result = await Swal.fire({
+				title: 'إعادة توليد الصوت',
+				text: 'هل أنت متأكد أنك تريد إعادة توليد الصوت؟ إذا فعلت ذلك، سيتم استبدال الصوت الحالي بصوت جديد.',
+				icon: 'info',
+				showCancelButton: true, // إظهار زر الإلغاء
+				confirmButtonText: 'نعم',
+				cancelButtonText: 'لا',
+				reverseButtons: true // تبديل أماكن أزرار التأكيد والإلغاء
+			});
+	
+			if (!result.isConfirmed) {
+				return; // إذا اختار المستخدم "لا"، توقف
+			}
+		}
+	
+
+		// Get Index Of Current Page Text
+		var allTexts = Array.from(document.querySelectorAll(".page .text"));
+		var index = allTexts.indexOf(textElement);
+
+		console.log(index);
+		// Send To Flask
+		const data = { message: [textElement.textContent,index] };
+	
+		// إظهار رسالة التحميل
+		Swal.fire({
+			title: 'جاري توليد الصوت...',
+			text: 'الرجاء الانتظار قليلاً',
+			allowOutsideClick: false,
+			showConfirmButton: false,
+			didOpen: () => {
+				Swal.showLoading(); // عرض المؤشر الدائري
+			}
+		});
+		try {
+			const response = await fetch('http://127.0.0.1:5000/generate-story-audio', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			});
+			
+			Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+			
+			if (!response.ok) {
+				throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+			}
+			
+			const result = await response.json();
+			console.log(result, "response from server"); // افحص محتوى الاستجابة
+			if (!result.audio_path) {
+				console.error("Audio path is undefined or missing!");
+				return;
+			}
+
+			audioSource.setAttribute("src", `${result.audio_path}?t=${new Date().getTime()}`); // تحديث src في <source>
+			audio.load(); // تحديث <audio> لتحميل المصدر الجديد
+		
+
+		} catch (error) {
+			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+			Swal.fire({
+				title: 'خطأ!',
+				text: error.message,
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
+		}
+	}
+	// Click Generate Audio Button
+	document.querySelectorAll(".page .generate-audio-btn").forEach(btn => {
+		btn.addEventListener("click", (e) => {
+			e.preventDefault(); // منع إعادة تحميل الصفحة
+			generateAudio(btn); // استدعاء الدالة الخاصة
+		});
+	});
+
 
 	
 	// @@@@@@@@@@@ Allam Correction @@@@@@@@@@@
@@ -1235,6 +1389,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (audio) {
 			audioSrc = audio.getAttribute("src").split('?')[0].split('/').pop()
 		}
+
+		// Get All Story Audio Sources
+		var allgenerAudioSources = document.querySelectorAll(".page audio source");
+
+		// Store Audio Sources in an Array
+		var generAudiosArray = []; // تعريف مصفوفة لتخزين النصوص
+		allgenerAudioSources.forEach(audioSource => {
+		// احصل على قيمة src لكل عنصر وقم بمعالجتها
+			let src = audioSource.getAttribute("src").split('?')[0].split('/').pop().trim();
+			generAudiosArray.push(src); // أضف إلى المصفوفة
+		});
 		
 		// Get All Text As One String
 		var AllStory = document.querySelectorAll(".page .text");
@@ -1264,6 +1429,7 @@ document.addEventListener('DOMContentLoaded', function () {
             title: titleText || null,
             imageSrc: imageSrc || "",
             audioSrc: audioSrc || "",
+			genertedAudiosSrcs: generAudiosArray || "", 
             message: fullStoryArray || ""
         };
         
@@ -1283,6 +1449,17 @@ document.addEventListener('DOMContentLoaded', function () {
 		if (audio) {
 			audioSrc = audio.getAttribute("src").split('?')[0].split('/').pop()
 		}
+
+		// Get All Story Audio Sources
+		var allgenerAudioSources = document.querySelectorAll(".page audio source");
+
+		// Store Audio Sources in an Array
+		var generAudiosArray = []; // تعريف مصفوفة لتخزين النصوص
+		allgenerAudioSources.forEach(audioSource => {
+		// احصل على قيمة src لكل عنصر وقم بمعالجتها
+			let src = audioSource.getAttribute("src").split('?')[0].split('/').pop().trim();
+			generAudiosArray.push(src); // أضف إلى المصفوفة
+		});
 		
 		// Get All Text
 		var AllStory = document.querySelectorAll(".page .text");
@@ -1331,6 +1508,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         title: title.value || null,
                         imageSrc: imageSrc || "",
                         audioSrc: audioSrc || "",
+						genertedAudiosSrcs: generAudiosArray || "", 
                         message: fullStoryArray || ""
                     };
                     

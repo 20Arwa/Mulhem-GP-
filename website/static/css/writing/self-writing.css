@@ -143,8 +143,14 @@
 .page .text:focus {
   outline: none;
 }
+.page .corrcet-audio-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+}
 .page .correction-btn {
-  margin: 10px auto 0;
+  /* margin: 10px auto 0; */
 }
 /* Correcting Words */
 .page .text .error-word {
@@ -171,10 +177,21 @@
     align-items: center;
     margin: 10px 0 2px;
 }
+/* إذا كان السورس موجودًا ولكنه فارغ */
+.page .counter-sound audio source[src=""] {
+  opacity: 1; /* التنسيق عندما يكون src فارغًا */
+}
+
+/* إذا كان السورس يحتوي على قيمة (ليس فارغًا) */
+.page .counter-sound audio source[src]:not([src=""]) {
+  opacity: 0; /* التنسيق عندما يكون src يحتوي على قيمة */
+}
+
+
 .page .text-counter {
   opacity: 0;
   height: 20px;
-  width: 160px;
+  width: 190px;
   text-align: right;
   font-size: 16px;
   color: var(--font-4);
