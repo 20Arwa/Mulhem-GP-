@@ -6,7 +6,8 @@
     --main-very-dark: #7b4e97;
     --main-light: #dbcef6;
     --gradient-dark: linear-gradient(to bottom, #7b5ba6, #b391d6 100%);
-    --gradient-light: linear-gradient(to bottom left, #dbcef6, #c9b4e9, #a58ed4 160%);;
+    --gradient-light: linear-gradient(to bottom left, #dbcef6, #c9b4e9, #a58ed4 160%);
+    --gradient-button: linear-gradient(to bottom right, #c5a7e1, #b391d6, #9f7dc3 160%);;
     --font-1: white; 
     --font-2: #9E887F;
     --font-3: #7b5ba6;
@@ -70,7 +71,7 @@ audio {
   background: var(--gradient-dark);
 }
 nav {
-    font-size: 18px;
+    font-size: 16px;
     background-color: transparent;
     color: var(--font-1);
 }
@@ -89,7 +90,7 @@ nav .navbar-brand img {
   height: 75px;
 }
 nav .navbar-nav li  {
-    margin: 0 4px;
+    margin: 0 2px;
   }
 nav .navbar-nav li a {
     color: rgba(255,255,255, 0.65);
@@ -154,7 +155,7 @@ nav .sign-log .profile button:hover {
 }
 .main-button {
     color: var(--font-1);
-    background-color: var(--main-dark); 
+    background: var(--gradient-button); 
     border: 2px solid transparent;
 }
 .main-button:hover {
@@ -311,6 +312,9 @@ footer a {
   color: var(--font-3);
   padding-top: 10px;
 }
+.swal2-popup .swal2-actions {
+  flex-direction: row-reverse;
+}
 .swal2-popup .swal2-confirm, 
 .swal2-popup .swal2-cancel {
   padding: 8px 13px;
@@ -360,6 +364,19 @@ footer a {
   }
 }
 /* Copyright (c) 2024 by Coran Spicer (https://codepen.io/cgspicer/pen/AXjZxa) */
+
+/* الشرح اللي يطلع عند الهوفر على الازرار */
+.custom-tooltip {
+  --bs-tooltip-bg: var(--font-1);
+  --bs-tooltip-color: var(--font-3);
+  /* --bs-tooltip-font-size: 15px; */
+  --bs-tooltip-font-weight: bold;
+}
+/* الشرح اللي يطلع عند الضغط على الازرار */
+.popover-body {
+  padding: 5px;
+}
+
 
 
 /* Right Answer Effect */

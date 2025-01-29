@@ -47,7 +47,7 @@
                     <div class="question">
                         <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>شخصيات القصة هم <span class="fw-bold">(يوجد خيارين)</span>:</h6>
                         <div class="options">
-                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="bottom" data-bs-content="هذه الشخصية غير موجودة في القصة">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>النبتة جميلة
                             </button>
                             <div class="confetti-right confetti-click">
@@ -159,7 +159,7 @@
                                     <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>       
                                 </div>
                                 <div class="square rabbit position-absolute"></div>
-                                <div class="square wrong-button fox position-absolute"></div>
+                                <div class="square wrong-button fox position-absolute" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="الثعلب ليس الشخصية الرئيسية في القصة"></div>
                             </div>
                             <div>
                                 <p>لقد اخترت: <button class="button bg-white mt-2 px-3" disabled>الأرنب</button></p>
@@ -170,7 +170,7 @@
                             <div class="answer position-relative">
                                 <img class="rounded-4" src="../../static/images/activity_rabbit_fox.jpg" alt="rabbit and fox">
                                 <div class="square fox position-absolute"></div>
-                                <div class="square rabbit wrong-button position-absolute"></div>
+                                <div class="square rabbit wrong-button position-absolute" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="الأرنب ليس الشخصية الثانوية في القصة"></div>
                             </div>
                             <div>
                                 <p>لقد اخترت: <button class="button bg-white mt-2 px-3" disabled>الأرنب</button></p>
@@ -262,7 +262,7 @@
                                         <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
                                         <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>       
                                     </div>
-                                    <button class="wrong wrong-button button main-button m-1 " onclick="optionClick(this)">
+                                    <button class="wrong wrong-button button main-button m-1 " onclick="optionClick(this)" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="القنفذ ليس لديه أجنحة ولا ريش">
                                         <i class="fa-solid fa-lightbulb ms-1"></i>لديه جناحان وريش أزرق
                                     </button>
                                 </div>
@@ -290,7 +290,7 @@
                             <div class="question">
                                 <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>كيف يبدو شكل الأرنب فرفور؟</h6>
                                 <div class="options">
-                                    <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                    <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)" data-bs-container="body" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="الأرنب ليس لديه أجنحة">
                                         <i class="fa-solid fa-lightbulb ms-1"></i>لديه أجنحة ملونة
                                     </button>
                                     <div class="confetti-right confetti-click">
@@ -344,23 +344,55 @@
                         المتصفح الخاص بك لا يدعم عنصر الصوت
                     </audio>
                 </div>
-                <a href="../activities/all_activities" class="go-back"><button class="btn button main-button">ارجع للأنشطة</button></a>
+                <!-- <a href="../activities/all_activities" class="go-back"><button class="btn button main-button">ارجع للأنشطة</button></a> -->
                 <div class="allQues-error-msg mt-3 text-danger">قم بالإجابة على جميع الأسئلة لإنهاء النشاط</div>
             </div>
         </div>
-        <button class="carousel-control-prev h-50 top-50 translate-middle-y" type="button" id="carouselPrev"  data-bs-target="#carouselCaracthers" data-bs-slide="prev">
+        <button class="carousel-control-prev h-50 top-50 translate-middle-y" type="button" id="carouselPrev"  data-bs-target="#carouselCaracthers" data-bs-slide="prev"  data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط للانتقال إلى الجزء السابق">
             <i class="fa-regular fa-circle-right"></i>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next h-50 top-50 translate-middle-y" type="button" id="carouselNext" data-bs-target="#carouselCaracthers" data-bs-slide="next">
+        <button class="carousel-control-next h-50 top-50 translate-middle-y" type="button" id="carouselNext" data-bs-target="#carouselCaracthers" data-bs-slide="next" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط للانتقال إلى الجزء التالي">
             <i class="fa-regular fa-circle-left"></i>
             <span class="visually-hidden">Next</span>
         </button>
+    </div>
+    <div class="back-activities text-start mt-4"> 
+        <button class="back-activities-btn button main-button text-start"><i class="fa-solid fa-arrow-right-from-bracket"></i>  الرجوع للأنشطة</button>
     </div>
 </div>
 {% endblock %}
 {% block script %}
 <script>
+    // Click On Back To Activites
+    document.querySelector(".back-activities-btn").addEventListener("click", () => {
+        // Check if at least one question is answered
+        if (
+            Array.from(document.querySelectorAll(".section-1 .small-activity .question button")).some(button => button.classList.contains("active-right") || button.classList.contains("active-wrong")) ||
+            Array.from(document.querySelectorAll(".section-3 .small-activity .question .answer img")).some(img => img.classList.contains("active-right") || img.classList.contains("active-wrong")) ||
+            Array.from(document.querySelectorAll(".section-4 .small-activity .question button")).some(button => button.classList.contains("active-right") || button.classList.contains("active-wrong")) ||
+            Array.from(document.querySelectorAll(".section-4 .small-activity .question input[type='text']")).some(input => input.classList.contains("active-right") || input.classList.contains("active-wrong"))
+        ){
+            Swal.fire({
+                title: 'مغادرة النشاط',
+                text: "إذا غادرت الآن، قد تفقد إجاباتك الحالية. هل أنت متأكد أنك تريد المغادرة؟",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'نعم',
+                cancelButtonText: 'لا، أود إكمال النشاط',
+                reverseButtons: true // Swaps the position of confirm and cancel buttons
+            }).then(async (result) => { // تأكد من جعل الدالة داخل then متزامنة
+                if (result.isConfirmed) {
+                        window.location.href = '/activities/all_activities';
+                    }
+                })
+            }
+            else {
+                window.location.href = '/activities/all_activities';
+            }
+    })
+
+
     const myCarousel = document.querySelector('#carouselCaracthers');
     const carousel = new bootstrap.Carousel(myCarousel, {
         wrap: false // Stops Going Back To First Section
@@ -370,6 +402,14 @@
     const prevButton = document.querySelector('#carouselPrev');
     prevButton.style.display = 'none';
     myCarousel.addEventListener('slid.bs.carousel', (event) => {
+        // Hide Tooltips
+        var tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        // التكرار على كل عنصر تولتيب وإخفاؤه
+        tooltips.forEach(function (tooltipTriggerEl) {
+            var tooltipInstance = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
+                tooltipInstance.hide(); // إخفاء التولتيب
+        });
+
         const totalItems = document.querySelectorAll('#carouselCaracthers .carousel-item').length; // Number Of Items
         const currentIndex = event.to; // Current Item
         // Hide Prev Button If User In First Item
@@ -394,13 +434,13 @@
                     bigConfetti(); // Turn On Big Confitte
                     document.querySelector(".section-5 .allQues-error-msg").style.opacity = 0;
                     // Enable Go Back To Activiy Button 
-                    document.querySelector(".section-5 .go-back").style.opacity = '100%'; 
-                    document.querySelector(".section-5 .go-back").setAttribute("href", "../activities/all_activities");
+                    //document.querySelector(".section-5 .go-back").style.opacity = '100%'; 
+                    //document.querySelector(".section-5 .go-back").setAttribute("href", "../activities/all_activities");
                 }
                 else {
                 // Disable Go Back To Activiy Button 
-                document.querySelector(".section-5 .go-back").style.opacity = '50%';
-                document.querySelector(".section-5 .go-back").setAttribute("href", "#");
+               // document.querySelector(".section-5 .go-back").style.opacity = '50%';
+                //document.querySelector(".section-5 .go-back").setAttribute("href", "#");
                 // Show Error Message In Last Item
                 document.querySelector(".section-5 .allQues-error-msg").style.opacity = 1;
             }

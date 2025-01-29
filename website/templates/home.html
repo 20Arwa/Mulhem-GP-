@@ -13,30 +13,31 @@
   <div class="content container d-flex justify-content-between">
 
     <!-- Text -->
-    <div class="text thought w-50">
-      <!-- If User Logged In -->
-      {% if user.is_authenticated %}
+    <!-- If User Logged In -->
+    {% if user.is_authenticated %}
+      <div class="text thought w-50">
         {% if user.gender == "أنثى"%}
-        <h2 class="mb-4 mt-2">مرحبًا بكِ مجددًا يا {{user.first_name}}</h2>
+        <h2 class="mb-4 mt-2">مرحبًا بكِ يا {{user.first_name}} في عالم <span>مُلهِم</span>!</h2>
+        <p class="w-75 mx-auto"><p> استمتعي بكتابة قصصك، تطوير مهاراتكِ الإبداعية، <br>واكتشاف عالم القراءة وأنشطة الكتابة الممتعة.<br> قصتكِ بانتظار أن تُكتب!</p></p>
         {% else %}
-        <h2 class="mb-4 mt-2">مرحبًا بكَ مجددًا يا {{user.first_name}}</h2>
+        <h2 class="mb-4 mt-2">مرحبًا بك يا {{user.first_name}} في عالم <span>مُلهِم</span>!</h2>
+        <p class="w-75 mx-auto"><p> استمتع بكتابة قصصك، تطوير مهاراتك الإبداعية، <br>واكتشاف عالم القراءة وأنشطة الكتابة الممتعة.<br> قصتك بانتظار أن تُكتب!</p></p>
         {% endif %}
-      <p class="w-75 mx-auto">سعيد بعودتك إلى عالم <span>مُلهِم</span>. انطلق في رحلتك الإبداعية، واستمتع بتطوير مهاراتك، وعِش تجربة ممتعة في عالم الكتابة والقصص.</p>
-
-
+      </div>
+      
+      
       <!-- If User Not Logged In -->
       {% else %}
-      <!-- <h2>مرحبا بك في موقعنا مُلهِمْ , حيث تتحول أفكارك إلى قصص تُحكى</h2> -->
-      <h2 class="mb-4 mt-2">مرحبا بك في موقعنا <span>مُلهِم</span></h2>
-      <!-- <p>أنا <span>مُلهِم</span>، هنا لأساعدك على استكشاف متعة الكتابة والإبداع. استعد للانطلاق في رحلة تعليمية ممتعة حيث يمكنك تطوير مهاراتك في الكتابة واكتشاف قصص جديدة.</p> -->
-      <p>أنا <span>مُلهِم</span> هنا لأساعدك على استكشاف متعة الكتابة والإبداع.</p>
-      <p class="mb-2">سجل دخولك الآن لتبدأ رحلتك الإبداعية!</p>
-      <div class="account-buttons">
-        <a href="{{ url_for('auth.signUp') }}"><button type="button" class="button main-button ms-1">إنشاء حساب</button></a>
-        <a href="{{ url_for('auth.login') }}"><button type="button" class="button main-button">تسجيل الدخول</button></a>
+      <div class="text thought un-loged w-50">
+        <h2 class="mb-4 mt-2">مرحبا بك في عالم <span>مُلهِم</span></h2>
+        <p class="descrip">أنا <span>مُلهِم</span>، دليلك إلى عالم الكتابة والإبداع! هنا يمكنك استكشاف قصص مشوقة ومتنوعة، تحويل أفكارك إلى حكايات رائعة، وتعلّم أساسيات الكتابة بأسلوب ممتع وسهل.</p>      
+        <p class="mb-2">سجل دخولك الآن لتبدأ رحلتك الإبداعية!</p>
+        <div class="account-buttons">
+          <a href="{{ url_for('auth.signUp') }}"><button type="button" class="button main-button ms-1">إنشاء حساب</button></a>
+          <a href="{{ url_for('auth.login') }}"><button type="button" class="button main-button">تسجيل الدخول</button></a>
+        </div>
       </div>
       {% endif %}
-    </div>
 
 
 
@@ -57,7 +58,14 @@
 
   <div class="line-container mb-3">
     <div class="line"></div>
-    <span class="line-text"> اقرأ القصص وعدّلها</span>
+
+    
+    {% if user.is_authenticated and user.gender == "أنثى" %}
+      <span class="line-text"> اقرئي القصص وعدّليها</span>
+      {% else %}
+      <span class="line-text"> اقرأ القصص وعدّلها</span>
+    {% endif %}
+
     <div class="line"></div>
   </div>
   
@@ -80,7 +88,11 @@
   <div class="story-box">
     <a href="../reading/our_library" target="_blank">
         <img class="img-icon" src="/static/images/open-book.png" alt=" اقرأ المزيد "  height="270px"  width="250px"   max-width="100%" >
-        <p>اقرأ المزيد </p>
+        {% if user.is_authenticated and user.gender == "أنثى" %}
+          <p>اقرئي المزيد </p>
+          {% else %}
+          <p>اقرأ المزيد </p>
+        {% endif %}
     </a>
   </div>
   </div>
@@ -104,7 +116,7 @@
     <a href="../activities/all_activities" target="_blank">
       
         <img class="img-icon" src="/static/images/teacher1.png" alt=" دروس الكتابة"  height="270px"  width="250px"  >
-        <p>لنتعلم معاً</p>
+        <p>لنتعلم أنشطة الكتابة معاً</p>
     </a>
   </div> 
   
@@ -113,15 +125,23 @@
   
   <div class="story-box">
     <a href="/writing/story-generator" target="_blank">
-      <img class="img-icon" src="/static/images/publishing.png" alt="  انشاء قصة "    height="270px"  width="250px"   max-width="100%" >
+      <img class="img-icon" src="/static/images/generate-icon.png" alt="  انشاء قصة "    height="270px"  width="250px"   max-width="100%" >
+      {% if user.is_authenticated and user.gender == "أنثى" %}
+      <p> دع مُلهِم يكتب لكِ قصة </p>
+      {% else %}
       <p> دع مُلهِم يكتب لك قصة </p>
+      {% endif %}
     </a>
   </div>
   
   <div class="story-box">
     <a href="/writing/self-writing" target="_blank">
         <img class="img-icon" src="/static/images/writing.png" alt="أبدع واكتب قصة "  height="270px"  width="250px"   max-width="100%" >
+        {% if user.is_authenticated and user.gender == "أنثى" %}
+        <p>أبدعي واكتبي قصة </p>
+        {% else %}
         <p>أبدع واكتب قصة </p>
+        {% endif %}
     </a>
   </div>
    

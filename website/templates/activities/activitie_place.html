@@ -304,7 +304,7 @@
                                 <li class="option" data-target="park"> <button class="button main-button m-1">في الحديقة</button></li>
                                 <li class="option" data-target="pstan"> <button class="button main-button m-1">في بستان مزرعته</button></li>
                                 <li class="option" data-target="sea"> <button class="button main-button m-1">على الشاطئ</button></li>
-                            </ul>
+                            </ul> 
                         </div>
                         <!-- 2 -->
                         <h5 class="my-2 mt-5"> 
@@ -334,21 +334,17 @@
                     </div>
                 </div>
             </div>
-                
-
-
-
         </div>
 
 
-            <button class="carousel-control-prev" type="button" id="carouselPrev1"  data-bs-target="#carousel1" data-bs-slide="prev">
-                <i class="fa-regular fa-circle-right"></i>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button class="carousel-control-next" type="button" id="carouselNext1" data-bs-target="#carousel1" data-bs-slide="next">
-                <i class="fa-regular fa-circle-left"></i>
-                <span class="visually-hidden">Next</span>
-            </button>
+        <button class="carousel-control-prev" type="button" id="carouselPrev1"  data-bs-target="#carousel1" data-bs-slide="prev">
+            <i class="fa-regular fa-circle-right"></i>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" id="carouselNext1" data-bs-target="#carousel1" data-bs-slide="next">
+            <i class="fa-regular fa-circle-left"></i>
+            <span class="visually-hidden">Next</span>
+        </button>
 
     </div>
 
@@ -358,11 +354,7 @@
         <div class="modal-dialog">
             <div class="modal-content align-items-center text-center">
                 <div class="modal-header">
-                    <h2 class="modal-title fs-3 d-flex align-items-center" id="exampleModalLabel">
-                        <!-- <i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i> -->
-                        تهانينا
-                        <!-- <i class="fa-solid fa-star fs-5 me-1" style="color: #FFD43B;"></i> -->
-                    </h2>
+                    <h2 class="modal-title fs-3 d-flex align-items-center" id="exampleModalLabel">تهانينا</h2>
                 </div>
                 <div class="modal-body">🌟 لقد انتهيت من النشاط بنجاح.🌟<br>المكان والزمان هما أساس كل قصة رائعة! المكان يجعل الأحداث تبدو حقيقية ومليئة بالحياة، والزمان يساعدنا نفهم متى تحدث الأشياء. عندما تختار المكان والزمان بعناية، تصبح قصتك ممتعة ومليئة بالإثارة للقارئ!</div>
                 <a href="../activities/all_activities" class="mb-4 mt-3"><button type="button" class="btn button main-button" data-bs-dismiss="modal">ارجع للأنشطة</button></a>
@@ -370,11 +362,41 @@
         </div>
     </div>
 
+    <div class="back-activities text-start mt-3"> 
+        <button class="back-activities-btn button main-button text-start"><i class="fa-solid fa-arrow-right-from-bracket"></i>  الرجوع للأنشطة</button>
+    </div>
 
 </div>
 {% endblock %}
 {% block script %}
 <script>
+    // Click On Back To Activites
+    document.querySelector(".back-activities-btn").addEventListener("click", () => {
+        // Check if at least one question is answered
+        if (
+            Array.from(document.querySelectorAll(".options button")).some(button => button.classList.contains("active-right") || button.classList.contains("active-wrong")) ||
+            Array.from(document.querySelectorAll(".quiz-wrapper .target")).some(img => img.classList.contains("active-right") || img.classList.contains("active-wrong")) 
+       ){
+            Swal.fire({
+                title: 'مغادرة النشاط',
+                text: "إذا غادرت الآن، قد تفقد إجاباتك الحالية. هل أنت متأكد أنك تريد المغادرة؟",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'نعم',
+                cancelButtonText: 'لا، أود إكمال النشاط',
+                reverseButtons: true // Swaps the position of confirm and cancel buttons
+            }).then(async (result) => { // تأكد من جعل الدالة داخل then متزامنة
+                if (result.isConfirmed) {
+                        window.location.href = '/activities/all_activities';
+                    }
+                })
+            }
+            else {
+                window.location.href = '/activities/all_activities';
+            }
+    })
+
+
 // @@@@@@@@@@@@@@@@@@@@@@@@ Start Text 1 @@@@@@@@@@@@@@@@@@@@@@@@
     var modal = new bootstrap.Modal(document.getElementById('modal'));
 
@@ -413,7 +435,6 @@
             Array.from(document.querySelectorAll(".options button.right")).every(button => button.classList.contains("active-right")) &&
             Array.from(document.querySelectorAll(".quiz-wrapper .target")).every(button => button.classList.contains("active-right"))
             ) {
-                console.log("dfknskfn")
                 allTrue = true;
                 modal.show();
             bigConfetti(); // Show Confetti

@@ -4,8 +4,19 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/writing/story-generator.css')  }}">
 {% endblock %}
 {% block body %}
+  <div class="create-story-container my-5 position-relative">
+    <!-- Description -->
+    <div class="create-story-descrip p-3 rounded-4 text-right d-flex align-items-center position-absolute top-50 start-100 translate-middle">
+      <img class="mulhem" src="../../static/images/mulhem-write.png" alt="ملهم">
+      {% if user.gender == "أنثى"%}
+      <p class="mb-0">كل ما عليكِ فعله هو إدخال عناصر القصة التي ترغبين بها، وسأقوم بكتابة قصة رائعة لكِ!</p>
+      {% else %}
+      <p class="mb-0">كل ما عليك فعله هو إدخال عناصر القصة التي ترغب بها، وسأقوم بكتابة قصة رائعة لك!</p>
+      {% endif %}
+    </div>
+    <!-- Description -->
+    
 
-  <div class="create-story-container my-5">
     <h1 class="story-title">إنشاء قصة</h1>
     <form id="storyForm">
       <label class="story-label">الشخصيات:</label>
@@ -21,24 +32,9 @@
 
       <label class="story-label">المكان:</label>
       <input type="text" name="place" id="place" class="story-input-select" maxlength="200">
-      <!-- <select id="place" class="story-input-select">
-        <option value="">اختر المكان...</option>
-        <option value="البيت">البيت</option>
-        <option value="الحديقة">الحديقة</option>
-        <option value="المدرسة">المدرسة</option>
-        <option value="قرية">قرية</option>
-        <option value="غابة">غابة</option>
-        <option value="بلدة">بلدة</option>
-      </select> -->
-      
+  
       <label class="story-label">الزمان:</label>
       <input type="text" name="time" id="time" class="story-input-select" maxlength="200">
-      <!-- <select id="time" class="story-input-select">
-        <option value="">اختر الزمان...</option>
-        <option value="الصباح">الصباح</option>
-        <option value="المساء">المساء</option>
-        <option value="الظهر">الظهر</option>
-      </select> -->
 
       <div class="story-spacing"></div>
 
@@ -49,13 +45,7 @@
       <textarea id="solution" class="story-input-text" maxlength="800" placeholder="كيف ستنتهي القصة..."></textarea>
 
       <div class="error-msg text-center">يجب إدخال النصوص باللغة العربية فقط</div>
-      <!-- زر "أنشئ القصة" -->
-       <div class="d-flex align-items-center">
-         <div class="img-holder position-relative">
-           <img class="mulhem position-absolute" src="../../static/images/mulhem-write.png" alt="ملهم">
-          </div>
-          <button type="button" class="story-btn-main" onclick="submitStory()">أنشئ القصة</button>
-       </div>
+      <button type="button" class="story-btn-main" onclick="submitStory()">أنشئ القصة</button>
     </form>
   </div>
 

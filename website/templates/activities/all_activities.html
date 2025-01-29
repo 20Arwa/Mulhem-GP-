@@ -21,9 +21,11 @@
                 <div class="img-holder position-relative">
                     <img class="mulhem position-absolute" src="../../static/images/mulhem-explain.png" alt="ملهم">
                 </div>
-                <div class="text">
-                    <h4 class="my-0 text-end">{{activity.title}}</h4>
-                    <p class="my-4 text-end">{{activity.description}}</p>
+                <div class="text d-flex flex-column justify-content-evenly">
+                    <div>
+                        <h4 class="my-0 text-end">{{activity.title}}</h4>
+                        <p class="my-4 text-end">{{activity.description}}</p>
+                    </div>
                     <a href="{{activity.exercisesPath}}" class="start-container w-25 d-flex justify-content-around align-items-center mx-auto button main-button">
                         <button class="border-0 bg-transparent">إبدأ</button>
                     </a>

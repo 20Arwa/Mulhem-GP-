@@ -64,10 +64,12 @@
 .carousel .carousel-control-prev {
     right: -50px !important;
     left: auto !important;
+    height: 60px !important;
 }
 .carousel .carousel-control-next {
     left: -50px !important;
     right: auto !important;
+    height: 60px !important;
 }
 .carousel .carousel-control-next i,
 .carousel .carousel-control-prev i {
@@ -140,6 +142,34 @@ i.text-sound:hover {
     opacity: 100%;
 }
 
+/* @@@@@@@@@@@@@ Go Back To Activites Button @@@@@@@@@@@@@ */
+.back-activities {
+    margin-bottom: -15px;
+    margin-left: -15px;
+}
+.back-activities-btn {
+    font-weight: 500;
+    padding: 4px 10px;
+    border: 2px solid transparent;
+    background: var(--main-very-dark);
+}
+.back-activities-btn:hover {
+    font-size: 16px;
+    background: var(--main-very-dark);
+}
+.back-activities-btn i {
+    margin-left: 2px;
+    transition: var(--transition-seconds);
+}
+.back-activities-btn:hover i {
+    font-size: 18px;
+    margin-left: 4px;
+}
+
+/* @@@@@@@@@@@@@ PopOver On Wronge Ansers @@@@@@@@@@@@@ */
+.popover-body {
+    color: #ff2323;
+}
 
 
 /* @@@@@@@@@@@@@ activity_1 Page @@@@@@@@@@@@@ */
@@ -231,17 +261,17 @@ i.text-sound:hover {
     opacity: 1;
 }
 /* Modal */
-.activity_1 .modal .modal-content {
+.modal .modal-content {
     margin-top: 5.75rem !important;
     color: var(--font-3);
-    border: 3px solid var(--font-3);
-    background-color: white;
+    border: 3px solid var(--font-3) !important;
+    background-color: white !important;
 }
-.activity_1 .modal .modal-content .modal-header {
+.modal .modal-content .modal-header {
     width: 100%;
     padding: 10px 0;
-    color: var(--font-1);
-    background-color: var(--main-dark);
+    color: var(--font-1) !important;
+    background-color: var(--main-dark) !important;
     justify-content: space-around;
 }
 /* End Style activity_1 Page */
@@ -462,6 +492,12 @@ i.text-sound:hover {
 .activity_2_exer1 .form-floating textarea:focus-visible {
     outline-color: var(--main-dark);
 }
+.activity_2_exer1 .small-activity  {
+    border: 2px solid var(--main-very-dark);
+}
+.activity_2_exer1 .back-activities  {
+    margin-bottom: 0;
+}
 /* @@@@@@@@@@@@@ reasons activity @@@@@@@@@@@@@ */
 .reasons_activiy {
     margin-top: 3rem !important;
@@ -473,9 +509,9 @@ i.text-sound:hover {
     background-color: #dbcef6;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     border-radius: 8px;
-  }
-  
-  .plac-container .addr {
+}
+
+.plac-container .addr {
     color: #ffffff;
     text-align: center;
   }
@@ -486,33 +522,32 @@ i.text-sound:hover {
     background-color: #f5edf5;
     border-radius: 45px;
     text-align: center;
-  }
-  
-  .plac-container .story {
+}
+
+.plac-container .story {
     text-align: right;
-  }
-  
-  .plac-container .hidden {
+}
+
+.plac-container .hidden {
     padding: 10px;
-    /* display: none; */
-   
-  }
-  .plac-container .Story-place-time{
+    
+}
+.plac-container .Story-place-time{
     color: #502c66;
-  }
+}
   
-  .plac-container .story-content {
+.plac-container .story-content {
     display: flex;
     align-items: flex-start;
     gap: 10px;
     text-align: center;
     color: #502c66;
     padding: 10px;
-      border: 2px solid #ece4ec;
-      border-radius: 10px;
-  }
-  
-  .plac-container .story-content img {
+    border: 2px solid #ece4ec;
+    border-radius: 10px;
+}
+
+.plac-container .story-content img {
     width: 150px;
     height: 150px;
     image-rendering: crisp-edges;
@@ -520,54 +555,54 @@ i.text-sound:hover {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     margin-bottom: 10px;
   }
-
+  
   .plac-container .time-questions {
-    margin-bottom: 20px;
-  }
-  
-  .plac-container .drag-container {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-
-  .drag-container-1 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    margin-bottom: 20px;
-    text-align: center;
-    align-items: center;
-  }
-  
-  .plac-container .dropzone {
-    width: 200px;
-    height: 40px;
-    border: 2px dashed #b391d6;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: #f4f4f4;
-    transition: background-color 0.3s;
-  }
-  
-  .plac-container .dropzone.success {
-    background-color: #e4cfe9;
-   
-  }
-  
-  .plac-container .draggable {
-    padding: 5px 10px;
-    background-color: #b391d6;
-    border-radius: 10px;
-    cursor: grab;
-    display: inline-block;
-   
-  }
-  
+      margin-bottom: 20px;
+    }
+    
+    .plac-container .drag-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    
+    .drag-container-1 {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+        text-align: center;
+        align-items: center;
+    }
+    
+    .plac-container .dropzone {
+        width: 200px;
+        height: 40px;
+        border: 2px dashed #b391d6;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #f4f4f4;
+        transition: background-color 0.3s;
+    }
+    
+    .plac-container .dropzone.success {
+        background-color: #e4cfe9;
+        
+    }
+    
+    .plac-container .draggable {
+        padding: 5px 10px;
+        background-color: #b391d6;
+        border-radius: 10px;
+        cursor: grab;
+        display: inline-block;
+        
+    }
+    
   .plac-container .draggable:hover {
     background-color: #e4cfe9;
   }
@@ -580,9 +615,9 @@ i.text-sound:hover {
     background-color: #b391d6;
     cursor: pointer;
     transition: background-color 0.3s;
-  }
-  
-  .plac-container .choices button:hover {
+}
+
+.plac-container .choices button:hover {
     background-color: #bbb;
   }
   
@@ -594,76 +629,76 @@ i.text-sound:hover {
   
   /* تصميم الإجابة الخاطئة */
   .plac-container .choices button.wrong {
-    background-color: #944343;
-    color: #fff;
-  }
+      background-color: #944343;
+      color: #fff;
+    }
+    
+    
+    .plac-container .plac-container .navigation {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
   
-  
-  .plac-container .plac-container .navigation {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .plac-container .plac-container .navigation button {
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: #7b4e97;
-    color: #fff;
-    transition: background-color 0.3s;
-  }
-  
-  .plac-container .plac-container .navigation button:hover {
-    background-color: #7b4e97;
-  }
-  /* تصميم صندوق الإجابة */
-  .plac-container .plac-container .dropzone {
-    width: 150px;
-    height: 40px;
-    border: none;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    background-color: #fff;
-    transition: background-color 0.3s ease;
-   
-  
-  }
-  
-  /* عند الإجابة الصحيحة */
-  .plac-container .plac-container .dropzone.success {
+    .plac-container .plac-container .navigation button {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        background-color: #7b4e97;
+        color: #fff;
+        transition: background-color 0.3s;
+    }
+    
+    .plac-container .plac-container .navigation button:hover {
+        background-color: #7b4e97;
+    }
+    /* تصميم صندوق الإجابة */
+    .plac-container .plac-container .dropzone {
+        width: 150px;
+        height: 40px;
+        border: none;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        background-color: #fff;
+        transition: background-color 0.3s ease;
+        
+        
+    }
+    
+    /* عند الإجابة الصحيحة */
+    .plac-container .plac-container .dropzone.success {
     background-color: #567854;
   }
   
   /* عند الإجابة الخاطئة */
   .plac-container .plac-container .dropzone.error {
     background-color: #944343;
-  }
-  
-  /* تصميم صندوق النهاية */
-  .plac-container .plac-container #end {
+}
+
+/* تصميم صندوق النهاية */
+.plac-container .plac-container #end {
     text-align: center;
     padding: 20px;
     background-color: #fafafa;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  .plac-container .endTime{
+}
+
+.plac-container .endTime{
     color: #a5b86e;
     margin-bottom: 15px;
-  }
-  
-  .plac-container .endPlace {
+}
+
+.plac-container .endPlace {
     font-size: 16px;
     color: #373535;
   }
- 
-.plac-container .text1 .text .title {
-    color: var(--font-3);
-}
-.plac-container .carousel .story-white {
+  
+  .plac-container .text1 .text .title {
+      color: var(--font-3);
+    }
+    .plac-container .carousel .story-white {
     width: 95%;
     margin: 0 auto;
 }
@@ -674,12 +709,39 @@ i.text-sound:hover {
     width:150px
 }
 .plac-container .carousel-control-next,
-.plac-container .carousel-control-prev {
+.plac-container .carousel-control-prev{
     width: 0 !important;
 }
 .plac-container .carousel-control-next {
     left: -24px !important;
 }
-.plac-container .carousel-control-prev {
+.plac-container .carousel-control-prev  {
     right: -24px !important;
 }
+
+/* @@@@@@@@@@@@@ Problem @@@@@@@@@@@@@ */
+.problem-container  {
+    margin-top: 3rem !important;
+} 
+.problem-container .title  {
+    color: var(--font-3);
+} 
+.problem-container .section-3 .maryam.story  {
+    width: 85%;
+} 
+.problem-container .quiz-wrapper .prompt  {
+    color: var(--main-very-dark);
+} 
+.problem-container .quiz-wrapper .target  {
+    width: 190px;
+} 
+/* .problem-container .carousel-control-next,
+.problem-container .carousel-control-prev {
+    width: 0 !important;
+}
+.problem-container .carousel-control-next {
+    left: -24px !important;
+}
+.problem-container .carousel-control-prev {
+    right: -24px !important;
+} */

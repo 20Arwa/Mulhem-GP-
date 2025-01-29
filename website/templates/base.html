@@ -56,15 +56,18 @@
                   {% if current_user.is_authenticated %}
                   <!-- Show Link If User Logged In -->
                   <li class="nav-item">
-                      <a class="nav-link {% if request.path == '/writing/user-stories' %}active{% endif %}" href="/writing/user-stories"><i class="fa-solid fa-book"></i> قصصي</a>
+                    <a class="nav-link {% if request.path == '/writing/user-stories' %}active{% endif %}" href="/writing/user-stories"><i class="fa-solid fa-book"></i> قصصي</a>
                   </li>
                   {% endif %}
+                  <li class="nav-item">
+                    <a class="nav-link {% if request.path == '/help' %}active{% endif %}" href="/help"><i class="fa-solid fa-circle-question"></i> مركز المساعدة</a>
+                  </li>
               </ul>
               
               </div>
               <div class="sign-log d-flex align-items-center">
                 {% if current_user.is_authenticated %} <!-- Show Those Links If User Logged In -->
-                <a class="profile ms-3" href="{{ url_for('auth.profile') }}" alt="ملفي الشخصي"><button type="button"><i class="fa-solid fa-circle-user"></i></button></a>
+                <a class="profile ms-3" href="{{ url_for('auth.profile') }}" alt="المساعدة"><button type="button"><i class="fa-solid fa-circle-user"></i></button></a>
                 <a href="{{ url_for('auth.logout') }}"><button type="button">تسجيل الخروج</button></a>
                 {% endif %} 
               </div>

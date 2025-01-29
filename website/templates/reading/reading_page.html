@@ -19,8 +19,8 @@
 <div class="page-title container mt-5 ">صفحة القراءة</div>
 <div class="container self-writing reading-page mb-5 p-4 py-5 position-relative" id="{{story.id}}">
 	<div class="book-container position-relative">
-		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
-		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3"></i>
+		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط لتنتقل للصفحة السابقة"></i>
+		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط لتنتقل للصفحة التالية"></i>
 		<div class="scene">
 				<article class="book">
 					<section class="page active cover-page">
@@ -61,7 +61,7 @@
                     {% for index in range(1, story.content|length, 2) %}
                     <section class="page">
                         <div class="front">
-                            <div class="text" contenteditable="true">{{story.content[index]}}</div>
+                            <div class="text">{{story.content[index]}}</div>
 
                             <!-- Put Audio If our_library Story -->
                             {% if reading_type == "our_library" %}
@@ -78,7 +78,7 @@
 
                         </div>
                         <div class="back">
-                            <div class="text" contenteditable="true">
+                            <div class="text">
                                 {% if index + 1 < story.content|length %}
                                     {{ story.content[index + 1] }}
                                 {% endif %}
@@ -126,10 +126,10 @@
 		<!-- Sittings Buttons -->
         <div class="sitting-buttons d-flex align-items-center justify-content-center column-gap-2 mt-5 position-relative text-center mx-auto">
 			<!-- Our Library Extra Content -->
-			{% if reading_type == "our_library" %}
-				<button class="edit-availble-btn" data-user="{{user.is_authenticated}}">
+			{% if reading_type == "our_library" %} 
+				<button class="edit-availble-btn" data-user="{{user.is_authenticated}}" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="يمكنك تعديل القصة بإضافة شخصيات، حذف أحداث، أو تغيير البداية والنهاية لتجعلها خاصة بك">
 					<i class="fa-regular fa-pen-to-square"></i>
-					تغيير القصة
+					تعديل القصة
 				</button>
 			{% endif %}
 
@@ -452,6 +452,14 @@
 		editAvalStoryBtn.addEventListener("click", (e) => {
 			e.preventDefault(); // Prevent page reload
 	
+			// Hide Tooltips
+			var tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+			// التكرار على كل عنصر تولتيب وإخفاؤه
+			tooltips.forEach(function (tooltipTriggerEl) {
+				var tooltipInstance = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
+					tooltipInstance.hide(); // إخفاء التولتيب
+			});
+			
 			// Check If User Is Logged In
 			if (editAvalStoryBtn.getAttribute("data-user") == "True") {
 				editAvalForm.style.display = "block";

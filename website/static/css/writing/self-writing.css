@@ -226,7 +226,6 @@
   border-radius: 1rem;
   border: 1px solid rgb(179 145 217 / 60%);
   box-shadow:rgb(227 204 232) 3px 3px 6px 0px inset, rgba(255, 255, 255, 0.5) -3px -3px 6px 1px inset
-  /* background-color: rgb(144 144 145 / 20%); */
 }
 .front .img-container img[src=""] {
   opacity: 0;
@@ -236,6 +235,14 @@
   height: 100%;
   border-radius: 1rem;
   opacity: 1;
+}
+.front .img-container .no-cover-msg {
+  position: relative;
+  left: 50%;
+  top: -50%;
+  transform: translate(-50%, -50%);
+  font-size: 17px;
+  opacity: 60%;
 }
 .front .error-msg {
   opacity: 0;
@@ -248,7 +255,6 @@
 .cover-page .buttons button {
   border: 2px solid white;
   color: var(--font-1);
-  background-color: var(--main-dark);
   margin: 0 5px;
   display: none;
   font-size: 16px;
@@ -280,7 +286,7 @@
     border-radius: 10px;
     border: 2px solid white;
     color: var(--font-1);
-    background-color: var(--main-dark);
+    background: var(--gradient-button);
     transition: var(--transition-seconds);
 }
 .self-writing button:disabled {
@@ -418,6 +424,11 @@
   color: var(--font-3);
   font-size: 20px;
   font-weight: 500;
+}
+.self-writing .response-feedback .text {
+  color: var(--font-3);
+  font-size: 19px;
+  font-weight: 500 !important;
 }
 .self-writing .response-titles .text ul {
   list-style: disc;

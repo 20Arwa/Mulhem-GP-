@@ -5,27 +5,21 @@
 {% endblock %}
 {% block body %}
 <div class="activity characters_activity reasons_activiy container my-5 p-4 py-5 px-5 rounded-4 position-relative">
-    <!-- Decore Images -->
-    <!-- <img class="decore-imgs boy position-absolute" src="../../static/images/boy.png" alt="boy">
-    <img class="decore-imgs tree position-absolute" src="../../static/images/tree.png" alt="tree">
-    <img class="decore-imgs racon position-absolute" src="../../static/images/racon.png" alt="racon">
-    <img class="decore-imgs flower position-absolute" src="../../static/images/flower.png" alt="flower">
-    <img class="decore-imgs apple position-absolute" src="../../static/images/apple.png" alt="apple">
-    <img class="decore-imgs door position-absolute" src="../../static/images/door.png" alt="door">
-    <img class="decore-imgs girl position-absolute" src="../../static/images/girl.png" alt="girl"> -->
     <div id="carouselCaracthers" class="carousel slide">
         <div class="carousel-inner">
             <!-- @@@@@@@@@@@@@ Section 1 @@@@@@@@@@@@@ -->
             <div class="carousel-item section-1 active">
                 <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
-                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>ماهي الاسباب ؟<i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>ماهي الاسباب ؟</h4>
                     <p> الأسباب هي الأشياء التي نفعلها، أو تحدث، وتؤدي إلى نتيجة.
-
                         مثال:
-                        
                         إذا وضعت الماء على الزهرة، ستنمو 🌸.
                         إذا لم تسقها، ستذبل 🥀.
-                           </p>
+                    </p>
+                    <audio class="w-50 rounded-4" controls controlslist="nodownload noplaybackrate">
+                        <source id="audioSource" src="../../static/audio/activity/الاسباب1.mp3" type="audio/mpeg">
+                        المتصفح الخاص بك لا يدعم عنصر الصوت
+                    </audio>
                 </div>
                 <div class="small-activity text-center pt-3  mx-auto">
                     <div class="content mx-auto">
@@ -35,7 +29,7 @@
                                 <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>قصة رحلة الحديقة</h5>
                                 <img class="my-3 rounded-4" src="../..//static/images/reason1.webp" alt="سامي في الحديقة">
                                 <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
-                                    <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                                    <source id="audioSource" src="../../static/audio/activity/الاسباب_رحلة الى الحديقة.mp3" type="audio/mpeg">
                                     المتصفح الخاص بك لا يدعم عنصر الصوت
                                 </audio>
                             </div>
@@ -78,9 +72,13 @@
             <!-- @@@@@@@@@@@@@ Section 3 @@@@@@@@@@@@@ -->
             <div class="carousel-item section-3">
                 <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
-                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i> ماهي اهمية الاسباب ؟<i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i> ماهي اهمية الاسباب ؟</h4>
                     <p> الاسباب تجعل القصة ممتعة ومفهومة. عندما نعرف السبب، نفهم لماذا تصرف الشخصيات كما تصرفت، ولماذا حدثت الأشياء كما حدثت. 
                     </p>
+                    <audio class="w-50 rounded-4" controls controlslist="nodownload noplaybackrate">
+                        <source id="audioSource" src="../../static/audio/activity/الاسباب2.mp3" type="audio/mpeg">
+                        المتصفح الخاص بك لا يدعم عنصر الصوت
+                    </audio>
                 </div>
                 <div class="small-activity text-center pt-3 mx-auto">
                     <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج الاسباب التي أدت الى تغير الاحداث من القصة التالية:</h5>
@@ -90,7 +88,7 @@
                                 <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>قصةالكتاب المفقود</h5>
                                 <img class="my-3 rounded-4" src="../..//static/images/reason2.webp" alt=" حسن والكتاب ">
                                 <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
-                                    <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                                    <source id="audioSource" src="../../static/audio/activity/الاسباب_الكتاب المفقود.mp3" type="audio/mpeg">
                                     المتصفح الخاص بك لا يدعم عنصر الصوت
                                 </audio>
                             </div>
@@ -134,10 +132,14 @@
             
             <div class="carousel-item section-4">
                 <div class="explanation text-center mb-5 bg-white rounded-4 p-3 px-4 w-75 mx-auto position-relative">
-                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>  كيف تعمل الأسباب في القصة؟ <i class="fa-solid text-sound fa-volume-high"></i></h4>
+                    <h4 class=" mb-3"><i class="fa-regular fa-comment fs-4 ms-2"></i>  كيف تعمل الأسباب في القصة؟ </h4>
                     <p> عندما تواجه الشخصية مشكلة أو تتخذ قرارًا، هناك دائمًا سبب وراء ذلك. هذا يجعل القصة ممتعة ومثيره لمعرفة ما الذي سيحدث بعد ذلك.
                         <p><span> 🔹 مثال بسيط: </span><br>إذا تأخر سالم عن المدرسة، قد يكون السبب أنه نسي ضبط المنبه. هذا السبب يؤدي إلى نتيجة مثل مواجهة سالم لعقوبة أو تعلمه أهمية تنظيم الوقت. </p>
                     </p>
+                    <audio class="w-50 rounded-4" controls controlslist="nodownload noplaybackrate">
+                        <source id="audioSource" src="../../static/audio/activity/الاسباب3.mp3" type="audio/mpeg">
+                        المتصفح الخاص بك لا يدعم عنصر الصوت
+                    </audio>
                 </div>
                 <div class="small-activity text-center pt-3 mx-auto">
                     <h5 class="text-end"><i class="fa-regular fa-comment fs-4 ms-2"></i>استخرج الاسباب التي أدت الى تغير الاحداث من القصة التالية:</h5>
@@ -147,7 +149,7 @@
                                 <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i>قصة القلم السحري</h5>
                                 <img class="my-3 rounded-4" src="../..//static/images/reason3.webp" alt=" أحمد والقلم ">
                                 <audio class="w-100 rounded-4" controls controlslist="nodownload noplaybackrate">
-                                    <source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
+                                    <source id="audioSource" src="../../static/audio/activity/الاسباب_القلم السحري.mp3" type="audio/mpeg">
                                     المتصفح الخاص بك لا يدعم عنصر الصوت
                                 </audio>
                             </div>
@@ -196,6 +198,10 @@
                         <p class="mb-1">عندما تكتب قصة، فكر في "لماذا" حدث الشيء و"ماذا" سيحدث بعد ذلك.</p>
                         <p>✨ كلما كانت الأسباب واضحة ومنطقية، أصبحت قصتك أكثر تشويقًا وإثارة.  </p>
                     </div>
+                    <audio class="w-50 rounded-4" controls controlslist="nodownload noplaybackrate">
+                        <source id="audioSource" src="../../static/audio/activity/الاسباب4.mp3" type="audio/mpeg">
+                        المتصفح الخاص بك لا يدعم عنصر الصوت
+                    </audio>
                 </div>
                 <a href="../activities/all_activities" class="go-back"><button class="btn button main-button">ارجع للأنشطة</button></a>
                 <div class="allQues-error-msg mt-3 text-danger">قم بالإجابة على جميع الأسئلة لإنهاء النشاط</div>
@@ -210,10 +216,38 @@
             <span class="visually-hidden">Next</span>
         </button>
     </div>
+    <div class="back-activities text-start mt-4 mb-1"> 
+        <button class="back-activities-btn button main-button text-start"><i class="fa-solid fa-arrow-right-from-bracket"></i>  الرجوع للأنشطة</button>
+    </div>
 </div>
 {% endblock %}
 {% block script %}
 <script>
+     // Click On Back To Activites
+     document.querySelector(".back-activities-btn").addEventListener("click", () => {
+        // Check if at least one question is answered
+        if (
+            Array.from(document.querySelectorAll(".options button")).some(button => button.classList.contains("active-right") || button.classList.contains("active-wrong"))
+         ){
+            Swal.fire({
+                title: 'مغادرة النشاط',
+                text: "إذا غادرت الآن، قد تفقد إجاباتك الحالية. هل أنت متأكد أنك تريد المغادرة؟",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'نعم',
+                cancelButtonText: 'لا، أود إكمال النشاط',
+                reverseButtons: true // Swaps the position of confirm and cancel buttons
+            }).then(async (result) => { // تأكد من جعل الدالة داخل then متزامنة
+                if (result.isConfirmed) {
+                        window.location.href = '/activities/all_activities';
+                    }
+                })
+            }
+            else {
+                window.location.href = '/activities/all_activities';
+            }
+    })
+
     const myCarousel = document.querySelector('#carouselCaracthers');
     const carousel = new bootstrap.Carousel(myCarousel, {
         wrap: false // Stops Going Back To First Section

@@ -6,7 +6,7 @@
       flashMessages.style.opacity = "0"; // اجعل الرسائل شفافة
       setTimeout(() => flashMessages.remove(), 500); // أزل الرسائل من DOM بعد اختفائها
     }
-}, 5000); // 5000 ميلي ثانية (5 ثوانٍ)
+}, 3000); // 5000 ميلي ثانية (5 ثوانٍ)
 
 
 // Drag And Drop Quiz
@@ -148,5 +148,32 @@ function checkForbiddenWords(text) {
     }
     return false;
 }
+
+
+
+// تفعيل الشرح اللي يطلع عند الهوفر على الأزرار
+document.addEventListener("DOMContentLoaded", () => {
+    const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    const tooltipList = tooltipTriggerList.map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+});
+
+// تفعيل الشرح اللي يطلع عند الضغط على الأزرار
+document.addEventListener('DOMContentLoaded', function () {
+    // تهيئة كل عناصر الـ popover في الصفحة
+    var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+    var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        var popover = new bootstrap.Popover(popoverTriggerEl);
+
+        // إضافة حدث عند النقر لإخفاء البوبوفر بعد ثوانٍ
+        popoverTriggerEl.addEventListener('click', function () {
+            setTimeout(function () {
+                popover.hide(); // إخفاء البوبوفر
+            }, 3000); // 3000 مللي ثانية = 3 ثوانٍ
+        });
+
+        return popover;
+    });
+});
+
 
 

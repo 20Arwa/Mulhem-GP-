@@ -7,8 +7,11 @@ const State = ['Initial', 'Record', 'Download'];
 let stateIndex = 0;
 let mediaRecorder, chunks = [], audioURL = '';
 
-// استلام البيانات من الخادم (إذا كان الصوت موجودًا)
+// استلام البيانات من صفحة تعديل قصة اليوزر (إذا كان الصوت موجودًا)
 const existingAudioSrc = display.getAttribute('data-audio-src');
+const userGender = display.getAttribute('data-gender');
+
+console.log(userGender)
 
 // الوظيفة الرئيسية للتحكم في الواجهة
 const application = (index) => {
@@ -16,8 +19,11 @@ const application = (index) => {
         case 'Initial':
             clearDisplay();
             clearControls();
-
-            addButton('record', 'record()', 'سجل القصة بصوتك');
+            if (userGender === "أنثى") {
+                addButton('record', 'record()', 'سجلي القصة بصوتك');
+            } else {
+                addButton('record', 'record()', 'سجل القصة بصوتك');
+            }
             break;
 
         case 'Record':

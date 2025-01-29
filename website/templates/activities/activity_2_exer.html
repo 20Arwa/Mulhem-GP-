@@ -5,29 +5,33 @@
 {% endblock %}
 <!-- Questions & Answers -->
 {% block body %}
-<div class="activity activity_1 activity_2_exer1 container my-5 p-4 px-5 rounded-4">
+<div class="activity activity_1 activity_2_exer1 container my-5 p-5 py-4  rounded-4">
 <!-- Text 1 -->
 <div class="text1">
     <div class="content">
         <h4> القصص موجودة حولنا في كل مكان! </h4>
-       <div class="text d-flex align-items-center gap-2 my-5 bg-white rounded-4 p-3 px-4">
-       
-            <div class="right-side text-center">  
+        <div class="text mb-5 mt-4 bg-white rounded-4 p-4 pb-3 text-center">
+            <div class="text-center">  
                 <h5 class="mb-0"><i class="fa-solid fa-book ms-2 fs-6"></i> في هذا النشاط، سنتعلم كيف نلاحظ مواقفنا اليومية في المنزل، المدرسة، أو الحي، ونحوّلها بخيالنا إلى قصص ممتعة ومبتكرة. تجربة بسيطة تساعدنا على ربط الواقع بالخيال وصنع حكايات مليئة بالإبداع. ✨ </h5>
             </div>
+            <audio class="rounded-4 mt-4 mx-auto" controls controlslist="nodownload noplaybackrate">
+                <source id="audioSource" src="../../static/audio/activity/استلهام القصص.mp3" type="audio/mpeg">
+                المتصفح الخاص بك لا يدعم عنصر الصوت
+            </audio>
         </div>
-        <h4><i class="fa-regular fa-comment fs-4 ms-2"></i>تأمل في تفاصيل يومك. ما الموقف أو الشيء الذي لاحظته اليوم وكان مميزًا بالنسبة لك؟</h4>
-        <p> ماذا كنت تفعل عندما لاحظت ذلك؟ </p>
-        <p> هل كان شيء مضحك، غريب، أو مثير؟ </p>
-        <h6>اكتب جملة عنه وتخيل أنه بداية لقصة خيالية.</h6>
-        <div class="form-floating">
-            <form id="myForm" class="d-flex">
-                <i class="fa-solid fa-lightbulb ms-2"></i>
-                <div class="form-floating" style="display: flex; align-items: center;">
-                    <textarea class="rounded-1 p-1 px-2" rows="5" cols="50" placeholder="مثال: رأيت قوس قزح بعد المطر. تخيلت أنه يؤدي إلى مدينة سحرية مخفية!" id="floatingTextarea" style="margin-right: 10px;"></textarea>
-                    <button type="submit" class="btn button main-button" style="margin-right: 15px;">إنتهيت</button>
-                </div>
-            </form>
+        <div class="small-activity rounded-4 p-3 text-center">
+            <h4><i class="fa-regular fa-comment fs-4 ms-2"></i>تأمل في تفاصيل يومك. ما الموقف أو الشيء الذي لاحظته اليوم وكان مميزًا بالنسبة لك؟</h4>
+            <p> ماذا كنت تفعل عندما لاحظت ذلك؟ هل كان شيء مضحك، غريب، أو مثير؟ </p>
+            <p> </p>
+            <h6 class="mt-4">اكتب جملة عنه وتخيل أنه بداية لقصة خيالية.</h6>
+            <div class="form-floating">
+                <form id="myForm" class="d-flex justify-content-center">
+                    <div class="form-floating d-flex flex-column align-items-center" >
+                        <textarea class="rounded-1 p-1 px-2" rows="5" cols="50" placeholder="مثال: رأيت قوس قزح بعد المطر. تخيلت أنه يؤدي إلى مدينة سحرية مخفية!" id="floatingTextarea"></textarea>
+                        <button type="submit" class="btn button main-button" style="margin-top: 15px;">إنتهيت</button>
+                    </div>
+                </form>
+            </div>
         </div>
            
         <div class="modal modal3 fade modal-finishStory" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -70,8 +74,12 @@
                 </div>
             </div>
         </div>
+
     </div>
   </div>
+  <div class="back-activities text-start mt-3"> 
+    <button class="back-activities-btn button main-button text-start"><i class="fa-solid fa-arrow-right-from-bracket"></i>  الرجوع للأنشطة</button>
+</div>
 </div>
 {% endblock %}
 {% block script %}
@@ -79,12 +87,37 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+    // Go Back To Activties Button
+    document.querySelector(".back-activities-btn").addEventListener("click", () => {
+        console.log("dlkfnskl")
+        // Check if at least one question is answered
+        if (document.getElementById('floatingTextarea').value.length > 0) {
+            Swal.fire({
+                title: 'مغادرة النشاط',
+                text: "إذا غادرت الآن، قد تفقد إجابتك الحالية. هل أنت متأكد أنك تريد المغادرة؟",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'نعم',
+                cancelButtonText: 'لا، أود إكمال النشاط',
+                reverseButtons: true // Swaps the position of confirm and cancel buttons
+            }).then(async (result) => { // تأكد من جعل الدالة داخل then متزامنة
+                if (result.isConfirmed) {
+                        window.location.href = '/activities/all_activities';
+                    }
+                })
+            }
+            else {
+                window.location.href = '/activities/all_activities';
+            }
+    })
+
     document.getElementById('myForm').addEventListener('submit', async function(event) {
         event.preventDefault(); // Prevent the default form submission
 
         const textarea = document.getElementById('floatingTextarea');
         const textLength = textarea.value.length;
 
+        // Validate Answer
         if (!arabicRegex.test(textarea.value)) {
             Swal.fire({
                 title: 'خطأ!',

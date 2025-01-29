@@ -1,12 +1,28 @@
+
 .create-story-container {
   max-width: 600px;
   margin: auto;
+  margin-right: 530px;
   background: var(--gradient-light);
   padding-bottom: 5px;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(197, 154, 190, 0.1);
 }
 
+.create-story-container .create-story-descrip {
+  background: var(--gradient-light);
+  width: 430px;
+    height: 250px;
+    padding-right: 115px !important;
+    right: -115%;
+    color: var(--font-4);
+}
+.create-story-container .create-story-descrip .mulhem {
+  position: absolute;
+  width: 350px;
+  top: -5px;
+  right: -28%;
+}
 .create-story-container .story-title {
   margin-bottom: 20px;
   text-align: center;
@@ -87,7 +103,7 @@
 
 .create-story-container .story-btn-main {
   display: block;
-  margin: 20px auto; /* التمركز في المنتصف */
+  margin: 15px auto 25px; /* التمركز في المنتصف */
   padding: 10px 25px; /* حجم مناسب */
   background-color: #7b4e97;
   color: #fff;
@@ -109,13 +125,13 @@
 .create-story-container .story-spacing {
   margin-top: 20px;
 }
-.create-story-container .img-holder{
+/* .create-story-container .img-holder{
   width: 20px;
     height: 230px;
 }
-.create-story-container img.mulhem{
+.create-story-container img.mulhem.create {
   z-index: 0;
   bottom: -100px;
   right: -59px;
   width: 350px;
-}
+} */

@@ -23,6 +23,11 @@
 .reading-page .sitting-buttons {
     z-index: 1;
 }
+.reading-page .sitting-buttons .custom-tooltip {
+    --bs-tooltip-max-width: 400px !important;
+    --bs-tooltip-max-width: 17px !important;
+}
+
 .reading-page img.mulhem{
     width: 170px;
     bottom: -85px;

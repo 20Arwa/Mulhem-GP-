@@ -12,8 +12,8 @@
 <div class="page-title container mt-5 ">صفحة تعديل الكتابة</div>
 <div class="container self-writing edit-user-story mb-5 p-4 py-5 position-relative"  data-story-id="{{story.id}}" data-story-type="{{story.type}}">
 	<div class="book-container position-relative">
-		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
-		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3"></i>
+		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط لتنتقل للصفحة السابقة"></i>
+		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط لتنتقل للصفحة التالية"></i>
 		<div class="scene">
 				<article class="book">
 					<section class="page active cover-page">
@@ -31,6 +31,7 @@
                                 {% else %}
 								    <img class="img cover-img" src="../../static/{{story.imgSrc}}"> 
                                 {% endif %}
+								<div class="no-cover-msg">لا يوجد غلاف للقصة. <br>اضغط أحد الزرين أدناه ليُنشئ مُلهِم صورة لك، <br>أو ارفع صورة من جهازك.</div>
 							</div>
 							<div class="buttons d-flex align-items-center justify-content-center">
 								<button class="generate-coverImage-btn button active"><i class="fa-solid fa-folder-plus"></i> توليد صورة</button>
@@ -109,14 +110,19 @@
 			<div class="sitting-error-msg error-msg my-2">رسالة الخطأ</div>
 			<div class="d-flex align-items-center justify-content-center column-gap-2">
 				<div class="dropdown allam-help">
-					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						<i class="fa-solid fa-circle-question"></i>
-						اطلب مساعدة مُلهِم
-					</button>
+					
+					{% if user.gender == "أنثى"%}
+					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-circle-question"></i>اطلبي مساعدة مُلهِم</button>
+					{% else %}
+					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-circle-question"></i>اطلب مساعدة مُلهِم</button>
+					{% endif %}
+					
 					<ul class="dropdown-menu text-center">
-						<li><a class="dropdown-item starting">لا أعرف عن ماذا أكتب</a></li>
-						<li><a class="dropdown-item completion">لا أعرف كيف أكمل قصتي</a></li>
-						<li><a class="dropdown-item elements" href="#allam-response">تحقق من عناصر قصتي</a></li>
+						<li><a class="dropdown-item starting">🤔 لا أعرف عن ماذا أكتب</a></li>
+						<li><a class="dropdown-item completion">✍️ لا أعرف كيف أكمل قصتي</a></li>
+						<li><a class="dropdown-item titles" href="#allam-response">💡 اقترح عناوين لقصتي</a></li>
+						<li><a class="dropdown-item elements" href="#allam-response">✅ تحقق من عناصر قصتي</a></li>
+						<li><a class="dropdown-item feedback" href="#allam-response">✨ راجع قصتي واقترح تحسينات</a></li>
 					</ul>
 					<img class="mulhem position-absolute" src="../../static/images/mulhem-no-crown.png" alt="ملهم">
 				</div>
@@ -133,7 +139,7 @@
 
 
 				<div class="record d-flex flex-column align-items-center">
-                    <div class="display-voice-record" data-audio-src="{% if story.audioSrc %}../../static/{{ story.audioSrc | safe }}{% else %}""{% endif %}"></div>
+                    <div class="display-voice-record"  data-gender="{{user.gender}}" data-audio-src="{% if story.audioSrc %}../../static/{{ story.audioSrc | safe }}{% else %}""{% endif %}"></div>
                     <div class="d-flex">
                         <div class="controllers-voice-record"></div>
                     </div> 
@@ -237,6 +243,29 @@
 				<h3>📚✨التحقق من عناصر القصة:</h3>
 			</div>
 			<div class="elements mb-3">
+			</div>
+		</div>
+
+
+		<!-- Story Titles -->
+		<div class="response response-titles p-4 p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="titles">
+			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
+			<div class="d-flex justify-content-between mb-4">
+				<h3>🎨✨عناوين مقترحة لقصتك الجميلة:</h3>
+			</div>
+			<div class="text text-end">
+				<ul>
+				</ul>
+			</div>
+		</div>
+		
+		<!-- Story Feedback -->
+		<div class="response response-feedback p-4 p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="titles">
+			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
+			<div class="d-flex justify-content-between mb-4">
+				<h3>📖✍️ مراجعة القصة:</h3>
+			</div>
+			<div class="text text-end">
 			</div>
 		</div>
 
@@ -515,9 +544,29 @@ document.addEventListener('DOMContentLoaded', function () {
 	// @@@@@@@@@@@ Upload Cover Page Image @@@@@@@@@@@
 	const uploadBtn = document.querySelector('.cover-page .upload-coverImage-btn');
 	const uploadInput = document.querySelector('.cover-page .upload-coverImage-btn input');
-	const coverImage = document.querySelector(".cover-page .cover-img-container img");
 	const deleteCoverBtn = document.querySelector(".cover-page .delete-coverImage-btn");
+	const coverImage = document.querySelector(".cover-page .cover-img-container img");
+
+
 	
+	// No Cover Message
+
+	// When Enter The Page
+	if (coverImage.getAttribute("src") != "") {
+		document.querySelector(".no-cover-msg").style.opacity = 0;
+	} 
+	
+	// On Change
+	const observer = new MutationObserver(() => {
+		if (coverImage.getAttribute("src")) {
+			document.querySelector(".no-cover-msg").style.opacity = 0;
+		} else {
+			document.querySelector(".no-cover-msg").style.opacity = .60;
+		}
+	});
+	observer.observe(coverImage, { attributes: true });
+	
+	// Click Uplaod
 	uploadBtn.addEventListener('click', () => {
 		uploadInput.click(); // ينقر على الإدخال المخفي
 	});
@@ -1225,17 +1274,24 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 			
             result = await response.json();
-			
+
+			Swal.fire({
+				title: 'تمت معالجة طلبك',
+				icon: 'success',
+				confirmButtonText: 'تفقد عناصر قصتك',
+				reverseButtons: true, 
+			})
+
 			// Show Response To User
 			var completionContain  = document.querySelector(".response-completion");
 
 			// Go Down To completion
-			const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
+			var offset = window.innerHeight * 0.4; // 30% من ارتفاع الشاشة، اجعلها أكبر لتزيد المسافة
+			const completionTop = completionContain.getBoundingClientRect().top + window.pageYOffset;
 			window.scrollTo({ 
-				top: completionContain.getBoundingClientRect().top + window.pageYOffset - offset, 
+				top: completionTop + offset, // إضافة الـ offset لجعل التمرير ينزل أكثر
 				behavior: 'smooth' 
 			});
-
 
 			completionContain.style.display = "block";
 			completionContain.querySelector(".text").innerHTML = result.response;
@@ -1261,6 +1317,247 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.querySelector(".response-completion").style.display = "none";
 		window.scrollBy({top: -420});	
 	});
+
+
+	// @@@@@@@@@@@ Allam Titles @@@@@@@@@@@
+	async function allamTitles() {
+		var sittingErrMsg = document.querySelector(".sitting-error-msg");
+		// Get All Text
+		var AllStory = document.querySelectorAll(".page .text");
+		var fullStory = "";
+		AllStory.forEach(text => {fullStory += text.textContent.trim() + " "})
+		
+		// If Text Is Empty
+		if (fullStory.trim().length == 0) {
+			sittingErrMsg.innerHTML = "لا يوجد نص للتحقق منه، أضف نصاً أولاً"
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// If Text Is Short
+		else if (fullStory.length < 200) {
+			sittingErrMsg.innerHTML = "يجب أن تكون القصة بطول 200 حرفا وأكثر ليتمكن مُلهِم من اقتراح العناوين!"
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// If Text Is Not Arabic
+		else if (!arabicRegex.test(fullStory) ) {
+			sittingErrMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// الكلمات المحظورة
+		if (checkForbiddenWords(fullStory)) {
+			return;
+		}
+		else {
+			sittingErrMsg.style.opacity = 0; // Remove Error Message
+		}
+
+		// Send To Allam
+		const data = { message: fullStory }; 
+
+		 // إظهار رسالة التحميل
+		Swal.fire({
+            title: 'جاري انشاء العناوين المقترحة...',
+            text: 'الرجاء الانتظار قليلاً',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading(); // عرض المؤشر الدائري
+            }
+        });
+
+		try {
+            const response = await fetch('http://127.0.0.1:5000/allam-titles', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			});
+
+            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+			
+            if (!response.ok) {
+                throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+            }
+			
+            var result = await response.json();
+            result = JSON.parse(result.response); // تحويل النص إلى JSON
+
+			Swal.fire({
+				title: 'تمت معالجة طلبك',
+				icon: 'success',
+				confirmButtonText: 'تفقد عناصر قصتك',
+				reverseButtons: true, 
+			})
+			
+			// Show Response To User
+			var TitlesContain  = document.querySelector(".response-titles");
+			TitlesContain.style.display = "block";
+
+			const ulElement = TitlesContain.querySelector(".text ul");
+			ulElement.innerHTML = ""; // مسح المحتوى الحالي داخل <ul> إذا كان موجودًا
+			// إضافة كل عنصر من المصفوفة كعنصر <li>
+			result.forEach((title) => {
+				const liElement = document.createElement("li"); // إنشاء عنصر <li>
+				liElement.textContent = title; // تعيين النص للعنصر
+				ulElement.appendChild(liElement); // إضافة <li> إلى <ul>
+			});
+						
+			// Go Down To Titles
+			const offset = window.innerHeight * 0.1; // 30% من ارتفاع الشاشة، اجعلها أكبر لتزيد المسافة
+			const TopTitles = TitlesContain.getBoundingClientRect().top + window.pageYOffset;
+			window.scrollTo({ 
+				top: TopTitles + offset, // إضافة الـ offset لجعل التمرير ينزل أكثر
+				behavior: 'smooth' 
+			});
+
+		} catch (error) {
+			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+			Swal.fire({
+				title: 'خطأ!',
+				text: error.message,
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
+		}
+	}
+	// Click Titles Button
+	document.querySelector(".dropdown.allam-help .titles").addEventListener("click", (e) => {
+		e.preventDefault(); // Prevent page reload
+		allamTitles(); 
+	});
+	// Click On Close Titles
+	document.querySelector(".response-titles .close-icon").addEventListener("click", () => {
+		document.querySelector(".response-titles").style.display = "none";
+		window.scrollBy({top: -420});	
+	});
+
+
+
+	// @@@@@@@@@@@ Allam Feedback @@@@@@@@@@@
+	async function allamFeedback() {
+		var sittingErrMsg = document.querySelector(".sitting-error-msg");
+		// Get All Text
+		var AllStory = document.querySelectorAll(".page .text");
+		var fullStory = "";
+		AllStory.forEach(text => {fullStory += text.textContent.trim() + " "})
+		
+		// If Text Is Empty
+		if (fullStory.trim().length == 0) {
+			sittingErrMsg.innerHTML = "لا يوجد نص للمراجعة، أضف نصاً أولاً"
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// If Text Is Short
+		else if (fullStory.length < 200) {
+			sittingErrMsg.innerHTML = "يجب أن تكون القصة بطول 200 حرفا وأكثر ليتمكن مُلهِم مراجعة قصتك!"
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// If Text Is Not Arabic
+		else if (!arabicRegex.test(fullStory) ) {
+			sittingErrMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
+			sittingErrMsg.style.opacity = 1;
+			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
+			return;
+		}
+		// الكلمات المحظورة
+		if (checkForbiddenWords(fullStory)) {
+			return;
+		}
+		else {
+			sittingErrMsg.style.opacity = 0; // Remove Error Message
+		}
+
+		// Send To Allam
+		const data = { message: fullStory }; 
+
+		 // إظهار رسالة التحميل
+		Swal.fire({
+            title: 'جاري مراجعة القصة واقتراح التحسينات...',
+            text: 'الرجاء الانتظار قليلاً',
+            allowOutsideClick: false,
+            showConfirmButton: false,
+            didOpen: () => {
+                Swal.showLoading(); // عرض المؤشر الدائري
+            }
+        });
+
+		try {
+            const response = await fetch('http://127.0.0.1:5000/allam-feedback', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(data)
+			});
+
+            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
+			
+            if (!response.ok) {
+                throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
+            }
+			
+           
+			var result = await response.json();
+			var result_br = result.response.replace(/\n/g, "<br>");
+
+			Swal.fire({
+				title: 'تمت معالجة طلبك',
+				icon: 'success',
+				confirmButtonText: 'تفقد عناصر قصتك',
+				reverseButtons: true, 
+			})
+			
+			Swal.fire({
+				title: 'تمت معالجة طلبك',
+				icon: 'success',
+				confirmButtonText: 'تفقد عناصر قصتك',
+				reverseButtons: true, 
+			})
+			
+			// Show Response To User
+			var feedbackContain  = document.querySelector(".response-feedback");
+
+			// Go Down To Feedback
+			const offset = window.innerHeight * 0.8; // 30% من ارتفاع الشاشة، اجعلها أكبر لتزيد المسافة
+			const TopFeedback = feedbackContain.getBoundingClientRect().top + window.pageYOffset;
+			window.scrollTo({ 
+				top: TopFeedback + offset, // إضافة الـ offset لجعل التمرير ينزل أكثر
+				behavior: 'smooth' 
+			});
+
+			feedbackContain.style.display = "block";
+			feedbackContain.querySelector(".text").innerHTML = result_br;
+
+		} catch (error) {
+			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
+			Swal.fire({
+				title: 'خطأ!',
+				text: error.message,
+				icon: 'error',
+				confirmButtonText: 'موافق',
+				reverseButtons: true,
+			});
+		}
+	}
+	// Click Titles Button
+	document.querySelector(".dropdown.allam-help .feedback").addEventListener("click", (e) => {
+		e.preventDefault(); // Prevent page reload
+		allamFeedback(); 
+	});
+	// Click On Close Titles
+	document.querySelector(".response-feedback .close-icon").addEventListener("click", () => {
+		document.querySelector(".response-feedback").style.display = "none";
+		window.scrollBy({top: -420});	
+	});
+
+
+
 
 	// @@@@@@@@@@@ Starting Ideas @@@@@@@@@@@
 	var startingIdeas = document.querySelector(".response-starting");
@@ -1382,8 +1679,15 @@ document.addEventListener('DOMContentLoaded', function () {
 		var title = document.querySelector(".page.cover-page .front .title");
 		var titleText = document.querySelector(".page.cover-page .front .title").value;
         var storyID = document.querySelector(".edit-user-story").dataset.storyId;
+
+		// Image
 		var image = document.querySelector(".page.cover-page .front .cover-img");
-		var imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
+		var imageSrc = "";
+		if (image) {
+			imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
+		}
+
+		// Audio
 		var audio = document.querySelector(".record audio");
 		var audioSrc = "";
 		if (audio) {
@@ -1432,7 +1736,8 @@ document.addEventListener('DOMContentLoaded', function () {
 			genertedAudiosSrcs: generAudiosArray || "", 
             message: fullStoryArray || ""
         };
-        
+
+		console.log(data)
 		// Call function to send the story
 		await SendStory(data);
 	})
@@ -1442,8 +1747,14 @@ document.addEventListener('DOMContentLoaded', function () {
 		// Get Elements
 		var storyID = document.querySelector(".edit-user-story").dataset.storyId;
 		var title = document.querySelector(".page.cover-page .front .title");
+
+		// Image
 		var image = document.querySelector(".page.cover-page .front .cover-img");
-		var imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
+		var imageSrc = "";
+		if (image) {
+			imageSrc = image.getAttribute("src").split('?')[0].split('/').pop();
+		}
+		// Audio
 		var audio = document.querySelector(".record audio");
 		var audioSrc = "";
 		if (audio) {

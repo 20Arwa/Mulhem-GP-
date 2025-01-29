@@ -81,7 +81,7 @@ def checkSignUp(f_name, l_name, age, gender, email, password, password2):
     # Age
     elif not age:
         flash("يرجى ادخال عمرك", category='error')
-    elif int(age) < 6 or int(age) > 14:
+    elif int(age) < 8 or int(age) > 10:
         flash("عذرًا، هذا الموقع غير مخصص لفئتك العمرية", category='error')
     # Gender
     elif not gender:

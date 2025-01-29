@@ -1,0 +1,68 @@
+.help ul {
+    /* list-style: unset; */
+}
+.help p:last-of-type {
+    margin-bottom: 0;
+}
+.help .intro {
+    height: 225px;
+    font-size: 20px;
+    color: var(--font-3);
+    background: var(--gradient-light);
+}
+.help .intro img.mulhem {
+    width: 115px;
+    top: 0px;
+    right: 35px;
+}
+/* Contetn */
+.accordion-header .accordion-button {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--font-1);
+    background: var(--main-dark);
+}
+.accordion-header .accordion-button::after {
+    margin-right: auto !important;
+    margin-left: 0 !important;
+}
+.accordion-header .accordion-button .mark-icon {
+    font-size: 20px;
+    margin-left: 10px;
+}
+.accordion-body {
+    font-size: 16px;
+    color: var(--font-4);
+    background-color: #dbcef647;
+}
+.accordion-body a {
+    font-weight: 500;
+    color: var(--font-3);
+}
+
+.accordion-item .accordion-body ul li {
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--font-3);
+}
+.accordion-item .accordion-body ul li i {
+    font-size: 16px;
+    margin-left: 3px;
+}
+.accordion-item .accordion-body ul li::marker {
+    color: var(--font-3);
+}
+.accordion-item .accordion-body span {
+    color: var(--font-3);
+}
+.help .contact button {
+    font-size: 17px;
+    border: 2px solid transparent;
+    background: var(--font-1);
+}
+.help .contact button:hover {
+    border-color: var(--font-3);
+}
+.help .contact button a {
+    color: var(--font-3);
+}

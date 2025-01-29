@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% block title %}القراءة{% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reading/our_library.css') }}">
 {% endblock %}
@@ -9,8 +9,6 @@
         {% for story in stories %}
         <div div class="story-box" id="{{story['id']}}">
             <img class="cover" src="../../static/{{ story['imgSrc'] }}" alt="صورة الغلاف">
-                <!-- <img src="{{ url_for('static', filename=story['imgSrc']) }}" alt="{{ story.alt }}"> -->
-                <!-- <p>{{ story.title }}</p> -->
                 <p>{{story['title']}}</p>
         </div>
         {% endfor %}

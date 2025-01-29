@@ -1,0 +1,202 @@
+{% extends "base.html" %}
+{% block title %}مركز المساعدة{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/help.css') }}">
+{% endblock %}
+{% block body %}
+<div class="help container my-5 mx-auto">
+    <div class="intro w-50 d-flex justify-content-end align-items-center position-relative rounded-4 p-4 mx-auto">
+
+        {% if user.is_authenticated and user.gender == "أنثى" %}
+            <p class="w-75 fs-5">مرحبًا! إذا واجهتكِ أي مشكلة أثناء استخدام التطبيق أو كنتِ بحاجة إلى مساعدة، فهذه الصفحة ستساعدك!</p>
+        {% else %}
+            <p class="w-75 fs-5">مرحبًا! إذا واجهتك أي مشكلة أثناء استخدام التطبيق أو كنت بحاجة إلى مساعدة، فهذه الصفحة ستساعدك!</p>
+        {% endif %}
+        
+        <img src="../static/images/mulhem-explain.png" alt="ملهم" class="mulhem position-absolute">
+    </div>
+    
+    <!-- Content -->
+    <div class="accordion my-5" id="accordionExample">
+
+    <!--  -->
+    <div class="accordion-item">
+        <h2 class="accordion-header">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <i class="fa-regular fa-circle-question mark-icon"></i>
+                كيفية التسجيل والدخول إلى الموقع.           
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <p>
+                    إذا كنت ترغب في التسجيل أو الدخول إلى الموقع، يُرجى الانتقال إلى <a href="../" target="_blank">الصفحة الرئيسية</a>. <br>
+                    هناك زران متاحان للتسجيل: <br>
+                    - إذا كنت تزورنا لأول مرة، يمكنك <a href="/sign-up" target="_blank">إنشاء حساب جديد</a>. <br>
+                    - إذا كنت تمتلك حسابًا بالفعل، يمكنك <a href="/login" target="_blank">تسجيل الدخول</a>.
+                </p>
+            </div>            
+        </div>
+    </div>
+
+    <!--  -->
+    <div class="accordion-item sections">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <i class="fa-regular fa-circle-question mark-icon"></i>
+                ما هي أقسام وخدمات الموقع؟
+            </button>
+        </h2>
+        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <ul>
+                    <li><a href="reading/our_library" target="_blank"><i class="fa-solid fa-book-open-reader"></i> صفحة القراءة</a></li>
+                    <p>هنا يمكنك استكشاف مجموعة واسعة من القصص المتنوعة والممتعة المدعومة بصور غلاف جذابة وأصوات تفاعلية. كما يمكنك تعديل القصة بإضافة شخصيات، حذف أحداث، أو تغيير البداية والنهاية لتجعلها خاصة بك.</p>
+                    
+                    <li><a href="activities/all_activities" target="_blank"><i class="fa-solid fa-person-chalkboard"></i> صفحة الأنشطة التعليمية</a></li>
+                    <p>تحتوي هذه الصفحة على العديد من الأنشطة التعليمية الممتعة التي تساعدك على تطوير مهاراتك في كتابة القصص. ستتعلم عناصر القصة بطريقة تفاعلية مع صور وأصوات وأسئلة متنوعة لتحسين فهمك لعالم الكتابة الإبداعية.</p>
+
+                    <li><a href="writing/story-generator" target="_blank"><i class="fa-solid fa-gears ms-2"></i> صفحة مولّد القصة</a></li>
+                    <p>في هذه الصفحة، يساعدك "ملهم" على إنشاء قصص رائعة بسهولة. كل ما عليك هو إدخال عناصر القصة التي ترغب بها، وسيقوم "ملهم" بكتابة قصة ممتعة ومميزة خصيصًا لك!</p>
+                    
+                    <li><a href="writing/self-writing" target="_blank"><i class="fa-solid fa-child-reaching ms-2"></i> صفحة الكتابة المستقلة</a></li>
+                    <p>هنا يمكنك كتابة قصتك بنفسك، وسيكون "ملهم" بجانبك لمساعدتك من خلال أسئلة ملهمة تُساعدك على تطوير القصة، بالإضافة إلى اقتراح عناوين مناسبة وتحليل القصة لتقديم ملاحظات تحسين واقتراحات تجعل قصتك أفضل وأقوى.</p>
+                </ul>
+            </div>            
+        </div>
+    </div>
+
+    <!--  -->
+    <div class="accordion-item sections">
+        <h2 class="accordion-header">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseTwo">
+                <i class="fa-regular fa-circle-question mark-icon"></i>
+                كيفية استخدام الأنشطة التعليمية.
+            </button>
+        </h2>
+        <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                <p>
+                    عند الدخول إلى صفحة <a href="activities/all_activities" target="_blank">الأنشطة التعليمية</a>، ستظهر أمامك مجموعة من المربعات، كل منها يمثل نشاطًا مختلفًا.  <br>
+                    يحتوي كل مربع على اسم النشاط وشرح بسيط يوضح فكرته.  <br>
+                    بمجرد اختيار نشاط والدخول إليه، ستجد شرحًا مفصلاً للنشاط مع الخطوات التي يمكنك اتباعها.  <br>
+                    بعد ذلك، ستظهر قصة متعلقة بالنشاط يمكنك قراءتها أو الاستماع إليها، يتبعها مجموعة من الأسئلة التفاعلية التي تساعدك على تطبيق ما تعلمته بطريقة ممتعة ومفيدة.<br>
+                </p>
+            </div>            
+        </div>
+    </div>
+    
+    
+    
+        <!--  -->
+        <div class="accordion-item sections">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseWrirting" aria-expanded="false" aria-controls="collapseTwo">
+                    <i class="fa-regular fa-circle-question mark-icon"></i>
+                الخدمات الموجودة في صفحة الكتابة المستقلة.
+                </button>
+            </h2>
+            <div id="collapseWrirting" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p class="fs-5">في صفحة الكتابة المستقلة توجد العديد من الخدمات اللتي يمكن مساعدتك</p>
+                    <ul>
+                        <li><i class="fas fa-book"></i> غلاف القصة</li>
+                        <p>يمكنك إنشاء غلاف مميز لقصتك <span>(زر توليد صورة)</span>، حيث يقوم مُلهِم بتصميم صورة مناسبة لك أو يتيح لك رفع صورة من جهازك <span>(زر رفع صورة)</span>.</p>
+                    
+                        <li><i class="fas fa-volume-up"></i> صوت للقصة</li>
+                        <p>يضيف مُلهِم صوتًا لكل جزء من القصة، بحيث يكون لكل صفحة سرد مسموع يجعل القصة أكثر تشويقًا.</p>
+                    
+                        <li><i class="fas fa-microphone"></i> تسجيل القصة بصوتك</li>
+                        <p>يمكنك تسجيل القصة بصوتك الجميل لإضفاء لمسة شخصية ومميزة على الحكاية.</p>
+                    
+                        <li><i class="fas fa-lightbulb"></i> المساعدة في البدء</li>
+                        <p>إذا كنت لا تعرف كيف تبدأ، يقدم لك مُلهِم مجموعة من الأفكار الممتعة التي تساعدك على كتابة قصة رائعة.</p>
+                    
+                        <li><i class="fas fa-eraser"></i> تصحيح الأخطاء الإملائية</li>
+                        <p>يكتشف مُلهِم الأخطاء الإملائية في قصتك ويُبرزها بلون مميز، وعند الضغط عليها يقوم بتصحيحها تلقائيًا.</p>
+                    
+                        <li><i class="fas fa-pen"></i> المساعدة في إكمال القصة</li>
+                        <p>يطرح مُلهِم أسئلة مشوقة تلهمك أفكارًا جديدة وتساعدك على إكمال قصتك بسهولة.</p>
+                    
+                        <li><i class="fas fa-tags"></i> اقتراح عناوين مناسبة</li>
+                        <p>يقترح مُلهِم عناوين مميزة وجذابة تتناسب مع أحداث قصتك.</p>
+                    
+                        <li><i class="fas fa-tasks"></i> التحقق من عناصر القصة</li>
+                        <p>يفحص مُلهِم عناصر قصتك الأساسية ويُخبرك بما ينقصك، مع تقديم أسئلة وإرشادات ممتعة تساعدك على الإضافة.</p>
+                    
+                        <li><i class="fas fa-check-circle"></i> مراجعة نهائية للقصة</li>
+                        <p>يقوم مُلهِم بمراجعة قصتك بالكامل ويقترح تحسينات تجعلها أكثر جمالًا وتشويقًا.</p>
+                    
+                    </ul>
+                </div>            
+            </div>
+        </div>
+        
+        <!--  -->
+        <div class="accordion-item sections">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#saveStory" aria-expanded="false" aria-controls="collapseTwo">
+                    <i class="fa-regular fa-circle-question mark-icon"></i>
+                    كيف أحفظ قصتي؟
+                </button>
+            </h2>
+            <div id="saveStory" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>
+                        أثناء كتابة قصتك في صفحة الكتابة، ستجد في الأسفل مجموعة من الأزرار. اضغط على <span>(زر الحفظ)</span> لتتمكن من حفظ قصتك.
+                    </p>
+                    
+                </div>            
+            </div>
+        </div>
+
+
+        <!--  -->
+        <div class="accordion-item sections">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseuserStories" aria-expanded="false" aria-controls="collapseTwo">
+                    <i class="fa-regular fa-circle-question mark-icon"></i>
+                أين أجدد قصصي اللتي كتبتها؟
+                </button>
+            </h2>
+            <div id="collapseuserStories" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p>
+                        في صفحة <a href="writing/user-stories">قصصي</a>، يمكنك العثور على جميع قصصك السابقة. تستطيع قراءتها، تعديلها، أو حتى حذفها بكل سهولة.
+                    </p>
+                </div>            
+            </div>
+        </div>
+   
+    </div>
+    <!-- End Quseions -->
+
+    <!-- Contact Email -->
+    <div class=" intro contact w-50 position-relative rounded-4 p-4 my-5 mx-auto h-100 text-center">
+
+        {% if user.is_authenticated and user.gender == "أنثى" %}
+        <h4>هل تحتاجين المزيد من المساعدة؟</h4>
+        <button class="button mt-3">
+            <a href="mailto:mulhem2025gp@gmail.com">
+                <i class="fa-solid fa-envelope"></i> تواصلي معنا عن طريق الإيميل
+            </a>
+        </button>
+        {% else %}
+            <h4>هل تحتاج المزيد من المساعدة؟</h4>
+            <button class="button mt-3">
+                <a href="mailto:mulhem2025gp@gmail.com">
+                    <i class="fa-solid fa-envelope"></i> تواصل معنا عن طريق الإيميل
+                </a>
+            </button>
+        {% endif %}
+    
+    </div>
+    
+</div>
+{% endblock %}
+{% block script %}
+    <script>
+
+
+    </script>
+{% endblock %}

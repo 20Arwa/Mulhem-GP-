@@ -454,10 +454,41 @@
             </div>
         </div>
     </div>
+    <div class="back-activities text-start mt-5 mb-1"> 
+        <button class="back-activities-btn button main-button text-start"><i class="fa-solid fa-arrow-right-from-bracket"></i>  الرجوع للأنشطة</button>
+    </div>
 </div>
 {% endblock %}
 {% block script %}
 <script>
+     // Click On Back To Activites
+     document.querySelector(".back-activities-btn").addEventListener("click", () => {
+        // Check if at least one question is answered
+        if (
+            Array.from(document.querySelectorAll(".options button")).some(button => button.classList.contains("active-right") || button.classList.contains("active-wrong")) ||
+            Array.from(document.querySelectorAll(".quiz-wrapper .target")).some(img => img.classList.contains("active-right") || img.classList.contains("active-wrong")) ||
+            Array.from(document.querySelectorAll(".carousel-item:nth-of-type(2) button")).some(button => button.classList.contains("active-right") || button.classList.contains("active-wrong"))
+       ){
+            Swal.fire({
+                title: 'مغادرة النشاط',
+                text: "إذا غادرت الآن، قد تفقد إجاباتك الحالية. هل أنت متأكد أنك تريد المغادرة؟",
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'نعم',
+                cancelButtonText: 'لا، أود إكمال النشاط',
+                reverseButtons: true // Swaps the position of confirm and cancel buttons
+            }).then(async (result) => { // تأكد من جعل الدالة داخل then متزامنة
+                if (result.isConfirmed) {
+                        window.location.href = '/activities/all_activities';
+                    }
+                })
+            }
+            else {
+                window.location.href = '/activities/all_activities';
+            }
+    })
+
+
 // @@@@@@@@@@@@@@@@@@@@@@@@ Start Text 1 @@@@@@@@@@@@@@@@@@@@@@@@
     const myCarousel1 = document.querySelector('#carousel1');
     const carousel1 = new bootstrap.Carousel(myCarousel1, {

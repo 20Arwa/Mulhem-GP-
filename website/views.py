@@ -35,7 +35,7 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiOGRjOWM3NWUtYzUxZC00NmFiLTgxNjktMjczNTc5ZWExMjM4IiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzc5NTg2OTIsImV4cCI6MTczNzk2MjI5MiwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.ScWXfMoyEL7sxK9a4C-F8tElbS669vhqOHYeboDGbEhhsJUInN4PChKTRgpw3_XDm6h1OvX_LOc5E653VXKO2ln-KlJ_s6BC0aXa1ozcCDsBKtdWgUiV7MK9qnC8itycdIvKw8AcBtoBD7WJUeJ9GyA475galyBeuA5Tef__CgI1h8qKhwFhRWgAoY5ylGD4iizJbfCLOy9fMUN2LhHBjqRG6HE6mQC-1l9fpzGUWf8IUeoe5X75KSnDTxqW6ZI-FchNPEm3-ms3u9ponzVy_fPWmEWgpyAfewEZFCPuNh1shLJiKhTNArjjoYIdsVse8jVWZRtmdiPUyBVTzlHv0g",
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMDM3NTE3NzgtZmQ0Ny00NDE5LWFkOTYtMDRlNTMxMWZhMmY4IiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzgwMTk1NzcsImV4cCI6MTczODAyMzE3NywiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.dokOrOv-AhbAyfePeMjixMyUQDajxQohM9zLFbGnxgBbmkDzTIXsrer1ARdH0FlHMSvpErW04xk8JohCcZRZFBdagfEXsRUm-8cIJsUPHj6RIAKwxh2Tm2UOOGBuBnJnb93RR0ObX1-6nE1xs2puyLdwZ2lbcjj-2GSCR_i3rftNUGCx80x3iAHl0vrgYsZaPxGG1nXjIkd1ziECI8VuXq6kanhF8KFNcB2wZKeJKkkVRHFNWXHTmcY5f-VL-7wr09ocPOvB0QGXZMyvjXkVpjRbSln512Zy4kV64emAaUeQgdH7o58PuLufh94u9GkTi6IYrhiiNBfsrcp3Rl0MwQ"
     }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
@@ -58,6 +58,10 @@ def generate_AllamResponse(prompt, max_tokens):
 @views.route('/')
 def home():
     return render_template("home.html", user=current_user) 
+
+@views.route('/help')
+def help():
+    return render_template("help.html", user=current_user) 
 
 # Reading
 # our_library Page
@@ -175,13 +179,13 @@ def activitie_plac():
 # Types
 @views.route('/writing/writing-types')
 def writing_types():
-    return render_template("/writing/writing-types.html", url_for=url_for) 
+    return render_template("/writing/writing-types.html", url_for=url_for, user=current_user) 
 
 # Story Generator
 @views.route('/writing/story-generator')
 @login_required
 def storyGenerator():
-    return render_template("/writing/story-generator.html") 
+    return render_template("/writing/story-generator.html", user=current_user) 
 
 # Self Writing
 @views.route('/writing/self-writing')
@@ -344,7 +348,7 @@ def edit_user_story():
     
     print(story)
     # معالجة القصة (عرضها أو تعديلها)
-    return render_template('writing/edit_user_story.html', story=story)
+    return render_template('writing/edit_user_story.html', story=story, user=current_user)
 
 # Uddate User Story
 @views.route('/update-user-story', methods=['POST'])
@@ -393,8 +397,12 @@ def update_user_story():
         # إذا كان هناك صورة حالية للقصة (يتم حذفها أولًا)
         if story.imgSrc:
             current_image_path = os.path.join(current_app.root_path, 'static', story.imgSrc)
-            if os.path.exists(current_image_path):
-                os.remove(current_image_path)  # حذف الصورة القديمة
+            current_db_image_name = os.path.basename(story.imgSrc)
+
+            # إذا كان الاسم الجديد يختلف عن الاسم المخزن في قاعدة البيانات
+            if current_db_image_name != imageSrc:
+                if os.path.exists(current_image_path):  # إذا كان الملف موجودًا
+                    os.remove(current_image_path)  # حذف الملف القديم
 
         # تحقق إذا كانت الصورة الجديدة موجودة باسمها القديم
         if os.path.exists(old_name):
@@ -416,9 +424,7 @@ def update_user_story():
             old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), 'story', audio_src)
             new_name = os.path.join(current_app.root_path,'static/audio/users',str(user_id),'story',f"{user_id}_{story_id}_{pageNum}.mp3")
 
-            print(index,"index")
-            # التحقق من وجود صوت في المصفوفة
-             # التحقق إذا كان هناك ملف موجود في قاعدة البيانات
+            # التحقق إذا كان هناك ملف موجود في قاعدة البيانات
             if index < len(story.generAudios) and story.generAudios[index] != "":
                 current_audio_path = os.path.join(current_app.root_path, 'static', story.generAudios[index])
 
@@ -451,9 +457,7 @@ def update_user_story():
     print(editedGenertedAudiosSrcs)
     # طباعة المسارات الجديدة
 
-
-
-    #### تغيير اسم الملف إذا كان الصوت موجود ####
+    #### تغيير اسم الملف إذا كان الصوت المسجل موجود ####
     if recordedaudioSrc:
         # استخراج امتداد الملف
         ext = os.path.splitext(recordedaudioSrc)[1]  # مثال: .png أو .jpg
@@ -462,15 +466,24 @@ def update_user_story():
         old_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), 'record', recordedaudioSrc)
         new_name = os.path.join(current_app.root_path, 'static/audio/users', str(user_id), 'record',f"{user_id}_{story_id}{ext}")
 
-        # تحقق إذا كان الملف القديم موجودًا
-        if os.path.exists(new_name):
-            # حذف الصوت القديم إذا كانت موجودة
-            os.remove(new_name)
+        # التحقق من المسار الحالي في قاعدة البيانات
+        if story.audioSrc:
+            current_audio_path = os.path.join(current_app.root_path, 'static', story.audioSrc)
+            current_db_audio_name = os.path.basename(story.audioSrc)
 
-        os.rename(old_name, new_name)  # تغيير اسم الملف
-        # تحديث المسار في قاعدة البيانات
-        story.audioSrc = f"audio/users/{user_id}/record/{user_id}_{story_id}{ext}"
-        db.session.commit()
+            # إذا كان الاسم الجديد يختلف عن الاسم المخزن في قاعدة البيانات
+            if current_db_audio_name != recordedaudioSrc:
+                if os.path.exists(current_audio_path):  # إذا كان الملف موجودًا
+                    os.remove(current_audio_path)  # حذف الملف القديم
+
+        # تحقق إذا كان الملف القديم موجودًا
+        if os.path.exists(old_name):
+            os.rename(old_name, new_name)  # تغيير اسم الملف
+                # تحديث المسار في قاعدة البيانات
+            story.audioSrc = f"audio/users/{user_id}/record/{user_id}_{story_id}{ext}"
+            db.session.commit()
+        else:
+            return jsonify({"response": "Audio recorded file not found.", "file": old_name}), 404
 
     # تحديث بيانات القصة
     story.content = json.dumps(content)
@@ -959,8 +972,8 @@ def allam_completion():
     قصة الطفل: {data['message']}.
     Output:"""
 
-    result = generate_AllamResponse(prompt, 70)
-    # result = "أحسنت! قصتك جميلة جدًا. أين يمكن أن يكون أحمد؟ هل يساعد أصدقائه في المدرسة أم في الحي؟"
+    # result = generate_AllamResponse(prompt, 70)
+    result = "أحسنت! قصتك جميلة جدًا. أين يمكن أن يكون أحمد؟ هل يساعد أصدقائه في المدرسة أم في الحي؟"
     
     global result_cleaned 
 
@@ -1046,6 +1059,42 @@ def allam_elements():
 
     return jsonify({"response": result_cleaned}), 200  # إرجاع النتيجة بشكل صحيح
 
+
+# Story Completion
+@views.route('/allam-feedback', methods=['POST'])
+def allam_feedback():
+    data = request.json  # استلام البيانات من JavaScript
+    if not data or 'message' not in data or not data['message']:
+        return jsonify({"response": "Invalid request, 'message' is required."}), 400  # تحقق من البيانات المستلمة
+    prompt = f"""Input: راجع قصة الطفل، امدح قصته بعبارات تشجيعية ومحددة تبرز جمالها وأفكارها الإيجابية، ثم قدم اقتراحات بناءة لتحسين القصة بطريقة داعمة وموجهة.
+قصة الطفل: كان هناك طفل يدعى سامي. رأى عصفورًا صغيرًا ساقطًا من عشه. حمله سامي بلطف وقال: "سأعيدك إلى بيتك!" لكنه لم يعرف كيف. وضعه في صندوق صغير، لكنه نسي أن يطعمه. العصفور ظل يغرد، وسامي لم يفهم لماذا.
+Output:عمل مميز جدًا! قصتك تُظهر تعاطفًا رائعًا مع الحيوانات وتسلط الضوء على لطف سامي وحبه للمساعدة. أحببت الطريقة التي عبّرت بها عن محاولاته الصادقة لمساعدة العصفور، مما يجعل القصة مؤثرة ومليئة بالمشاعر.
+
+اقتراحات لتحسين القصة:  
+1. وضّح مشاعر سامي أكثر، مثل شعوره عندما رأى العصفور.  
+2. صف المكان الذي سقط فيه العصفور.  
+3. اجعل النهاية فيها حل، مثل أن سامي تعلم شيئًا جديدًا عن العناية بالحيوانات.              
+
+Input: راجع قصة الطفل، امدح قصته بعبارات تشجيعية ومحددة تبرز جمالها وأفكارها الإيجابية، ثم قدم اقتراحات بناءة لتحسين القصة بطريقة داعمة وموجهة.
+قصة الطفل: {data['message']}.
+Output:"""
+
+    result = generate_AllamResponse(prompt, 150)
+#     result =  '''قصة رائعة! لقد أظهرت لنا أهمية الصداقة والشجاعة في مواجهة المواقف الصعبة. أحببت كيف استخدم هانز ذكائه 
+# لحماية نفسه وكيف تعلم توم من الموقف.\n\nاقتراحات لتحسين القصة:\n1. صف مشاعر توم وهانز أثناء وبعد الموقف.\n2. أضف تفاصيل أكثر عن الغابة والدب، مثل حجمه ولونه.\n3. أظهر كيف تصالح توم وهانز بعد الموقف وكيف استفادا منه.  '''
+    
+    global result_cleaned 
+
+    if "Input:" in result:
+        # استخراج النص من البداية حتى كلمة "Input"
+        input_index = result.find("Input")  # إيجاد موقع الكلمة
+        result_cleaned = result[:input_index].strip()  # قص النص من البداية حتى الكلمة
+    else:
+        result_cleaned = result  # Or handle the error as needed
+    # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
+    if result is None:
+        return jsonify({"response": "Error processing request."}), 500
+    return jsonify({"response": result_cleaned}), 200  # إرجاع النتيجة بشكل صحيح
 
 
 # Activity 1 Laiala
