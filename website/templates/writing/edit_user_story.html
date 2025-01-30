@@ -3,7 +3,7 @@
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
 	<style>
-		.edit-user-story .cover-page .buttons button {
+		.edit-user-story .cover-page  {
 			display: block;
 		}
 	</style>
@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', function () {
 		document.querySelector(".cover-page .delete-coverImage-btn").style.display = "none";
 	}
 
-
+ 
 	const addPageBtn = document.querySelector(".add-page-icon"); // Add Page Button
 	const deletePageBtn = document.querySelector(".delete-page-icon"); // Delete Page Button
 
@@ -555,6 +555,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	if (coverImage.getAttribute("src") != "") {
 		document.querySelector(".no-cover-msg").style.opacity = 0;
 	} 
+	else {
+		document.querySelector(".no-cover-msg").style.opacity = 1;
+	}
 	
 	// On Change
 	const observer = new MutationObserver(() => {
@@ -1278,7 +1281,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			Swal.fire({
 				title: 'تمت معالجة طلبك',
 				icon: 'success',
-				confirmButtonText: 'تفقد عناصر قصتك',
+				confirmButtonText: 'تفقد المساعدة',
 				reverseButtons: true, 
 			})
 
@@ -1389,7 +1392,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			Swal.fire({
 				title: 'تمت معالجة طلبك',
 				icon: 'success',
-				confirmButtonText: 'تفقد عناصر قصتك',
+				confirmButtonText: 'تفقد العناوين المقترحة',
 				reverseButtons: true, 
 			})
 			
@@ -1509,7 +1512,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			Swal.fire({
 				title: 'تمت معالجة طلبك',
 				icon: 'success',
-				confirmButtonText: 'تفقد عناصر قصتك',
+				confirmButtonText: 'تفقد النتيجة',
 				reverseButtons: true, 
 			})
 			

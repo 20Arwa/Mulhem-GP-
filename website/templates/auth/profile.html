@@ -6,26 +6,22 @@
 {% block body %} 
 <div class="profile-container my-5">
     <h1 class="page-title container mb-4"><i class="fa-solid fa-circle-user user-icon fs-3"></i>ملفي الشخصي</h1>
-    <!-- نموذج الإدخال -->
     <form class="profile-form" id="profile-form">
         <label for="first-name">
             <i class="fa-solid fa-user"></i> الاسم الأول :</label>
         <div class="d-flex align-items-center justify-content-center mx-auto">
             <input type="text" name="first-name" maxlength="9" placeholder="جولي" value="{{user.first_name}}" disabled>
         </div>
-
         <label for="last-name">
             <i class="fa-solid fa-user"></i> الاسم الأخير : </label>
         <div class="d-flex align-items-center justify-content-center mx-auto">
             <input type="text" name="last-name" maxlength="10" placeholder=" الزهراني" value="{{user.last_name}}" disabled>
         </div>
-
         <label for="age">
             <i class="fa-solid fa-calendar"></i> العمر : </label>
         <div class="d-flex align-items-center justify-content-center mx-auto">
             <input type="number" name="age" min="8" max="10" placeholder=" 9" value="{{user.age}}" disabled>
         </div>
-
         <label for="gender">
             <i class="fa-solid fa-venus-mars"></i> الجنس : </label>
         <div class="d-flex align-items-center justify-content-center mx-auto">
@@ -34,13 +30,11 @@
                 <option value="ذكر" {% if user.gender == 'ذكر' %}selected{% endif %}>ذكر</option>
             </select>            
         </div>
-
         <label for="email">
             <i class="fa-solid fa-envelope"></i> الإيميل : </label>
         <div class="d-flex align-items-center justify-content-center mx-auto">
             <input type="email" name="email" placeholder=" LOOD@gmail.com " value="{{user.email}}" disabled>    
         </div>
-
         <label for="password">
             <i class="fa-solid fa-lock"></i> كلمة المرور : </label>
         <div class="d-flex align-items-center justify-content-center mx-auto">

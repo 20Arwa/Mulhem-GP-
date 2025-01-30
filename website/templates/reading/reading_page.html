@@ -31,7 +31,6 @@
                             {% else  %}
 							<input class="button title" type="text" name="title" placeholder="عنوان القصة" value="{{story.title}}" disabled>
                             {% endif %}
-
                             <!-- Cover Image -->
 							<div class="cover-img-container img-container">
                                 {% if story.imgSrc == "" %}
@@ -62,7 +61,6 @@
                     <section class="page">
                         <div class="front">
                             <div class="text">{{story.content[index]}}</div>
-
                             <!-- Put Audio If our_library Story -->
                             {% if reading_type == "our_library" %}
 								<audio class="w-175 rounded-4 mt-2" controls controlslist="nodownload noplaybackrate">
@@ -75,7 +73,6 @@
 								المتصفح الخاص بك لا يدعم عنصر الصوت
 							</audio>
 						    {% endif %}
-
                         </div>
                         <div class="back">
                             <div class="text">
@@ -83,7 +80,6 @@
                                     {{ story.content[index + 1] }}
                                 {% endif %}
                             </div>
-
 							<!-- Put Audio If our_library Story -->
 							{% if reading_type == "our_library" %}
 								{% if index + 1 < story.content|length %}
@@ -100,14 +96,12 @@
 								</audio>
 								{% endif %}
 							{% endif %}
-
                         </div>
                     </section>
                     {% endfor %}
 				</article>
 			</div>
 		</div>
-
 		<!-- Recorded Audio -->
 		<!-- User Stories Extra Content -->
 		{% if reading_type == "user_stories" %}
@@ -156,31 +150,27 @@
 			<div class="edit-story-container m-0 mx-auto">
 				<h1> <i class="fa-solid fa-pen user-icon"></i> اضف لمستك الى القصة </h1>   
 				<form id="storyForm">
+					
+					<label class="story-label"> <i class="fa-solid fa-user-minus"></i> احذف شخصية من شخصيات القصة: </label>
+					<input type="text" name="deletcharcter" id="deletcharcter" class="story-input" maxlength="200" placeholder="من هي الشخصية؟">
+					
+					<div id="characters" class="story-characters-group"></div>
+					<button type="button" class="story-btn-small" onclick="addCharacter()"> <i class="fa-solid fa-user-plus"></i> إضافة شخصية جديدة </button>
 				
-				<label class="story-label"> <i class="fa-solid fa-user-minus"></i> احذف شخصية من شخصيات القصة: </label>
-				<input type="text" name="deletcharcter" id="deletcharcter" class="story-input" maxlength="200" placeholder="من هي الشخصية؟">
+					<div class="story-spacing"></div>
+					<label class="story-label"> <i class="fa-solid fa-exchange-alt"></i> تغير حدث في القصة:</label>
+					<input type="text" name="event" id="event" class="story-input" maxlength="200" placeholder="ما الحدث الذي تود تغيره؟">
+					
+					<div class="story-spacing"></div>
+					<label class="story-label"> <i class="fa-solid fa-pen-to-square"></i> تغير بداية القصة: </label>
+					<textarea id="beginning" class="story-input-textarea" maxlength="250" placeholder="كيف ستبدأ القصة؟"></textarea>
+					
+					<label class="story-label"> <i class="fa-solid fa-pen-to-square"></i> تغير نهاية القصة: </label>
+					<textarea id="End" class="story-input-textarea" maxlength="250" placeholder="كيف ستنتهي القصة؟"></textarea>
 				
-				<div id="characters" class="story-characters-group">
-				<!-- Initially empty; characters will be added here -->
-				</div>
-				
-				<button type="button" class="story-btn-small" onclick="addCharacter()"> <i class="fa-solid fa-user-plus"></i> إضافة شخصية جديدة </button>
-			
-				<div class="story-spacing"></div>
-				<label class="story-label"> <i class="fa-solid fa-exchange-alt"></i> تغير حدث في القصة:</label>
-				<input type="text" name="event" id="event" class="story-input" maxlength="200" placeholder="ما الحدث الذي تود تغيره؟">
-				
-				<div class="story-spacing"></div>
-				<label class="story-label"> <i class="fa-solid fa-pen-to-square"></i> تغير بداية القصة: </label>
-				<textarea id="beginning" class="story-input-textarea" maxlength="250" placeholder="كيف ستبدأ القصة؟"></textarea>
-				
-				<label class="story-label"> <i class="fa-solid fa-pen-to-square"></i> تغير نهاية القصة: </label>
-				<textarea id="End" class="story-input-textarea" maxlength="250" placeholder="كيف ستنتهي القصة؟"></textarea>
-			
-				<div class="error-msg text-center" style="opacity: 0; transition: opacity 0.3s;">يجب إدخال النصوص باللغة العربية فقط</div>
-				
-				<button type="button" class="story-btn-main" onclick="submitStory()" >أنشئ القصة</button>
-			</form>
+					<div class="error-msg text-center" style="opacity: 0; transition: opacity 0.3s;">يجب إدخال النصوص باللغة العربية فقط</div>
+					<button type="button" class="story-btn-main" onclick="submitStory()" >تعديل القصة</button>
+				</form>
 			</div>
 		</div>
 </div>

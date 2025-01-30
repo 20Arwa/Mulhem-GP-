@@ -35,7 +35,7 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMDM3NTE3NzgtZmQ0Ny00NDE5LWFkOTYtMDRlNTMxMWZhMmY4IiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzgwMTk1NzcsImV4cCI6MTczODAyMzE3NywiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.dokOrOv-AhbAyfePeMjixMyUQDajxQohM9zLFbGnxgBbmkDzTIXsrer1ARdH0FlHMSvpErW04xk8JohCcZRZFBdagfEXsRUm-8cIJsUPHj6RIAKwxh2Tm2UOOGBuBnJnb93RR0ObX1-6nE1xs2puyLdwZ2lbcjj-2GSCR_i3rftNUGCx80x3iAHl0vrgYsZaPxGG1nXjIkd1ziECI8VuXq6kanhF8KFNcB2wZKeJKkkVRHFNWXHTmcY5f-VL-7wr09ocPOvB0QGXZMyvjXkVpjRbSln512Zy4kV64emAaUeQgdH7o58PuLufh94u9GkTi6IYrhiiNBfsrcp3Rl0MwQ"
+        "Authorization": "Bearer  eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiYjEyYWZlYWMtMjMyOS00YTkzLWJhMjYtMzVmZDdiMTQ2MjBjIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzgyNTYxODksImV4cCI6MTczODI1OTc4OSwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.LP3ISWgs2n8qXYfM_-saiB-Rd6H2qYiiVanPHtJluuv43JhTUY16ZaB023Ftn3DOf5_ICtmSFo0Cg_7sGeXuS0oYBX9xp95t9M1_pKWRgmVCQK4EDgdsPrl3eSLiZMhTIYxzazRvRmmSjDnTQrBU8zeMEnWiTKLw0uBf16tbesn1vTeG2guB6RTmrvOmlUGf1iqc1abjUh65jWH5_vxGhjcPoQlXrSCDPyPDPVxRmM3vyKOMoGK2ARrZ8pkOUvJ_HqNLOfRe_cMtetQiqP7vCDdYLBEKtxqumvw6xOKt9wUh95Li_GVoqUDKlJCvpsJKe3MKPbYObb3YHETAK2kChA",
     }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
@@ -619,7 +619,9 @@ Output:"""
 # Output:"""
     
     
-    result = generate_AllamResponse(promptAllam, 250) # Get Prompt For Image 
+    # result = generate_AllamResponse(promptAllam, 250) # Get Prompt For Image 
+    result = ''' ["True", "A young boy named Omar is described as having a love for birds. He is playing 
+in a park when he hears a small sound and discovers a tired bird on the ground. He carefully picks it up and takes it home to nurse it back to health. The bird eventually recovers and is able to fly, but it returns every day to sing on Omar\'s window, as if to express gratitude."] '''
     result = ast.literal_eval(result)  # تحويل النص إلى مصفوفة
     global result_cleaned 
     # result =""
@@ -636,7 +638,7 @@ Output:"""
         result_cleaned = result[1]  # Or handle the error as needed
 
     # Send To Colab And Recive Image
-    colab_url = "https://d642-34-125-61-194.ngrok-free.app/colab-message"  # رابط ngrok من Colab
+    colab_url = "https://4460-34-125-36-235.ngrok-free.app/colab-message"  # رابط ngrok من Colab
     prompt = {"message": f"{result_cleaned}"} # Send Prompt From Allam
     # prompt = {"message": " A white duck is sleeping under a fruitful beech tree in a forest. The tree is filled with beech nuts, and the sunlight filters through the leaves, creating a peaceful and serene atmosphere. Suddenly, a beech nut falls from the tree and lands on the duck's head, waking it up with a start. The duck, initially frightened, realizes that it was just a falling nut and not a hunter's shot."} # Send Prompt From Allam
     # إرسال الطلب إلى Colab
@@ -972,8 +974,8 @@ def allam_completion():
     قصة الطفل: {data['message']}.
     Output:"""
 
-    # result = generate_AllamResponse(prompt, 70)
-    result = "أحسنت! قصتك جميلة جدًا. أين يمكن أن يكون أحمد؟ هل يساعد أصدقائه في المدرسة أم في الحي؟"
+    result = generate_AllamResponse(prompt, 70)
+    # result = "أحسنت! قصتك جميلة جدًا. أين يمكن أن يكون أحمد؟ هل يساعد أصدقائه في المدرسة أم في الحي؟"
     
     global result_cleaned 
 

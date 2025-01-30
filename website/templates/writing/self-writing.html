@@ -26,13 +26,12 @@
 							{% else %}
 								<input class="button title" type="text" name="title" placeholder="عنوان القصة">
 							{% endif %}
-
 							<div class="cover-img-container img-container">
-								{% if story_type == "قصة معدلة" %}
+								<!-- {% if story_type == "قصة معدلة" %}
 								<img class="img cover-img" src="../../static/{{allam_story['imgSrc']}}"> 
 								{% else %}
-									<img class="img cover-img" src=""> 
-								{% endif %}
+								{% endif %} -->
+								<img class="img cover-img" src=""> 
 								<div class="no-cover-msg">لا يوجد غلاف للقصة. <br>اضغط أحد الزرين أدناه ليُنشئ مُلهِم صورة لك، <br>أو ارفع صورة من جهازك.</div>
 							</div>
 							<div class="buttons d-flex align-items-center justify-content-center">
@@ -149,15 +148,12 @@
 		<div class="sitting-buttons">
 			<div class="sitting-error-msg error-msg my-3">رسالة الخطأ</div>
 			<div class="d-flex align-items-center justify-content-center column-gap-2">
-				
 				<div class="dropdown allam-help position-relative">
-
 					{% if user.gender == "أنثى"%}
 					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-circle-question"></i>اطلبي مساعدة مُلهِم</button>
 					{% else %}
 					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-circle-question"></i>اطلب مساعدة مُلهِم</button>
 					{% endif %}
-
 					<ul class="dropdown-menu text-center">
 						<li><a class="dropdown-item starting">🤔 لا أعرف عن ماذا أكتب</a></li>
 						<li><a class="dropdown-item completion">✍️ لا أعرف كيف أكمل قصتي</a></li>
@@ -167,7 +163,6 @@
 					</ul>
 					<img class="mulhem position-absolute" src="../../static/images/mulhem-no-crown.png" alt="ملهم">
 				</div>
-
 				<button class="add-page-icon">
 					<i class="fa-solid fa-circle-plus"></i>
 					إضافة صفحة
@@ -176,16 +171,12 @@
 					<i class="fa-solid fa-circle-minus"></i>
 					حذف صفحة
 				</button>
-
-
 				<div class="record d-flex flex-column align-items-center">
 					<div class="display-voice-record" data-gender="{{user.gender}}"></div>
 					<div class="d-flex">
 						<div class="controllers-voice-record"></div>
 					</div>
 				</div>
-				
-				<!-- <button class="later-btn"><i class="fa-solid fa-stopwatch"></i>سأكمل لاحقا</button> -->
 				<button class="out-btn"><i class="fa-solid fa-right-from-bracket"></i>خروج</button>
 				<button class="save-btn"><i class="fa-solid fa-floppy-disk"></i>حفظ</button>
 			</div>
@@ -579,6 +570,14 @@ document.addEventListener('DOMContentLoaded', function () {
 	const uploadInput = document.querySelector('.cover-page .upload-coverImage-btn input');
 	const deleteCoverBtn = document.querySelector(".cover-page .delete-coverImage-btn");
 	const coverImage = document.querySelector(".cover-page .cover-img-container img");
+
+	// When Enter The Page
+	if (coverImage.getAttribute("src") != "") {
+		document.querySelector(".no-cover-msg").style.opacity = 0;
+	} 
+	else {
+		document.querySelector(".no-cover-msg").style.opacity = 1;
+	}
 
 	// No Cover Message
 	const observer = new MutationObserver(() => {
@@ -1322,7 +1321,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			Swal.fire({
 				title: 'تمت معالجة طلبك',
 				icon: 'success',
-				confirmButtonText: 'تفقد عناصر قصتك',
+				confirmButtonText: 'تفقد المساعدة',
 				reverseButtons: true, 
 			})
 			
@@ -1435,7 +1434,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			Swal.fire({
 				title: 'تمت معالجة طلبك',
 				icon: 'success',
-				confirmButtonText: 'تفقد عناصر قصتك',
+				confirmButtonText: 'تفقد العناوين المقترحة',
 				reverseButtons: true, 
 			})
 
@@ -1559,7 +1558,7 @@ document.addEventListener('DOMContentLoaded', function () {
 			Swal.fire({
 				title: 'تمت معالجة طلبك',
 				icon: 'success',
-				confirmButtonText: 'تفقد عناصر قصتك',
+				confirmButtonText: 'تفقد النتيجة',
 				reverseButtons: true, 
 			})
 			

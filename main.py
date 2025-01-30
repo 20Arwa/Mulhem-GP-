@@ -1,8 +1,6 @@
-# This File To Run The Server
-from website import create_app # نقدر نسوي امبورت بهذا الشكل لانه اي شي داخل مجلد الويبسايت يصير عبارة عن باكج
+from website import create_app 
 
 app = create_app()
 
-if __name__ == '__main__': # يعني ما يسوي رن للبروجمت إلا إذا سوينا رن دايركت رن لهذا الملف
+if __name__ == '__main__':
     app.run(debug=True)
-    

@@ -384,6 +384,7 @@
   color: var(--main-very-dark);
   background-color: transparent;
   border: none;
+  background: none;
 }
 .response-starting .carousel .carousel-control-prev i,
 .response-starting .carousel .carousel-control-next i {

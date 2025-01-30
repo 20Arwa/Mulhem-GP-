@@ -4,15 +4,10 @@
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
 {% endblock %}
-
-
-
 {% block landing %}
- <!-- Landing -->
- <div class="home-landing">
+<!-- Landing -->
+<div class="home-landing">
   <div class="content container d-flex justify-content-between">
-
-    <!-- Text -->
     <!-- If User Logged In -->
     {% if user.is_authenticated %}
       <div class="text thought w-50">
@@ -24,8 +19,6 @@
         <p class="w-75 mx-auto"><p> استمتع بكتابة قصصك، تطوير مهاراتك الإبداعية، <br>واكتشاف عالم القراءة وأنشطة الكتابة الممتعة.<br> قصتك بانتظار أن تُكتب!</p></p>
         {% endif %}
       </div>
-      
-      
       <!-- If User Not Logged In -->
       {% else %}
       <div class="text thought un-loged w-50">
@@ -38,16 +31,11 @@
         </div>
       </div>
       {% endif %}
-
-
-
-     <!-- Mulhem -->
-     <div class="img position-relative">
+      <!-- Mulhem -->
+      <div class="img position-relative">
       <img src="../static/images/mulhem-hi.png" alt="مُلهِم" class="mulhem">
     </div>
-    
   </div>
-
   <div class="wavy"></div>
 </div>
 {% endblock %}
@@ -55,20 +43,15 @@
 {% block body %}
 <div class="home">
   <div class="section-1 my-5">
-
   <div class="line-container mb-3">
     <div class="line"></div>
-
-    
     {% if user.is_authenticated and user.gender == "أنثى" %}
       <span class="line-text"> اقرئي القصص وعدّليها</span>
       {% else %}
       <span class="line-text"> اقرأ القصص وعدّلها</span>
     {% endif %}
-
     <div class="line"></div>
   </div>
-  
   <div class ="section-container">
     <div class="story-box our" id="7">
       <a>
@@ -83,7 +66,6 @@
         <p>علاء الدين و المصباح السحري</p>
     </a>
   </div> 
-  
   </div>
   <div class="story-box">
     <a href="../reading/our_library" target="_blank">
@@ -109,44 +91,39 @@
   <section>
 
 
-    <div class="section-2 mb-5">
+  <div class="section-2 mb-5">
     <div class="section-container">
-  <div class="story-box">
-    <div calss=" img-e">
-    <a href="../activities/all_activities" target="_blank">
-      
-        <img class="img-icon" src="/static/images/teacher1.png" alt=" دروس الكتابة"  height="270px"  width="250px"  >
-        <p>لنتعلم أنشطة الكتابة معاً</p>
-    </a>
-  </div> 
-  
-  </div>
-  
-  
-  <div class="story-box">
-    <a href="/writing/story-generator" target="_blank">
-      <img class="img-icon" src="/static/images/generate-icon.png" alt="  انشاء قصة "    height="270px"  width="250px"   max-width="100%" >
-      {% if user.is_authenticated and user.gender == "أنثى" %}
-      <p> دع مُلهِم يكتب لكِ قصة </p>
-      {% else %}
-      <p> دع مُلهِم يكتب لك قصة </p>
-      {% endif %}
-    </a>
-  </div>
-  
-  <div class="story-box">
-    <a href="/writing/self-writing" target="_blank">
-        <img class="img-icon" src="/static/images/writing.png" alt="أبدع واكتب قصة "  height="270px"  width="250px"   max-width="100%" >
-        {% if user.is_authenticated and user.gender == "أنثى" %}
-        <p>أبدعي واكتبي قصة </p>
-        {% else %}
-        <p>أبدع واكتب قصة </p>
-        {% endif %}
-    </a>
-  </div>
-   
-  </div>
+      <div class="story-box">
+        <div calss=" img-e">
+        <a href="../activities/all_activities" target="_blank">
+          
+            <img class="img-icon" src="/static/images/teacher1.png" alt=" دروس الكتابة"  height="270px"  width="250px"  >
+            <p>لنتعلم أنشطة الكتابة معاً</p>
+        </a>
+        </div> 
+      </div>
+      <div class="story-box">
+        <a href="/writing/story-generator" target="_blank">
+          <img class="img-icon" src="/static/images/generate-icon.png" alt="  انشاء قصة "    height="270px"  width="250px"   max-width="100%" >
+          {% if user.is_authenticated and user.gender == "أنثى" %}
+          <p> دع مُلهِم يكتب لكِ قصة </p>
+          {% else %}
+          <p> دع مُلهِم يكتب لك قصة </p>
+          {% endif %}
+        </a>
+      </div>
+      <div class="story-box">
+        <a href="/writing/self-writing" target="_blank">
+            <img class="img-icon" src="/static/images/writing.png" alt="أبدع واكتب قصة "  height="270px"  width="250px"   max-width="100%" >
+            {% if user.is_authenticated and user.gender == "أنثى" %}
+            <p>أبدعي واكتبي قصة </p>
+            {% else %}
+            <p>أبدع واكتب قصة </p>
+            {% endif %}
+        </a>
+      </div>
     </div>
+  </div>
     </section>
 </div>
 <body>

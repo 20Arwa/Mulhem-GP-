@@ -70,7 +70,7 @@
                         </h2>
                     </div>
                     <div class="modal-body">قصتك قصيرة جدًا! حاول إضافة المزيد من التفاصيل من حياتك اليومية، مثل المواقف التي مررت بها، الأشخاص الذين قابلتهم، أو الأماكن التي زرتها. أضف لمستك الخاصة لخلق قصة أكثر إبداعًا وواقعية.</div>
-                    <button type="button" class="btn button main-button mb-4 " data-bs-dismiss="modal">سأضيف المزيد!</button>
+                    <button type="button" id="myInput" class="btn button main-button mb-4 " data-bs-dismiss="modal">سأضيف المزيد!</button>
                 </div>
             </div>
         </div>
@@ -87,6 +87,16 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
+
+
+        const myModal = document.getElementById('modalWarning')
+        const myInput = document.getElementById('myInput')
+
+        myModal.addEventListener('shown.bs.modal', () => {
+        myInput.focus()
+        })
+
+
     // Go Back To Activties Button
     document.querySelector(".back-activities-btn").addEventListener("click", () => {
         console.log("dlkfnskl")
@@ -126,10 +136,17 @@
                 confirmButtonText: 'موافق',
                 reverseButtons: true,
             });
+            return;
         }
         else if (textLength < 50) {
-            var warningModal = new bootstrap.Modal(document.getElementById('modalWarning'));
-            warningModal.show();
+            Swal.fire({
+                title: 'قصتك قصيرة جدًا! ',
+                text: "حاول إضافة المزيد من التفاصيل من حياتك اليومية، مثل المواقف التي مررت بها، الأشخاص الذين قابلتهم، أو الأماكن التي زرتها.",
+                icon: 'error',
+                confirmButtonText: 'موافق',
+                reverseButtons: true,
+            });
+            return;
         } 
         if (checkForbiddenWords(textarea.value)) {
 			return;
@@ -168,14 +185,21 @@
 
                 // Right Answer
                 if (result[0] == "True") {
-                      // Show the modal if the input is valid
-                        var modal = new bootstrap.Modal(document.getElementById('modal3'));
-                        modal.show();
-                        // Call bigConfetti after the modal is shown
-                        bigConfetti();
-                        // Light On The Lamb
-                        // Light On Based on Response
-                        document.querySelector(".form-floating .fa-lightbulb ").classList.add("active");
+                    bigConfetti();
+                    Swal.fire({
+                        title: "⭐ إجابة صحيحة ⭐",
+                        text: "رائع! لقد أجبت بشكل صحيح.",
+                        imageUrl: "../../static/images/applause.png",
+                        imageWidth: 120,
+                        imageHeight: 120,
+                        showCancelButton: true, // إظهار زر الإلغاء
+                        confirmButtonText: "عودة للأنشطة", // زر التأكيد
+                        cancelButtonText:"كتابة قصة جديدة",
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/activities/all_activities';
+                        }
+                    });
                 }
                 // Wrong Answer
                 else {
@@ -189,7 +213,6 @@
                 }
             } catch (error) {
                 Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
-                console.log(error.message)
                 Swal.fire({
                     title: 'خطأ!',
                     text: error.message,

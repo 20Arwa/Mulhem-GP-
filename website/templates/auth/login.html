@@ -20,22 +20,18 @@
     <div class="hello-msg text-center d-flex align-items-center w-50 rounded-end-2 pe-4 position-relative">
         <div class="text w-75">
             <h4 class="mb-4">مرحبا بعودتك إلى مُلهِم!</h4>
-            <!-- <p>استمر في رحلتك الإبداعية واكتشف المزيد من القصص والإلهام.</p> -->
         </div>
         <img class="mulhem position-absolute" src="../../static/images/mulhem-hi-2.png" alt="ملهم">
     </div>
     <form method="POST" id="sign-up" class="d-flex flex-column align-items-center m-4 p-4 py-2 ps-5 w-50">
         <h2 class="mb-5">تسجيل دخول</h2>
-       
         <label for="email">البريد الإلكتروني</label>
         <input type="text" name="email" placeholder="a12@gmail.com">
-
         <div class="password-container w-100 position-relative">
             <label for="password">كلمة المرور</label>
             <input id="password-input" type="password" name="password" maxlength="128">
             <i id="toggle-password" class="fas fa-eye-slash toggle-password"></i>
         </div>
-
         <div class="error-msg">رسالة خطأ</div>
         <input type="submit" class="button main-button" value="تسجيل دخول" onclick="checkInputs()" class="btn btn-primary" id="liveAlertBtn">
         <div class="have-account mt-2">

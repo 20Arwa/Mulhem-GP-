@@ -37,3 +37,8 @@
 .reading-page .response.edit-availble-story{
     width: 60%;
 }
+.reading-page .story-btn-main,
+.reading-page .story-btn-small{
+    background: none;
+    background-color: #7b4e97 !important;
+}

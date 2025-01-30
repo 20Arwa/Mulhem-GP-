@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% block title %}قصصي{% endblock %}
 {% block styles %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/reading/our_library.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/user-stories.css') }}">
@@ -6,7 +7,6 @@
 
 {% block body %}
 <div class="container user-stories our-library-container" >
-
     <!-- If No Story -->
     {% if stories|length == 0 %}
     <div class="no-stories p-4 rounded-4 text-center">
@@ -15,7 +15,6 @@
         <a href="../writing/writing-types"><button class="go-write button main-button mt-3">اذهب لصفحة الكتابة</button></a>
     </div>
     {% endif %}
-
 {% for story in stories %}
     <div class="story-box" >
                 <!-- Cover Image -->
@@ -27,14 +26,12 @@
                 {% else %}
                 <img class="cover" src="/static/{{ story['imgSrc'] }}" alt="صورة الغلاف">
                 {% endif %}
-
                 <!-- Title -->
                 {% if story['title'] == None %}
                 <p>بدون عنوان</p>
                 {% else  %}
                 <p>{{story['title']}}</p>
                 {% endif %}
-
                 <!-- Story Type -->
                 <p class="story-type" story-type="{{story['type']}}">نوع القصة: <span>{{story['type']}}</span></p>
                 <div class="buttons text-center mt-3">
@@ -43,7 +40,6 @@
                     <button class="button main-button delete-story" id="{{story['id']}}"><i class="fa-solid fa-trash-can"></i>حذف</button>
                 </div>
         </div>
-        
         {% endfor %}
     </div>
 {% endblock %}
