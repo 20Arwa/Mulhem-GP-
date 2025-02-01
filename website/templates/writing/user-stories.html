@@ -16,6 +16,7 @@
     </div>
     {% endif %}
 {% for story in stories %}
+
     <div class="story-box" >
                 <!-- Cover Image -->
                 {% if story['imgSrc'] is none or story['imgSrc'] | trim == "" %}
@@ -41,6 +42,8 @@
                 </div>
         </div>
         {% endfor %}
+
+
     </div>
 {% endblock %}
 {% block script %}

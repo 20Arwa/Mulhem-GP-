@@ -129,6 +129,26 @@
     font-size: 21px;
     color: var(--font-3);
 }
+.quiz-wrapper .drag-options button {
+    animation: moveUpDown 4s ease-in-out infinite; /* التأثير يستمر في التكرار */
+}
+.quiz-wrapper .target button {
+    border: none; /* التأثير يستمر في التكرار */
+}
+.quiz-wrapper .drag-options li:nth-of-type(2) button {
+    animation-delay: 3s; 
+}
+.quiz-wrapper .drag-options li:nth-of-type(3) button {
+    animation-delay: 5s; 
+}
+@keyframes moveUpDown {
+    0% { transform: translateY(0); }
+    40% { transform: translateY(-10px); } /* يتحرك للأعلى */
+    50% { transform: translateY(-10px); } /* يبقى في الأعلى */
+    90% { transform: translateY(0); } /* يعود للأسفل */
+    100% { transform: translateY(0); } /* يبقى في الأسفل */
+  }
+  
 
 /* @@@@@@@@@@@@@ Text Sound Icon @@@@@@@@@@@@@ */
 i.text-sound {
@@ -141,6 +161,7 @@ i.text-sound {
 i.text-sound:hover {
     opacity: 100%;
 }
+
 
 /* @@@@@@@@@@@@@ Go Back To Activites Button @@@@@@@@@@@@@ */
 .back-activities {
@@ -711,6 +732,7 @@ i.text-sound:hover {
 .plac-container .carousel-control-next,
 .plac-container .carousel-control-prev{
     width: 0 !important;
+    top: 50% !important;
 }
 .plac-container .carousel-control-next {
     left: -24px !important;

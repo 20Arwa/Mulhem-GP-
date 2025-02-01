@@ -48,6 +48,12 @@ document.addEventListener('DOMContentLoaded', function () {
                         audio.currentTime = 0; // Reset audio to the start
                         audio.play();
 
+                        // Remove Animation From Buttons
+                        quizWrapper.querySelectorAll(".drag-options button").forEach(btn => {
+                            btn.style.animation = "none"; // يوقف الأنيميشن فقط عن الخيارات في نفس السؤال
+                        });
+
+                        
                         // Confetti Class
                         setTimeout(() => {
                             targetEle.parentElement.classList.add('active'); // Spread confetti
@@ -60,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                         targetEle.classList.remove("active-wrong"); // Remove wrong reaction
                         targetEle.classList.add("active-right"); // Correct reaction
-                        targetEle.style.backgroundColor = "var(--main-dark)"; // Change background
+                        targetEle.style.background = "var(--gradient-button)"; // Change background
                         option.draggable = false;
                         targetEle.removeEventListener('dragover', null);
                         targetEle.removeEventListener('drop', null);
@@ -81,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
                         audio.play();
                     }
                 });
-
                 answersLeft.push(answerValue);
             }
         });

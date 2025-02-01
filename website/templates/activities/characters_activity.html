@@ -401,6 +401,10 @@
     const prevButton = document.querySelector('#carouselPrev');
     prevButton.style.display = 'none';
     myCarousel.addEventListener('slid.bs.carousel', (event) => {
+        // Move User To Up
+        var offsetTop =   document.querySelector('.characters_activity .carousel').getBoundingClientRect().top + window.scrollY - 20;
+        window.scrollTo({top: offsetTop,behavior: 'smooth'});
+
         // Hide Tooltips
         var tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
         // التكرار على كل عنصر تولتيب وإخفاؤه
@@ -432,15 +436,8 @@
                     allTrue = true;
                     bigConfetti(); // Turn On Big Confitte
                     document.querySelector(".section-5 .allQues-error-msg").style.opacity = 0;
-                    // Enable Go Back To Activiy Button 
-                    //document.querySelector(".section-5 .go-back").style.opacity = '100%'; 
-                    //document.querySelector(".section-5 .go-back").setAttribute("href", "../activities/all_activities");
                 }
                 else {
-                // Disable Go Back To Activiy Button 
-               // document.querySelector(".section-5 .go-back").style.opacity = '50%';
-                //document.querySelector(".section-5 .go-back").setAttribute("href", "#");
-                // Show Error Message In Last Item
                 document.querySelector(".section-5 .allQues-error-msg").style.opacity = 1;
             }
         } else {
@@ -504,7 +501,7 @@
         // Button Content Under The Image
         document.querySelector("#carouselCaracthers .section-3 .question:last-of-type div p > button").innerHTML = "الثعلب";
         document.querySelector("#carouselCaracthers .section-3 .question:last-of-type div p > button").style.color = "var(--font-4)";
-    })
+    }) 
 
 
     // @@@@@@@@@ Fill In The Blank Question @@@@@@@@@

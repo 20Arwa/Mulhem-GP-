@@ -69,6 +69,9 @@
                 {% if current_user.is_authenticated %} <!-- Show Those Links If User Logged In -->
                 <a class="profile ms-3" href="{{ url_for('auth.profile') }}" alt="المساعدة"><button type="button"><i class="fa-solid fa-circle-user"></i></button></a>
                 <a href="{{ url_for('auth.logout') }}"><button type="button">تسجيل الخروج</button></a>
+                {% else %} 
+                <a href="{{ url_for('auth.signUp') }}" class="ms-3"><button type="button">إنشاء حساب</button></a>
+                <a href="{{ url_for('auth.login') }}"><button type="button">تسجيل دخول</button></a>
                 {% endif %} 
               </div>
           </div>

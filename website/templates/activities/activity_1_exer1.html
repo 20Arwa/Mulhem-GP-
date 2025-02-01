@@ -29,10 +29,10 @@
                         <i class="fa-regular fa-comment fs-5 ms-1"></i>ما هي الفكرة الرئيسية في هذه القصة ؟
                     </h5>
                     <div class="options">
-                        <button class="wrong wrong-button button main-button m-1 " onclick="optionClick1(this)">
+                        <button class="wrong wrong-button button main-button m-1 " onclick="optionClick1(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="ليلى ذهبت لبيت جدتها لايصال الطعام">
                             <i class="fa-solid fa-lightbulb ms-1"></i>ليلى تريد أن تترك منزلها وتذهب بعيدًا
                         </button>
-                        <button class="wrong wrong-button button main-button m-1" onclick="optionClick1(this)">
+                        <button class="wrong wrong-button button main-button m-1" onclick="optionClick1(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="القصة تخبرنا أن الذئب شرير">
                             <i class="fa-solid fa-lightbulb ms-1"></i>القصة تخبرنا كيف نطعم الذئب
                         </button>
                         <div class="confetti-right confetti-click">
@@ -68,7 +68,7 @@
                                     <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
                                     <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
                                 </div>
-                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick1(this)">
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick1(this)" >
                                     <i class="fa-solid fa-check right-icon fs-3"></i>
                                 </button>
                             </div>
@@ -98,7 +98,7 @@
                     </div>
                 </div>
                 <div class="carousel-item quiz-wrapper">
-                    <h4 class="prompt mb-4 text-end">قم بسحب الإجابة الصحيحة وأفلتها داخل المربع:</h4>
+                    <h4 class="prompt mb-4">قم بسحب الإجابة الصحيحة وأفلتها داخل المربع:</h4>
                     <h5 class="my-3 d-flex justify-content-center align-items-center"> 
                         <i class="fa-regular fa-comment fs-5 ms-1"></i>
                         هل هذه القصة حقيقية أو خيالية؟
@@ -125,7 +125,7 @@
                         <i class="fa-regular fa-comment fs-5 ms-1"></i>كيف عرفت أن القصة خيالية، وليست واقعية؟
                     </h5>
                     <div class="options">
-                        <button class="wrong wrong-button button main-button m-1" onclick="optionClick1(this)">
+                        <button class="wrong wrong-button button main-button m-1" onclick="optionClick1(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="ليلى إنسانة لذا تستطيع المشي والتكلم">
                             <i class="fa-solid fa-lightbulb ms-1"></i>لأن ليلى تمشي وتتكلم
                         </button>
                         <div class="confetti-right confetti-click">
@@ -140,46 +140,21 @@
                             <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
                             <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
                         </div>
-                        <button class="wrong wrong-button button main-button m-1" onclick="optionClick1(this)">
+                        <button class="wrong wrong-button button main-button m-1" onclick="optionClick1(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="الصياد قوي، لذا يستطيع هزيمة الذئب">
                             <i class="fa-solid fa-lightbulb ms-1"></i>لأن الصياد هزم الذئب
                         </button>
                     </div>
                     <div class="allQues-error-msg mt-3 text-danger">قم بالإجابة على جميع الأسئلة لتنتقل إلى القسم التالي</div>
                 </div>
             </div>
-            <button class="carousel-control-prev" type="button" id="carouselPrev1"  data-bs-target="#carousel1" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" id="carouselPrev1"  data-bs-target="#carousel1" data-bs-slide="prev" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط للانتقال إلى الجزء السابق">
                 <i class="fa-regular fa-circle-right"></i>
                 <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" id="carouselNext1" data-bs-target="#carousel1" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" id="carouselNext1" data-bs-target="#carousel1" data-bs-slide="next" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط للانتقال إلى الجزء التالي">
                 <i class="fa-regular fa-circle-left"></i>
                 <span class="visually-hidden">Next</span>
             </button>
-        </div>
-    </div>
-    <!-- Modal1 : Shows When Text1 Questions Are Done -->
-    <div class="modal modal1 fade modal-finishStory" id="modal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content align-items-center text-center">
-                <div class="confetti-right confetti-click">
-                    <div class="modal-header">
-                        <h2 class="modal-title fs-3 d-flex align-items-center" id="exampleModalLabel">
-                            <i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i>
-                            أحسنت
-                            <i class="fa-solid fa-star fs-5 me-1" style="color: #FFD43B;"></i>
-                        </h2>
-                    </div>
-                    <div class="modal-body">انتهينا من النص الأول، والآن سننتقل إلى النص الثاني. اقرأه جيدًا وأجب عن الأسئلة بكل تركيز!</div>
-                    <div class="modal-footer justify-content-center"><button type="button" class="btn button main-button" data-bs-dismiss="modal">أكمل</button></div>
-                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                    <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -208,10 +183,10 @@
                             <i class="fa-regular fa-comment fs-5 ms-1"></i>ما هي الفكرة الرئيسية في هذا النص ؟
                         </h5>
                         <div class="options">
-                            <button class="wrong wrong-button button main-button m-1 " onclick="optionClick2(this)">
+                            <button class="wrong wrong-button button main-button m-1 " onclick="optionClick2(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="الذئب لا يمكنه العيش مع البشر لأنه حيوان مفترس">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>الذئب يعيش في المدن مع البشر
                             </button>
-                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick2(this)">
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick2(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="اقرأ السطر الثاني بتركيز">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>الذئب يحب الصيد وحده دائمًا
                             </button>
                             <div class="confetti-right confetti-click">
@@ -277,7 +252,7 @@
                         </div>
                     </div>
                     <div class="carousel-item quiz-wrapper">
-                        <h4 class="prompt mb-4 text-end">قم بسحب الإجابة الصحيحة وأفلتها داخل المربع:</h4>
+                        <h4 class="prompt mb-5">قم بسحب الإجابة الصحيحة وأفلتها داخل المربع:</h4>
                         <h5 class="my-3 d-flex justify-content-center align-items-center"> 
                             <i class="fa-regular fa-comment fs-5 ms-1"></i>
                             هل هذه القصة حقيقية أو خيالية؟
@@ -304,10 +279,10 @@
                             <i class="fa-regular fa-comment fs-5 ms-1"></i>كيف عرفت أن القصة خيالية، وليست واقعية؟
                         </h5>
                         <div class="options">
-                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick2(this)">
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick2(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="الذئب لا يتكلم ولا يردتي الملابس">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>لأنه يتحدث عن الذئب الذي يتكلم ويرتدي الملابس
                             </button>
-                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick2(this)">
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick2(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="النص يتحدث معلومات عن الذئب وليس عن مغامراته">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>لأنه يشير إلى مغامرات خيالية للذئب مع الشخصيات
                             </button>
                             <div class="confetti-right confetti-click">
@@ -335,34 +310,6 @@
                     <span class="visually-hidden">Next</span>
                 </button>
             </div>    
-        </div>
-        <!-- Modal2 : Shows When Text2 Questions Are Done -->
-        <div class="modal modal2 fade modal-finishStory" id="modal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content align-items-center text-center">
-                    <div class="confetti-right confetti-click">
-                        <div class="modal-header">
-                            <h2 class="modal-title fs-3 d-flex align-items-center" id="exampleModalLabel">
-                                <i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i>
-                                مذهل
-                                <i class="fa-solid fa-star fs-5 me-1" style="color: #FFD43B;"></i>
-                            </h2>
-                        </div>
-                        <div class="modal-body">
-                            <br>الآن بعدما فهمت الفرق بين النص الأول (ليلى والذئب) والنص الثاني (الذئب)، ما رأيك أن نلخص الفرق بينهما في جدول؟<br>
-                            سيساعدنا هذا في فهم الفرق بين الكتابة القصصية والكتابة المعلوماتية بشكل أفضل.
-                        </div>
-                        <div class="modal-footer justify-content-center"><button type="button" class="btn button main-button" data-bs-dismiss="modal">هيا نبدأ</button></div>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                        <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
-                    </div>
-                </div>
-            </div>
         </div>
 
 <!-- @@@@@@@@@@@@@@@@@@@@@@@@ Text 3 @@@@@@@@@@@@@@@@@@@@@@@@ -->
@@ -419,41 +366,12 @@
                         <button class="check button mb-1" onclick="allamCheck_2()">تحقق من الإجابة</button>
                     </td>
                 </tr>
-                <!-- <tr class="textarea_sec">
-                    <td><i class="fa-regular fa-comment fs-5 ms-2"></i>كيف تم حل المشكلة في النص؟</td>
-                    <td>
-                        <div class="d-flex">
-                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5" placeholder="يجب أن يتكون الجواب من حوالي 5 كلمات كحد أدنى"></textarea>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="d-flex">
-                            <i class="fa-solid fa-lightbulb ms-1"></i><textarea rows="5" placeholder="يجب أن يتكون الجواب من حوالي 5 كلمات كحد أدنى"></textarea>
-                        </div>
-                    </td>
-                </tr> -->
             </table>
         </div>
         <span class="d-block mb-3 error-msg text-danger">عذرًا، لم تتمكن من إضاءة جميع الأنوار. تأكد من إدخال الإجابات بالطول المطلوب وحاول مرة أخرى.</span>
-        <button class="button main-button done-button"  onclick="showModal3()">انتهيت</button>
+        <button class="button main-button done-button"  onclick="show3()">انتهيت</button>
     </div>
 
-    <!-- Modal3 > Shows When Text3 Questions Are Done -->
-    <div class="modal modal3 fade modal-finishStory" id="modal3" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content align-items-center text-center">
-                <div class="modal-header">
-                    <h2 class="modal-title fs-3 d-flex align-items-center" id="exampleModalLabel">
-                        <i class="fa-solid fa-star fs-5 ms-1" style="color: #FFD43B;"></i>
-                        عمل رائع
-                        <i class="fa-solid fa-star fs-5 me-1" style="color: #FFD43B;"></i>
-                    </h2>
-                </div>
-                <div class="modal-body">الآن أصبحت تعرف الفرق بين القصة الخيالية والنص المعلوماتي. تذكّر أن القصة الخيالية تعتمد على الخيال والإبداع، بينما النص المعلوماتي يقدم حقائق ومعلومات مفيدة. لا تنسَ أن تكتشف أنشطة أخرى لتتعلم أكثر!</div>
-                <a href="../activities/all_activities" class="mb-4 mt-3"><button type="button" class="btn button main-button" data-bs-dismiss="modal">ارجع للأنشطة</button></a>
-            </div>
-        </div>
-    </div>
     <div class="back-activities text-start mt-5 mb-1"> 
         <button class="back-activities-btn button main-button text-start"><i class="fa-solid fa-arrow-right-from-bracket"></i>  الرجوع للأنشطة</button>
     </div>
@@ -500,13 +418,18 @@
 
     prevButton1.style.display = 'none'; // Hide Prev Button At The Beggining
     
-    // Modal That Appears When Finish Text1 Questions
-    var modal1 = new bootstrap.Modal(document.getElementById('modal1'));
-    
     // On Moving The Carousel
     myCarousel1.addEventListener('slid.bs.carousel', (event) => {
         const totalItems = document.querySelectorAll('#carousel1 .carousel-item').length; // Number of items
         const currentIndex = event.to; // Current index (Question)
+
+         // Hide Tooltips
+         var tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+         // التكرار على كل عنصر تولتيب وإخفاؤه
+         tooltips.forEach(function (tooltipTriggerEl) {
+             var tooltipInstance = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
+                 tooltipInstance.hide(); // إخفاء التولتيب
+         });
         
         // Show/Hide Prev and Next Buttons
         prevButton1.style.display = (currentIndex === 0) ? 'none' : 'flex'; // Hide Prev Button if on the first item
@@ -517,12 +440,20 @@
        
         if (allAnswers) {
             // Turn On Confetti And Audio
-            document.querySelector(".modal1 .confetti-right").classList.add("active");
             const audio = document.getElementById('confetti-sound-right');
             audio.currentTime = 0; // Return Voice To The Start
             audio.play();
             
-            modal1.show(); // Show Modal
+            Swal.fire({
+                title: "🌟 أحسنت 🌟",
+                text: "انتهينا من النص الأول، والآن سننتقل إلى النص الثاني. اقرأه جيدًا وأجب عن الأسئلة بكل تركيز!",
+                imageUrl: "../../static/images/applause.png",
+                imageWidth: 120,
+                imageHeight: 120,
+                showCancelButton: false, // إظهار زر الإلغاء
+                confirmButtonText: "هيا نكمل", // زر التأكيد
+            })
+
             document.querySelector(".activity_1_exer1 > .text1").style.display = 'none';  // Hide Current Text
             document.querySelector(".activity_1_exer1 > .text2").style.display = 'block'; // Show Next Text
         }
@@ -539,14 +470,21 @@
         // If User Answered Last Question
         if (button.classList.contains("last-ques")) {
             // Turn On Confetti And Audio
-            document.querySelector(".modal1 .confetti-right").classList.add("active");
             const audio = document.getElementById('confetti-sound-right');
             audio.currentTime = 0; // Return Voice To The Start
             audio.play();
 
             let allAnswers = CheckCar1Ques(); // Check If All Answerd
             if (allAnswers) { // If Yes
-                modal1.show(); 
+                Swal.fire({
+                    title: "🌟 أحسنت 🌟",
+                    text: "انتهينا من النص الأول، والآن سننتقل إلى النص الثاني. اقرأه جيدًا وأجب عن الأسئلة بكل تركيز!",
+                    imageUrl: "../../static/images/applause.png",
+                    imageWidth: 120,
+                    imageHeight: 120,
+                    showCancelButton: false, // إظهار زر الإلغاء
+                    confirmButtonText: "هيا نكمل", // زر التأكيد
+                })
                 document.querySelector(".activity_1_exer1 > .text1").style.display = 'none'; // Hide Current Text
                 document.querySelector(".activity_1_exer1 > .text2").style.display = 'block'; // Show Next Text
             }
@@ -579,13 +517,18 @@ function CheckCar1Ques() {
 
     prevButton2.style.display = 'none'; // Hide Prev Button At The Beggining
     
-    // Modal That Appears When Finish Text1 Questions
-    var modal2 = new bootstrap.Modal(document.getElementById('modal2'));
-    
     // On Moving The Carousel
     myCarousel2.addEventListener('slid.bs.carousel', (event) => {
         const totalItems = document.querySelectorAll('#carousel2 .carousel-item').length; // Number of items
         const currentIndex = event.to; // Current index (Question)
+
+        // Hide Tooltips
+        var tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        // التكرار على كل عنصر تولتيب وإخفاؤه
+        tooltips.forEach(function (tooltipTriggerEl) {
+            var tooltipInstance = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
+                tooltipInstance.hide(); // إخفاء التولتيب
+        });
         
         // Show/Hide Prev and Next Buttons
         prevButton2.style.display = (currentIndex === 0) ? 'none' : 'flex'; // Hide Prev Button if on the first item
@@ -596,12 +539,20 @@ function CheckCar1Ques() {
        
         if (allAnswers) {
             // Turn On Confetti And Audio
-            document.querySelector(".modal2 .confetti-right").classList.add("active");
             const audio = document.getElementById('confetti-sound-right');
             audio.currentTime = 0; // Return Voice To The Start
             audio.play();
             
-            modal2.show(); // Show Modal
+            Swal.fire({
+                title: "🌟 مذهل 🌟",
+                text: "الآن بعدما فهمت الفرق بين النص الأول (ليلى والذئب) والنص الثاني (الذئب)، ما رأيك أن نلخص الفرق بينهما في جدول؟ سيساعدنا هذا في فهم الفرق بين الكتابة القصصية والكتابة المعلوماتية بشكل أفضل.",
+                imageUrl: "../../static/images/applause.png",
+                imageWidth: 120,
+                imageHeight: 120,
+                showCancelButton: false, // إظهار زر الإلغاء
+                confirmButtonText: "هيا نكمل", // زر التأكيد
+            })
+
             document.querySelector(".activity_1_exer1 > .text2").style.display = 'none'; // Hide Current Text
             document.querySelector(".activity_1_exer1 > .text3").style.display = 'block'; // Show Next Text
         }
@@ -619,13 +570,20 @@ function CheckCar1Ques() {
         if (button.classList.contains("last-ques")) {
             let allAnswers = CheckCar2Ques(); // Check If All Answerd
             if (allAnswers) { // If Yes
-                // Turn On Confetti And Audio
-                document.querySelector(".modal2 .confetti-right").classList.add("active");
                 const audio = document.getElementById('confetti-sound-right');
                 audio.currentTime = 0; // Return Voice To The Start
                 audio.play();
 
-                modal2.show(); 
+                Swal.fire({
+                    title: "🌟 مذهل 🌟",
+                    text: "الآن بعدما فهمت الفرق بين النص الأول (ليلى والذئب) والنص الثاني (الذئب)، ما رأيك أن نلخص الفرق بينهما في جدول؟ سيساعدنا هذا في فهم الفرق بين الكتابة القصصية والكتابة المعلوماتية بشكل أفضل.",
+                    imageUrl: "../../static/images/applause.png",
+                    imageWidth: 120,
+                    imageHeight: 120,
+                    showCancelButton: false, // إظهار زر الإلغاء
+                    confirmButtonText: "هيا نكمل", // زر التأكيد
+                })
+
                 document.querySelector(".activity_1_exer1 > .text2").style.display = 'none'; // Hide Current Text
                 document.querySelector(".activity_1_exer1 > .text3").style.display = 'block'; // Show Next Text
             }
@@ -656,7 +614,6 @@ function CheckCar2Ques() {
     var textarea_laila = document.querySelector(".activity_1 .text3 table .textarea_laila");
     var textarea_wolf = document.querySelector(".activity_1 .text3 table .textarea_wolf");
     var error_msg = document.querySelector(".activity_1 .text3 .error-msg");
-    var modal3 = new bootstrap.Modal(document.getElementById('modal3'));
     
     // If User Answers Right: Color Light
     select_first.addEventListener("input", () => {
@@ -817,8 +774,8 @@ function CheckCar2Ques() {
         }
     }
 
-    function showModal3() {
-        // Check If All Light are On, If Yes Show Modal3
+    function show3() {
+        // Check If All Light are On, If Yes Show 
         let select_active = true;
         let textarea_active = true;
         
@@ -827,7 +784,22 @@ function CheckCar2Ques() {
 
         if (select_active) {
             if (textarea_active) {
-                modal3.show();
+                Swal.fire({
+                    title: "🌟 عمل رائع 🌟",
+                    text: "الآن أصبحت تعرف الفرق بين القصة الخيالية والنص المعلوماتي. تذكّر أن القصة الخيالية تعتمد على الخيال والإبداع، بينما النص المعلوماتي يقدم حقائق ومعلومات مفيدة.",
+                    imageUrl: "../../static/images/applause.png",
+                    imageWidth: 120,
+                    imageHeight: 120,
+                    showCancelButton: false, // إظهار زر الإلغاء
+                    confirmButtonText: "عودة للأنشطة", // زر التأكيد
+                    cancelButtonText:"البقاء هنا",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = '/activities/all_activities';
+                    }
+                });
+
+
                 bigConfetti(); // Show Confetti
                 error_msg.classList.remove("active")
             }

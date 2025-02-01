@@ -35,7 +35,7 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer  eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiYjEyYWZlYWMtMjMyOS00YTkzLWJhMjYtMzVmZDdiMTQ2MjBjIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzgyNTYxODksImV4cCI6MTczODI1OTc4OSwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.LP3ISWgs2n8qXYfM_-saiB-Rd6H2qYiiVanPHtJluuv43JhTUY16ZaB023Ftn3DOf5_ICtmSFo0Cg_7sGeXuS0oYBX9xp95t9M1_pKWRgmVCQK4EDgdsPrl3eSLiZMhTIYxzazRvRmmSjDnTQrBU8zeMEnWiTKLw0uBf16tbesn1vTeG2guB6RTmrvOmlUGf1iqc1abjUh65jWH5_vxGhjcPoQlXrSCDPyPDPVxRmM3vyKOMoGK2ARrZ8pkOUvJ_HqNLOfRe_cMtetQiqP7vCDdYLBEKtxqumvw6xOKt9wUh95Li_GVoqUDKlJCvpsJKe3MKPbYObb3YHETAK2kChA",
+        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiNmI0YjVlODMtMmE5ZS00NzIzLWI2MDYtNjhmODE5ZGFhYjM2IiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzgyNjIzNjYsImV4cCI6MTczODI2NTk2NiwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.NEkKotsuSDh5yoW9M10rSXBqkHQE-2jfyBN9p0zm41YhHUvMf2KNoqGcxtWbuj7fC6fA3xzTysH9624LHhAXuDqt0vE4ZGPPRdn9s_BhG4pmPjkVArlSkb3_R_JWacQUFkozyxo4dvsux2kxR7uXSyD6FD52yW2o2EIsQNa_ZRUK3k61HLVI6HwXwAPx7Ne6ZtkrBASnCWiRZ2kjyLbHPqmS3D7iuTUP1aTZwiv8P3Rz4JcHspuXtq82lJhzoCUycFGnHnXXeI80HmIduSaYcpP2-IEVupQtt3cguOCbd_Xv-Mk-tBRZPw030DOvL4KAQBVsN5TajSYRcCOCv39cAw"
     }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
@@ -566,7 +566,8 @@ def delete_user_story():
 @views.route('/writing/user-stories')
 @login_required
 def user_stories():
-    all_stories = User_stories.query.filter_by(user_id=current_user.id).all()
+    # Get Stories In Oreder 
+    all_stories = User_stories.query.filter_by(user_id=current_user.id).order_by(User_stories.id.asc()).all()
 
     # تحويل الكائنات إلى JSON
     stories_data = [
@@ -619,9 +620,9 @@ Output:"""
 # Output:"""
     
     
-    # result = generate_AllamResponse(promptAllam, 250) # Get Prompt For Image 
-    result = ''' ["True", "A young boy named Omar is described as having a love for birds. He is playing 
-in a park when he hears a small sound and discovers a tired bird on the ground. He carefully picks it up and takes it home to nurse it back to health. The bird eventually recovers and is able to fly, but it returns every day to sing on Omar\'s window, as if to express gratitude."] '''
+    result = generate_AllamResponse(promptAllam, 250) # Get Prompt For Image 
+#     result = ''' ['True', 'A young boy named Omar is described as having a love for birds. He is playing 
+# in a park when he hears a small sound and discovers a tired bird on the ground. He carefully picks it up and takes it home to nurse it back to health. The bird eventually recovers and is able to fly, but it returns every day to sing on Omar\'s window, as if to express gratitude.'] '''
     result = ast.literal_eval(result)  # تحويل النص إلى مصفوفة
     global result_cleaned 
     # result =""
@@ -638,7 +639,7 @@ in a park when he hears a small sound and discovers a tired bird on the ground. 
         result_cleaned = result[1]  # Or handle the error as needed
 
     # Send To Colab And Recive Image
-    colab_url = "https://4460-34-125-36-235.ngrok-free.app/colab-message"  # رابط ngrok من Colab
+    colab_url = "https://ca49-34-82-19-151.ngrok-free.app/colab-message"  # رابط ngrok من Colab
     prompt = {"message": f"{result_cleaned}"} # Send Prompt From Allam
     # prompt = {"message": " A white duck is sleeping under a fruitful beech tree in a forest. The tree is filled with beech nuts, and the sunlight filters through the leaves, creating a peaceful and serene atmosphere. Suddenly, a beech nut falls from the tree and lands on the duck's head, waking it up with a start. The duck, initially frightened, realizes that it was just a falling nut and not a hunter's shot."} # Send Prompt From Allam
     # إرسال الطلب إلى Colab

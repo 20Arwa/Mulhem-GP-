@@ -43,7 +43,7 @@
                     <div class="question">
                         <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>لماذا لم يستطع سامي اللعب كثيرًا مع أصدقائه في الحديقة؟</h6>
                         <div class="options">
-                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="اقرأ السطر الثالث بتركيز">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>لأنه شعر بالتعب من حمل حقيبته.
                             </button>
                             <div class="confetti-right confetti-click">
@@ -58,7 +58,7 @@
                                 <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>
                                 <i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i><i class="conf-i"></i>      
                             </div>
-                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                            <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)"  data-bs-toggle="popover" data-bs-placement="top" data-bs-content="اقرأ السطر الثالث بتركيز">
                                 <i class="fa-solid fa-lightbulb ms-1"></i>لأنه لم يحب الحديقة
                             </button>
                         </div>
@@ -105,10 +105,10 @@
                         <div class="question">
                             <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>لماذا لم يتمكن حسن من قراءة الكتاب في النشاط؟</h6>
                             <div class="options">
-                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)"  data-bs-toggle="popover" data-bs-placement="top" data-bs-content="اقرأ السطر الثاني بتركيز">
                                     <i class="fa-solid fa-lightbulb ms-1"></i>لأنه كان يشعر بالخوف من القراءة أمام أصدقائه. 
                                 </button>
-                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)"  data-bs-toggle="popover" data-bs-placement="top" data-bs-content="اقرأ السطر الثاني بتركيز">
                                     <i class="fa-solid fa-lightbulb ms-1"></i>لأنه لم يجد مكانًا للجلوس في الفصل.
                                 </button>
                                 <div class="confetti-right confetti-click">
@@ -156,8 +156,8 @@
                             <p class="left-side text-end mb-0">  ذات يوم، كان أحمد يلعب في حديقة المنزل حين وجد قلمًا قديمًا بين الأعشاب<br> 
                                 لما كتب بالقلم، حدث شيء غريب في الواقع عندما نظر إليه، لاحظ شيئًا غريبًا<br>  
                                 إذا كتب "الغيم في السماء" تتلبد السماء بالغيوم ,وإذا كتب "سقوط المطر"، <br>  
-                                     ، بدأ المطر يتساقط. فوجئ أحمد بهذه القدرة السحرية للقلم<br>                        
-                                  قرر أحمد أن يستخدم القلم بحكمة لجعل العالم من حوله مكانًا أجمل وأسعد. <br>
+                                    ، بدأ المطر يتساقط. فوجئ أحمد بهذه القدرة السحرية للقلم<br>                        
+                                    قرر أحمد أن يستخدم القلم بحكمة لجعل العالم من حوله مكانًا أجمل وأسعد. <br>
                             </p> 
                         </div>
                     </div>
@@ -165,10 +165,10 @@
                         <div class="question">
                             <h6><i class="fa-regular fa-comment fs-4 ms-2"></i>ما السبب الذي جعل أحمد يستغرب قوة القلم السحرية؟</h6>
                             <div class="options">
-                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
-                                    <i class="fa-solid fa-lightbulb ms-1"></i>لأنه لم يعجبته الكتابة بالقلم.
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="اقرأ السطر الثاني والثالث بتركيز">
+                                    <i class="fa-solid fa-lightbulb ms-1"></i>لأنه لم يعجبه الكتابة بالقلم.
                                 </button>
-                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)">
+                                <button class="wrong wrong-button button main-button m-1" onclick="optionClick(this)" data-bs-toggle="popover" data-bs-placement="top" data-bs-content="اقرأ السطر الثاني والثالث بتركيز">
                                     <i class="fa-solid fa-lightbulb ms-1"></i>لأنه فقد القلم في الحديقة.
                                 </button>
                                 <div class="confetti-right confetti-click">
@@ -207,11 +207,11 @@
                 <div class="allQues-error-msg mt-3 text-danger">قم بالإجابة على جميع الأسئلة لإنهاء النشاط</div>
             </div>
         </div>
-        <button class="carousel-control-prev h-50 top-50 translate-middle-y" type="button" id="carouselPrev"  data-bs-target="#carouselCaracthers" data-bs-slide="prev">
+        <button class="carousel-control-prev h-50 top-50 translate-middle-y" type="button" id="carouselPrev"  data-bs-target="#carouselCaracthers" data-bs-slide="prev" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط للانتقال إلى الجزء السابق">
             <i class="fa-regular fa-circle-right"></i>
             <span class="visually-hidden">Previous</span>
         </button>
-        <button class="carousel-control-next h-50 top-50 translate-middle-y" type="button" id="carouselNext" data-bs-target="#carouselCaracthers" data-bs-slide="next">
+        <button class="carousel-control-next h-50 top-50 translate-middle-y" type="button" id="carouselNext" data-bs-target="#carouselCaracthers" data-bs-slide="next" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip" data-bs-placement="top" data-bs-title="اضغط للانتقال إلى الجزء التالي">
             <i class="fa-regular fa-circle-left"></i>
             <span class="visually-hidden">Next</span>
         </button>
@@ -259,6 +259,19 @@
     myCarousel.addEventListener('slid.bs.carousel', (event) => {
         const totalItems = document.querySelectorAll('#carouselCaracthers .carousel-item').length; // Number Of Items
         const currentIndex = event.to; // Current Item
+
+        // Move User To Up
+        var offsetTop =  document.querySelector('.reasons_activiy .carousel').getBoundingClientRect().top + window.scrollY - 20;
+        window.scrollTo({top: offsetTop,behavior: 'smooth'});
+
+         // Hide Tooltips
+         var tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+         // التكرار على كل عنصر تولتيب وإخفاؤه
+         tooltips.forEach(function (tooltipTriggerEl) {
+             var tooltipInstance = bootstrap.Tooltip.getInstance(tooltipTriggerEl);
+                 tooltipInstance.hide(); // إخفاء التولتيب
+         });
+
         // Hide Prev Button If User In First Item
         if (currentIndex === 0) {
             prevButton.style.display = 'none';
@@ -305,7 +318,5 @@
             button.classList.add("active-right")
         }
     }
-    
-   
 </script>
 {% endblock %}

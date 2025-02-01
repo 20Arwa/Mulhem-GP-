@@ -1,901 +1,0 @@
-{% extends "base.html" %}
-{% block title %}الفرق بين الكتابة القصصية والإبداعية{% endblock %}
-{% block styles %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/writing/self-writing.css') }}">
-{% endblock %}
-{% block body %}
-<div class="container self-writing my-5 rounded-4 p-4 position-relative">
-	<div class="book-container position-relative">
-		<i id="prevButton" class="fa-regular fa-circle-right position-absolute top-50 end-0 me-3 z-3"></i>
-		<i id="nextButton" class="fa-regular fa-circle-left position-absolute top-50 start-0 ms-3 z-3"></i>
-		<div class="scene">
-				<article class="book">
-					<section class="page active">
-						<div class="front">
-							<input class="button" type="text" name="title" placeholder="عنوان القصة" class="">
-							<div class="cover-img-container img-container">
-								<div class="rounded-4">
-									<img class="img cover-img" src="" alt=""> 
-								</div>
-								<label for="cover-description">أدخل وصف الصورة</label>
-								<textarea class="w-100 h-75 rounded-3" type="text" id="cover-description" placeholder="مثال:ولد صغير مرح بشعر مجعد يرتدي سترة زرقاء، ويقف تحت شجرة بأوراق خضراء متوهجة. في الخلفية، سماء زرقاء مع سحب بيضاء وأرنب لطيف يقفز بالقرب." ></textarea>
-							</div>
-						</div>
-						<div class="back">
-							<div class="text" contenteditable="true"></div>
-							<div class="correction-word" title="انقر للتصحيح"></div>
-							<div class="counter-sound">
-								<div class="text-counter">عدد الأحرف: <span id="charCount">0</span>/<span id="maxLength">500</span></div>
-								<audio class="text-audio" controls controlslist="nodownload noplaybackrate">
-									<source id="audioSource" src="../../static/audio/tem.mp3" type="audio/mpeg">
-									المتصفح الخاص بك لا يدعم عنصر الصوت
-								</audio>
-							</div>
-							<span id="error-msg">لقد وصلت إلى الحد الأقصى من الحروف. أضف صفحة جديدة.</span>
-						</div>
-					</section>
-					<section class="page">
-						<div class="front">
-							<div class="cover-img-container img-container">
-								<img class="img cover-img" src=""> 
-							</div>
-							<div class="error-msg">اكتب المزيد لتحصل على الصورة</div>
-							<button class="generate-btn button">أنشئ صورة</button>
-						</div>
-						<div class="back">
-							<div class="text" contenteditable="true"></div>
-							<div class="text-counter">عدد الأحرف: <span id="charCount">0</span>/<span id="maxLength">500</span><span id="error-msg">لقد وصلت إلى الحد الأقصى من الحروف. يمكنك إضافة صفحة جديدة للمتابعة.</span></div>
-							<div class="correction-word" title="انقر للتصحيح"></div>
-							<i class="fa-solid fa-volume-high"></i>
-						</div>
-					</section>
-				</article>
-			</div>
-		</div>
-		
-		<!-- @@@@@@@@@@@@@ Buttons @@@@@@@@@@@@ -->
-		<div class="sitting-buttons mt-4">
-			<div class="sitting-error-msg error-msg mb-2">رسالة الخطأ</div>
-			<div class="d-flex align-items-center justify-content-center column-gap-2">
-				<button class="add-page-icon">
-					<i class="fa-solid fa-circle-plus"></i>
-					إضافة صفحة
-				</button>
-				<button class="delete-page-icon" disabled>
-					<i class="fa-solid fa-circle-minus"></i>
-					حذف صفحة
-				</button>
-
-				<div class="dropdown allam-help">
-					<button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-						<i class="fa-solid fa-circle-question"></i>
-						اطلب مساعدة مُلهِم
-					</button>
-					<ul class="dropdown-menu text-center">
-						<li><a class="dropdown-item starting">لا أعرف عن ماذا أكتب</a></li>
-						<li><a class="dropdown-item completion">لا أعرف كيف أكمل قصتي</a></li>
-						<li><a class="dropdown-item correction" href="#allam-response">صحح أخطائي</a></li>
-						<li><a class="dropdown-item elements" href="#allam-response">تحقق من عناصر قصتي</a></li>
-					</ul>
-				</div>
-
-				<div class="record d-flex flex-column align-items-center">
-					<div class="display-voice-record"></div>
-					<div class="d-flex">
-						<div class="controllers-voice-record"></div>
-					</div>
-				</div>
-				
-				<!-- <button class="later-btn"><i class="fa-solid fa-stopwatch"></i>سأكمل لاحقا</button> -->
-				<button class="out-btn"><i class="fa-solid fa-right-from-bracket"></i>خروج</button>
-			</div>
-		</div>
-
-
-		<!-- @@@@@@@@@@@@@ Starting Ideas @@@@@@@@@@@@ -->
-		<div class="response response-starting p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="starting-ideas">
-			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
-			<div class="d-flex justify-content-between mb-5">
-				<h3>✨أفكار جميلة لتكتب عنها</h3>
-			</div>
-			<div id="carouselIdeas" class="carousel slide mt-5 p-3 rounded-4">
-				<div class="carousel-indicators">
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="1" aria-label="Slide 2"></button>
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="2" aria-label="Slide 3"></button>
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="3" aria-label="Slide 4"></button>
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="4" aria-label="Slide 5"></button>
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="5" aria-label="Slide 6"></button>
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="6" aria-label="Slide 7"></button>
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="7" aria-label="Slide 8"></button>
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="8" aria-label="Slide 9"></button>
-					<button type="button" data-bs-target="#carouselIdeas" data-bs-slide-to="9" aria-label="Slide 10"></button>
-				  </div>
-				<div class="carousel-inner">
-					<div class="carousel-item active">
-						<h4>📅😊 يوم من حياتك  😊📅</h4>
-						<p>اكتب عن أكثر شيء مميز أو مختلف حدث اليوم، سواء كان جيدًا أو سيئًا</p>
-					</div>
-					<div class="carousel-item">
-						<h4>😀🎉 موقف جعلك سعيدًا 🎉😀</h4>
-						<p>احكِ عن لحظة شعرت فيها بالسعادة.</p>
-					</div>
-					<div class="carousel-item">
-						<h4>🧑‍🤝‍🧑✨ قصة عن صديقك المقرب ✨🧑‍🤝‍🧑</h4>
-						<p>اكتب عن مغامرة أو موقف ممتع عشته مع صديقك المفضل.</p>
-					</div>
-					<div class="carousel-item">
-						<h4>🐶🐱 حيوان مفضل 🐱🐶</h4>
-						<p>اكتب عن حيوانك المفضل. ماذا يفعل؟ أين يعيش؟</p>
-					</div>
-					<div class="carousel-item">
-						<h4>🚗🏞️ رحلة قمت بها 🏞️🚗</h4>
-						<p>احكِ عن مكان ذهبت إليه مع عائلتك أو أصدقائك وما الذي أحببته في الرحلة.</p>
-					</div>
-					<div class="carousel-item">
-						<h4>🌟🎯 حلم تتمنى تحقيقه 🎯🌟</h4>
-						<p>احكِ عن شيء تحلم بتحقيقه في المستقبل.</p>
-					</div>
-					<div class="carousel-item">
-						<h4>🦸‍♂️🛡️ مغامرة خيالية 🛡️🦸‍♂️</h4>
-						<p>تخيل قصة عن بطل خارق أو مغامرة مليئة بالإثارة والخيال.</p>
-					</div>
-					<div class="carousel-item">
-						<h4>🏞️🌅 رحلة في الطبيعة 🌅🏞️</h4>
-						<p>تخيل أنك عنصر من الطبيعة، مثل الرياح أو المطر، واحكِ قصتك.</p>
-					</div>
-					<div class="carousel-item">
-						<h4>🌻🌵 جمال النباتات 🌵🌻</h4>
-						<p>تحدث عن نبات أو زهرة وما تمر به خلال يومها.</p>
-					</div>
-					<div class="carousel-item">
-						<h4>🌟🎭 حلم غريب 🎭🌟</h4>
-						<p>احكِ عن حلم غريب أو ممتع رأيته أثناء نومك.</p>
-					</div>
-					
-				</div>
-				<button class="carousel-control-prev" type="button" id="carouselPrev"  data-bs-target="#carouselIdeas" data-bs-slide="prev">
-					<i class="fa-regular fa-circle-right"></i>
-					<span class="visually-hidden">Previous</span>
-				</button>
-				<button class="carousel-control-next" type="button" id="carouselNext" data-bs-target="#carouselIdeas" data-bs-slide="next">
-					<i class="fa-regular fa-circle-left"></i>
-					<span class="visually-hidden">Next</span>
-				</button>
-			</div>
-		</div>
-
-		<!-- Story Completion -->
-		<div class="response response-completion p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="completion">
-			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
-			<div class="d-flex justify-content-between mb-5">
-				<h3>✍️📖المساعدة في الإكمال:</h3>
-			</div>
-			<div class="text">
-			</div>
-		</div>
-
-
-		<!-- Story Elements -->
-		<div class="response response-elements p-4 mx-auto mt-5 bg-white rounded-4 position-relative text-center" id="elements">
-			<i class="fa-solid fa-circle-xmark close-icon position-absolute"></i>
-			<div class="d-flex justify-content-between mb-5">
-				<h3>📚✨التحقق من عناصر القصة:</h3>
-			</div>
-			<div class="elements mb-3">
-			</div>
-		</div>
-
-	</div>
-</div>
-{% endblock %}
-{% block script %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
-
-<script type="module">
-document.addEventListener('DOMContentLoaded', function () {
-	const addPageBtn = document.querySelector(".add-page-icon"); // Add Page Button
-	const deletePageBtn = document.querySelector(".delete-page-icon"); // Delete Page Button
-
-	const nextButton = document.getElementById('nextButton'); // Next Page Button
-	const prevButton = document.getElementById('prevButton'); // Prev Page Button
-	
-	nextButton.addEventListener('click', nextPage);
-	prevButton.addEventListener('click', prevPage);
-
-	// @@@@@@@@@@@ Next Page Button @@@@@@@@@@@
-	function nextPage() {
-		prevButton.style.display = "inline-block"; // Display Prev Button
-	
-		const activePage = document.querySelector('.page.active');
-		if (activePage) {
-			const nextPage = activePage.nextElementSibling;
-			
-			// اجعل الصفحة النشطة مقلوبة
-			activePage.classList.remove('active');
-			activePage.classList.add('flipped');
-			
-			// تحقق إذا كانت الصفحة التالية موجودة
-			if (nextPage && nextPage.classList.contains('page')) {
-				nextPage.classList.add('active'); // اجعل الصفحة التالية نشطة
-				
-				// تعريف المتغير بعد الصفحة التالية
-				const afterNextPage = nextPage.nextElementSibling;
-				
-				if (!afterNextPage || !afterNextPage.classList.contains('page')) {
-					nextButton.style.display = "none";
-				} else {
-					nextButton.style.display = "inline-block";
-				}
-				
-				// Add Page Btn
-				// تحقق إذا كان عدد الصفحات 20
-				const allPages = document.querySelectorAll('.page');
-				const errorMsg = document.querySelector(".sitting-error-msg");
-				if (allPages.length > 20) {
-					nextButton.style.display = "none";
-					addPageBtn.setAttribute('disabled', 'disabled'); 
-				}
-				else {
-					addPageBtn.removeAttribute('disabled'); 
-				}
-					
-				// Delete Page Btn
-				const activePageIndex = Array.from(allPages).indexOf(nextPage);
-
-				if (activePageIndex === 1) { 
-					// تمكين الزر إذا كانت afterNextPage تحتوي على الصفحات المطلوبة
-					deletePageBtn.disabled = !(afterNextPage && afterNextPage.classList.contains('page')); 
-				} 
-				else if (activePageIndex > 1) {
-					// تمكين الزر للصفحات بعد الصفحة الثانية
-					deletePageBtn.removeAttribute('disabled'); 
-				} 
-				else {
-					// تعطيل الزر لأي حالة أخرى
-					deletePageBtn.setAttribute('disabled', 'disabled'); 
-				}
-			}
-		}
-	}
-	
-	// @@@@@@@@@@@ Prev Page Button @@@@@@@@@@@
-	function prevPage() {
-		const flippedPages = document.querySelectorAll('.page.flipped');
-		const activePage = document.querySelector('.page.active');
-		const previousPage = activePage.previousElementSibling;
-		
-		nextButton.style.display = "inline-block"; // Display Next Btn
-
-		// If Prev Page Was The Cover, Hide PRev Btn And Delete
-		const beforePreviousPage = previousPage.previousElementSibling;
-		if (!beforePreviousPage || !beforePreviousPage.classList.contains('page')) {
-			prevButton.style.display = "none"; // Hide Prev Button
-			deletePageBtn.setAttribute('disabled', 'disabled'); // Disabled Delete Page Button
-			
-		}
-		
-		// Move The Page
-		if (flippedPages.length > 0) {
-			// اجعل آخر صفحة مقلوبة نشطة مرة أخرى
-			const lastFlippedPage = flippedPages[flippedPages.length - 1];
-			lastFlippedPage.classList.remove('flipped');
-			lastFlippedPage.classList.add('active');
-			
-			// إزالة حالة النشط من جميع الصفحات الأخرى
-			const allPages = document.querySelectorAll('.page');
-			allPages.forEach((page) => {
-				if (page !== lastFlippedPage) {
-					page.classList.remove('active');
-				}
-			});
-		}
-	}
-	
-	// @@@@@@@@@@@ Add Page Button @@@@@@@@@@@
-	addPageBtn.addEventListener("click", () => {
-		const book = document.querySelector(".book");
-		const newPage = document.createElement("section");
-		newPage.className = "page"; // أضف فئة "page"
-		newPage.innerHTML = `
-			<div class="front">
-				<div class="cover-img-container img-container">
-					<img class="img cover-img" src=""> 
-				</div>
-				<button class="generate-btn button">أنشئ صورة</button>
-			</div>  
-			<div class="back">
-				<div class="text" contenteditable="true"></div>
-				<div class="text-counter">
-					عدد الأحرف: <span id="charCount">0</span>/<span id="maxLength">500</span>
-					<span id="error-msg">لقد وصلت إلى الحد الأقصى من الحروف. يمكنك إضافة صفحة جديدة للمتابعة.</span>
-				</div>
-				<div class="correction-word" title="انقر للتصحيح"></div>
-				<i class="fa-solid fa-volume-high"></i>
-			</div>
-		`; 
-		book.appendChild(newPage); // أضف الصفحة الجديدة إلى الكتاب
-		nextPage(); // الانتقال إلى الصفحة التالية
-
-
-		// Click New Generate Image Button
-		newPage.querySelector(".generate-btn").addEventListener("click", (e) => {
-			e.preventDefault(); // Prevent page reload
-			sendTextGetImage();
-	})
-	});
-	
-
-	// @@@@@@@@@@@ Delete Page Button @@@@@@@@@@@	
-	deletePageBtn.addEventListener("click", () => {
-		Swal.fire({
-			title: 'حذف الصفحة',
-			text: 'هل أنت متأكد أنك تريد حذف هذه الصفحة؟ لا يمكن التراجع عن هذا الإجراء.',
-			icon: 'warning',
-			showCancelButton: true,
-			confirmButtonText: 'نعم، احذفها',
-			cancelButtonText: 'إلغاء',
-			reverseButtons: true, // تبديل أماكن الأزرار
-		}).then((result) => {
-			if (result.isConfirmed) {
-				const currentSection = document.querySelector(".page.active");
-				if (currentSection) {
-					// الانتقال إلى الصفحة السابقة
-					prevPage();
-	
-					// تحديث حالة الأزرار بعد الحذف
-					const activePage = document.querySelector('.page.active');
-					const previousPage = activePage.previousElementSibling;
-					const beforePreviousPage = previousPage?.previousElementSibling;
-	
-					if (!beforePreviousPage || !beforePreviousPage.classList.contains('page')) {
-						nextButton.style.display = "none"; // إخفاء زر الصفحة التالية
-						deletePageBtn.setAttribute('disabled', 'disabled'); // تعطيل زر الحذف
-					}
-	
-					// حذف الصفحة الحالية
-					currentSection.remove();
-					console.log('تم حذف الصفحة.');
-				} else {
-					Swal.fire({
-						icon: 'error',
-						title: 'خطأ',
-						text: 'لا توجد صفحة نشطة لحذفها!',
-					});
-				}
-			} else {
-				console.log('تم إلغاء عملية الحذف.');
-			}
-		});
-	});
-	
-
-
-	// @@@@@@@@@@@ @@@@@@@@@@@ Recive And Send Data To Python @@@@@@@@@@@ @@@@@@@@@@@
-	// @@@@@@@@@@@ Generate Image @@@@@@@@@@@
-	async function sendTextGetImage() {
-		const img = document.querySelector(".page.active .front img");
-		var textElement = document.querySelector(".page.active").previousElementSibling.querySelector(".back .text");
-
-		// Check Text Length
-		if (textElement.textContent.length < 25) {
-			document.querySelector(".front .error-msg").style.opacity = 1;
-			return;
-		}
-		document.querySelector(".front .error-msg").style.opacity = 0;
-
-		const data = { message: textElement.textContent }; // Corrected line
-	
-		const response = await fetch('http://127.0.0.1:5000/generate-img', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify(data)
-		});
-	
-		if (response.ok) {
-			const result = await response.json();
-			console.log(result.response);
-		} else {
-			console.error(`Error: ${response.statusText}`);
-		}
-	}
-	// Click Generate Image Button
-	document.querySelectorAll(".generate-btn").forEach(btn => {
-		btn.addEventListener("click", (e) => {
-			e.preventDefault(); // Prevent page reload
-			sendTextGetImage();
-		});
-	})
-	
-	
-	// @@@@@@@@@@@ Generate Audio @@@@@@@@@@@
-	//async function sendTextGetAudio() {    }
-
-	
-	// @@@@@@@@@@@ Allam Correction @@@@@@@@@@@
-	async function allamCorrection() {  
-		var sittingErrMsg = document.querySelector(".sitting-error-msg");
-		const arabicRegex = /^[\u0600-\u06FF\s]+$/;
-		// Check If Cover Page
-		if (document.querySelector(".page.active") == document.querySelector(".page:first-of-type")) {
-			sittingErrMsg.innerHTML = "لا يمكن المراجعة والتصحيح في صفحة الغلاف";
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return ;
-		}
-		
-		// If Text Is Empty
-		var textElement = document.querySelector(".page.active").previousElementSibling.querySelector(".back .text");
-		if (textElement.textContent.length == 0) {
-			sittingErrMsg.innerHTML = "لا يوجد نص لمراجعته، أضف نصاً أولاً"
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		// If Text Is Short
-		else if (textElement.textContent.length < 20) {
-			sittingErrMsg.innerHTML = "القصة قصيرة جدا! حاول كتابة المزيد لتحصل على التصحيح"
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		// If Text Is Not Arabic
-		else if (!arabicRegex.test(textElement.textContent) ) {
-			sittingErrMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		else {
-			sittingErrMsg.style.opacity = 0; // Remove Error Message
-		}
-		
-		// Send To Allam
-		const data = { message: textElement.textContent }; 
-
-		 // إظهار رسالة التحميل
-		 Swal.fire({
-            title: 'جاري التحقق من الأخطاء...',
-            text: 'الرجاء الانتظار قليلاً',
-            allowOutsideClick: false,
-            showConfirmButton: false,
-            didOpen: () => {
-                Swal.showLoading(); // عرض المؤشر الدائري
-            }
-        });
-
-		var result = "";		
-		try {
-            const response = await fetch('http://127.0.0.1:5000/allam-correction', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(data)
-			});
-
-            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
-
-            if (!response.ok) {
-                throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
-            }
-
-            result = await response.json();
-			const jsonObject = JSON.parse(result.response); // Convert String To JSONS
-
-				function highlightErrors(textElement, errorTypes) {
-				const textContent = textElement.textContent; // النص الكامل
-				const words = textContent.split(/(\s+|[,.!?؛؟])/); // تقسيم النص إلى كلمات وعلامات الترقيم
-				let hasErrors = false; // متغير لتتبع وجود الأخطاء
-
-				// إنشاء محتوى جديد مع الأخطاء المحددة
-				const newContent = words.map(word => {
-					// البحث في كل نوع من الأخطاء
-					for (const [errorType, errors] of Object.entries(errorTypes)) {
-						const error = errors.find(err => err[0] === word && err[0] !== err[1]); // البحث عن الكلمة في قائمة الأخطاء
-						if (error) {
-							hasErrors = true; // تحديد وجود الأخطاء
-							// إذا وُجد خطأ، إنشاء <span>
-							const span = document.createElement("span");
-							span.className = `${errorType}-error position-relative error-word`; // إضافة نوع الخطأ كـ class
-							span.dataset.suggestion = error[1]; // الاقتراح
-							span.textContent = error[0]; // النص الخاطئ
-							span.dataset.errorType = errorType; // نوع الخطأ
-							return span.outerHTML; // تحويل العنصر إلى نص HTML
-						}
-					}
-					return word; // الكلمة صحيحة تُترك كما هي
-				}).join(''); // إعادة تجميع النصوص
-			
-				// استبدال النص في العنصر
-				textElement.innerHTML = newContent;
-
-				// $$$$$$ If No Errors $$$$$$ 
-				if (!hasErrors) {
-					Swal.fire({
-						title: 'رائع جدا!',
-						text: 'نصك خالٍ من الأخطاء، عملك ممتاز! 🌟',
-						icon: 'success',
-						confirmButtonText: 'عودة للكتابة',
-						reverseButtons: true, 
-					})
-					return;
-				}
-				else {
-					Swal.fire({
-						title: 'أحسنت!',
-						text: 'لكن هناك بعض الأخطاء الصغيرة. اضغط على الأجزاء الملوّنة لتصحيحها وتحسين قصتك',
-						icon: 'info',
-						confirmButtonText: 'العودة لتصحيح الأخطاء',
-						reverseButtons: true,
-					})
-				}
-			}
-			
-			highlightErrors(textElement, jsonObject); // تطبيق الدالة
-			
-		
-			// Show Correction On Mouse Over
-			var correctionWord = document.querySelector(".back .correction-word");	
-			textElement.addEventListener('mouseover', (e) => {
-				if (e.target.classList.contains('spelling-error') || e.target.classList.contains('grammar-error') || e.target.classList.contains('inappropriate_words-error')) {
-					correctionWord.style.display = 'block';
-					correctionWord.textContent = `الكلمة الصحيحة: ${e.target.dataset.suggestion}`;
-			
-					// إضافة حدث النقر لتعديل الكلمة المحددة فقط
-					correctionWord.onclick = () => {
-						e.target.textContent = e.target.dataset.suggestion;
-						e.target.className = ""; // إزالة كل الأخطاء
-						correctionWord.style.display = 'none';
-					};
-				}
-			});
-		} catch (error) {
-            Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
-            // عرض رسالة خطأ
-            Swal.fire({
-                title: 'خطأ!',
-                text: error.message,
-                icon: 'error',
-                confirmButtonText: 'موافق',
-                reverseButtons: true,
-            });
-        }
-	}
-	// Click Correction Button
-	document.querySelector(".dropdown.allam-help .correction").addEventListener("click", (e) => {
-		e.preventDefault(); // Prevent page reload
-		allamCorrection();
-	});
-
-	// @@@@@@@@@@@ Allam Elements @@@@@@@@@@@
-	async function allamElements() {  
-		var sittingErrMsg = document.querySelector(".sitting-error-msg");
-		const arabicRegex = /^[\u0600-\u06FF\s]+$/;
-
-		// Get All Text
-		var AllStory = document.querySelectorAll(".back .text");
-		var fullStory = "";
-		AllStory.forEach(text => {fullStory += text.textContent.trim() + " "})
-		
-		// If Text Is Empty
-		if (fullStory.trim().length == 0) {
-			sittingErrMsg.innerHTML = "لا يوجد نص للتحقق منه، أضف نصاً أولاً"
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		// If Text Is Short
-		else if (fullStory.length < 20) {
-			sittingErrMsg.innerHTML = "القصة قصيرة! حاول كتابة المزيد لتمكين التحقق"
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		// If Text Is Not Arabic
-		else if (!arabicRegex.test(fullStory) ) {
-			sittingErrMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		else {
-			sittingErrMsg.style.opacity = 0; // Remove Error Message
-		}
-
-		// Send To Allam
-		const data = { message: fullStory }; 
-
-		// إظهار رسالة التحميل
-		Swal.fire({
-			title: 'جاري التحقق من عناصر القصة...',
-            text: 'الرجاء الانتظار قليلاً',
-            allowOutsideClick: false,
-            showConfirmButton: false,
-            didOpen: () => {
-                Swal.showLoading(); // عرض المؤشر الدائري
-            }
-        });
-		
-		var result = "";		
-		try {
-			const response = await fetch('http://127.0.0.1:5000/allam-elements', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(data)
-			});
-
-            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
-			
-            if (!response.ok) {
-				throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
-            }
-			
-            result = await response.json();
-			console.log(result)
-			//const resultObjenc = result.response.split("Input:")[0].trim();
-			//const jsonObject =  JSON.parse(resultObjenc);  // Convert 
-			const jsonObject =  JSON.parse(result.response);  // Convert 
-
-			// $$$$$$ If All Elements Exist $$$$$$ 
-			if (!result.response.includes("غير مذكور")) {
-				Swal.fire({
-					title: 'رائع جدا!',
-					text: 'قصتك تحتوي على جميع عناصر القصة. أحسنت! 🌟',
-					icon: 'success',
-					confirmButtonText: 'تفقد عناصر قصتك',
-					reverseButtons: true, 
-				})
-			}
-			else {
-				Swal.fire({
-					title: 'أحسنت!',
-					text: 'لكن هناك بعض العناصر الناقصة. انظر إلى الاقتراحات لتكملها',
-					icon: 'info',
-					confirmButtonText: 'تفقد عناصر قصتك',
-					reverseButtons: true,
-				})
-			}
-
-			 // Show Response To User
-			const responseElemsContainer = document.querySelector(".response-elements");
-			responseElemsContainer.style.display = "block"; // عرض الحاوية
-		
-			// تنظيف الحاوية قبل الإضافة
-			const responseElems = document.querySelector(".response-elements .elements");
-			responseElems.innerHTML = ""; // إزالة المحتوى السابق
-		
-			// ترتيب العناصر وعرضها
-			const elementOrder = ["الشخصيات", "المكان", "الزمان", "الأسباب", "المعضلة"];
-			elementOrder.forEach(key => {
-				if (key in jsonObject) {
-					const elementDiv = document.createElement("div"); // إنشاء div لكل عنصر
-					const title = document.createElement("h5");
-					title.innerHTML = key;
-					const paragraph = document.createElement("p");
-					paragraph.innerHTML = `:&nbsp;${jsonObject[key]}`; // عرض النص
-					elementDiv.appendChild(title);
-					elementDiv.appendChild(paragraph);
-					responseElems.appendChild(elementDiv); // إضافة العنصر إلى الحاوية
-				}
-			});
-		
-			// الانتقال إلى الأسفل لرؤية النتائج
-			const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
-			window.scrollTo({ 
-				top: responseElemsContainer.getBoundingClientRect().top + window.pageYOffset - offset, 
-				behavior: 'smooth', 
-			});
-		
-		} catch (error) {
-			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
-			Swal.fire({
-				title: 'خطأ!',
-				text: error.message,
-				icon: 'error',
-				confirmButtonText: 'موافق',
-				reverseButtons: true,
-			});
-		}
-	}
-	// Click Elements Button
-	document.querySelector(".dropdown.allam-help .elements").addEventListener("click", (e) => {
-		e.preventDefault(); // Prevent page reload
-		allamElements();
-	});
-	// Click On Close elements
-	document.querySelector(".response-elements .close-icon").addEventListener("click", () => {
-		document.querySelector(".response-elements").style.display = "none";
-		window.scrollBy({top: -420});	
-	});
-
-
-	// @@@@@@@@@@@ Allam Completion @@@@@@@@@@@
-	async function allamCompletion() {
-		var sittingErrMsg = document.querySelector(".sitting-error-msg");
-		const arabicRegex = /^[\u0600-\u06FF\s]+$/;
-
-		// Get All Text
-		var AllStory = document.querySelectorAll(".back .text");
-		var fullStory = "";
-		AllStory.forEach(text => {fullStory += text.textContent.trim() + " "})
-		
-		// If Text Is Empty
-		if (fullStory.trim().length == 0) {
-			sittingErrMsg.innerHTML = "لا يوجد نص للتحقق منه، أضف نصاً أولاً"
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		// If Text Is Short
-		else if (fullStory.length < 10) {
-			sittingErrMsg.innerHTML = "النص قصير جدا! حاول كتابة المزيد لأتمكن من مساعدتك"
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		// If Text Is Not Arabic
-		else if (!arabicRegex.test(fullStory) ) {
-			sittingErrMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
-			sittingErrMsg.style.opacity = 1;
-			setTimeout(() => {sittingErrMsg.style.opacity = 0;}, 5000); 
-			return;
-		}
-		else {
-			sittingErrMsg.style.opacity = 0; // Remove Error Message
-		}
-
-		// Send To Allam
-		const data = { message: fullStory }; 
-
-		 // إظهار رسالة التحميل
-		Swal.fire({
-            title: 'جاري التحقق من الإجابة...',
-            text: 'الرجاء الانتظار قليلاً',
-            allowOutsideClick: false,
-            showConfirmButton: false,
-            didOpen: () => {
-                Swal.showLoading(); // عرض المؤشر الدائري
-            }
-        });
-
-		console.log(fullStory)
-		var result = "";		
-		try {
-            const response = await fetch('http://127.0.0.1:5000/allam-completion', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(data)
-			});
-
-            Swal.close(); // إغلاق رسالة التحميل بمجرد استلام الرد
-			
-            if (!response.ok) {
-                throw new Error('فشل الاتصال بالخادم. حاول مرة أخرى.');
-            }
-			
-            result = await response.json();
-			const resultQues = result.split("Input:")[0].trim();
-			
-			// Show Response To User
-			var completionContain  = document.querySelector(".response-completion");
-
-			// Go Down To completion
-			const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
-			window.scrollTo({ 
-				top: completionContain.getBoundingClientRect().top + window.pageYOffset - offset, 
-				behavior: 'smooth' 
-			});
-
-
-			completionContain.style.display = "block";
-			completionContain.querySelector(".text").innerHTML = resultQues;
-		
-		} catch (error) {
-			Swal.close(); // إغلاق رسالة التحميل عند حدوث خطأ
-			Swal.fire({
-				title: 'خطأ!',
-				text: error.message,
-				icon: 'error',
-				confirmButtonText: 'موافق',
-				reverseButtons: true,
-			});
-		}
-	}
-	// Click Completion Button
-	document.querySelector(".dropdown.allam-help .completion").addEventListener("click", (e) => {
-		e.preventDefault(); // Prevent page reload
-		allamCompletion(); 
-	});
-	// Click On Close Completion
-	document.querySelector(".response-completion .close-icon").addEventListener("click", () => {
-		document.querySelector(".response-completion").style.display = "none";
-		window.scrollBy({top: -420});	
-	});
-
-	// @@@@@@@@@@@ Starting Ideas @@@@@@@@@@@
-	var startingIdeas = document.querySelector(".response-starting");
-	var dropdownStart = document.querySelector(".dropdown.allam-help .starting");
-	dropdownStart.addEventListener("click", (e) => {
-		e.preventDefault();
-		startingIdeas.style.display = "block"; // Display Ideas
-		
-		// Go Down To Ideas
-		const offset = window.innerHeight * 0.1; // 10% من ارتفاع الشاشة
-		window.scrollTo({ 
-			top: document.querySelector('#starting-ideas').getBoundingClientRect().top + window.pageYOffset - offset, 
-			behavior: 'smooth' 
-		});
-	});
-	// Click On Close Ideas
-	document.querySelector(".response-starting .close-icon").addEventListener("click", () => {
-		startingIdeas.style.display = "none";
-		window.scrollBy({top: -420});	
-	});
-	
-
-
-	// @@@@@@@@@@@ Out Button @@@@@@@@@@@
-	document.querySelector(".out-btn").addEventListener("click", () => {
-		// Save Story In data base
-	})
-
-
-	// @@@@@@@@@@@ Text Characters Counter @@@@@@@@@@@
-	document.querySelectorAll(".page").forEach((page) => {
-		const textElement = page.querySelector(".back .text");
-		const charCounter = page.querySelector(".back .text-counter #charCount");
-		const maxLength = Number(page.querySelector(".back .text-counter #maxLength").textContent);
-		const errorMsg = page.querySelector(".back #error-msg");
-	
-		if (textElement) {
-			let timeout;
-	
-			// حدث الإدخال
-			textElement.addEventListener('input', () => {
-				clearTimeout(timeout); // إلغاء المؤقت السابق
-				timeout = setTimeout(() => {
-					const currentText = textElement.textContent;
-	
-					// إذا تجاوز النص الحد الأقصى
-					if (currentText.length > maxLength) {
-						textElement.textContent = currentText.slice(0, maxLength); // قطع النص إلى الحد الأقصى
-						if (errorMsg) errorMsg.style.opacity = 1;
-	
-						// إعادة المؤشر إلى نهاية النص
-						const range = document.createRange();
-						const selection = window.getSelection();
-						range.selectNodeContents(textElement);
-						range.collapse(false);
-						selection.removeAllRanges();
-						selection.addRange(range);
-					} else {
-						if (errorMsg) errorMsg.style.opacity = 0;
-					}
-	
-					// تحديث عداد الأحرف
-					if (charCounter) charCounter.textContent = textElement.textContent.length;
-				}, 100); // تأخير بسيط لتحسين الأداء
-			});
-	
-			// منع لصق النصوص التي تتجاوز الحد الأقصى
-			textElement.addEventListener('paste', (event) => {
-				event.preventDefault();
-				let pastedText = event.clipboardData.getData('text').slice(0, maxLength - textElement.textContent.length);
-				document.execCommand('insertText', false, pastedText);
-			});
-		}
-	});
-	
-	
-	// @@@@@@@@@@@ Text Sitting @@@@@@@@@@@
-	// توحيد ستايل النص داخل صفحة الكتابة
-	document.querySelector(".page .back .text").addEventListener('paste', (event) => {
-        event.preventDefault(); // منع السلوك الافتراضي
-        const text = (event.clipboardData || window.clipboardData).getData('text/plain');  // الحصول على النص الخام من الحافظة
-        document.execCommand('insertText', false, text); // إدخال النص داخل العنصر بدون تنسيق
-    });
-});
-</script>
-<script src="../../static/js/voice_recorder.js"></script>
-{% endblock %}
-<!-- Copyright (c) 2024 by Timo Hausmann (https://codepen.io/timohausmann/pen/AaJWvo) -->

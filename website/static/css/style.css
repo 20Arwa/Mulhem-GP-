@@ -28,25 +28,9 @@ body {
     
 }
 body {
-/* Small dots */
-  /* background-color: #ffffff;
-  background-image: radial-gradient(var(--main-dark) 0.5px, transparent 0.5px), radial-gradient(var(--main-very-dark) 0.5px, #ffffff 0.5px);
-  background-size: 20px 20px;
-  background-position: 0 0, 10px 10px; */
-  
-  /* ++++
-  background-color: white;
-background: radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #ffffff 20%, #ffffff 80%, transparent 80%, transparent) 25px 25px, linear-gradient(var(--main-light) 2px, transparent 2px) 0 -1px, linear-gradient(90deg, var(--main-light) 2px, #ffffff 2px) -1px 0;
-background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;  */
-}
-body {
   background: radial-gradient(circle, #dbcef65c 10%, transparent 11%) 0% 0% / 3em 3em, radial-gradient(circle at left bottom, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right bottom, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at left top, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right top, #dbcef65c 5%, transparent 6%) 0% 0% / 3em 3em rgb(255, 255, 255);
   
 }
-
-/* background: radial-gradient(circle, var(--main-light) 10%, transparent 11%) 0% 0% / 3em 3em, radial-gradient(circle at left bottom, var(--main-light) 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right bottom, var(--main-light) 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at left top, var(--main-light) 5%, transparent 6%) 0% 0% / 3em 3em, radial-gradient(circle at right top, var(--main-light) 5%, transparent 6%) 0% 0% / 3em 3em rgb(255, 255, 255);}
-/* background: radial-gradient(#dbcef691 15%, transparent 16%) 0% 0% / 3em 3em, repeating-linear-gradient(0deg, transparent 6.5%, rgb(255, 255, 255) 7%, rgb(255, 255, 255) 9%, transparent 10%) 0% 0% / 3em 3em, linear-gradient(45deg, transparent 49%, #dbcef691 49%, #dbcef691 51%, transparent 51%) 0% 0% / 3em 3em, linear-gradient(-45deg, transparent 49%, #dbcef691 49%, #dbcef691 51%, transparent 51%) 0% 0% / 3em 3em rgb(255, 255, 255);} */
-
 a {
   text-decoration: none;
 }
@@ -369,11 +353,11 @@ footer a {
 .custom-tooltip {
   --bs-tooltip-bg: var(--font-1);
   --bs-tooltip-color: var(--font-3);
-  /* --bs-tooltip-font-size: 15px; */
   --bs-tooltip-font-weight: bold;
 }
 /* الشرح اللي يطلع عند الضغط على الازرار */
 .popover-body {
+  text-align: center;
   padding: 5px;
 }
 
