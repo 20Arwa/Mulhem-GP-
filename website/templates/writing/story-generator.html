@@ -102,6 +102,9 @@ async function submitStory() {
     errorMsg.style.opacity = 1;
     errorMsg.innerHTML = "يجب إدخال النصوص باللغة العربية فقط";
   }
+  else if (checkForbiddenWords([place, time, problem, solution, ...characters.map(c => c.name)].join(" "))) {
+    return;
+}
   else {
     errorMsg.style.opacity = 0;
 

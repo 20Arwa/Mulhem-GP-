@@ -28,6 +28,8 @@ def generate_AllamResponse(prompt, max_tokens):
         },
         "model_id": "sdaia/allam-1-13b-instruct",
         "project_id": "39e03a85-4bff-42b5-8ded-e7829de8fc0a"
+        # "project_id": "d75fea62-18ef-4859-85b3-adf7f8b55302"
+
 
     }
 
@@ -35,7 +37,7 @@ def generate_AllamResponse(prompt, max_tokens):
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI0MTIzMTA4NDMiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiNmI0YjVlODMtMmE5ZS00NzIzLWI2MDYtNjhmODE5ZGFhYjM2IiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3MzgyNjIzNjYsImV4cCI6MTczODI2NTk2NiwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.NEkKotsuSDh5yoW9M10rSXBqkHQE-2jfyBN9p0zm41YhHUvMf2KNoqGcxtWbuj7fC6fA3xzTysH9624LHhAXuDqt0vE4ZGPPRdn9s_BhG4pmPjkVArlSkb3_R_JWacQUFkozyxo4dvsux2kxR7uXSyD6FD52yW2o2EIsQNa_ZRUK3k61HLVI6HwXwAPx7Ne6ZtkrBASnCWiRZ2kjyLbHPqmS3D7iuTUP1aTZwiv8P3Rz4JcHspuXtq82lJhzoCUycFGnHnXXeI80HmIduSaYcpP2-IEVupQtt3cguOCbd_Xv-Mk-tBRZPw030DOvL4KAQBVsN5TajSYRcCOCv39cAw"
+        "Authorization": "Bearer eyJraWQiOiIyMDI1MDEzMDA4NDQiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMDBlOTY1MGItZTlhYy00NDg1LWJjYjItNjIyZmRiMGEyY2RlIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzg2MTkyOTQsImV4cCI6MTczODYyMjg5NCwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.LVprBbpslW3kTFhVSr1yBmu1DGYRW44KiOxH84SgefhrDFzywYI0uvfV-Yp3ugbFtJ2jJmzB6NyOD58NR-vKH2Ug_RPWBUaA5rlOfZnNG40QrMBI2x3B4Uyk7WSJrdmUtU14n62IGw8SeaKZWTq89VXfA7VilYihIlJ4X3sn7dbAowJOUvbBw2u5dnnv1jkL3191n21HyvXDcMfnaENC6zlVdNdjwsnFOn_nH2oXc8Ns4IwjxZyZJQmBieRJ9pqXCfK5D8Y_wzvEb7l_bPLgnqME4GzNsw-x4-177pTpRMzSfzEAstC5YZxXIkZARHqWWm9BUaQluHLlGpTS6M-6Mg",
     }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
@@ -639,7 +641,7 @@ Output:"""
         result_cleaned = result[1]  # Or handle the error as needed
 
     # Send To Colab And Recive Image
-    colab_url = "https://ca49-34-82-19-151.ngrok-free.app/colab-message"  # رابط ngrok من Colab
+    colab_url = "https://9d4a-34-82-78-171.ngrok-free.app/colab-message"  # رابط ngrok من Colab
     prompt = {"message": f"{result_cleaned}"} # Send Prompt From Allam
     # prompt = {"message": " A white duck is sleeping under a fruitful beech tree in a forest. The tree is filled with beech nuts, and the sunlight filters through the leaves, creating a peaceful and serene atmosphere. Suddenly, a beech nut falls from the tree and lands on the duck's head, waking it up with a start. The duck, initially frightened, realizes that it was just a falling nut and not a hunter's shot."} # Send Prompt From Allam
     # إرسال الطلب إلى Colab
@@ -687,6 +689,7 @@ def generate_audio():
 
     # إعداد ElevenLabs
     client = ElevenLabs(api_key="sk_9f4c4bb0168aaeb56465e37fb8f0e118f46994006fc36716")
+    # client = ElevenLabs(api_key="sk_cb6ea2345b8a884cc889ecfe7690b996fd18d89ac3074f85")
 
     # تحويل النص إلى صوت
     text = data['message'][0]
@@ -715,7 +718,6 @@ def generate_audio():
 
     # إنشاء المسار النسبي
     relative_audio_path = url_for('static', filename=f"audio/users/{current_user.id}/story/{current_user.id}_page{data['message'][1]}.mp3")
-    # relative_audio_path = url_for('static', filename=f"audio/users/6/6_page0.mp3")
     print("relative_audio_path",relative_audio_path)
     # إرجاع الاستجابة
     return jsonify({"message": "successfully", "audio_path": relative_audio_path})
