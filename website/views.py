@@ -5,6 +5,7 @@ from .database import db
 from .models import User_stories,Available_stories
 import requests
 import os
+project_id = os.environ.get("PROJECT_ID")
 import json
 import ast
 from elevenlabs import ElevenLabs
@@ -27,17 +28,14 @@ def generate_AllamResponse(prompt, max_tokens):
             "repetition_penalty": 1
         },
         "model_id": "sdaia/allam-1-13b-instruct",
-        "project_id": "39e03a85-4bff-42b5-8ded-e7829de8fc0a"
-        # "project_id": "d75fea62-18ef-4859-85b3-adf7f8b55302"
-
-
+        "project_id": project_id
     }
 
     # إعداد headers الخاص بالطلب
     headers = {
         "Accept": "application/json",
         "Content-Type": "application/json",
-        "Authorization": "Bearer eyJraWQiOiIyMDI1MDEzMDA4NDQiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiMDBlOTY1MGItZTlhYy00NDg1LWJjYjItNjIyZmRiMGEyY2RlIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzg2MTkyOTQsImV4cCI6MTczODYyMjg5NCwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.LVprBbpslW3kTFhVSr1yBmu1DGYRW44KiOxH84SgefhrDFzywYI0uvfV-Yp3ugbFtJ2jJmzB6NyOD58NR-vKH2Ug_RPWBUaA5rlOfZnNG40QrMBI2x3B4Uyk7WSJrdmUtU14n62IGw8SeaKZWTq89VXfA7VilYihIlJ4X3sn7dbAowJOUvbBw2u5dnnv1jkL3191n21HyvXDcMfnaENC6zlVdNdjwsnFOn_nH2oXc8Ns4IwjxZyZJQmBieRJ9pqXCfK5D8Y_wzvEb7l_bPLgnqME4GzNsw-x4-177pTpRMzSfzEAstC5YZxXIkZARHqWWm9BUaQluHLlGpTS6M-6Mg",
+        "Authorization": "Bearer eyJraWQiOiIyMDI1MDEzMDA4NDQiLCJhbGciOiJSUzI1NiJ9.eyJpYW1faWQiOiJJQk1pZC02OTcwMDBQMDRCIiwiaWQiOiJJQk1pZC02OTcwMDBQMDRCIiwicmVhbG1pZCI6IklCTWlkIiwianRpIjoiNmZhNzU4YjEtZGQ1My00MWJkLWJiM2MtOTg2NThkZmY3N2QwIiwiaWRlbnRpZmllciI6IjY5NzAwMFAwNEIiLCJnaXZlbl9uYW1lIjoiQXJ3ZSIsImZhbWlseV9uYW1lIjoiQXJ3byIsIm5hbWUiOiJBcndlIEFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20iLCJzdWIiOiJhcndhMTIzNGh1c3NhaW5AZ21haWwuY29tIiwiYXV0aG4iOnsic3ViIjoiYXJ3YTEyMzRodXNzYWluQGdtYWlsLmNvbSIsImlhbV9pZCI6IklCTWlkLTY5NzAwMFAwNEIiLCJuYW1lIjoiQXJ3ZSBBcndvIiwiZ2l2ZW5fbmFtZSI6IkFyd2UiLCJmYW1pbHlfbmFtZSI6IkFyd28iLCJlbWFpbCI6ImFyd2ExMjM0aHVzc2FpbkBnbWFpbC5jb20ifSwiYWNjb3VudCI6eyJ2YWxpZCI6dHJ1ZSwiYnNzIjoiOTFhMmY3ZDZiMzBjNDBhZmFlMDE4NDk0MTI4NzAwMTciLCJmcm96ZW4iOnRydWV9LCJpYXQiOjE3Mzg2NjQxMzYsImV4cCI6MTczODY2NzczNiwiaXNzIjoiaHR0cHM6Ly9pYW0uY2xvdWQuaWJtLmNvbS9pZGVudGl0eSIsImdyYW50X3R5cGUiOiJ1cm46aWJtOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmFwaWtleSIsInNjb3BlIjoiaWJtIG9wZW5pZCIsImNsaWVudF9pZCI6ImRlZmF1bHQiLCJhY3IiOjEsImFtciI6WyJwd2QiXX0.jfH_kpiQ4HgQloQ-hg98SQVRyK2oJH_V6LGg1DJPWtDEy2Bt4znzVFGLUJoUuVm6Qx-b77B8h7hRldapU-LI9FYqaTncVpNygZf7soF-kRueETdS4IpFrCcdzRLRkW2EHomaCjUZ7Ut6MMT4MT-q9fRKHo-2q7wi7eIgRm7nSiGDR65JiMlVYTCjY_SMXcUoixk_1yfy3p99W0HoVucGYeNhxcbyb-Ln2a_3ouu4NdgLOs3GyxWhq5JQuNQ4SRZChLyA991ebNC8yGzgcYelOUTzO9qZxg4Rj3RPXPp62t77WTeaMzebZPRDyiBO7g1dDOzErplIm1FESDH5gWbXbg"
     }
     # إرسال الطلب إلى النموذج
     response = requests.post(url, headers=headers, json=body)
@@ -610,24 +608,11 @@ Output: ["False"]
 Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي متوسط الطول باللغة الإنجليزية فقط.
 القصة: {data['message']}.
 Output:"""
-#     promptAllam = f"""Input: استخرج من القصة التفاصيل وصف تفصيلي متوسط الطول، قم بوصف شخصية البطل فقط (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية .إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
-# القصة: في غابة جميلة غنّاء سمعت الحيوانات صوت شجار غرابين واقفين على غصن شجرة عالِ، فقَدِم الثعلب المكّار وحاول أن يفهم سبب شجارهما، وما إن اقترب أكثر حتى سأل الغرابين: ما بالكما أيها الغرابان؟ فقال أحدهما: اتفقنا على أن نتشارك قطعة الجبن هذه بعد قسمتها بالتساوي، لكنّ هذا الغراب الأحمق يحاول أخذ مقدار يزيد عن نصيبه، فابتسم الثعلب، وقال: إذن ما رأيكما في أن أساعدكما في حل هذه المشكلة، وأقسم قطعة الجبن بينكما بالتساوي؟.
-# Output: ["True", "The two crows are sleek and striking with their glossy black feathers shimmering under the soft sunlight filtering through the lush forest. Their sharp beaks and alert, beady eyes reflect their frustration as they argue over a piece of cheese. One crow flaps its wings dramatically, while the other stands firmly on the high tree branch, its feathers slightly ruffled. Both are perched against a backdrop of vibrant green leaves and the tranquil atmosphere of the forest, which contrasts with the tension of their quarrel."]
-# Input: استخرج من القصة التفاصيل وصف تفصيلي، مثل وصف شخصية البطل (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية. إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
-# القصة: كان يا مكان في قديم الزمان خهثتبخ ةبن
-# Output: ["False"]
 
-# Input: استخرج من القصة التفاصيل وصف تفصيلي متوسط الطول، قم بوصف شخصية البطل فقط (نوعها، ملامحها، ملابسها)، مع التركيز على العناصر البصرية والتفاصيل الجوية .إذا كانت القصة غير منطقية تمامًا أو مجرد حروف عشوائية، أرجع \"False\". إذا كانت القصة منطقية، قم بكتابة وصف تفصيلي باللغة الإنجليزية فقط.
-# القصة: {data['message']}.
-# Output:"""
-    
     
     result = generate_AllamResponse(promptAllam, 250) # Get Prompt For Image 
-#     result = ''' ['True', 'A young boy named Omar is described as having a love for birds. He is playing 
-# in a park when he hears a small sound and discovers a tired bird on the ground. He carefully picks it up and takes it home to nurse it back to health. The bird eventually recovers and is able to fly, but it returns every day to sing on Omar\'s window, as if to express gratitude.'] '''
     result = ast.literal_eval(result)  # تحويل النص إلى مصفوفة
     global result_cleaned 
-    # result =""
 
     if result[0] == "False":
         print(result[0], result)
@@ -641,9 +626,8 @@ Output:"""
         result_cleaned = result[1]  # Or handle the error as needed
 
     # Send To Colab And Recive Image
-    colab_url = "https://9d4a-34-82-78-171.ngrok-free.app/colab-message"  # رابط ngrok من Colab
+    colab_url = "https://598f-34-16-236-49.ngrok-free.app/colab-message"  # رابط ngrok من Colab
     prompt = {"message": f"{result_cleaned}"} # Send Prompt From Allam
-    # prompt = {"message": " A white duck is sleeping under a fruitful beech tree in a forest. The tree is filled with beech nuts, and the sunlight filters through the leaves, creating a peaceful and serene atmosphere. Suddenly, a beech nut falls from the tree and lands on the duck's head, waking it up with a start. The duck, initially frightened, realizes that it was just a falling nut and not a hunter's shot."} # Send Prompt From Allam
     # إرسال الطلب إلى Colab
     response = requests.post(colab_url, json=prompt)
 
@@ -688,8 +672,9 @@ def generate_audio():
         return jsonify({"response": "Invalid request, 'message' is required."}), 400
 
     # إعداد ElevenLabs
-    client = ElevenLabs(api_key="sk_9f4c4bb0168aaeb56465e37fb8f0e118f46994006fc36716")
-    # client = ElevenLabs(api_key="sk_cb6ea2345b8a884cc889ecfe7690b996fd18d89ac3074f85")
+    client = ElevenLabs(api_key=os.environ.get("ELEVENLABS_API_KEY"))
+    print("API Key Connected Successfully")  # تحقق من الاتصال  
+
 
     # تحويل النص إلى صوت
     text = data['message'][0]
@@ -700,6 +685,8 @@ def generate_audio():
         model_id="eleven_multilingual_v2",
     )
 
+    print("Received Data:", data)
+    print("Message Data:", data.get('message'))
     # إنشاء المسار
     base_dir = os.path.dirname(os.path.abspath(__file__))  # مسار views.py
     folder_path = os.path.join(base_dir, "static", "audio", "users", str(current_user.id), "story")
@@ -721,17 +708,6 @@ def generate_audio():
     print("relative_audio_path",relative_audio_path)
     # إرجاع الاستجابة
     return jsonify({"message": "successfully", "audio_path": relative_audio_path})
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -816,15 +792,6 @@ def allam_story_generator():
     Output:"""
 
     result = generate_AllamResponse(prompt, 500)
-    # result = '''{
-    #     "title": "أروى والواجب المدرسي",
-    #     "story": [
-    #         "في صباح يوم جميل، استيقظت أروى وهي تشعر بالحماس ليوم جديد في المدرسة. كانت فتاة ذكية ومجتهدة، ولكن هذه المرة كان هناك شيء يقلقها. فقد كان المعلم قد كلفهم بواجب صعب، ولم تتمكن أروى من إنهائه بسبب ضيق الوقت. حاولت حله ليلة البارحة، لكن الأسئلة بدت صعبة، ولم تستطع التركيز بسبب المهام الأخرى التي انشغلت بها. وبينما ترتب حقيبتها، بدأت تتساءل كيف ستتعامل مع الموقف؟",
-    #         "أخذت أروى حقيبتها وركضت إلى المدرسة. كانت الطريق تبدو طويلة هذه المرة، حيث لم يتوقف عقلها عن التفكير في الواجب. ماذا ستقول للمعلم؟ كيف ستبرر عدم حل الواجب؟ شعرت أن قلبها ينبض بسرعة. عندما اقتربت من باب المدرسة، حاولت أن تهدئ نفسها، لكنها لم تستطع التخلص من القلق",
-    #         "وصلت أروى إلى الفصل، وجلست في مقعدها وهي شاردة الذهن. كان المعلم يشرح الدرس، لكنها لم تكن تتابع. الجميع بدأوا يفتحون دفاترهم استعدادًا لتقديم الواجب. شعرت أروى بالخجل عندما نظرت إلى دفاتر أصدقائها، ووجدتهم قد أتموا المهمة. شعرت أن اللحظة التي تخشاها قد اقتربت. قررت أروى أن تتحلى بالشجاعة.",
-    #         "رفعت يدها وقالت: 'أستاذ، لم أتمكن من حل الواجب، لكنني أعدك بأنني سأحاول المرة القادمة.' تفاجأت حين ابتسم المعلم وقال: 'الصدق هو أهم شيء يا أروى. لا بأس، لكن عليك تعلم إدارة وقتك.' شعرت أروى بالراحة، وعادت إلى المنزل وهي مليئة بالعزيمة. منذ ذلك اليوم، أصبحت أروى أكثر تنظيمًا في وقتها. تعلمت أن الصدق والمثابرة هما مفتاح النجاح، ولم تعد تخشى مواجهة التحديات."
-    #     ]
-    # }'''
 
     global result_cleaned 
 
@@ -871,21 +838,6 @@ def allam_edit_aval_story():
         Output:"""
 
     result = generate_AllamResponse(prompt, 600)
-
-#     result = """كان يا ما كان، في قديم الزمان، فتاة صغيرة طيبة القلب تُدعى 'ذات الرداء الأحمر'، وذلك بسبب رداء أحمر جميل أهَدته لها ج
-# دتها، وكانت ترتديه دائمًا.في يوم من الأيام، قالت لها والدتها:'يا ابنتي العزيزة، جدتكِ مريضة وتعيش وحدها في الغابة. خذي لها هذه الس
-# لة التي تحتوي على كعك وعصير لتقويتها. تذكري ألا تخرجي عن الطريق، ولا تضيعي الوقت.'وعدت ذات الرداء الأحمر أمها بأنها ستكون حذرة، وانطلقت نحو الغابة. كان يومًا مشرقًا، والغابة تبدو هادئة وجميلة. كانت ذات الرداء الأحمر تسير في الغابة، ظهر لها ذئب كبير بدا ودودًا.
-# قال الذئب بمكر: 'إلى أين أنتِ ذاهبة يا صغيرة؟' ردت ذات الرداء الأحمر:'أنا ذاهبة إلى بيت جدتي المريضة لأعطيها بعض الطعام.'سألها الذ
-# ئب: 'وأين تعيش جدتكِ؟'أجابته:'تحت ثلاثة أشجار بلوط كبيرة في الغابة.'فكر الذئب بخطة شريرة وقال: 'ما رأيكِ أن تجمعي بعض التفاح لجدتك
-# ِ؟ ستفرح كثيرًا بها.'وافقت ذات الرداء الأحمر، وبدأت تجمع التفاح، مما جعلها تبتعد عن الطريق. استغل الذئب فرصة انشغال الفتاة بالتفاح
-#  وركض سريعًا إلى بيت الجدة. طرق الباب قائلاً بصوت ناعم: 'أنا ذات الرداء الأحمر، أحضرت لكِ كعكًا وعصيرًا.'ردت الجدة من الداخل: 'ادخ
-# لي، الباب مفتوح.'دخل الذئب المنزل وانقض على الجدة وأكلها، ثم ارتدى ملابسها واستلقى في سريرها منتظرًا ذات الرداء الأحمر.عندما وصلت 
-# الفتاة إلى المنزل، لاحظت أن الباب مفتوح قليلاً وشعرت بالقلق. دخلت وقالت: 'صباح الخير يا جدتي!' اقتربت ذات الرداء الأحمر من السرير 
-# ولاحظت أن 'جدتها' تبدو غريبة. فقالت:'ما أكبر أذنيكِ!' فأجاب الذئب: 'لكي أسمعكِ جيدًا.' ثم قالت: 'ما أكبر عينيكِ!' فأجاب: 'لكي أراك
-# ِ جيدًا.'وأخيرًا قالت: 'ما أكبر فمكِ!' فرد الذئب: 'لكي آكلكِ!'قفز الذئب وابتلع الفتاة. ولكن لحسن الحظ، كان هناك صياد يمر قرب المنز
-# ل. دخل الصياد ورأى الذئب نائمًا، فشَق بطنه ووجد الجدة وذات الرداء الأحمر سالمتين.ملأ الصياد بطن الذئب بالحجارة وأغلقه. عندما استيق
-# ظ الذئب حاول الهرب لكنه لم يمت.شكرت ذات الرداء الأحمر وجدتها الصياد على شجاعته، وقالت الفتاة:'تعلمت درسًا. لن أخرج عن الطريق مرة أ
-# خرى.' ثم عادت إلى بيتها بأمان. """
 
     global result_cleaned 
 
@@ -978,7 +930,6 @@ def allam_completion():
     Output:"""
 
     result = generate_AllamResponse(prompt, 70)
-    # result = "أحسنت! قصتك جميلة جدًا. أين يمكن أن يكون أحمد؟ هل يساعد أصدقائه في المدرسة أم في الحي؟"
     
     global result_cleaned 
 
@@ -1010,7 +961,6 @@ def allam_titles():
     Output:"""
 
     result = generate_AllamResponse(prompt, 70)
-    # result = '''["جناح الأمل","حين حلّق الحلم","العصفور الذي لم يستسلم","رحلة نحو السماء","إرادة تصنع المعجزات"]'''
 
     global result_cleaned 
 
@@ -1038,16 +988,6 @@ def allam_elements():
 
     Input: استخرج عناصر القصة الأساسية (الشخصيات، المكان، الزمان، الأسباب، المشكلة) من النص التالي: {data['message']}
     Output:"""
-
-#     result = """
-#     {
-#         "الشخصيات": "أحمد",
-#         "المكان": "غير مذكور. أين يمكن أن يكون أحمد؟ في المنزل، المدرسة، أم مكان آخر؟",
-#         "الزمان": "صباح جميل",
-#         "الأسباب": "غير مذكورة. لماذا أحمد في هذا المكان؟ هل هو ذاهب لإنجاز شيء مهم أم لمجرد التسلية؟",
-#         "المشكلة": "غير مذكورة. ما المشكلة أو التحدي الذي يواجه أحمد في هذه القصة؟"
-#     }
-# """
 
     result = generate_AllamResponse(prompt, 170)
 
@@ -1085,9 +1025,7 @@ Input: راجع قصة الطفل، امدح قصته بعبارات تشجيع�
 Output:"""
 
     result = generate_AllamResponse(prompt, 150)
-#     result =  '''قصة رائعة! لقد أظهرت لنا أهمية الصداقة والشجاعة في مواجهة المواقف الصعبة. أحببت كيف استخدم هانز ذكائه 
-# لحماية نفسه وكيف تعلم توم من الموقف.\n\nاقتراحات لتحسين القصة:\n1. صف مشاعر توم وهانز أثناء وبعد الموقف.\n2. أضف تفاصيل أكثر عن الغابة والدب، مثل حجمه ولونه.\n3. أظهر كيف تصالح توم وهانز بعد الموقف وكيف استفادا منه.  '''
-    
+
     global result_cleaned 
 
     if "Input:" in result:
@@ -1171,11 +1109,7 @@ Output:
 """
 
     result = generate_AllamResponse(prompt, 300)
-    # result =  ''' ["True", "رائع جدًا! هذا بداية ممتازة لقصة مليئة بالمغامرات. يمكنك تخيّل ما حدث للقطة بعد ذلك!"] '''
 
-    # رد افتراضي لعلام:
-    # result = "[True, هذه بداية رائعة لقصة مليئة بالمرح والمغامرات! يمكنك تخيل المزيد من المواقف الممتعة التي حدثت لك ولصديقتك في المول.] "
-    
     # إذا كان هناك خطأ في النتيجة، قم بإرجاع رسالة خطأ
     if result is None:
         return jsonify({"response": "Error processing request."}), 500

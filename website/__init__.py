@@ -1,11 +1,19 @@
 # Python Package
 from flask import Flask
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # تحميل المتغيرات من .env
+
 from flask_login import LoginManager
 from .database import db
 import json
 from .models import Available_stories
 
-DB_NAME = 'mulhem' # Schema Name
+DB_NAME = os.getenv("DB_NAME") # Schema Name
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST")
 
 # Start Add Stories
 def add_stories(app, db):
@@ -160,8 +168,8 @@ def add_stories(app, db):
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'Mulhem2025GP'
-    app.config["SQLALCHEMY_DATABASE_URI"] = f'mysql+pymysql://root:1234@localhost/{DB_NAME}'
+    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+    app.config["SQLALCHEMY_DATABASE_URI"] = f'mysql+pymysql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}/{DB_NAME}'
     app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
     db.init_app(app)  # Bind SQLAlchemy to the app
 

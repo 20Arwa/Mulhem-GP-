@@ -8,6 +8,7 @@ from .models import User
 from random import *
 from datetime import datetime, timedelta
 import json
+import os
 
 auth = Blueprint('auth', __name__)
 
@@ -49,8 +50,8 @@ def signUp():
             current_app.config['MAIL_PORT'] = 587
             current_app.config['MAIL_USE_TLS'] = True
             current_app.config['MAIL_USE_SSL'] = False
-            current_app.config['MAIL_USERNAME'] = 'mulhem2025gp@gmail.com'
-            current_app.config['MAIL_PASSWORD'] = 'suiu wzif bqbq meff'
+            current_app.config['MAIL_USERNAME'] = os.environ.get('MAIL_USERNAME')
+            current_app.config['MAIL_PASSWORD'] = os.environ.get('MAIL_PASSWORD')
 
             mail = Mail(current_app)
 

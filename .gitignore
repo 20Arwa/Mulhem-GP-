@@ -1,2 +1,14 @@
 *.pyc
 **/__pycache__/
+.env
+allam_propmts.txt
+changes.txt
+copyright.txt
+
+/website/static/audio/*
+!/website/static/audio/.gitkeep
+
+/website/static/images/users/*
+!/website/static/images/users/.gitkeep
+
+/website/temporary_prompts.py

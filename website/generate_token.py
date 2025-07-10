@@ -1,4 +1,6 @@
 import requests
+import os
+
 
 url = "https://iam.cloud.ibm.com/identity/token"
 headers = {
@@ -7,8 +9,7 @@ headers = {
 }
 data = {
     "grant_type": "urn:ibm:params:oauth:grant-type:apikey",
-    "apikey": "mQcZ64keqdIMaqdcDfQYz2QJjzCz0Aa6L6KMk1AOYh08"
-    # "apikey": "2re8gQ49f0dNJ3oYKDPjj10XeIlfp0Q93lhoKQtz67Yn"
+    "apikey": os.environ.get("IBM_API_KEY")
 }
 
 response = requests.post(url, headers=headers, data=data)
