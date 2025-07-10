@@ -8,6 +8,9 @@ The Mulhem website is deployed on [Render](https://render.com/) and can be acces
 
 🔗 [https://mulhem.onrender.com](https://mulhem.onrender.com)
 
+⚠️ The app is currently configured to use a local MySQL database. As a result, the live version deployed on Render will not work unless a remote database is connected. For full functionality, run the project locally with MySQL installed.
+
+
 > Note: The source code is hosted on GitHub, while the live version runs on Render for full Flask server functionality.
 
 
