@@ -2,6 +2,9 @@
 
 Mulhem is an interactive, AI-powered storytelling platform designed for Arabic-speaking children aged 8–10. Built with Flask and integrating ALLaM (an Arabic language model by SDAIA), Mulhem helps kids learn storytelling fundamentals through AI-assisted writing, visuals, and speech.
 
+## 📽️ Demo Link
+https://drive.google.com/file/d/17MAthKLPYm-60mmUoMCGd_SEwJ-xXmuX/view?usp=drivesdk
+
 ## 🌐 Live Website
 
 The Mulhem website is deployed on [Render](https://render.com/) and can be accessed here:
